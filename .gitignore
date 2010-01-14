@@ -1,6 +1,7 @@
 templates/*
 Assets*
 Docs/*
+setup/*
 public_html/Common/tmp/*
 public_html/admin/Common/tmp/*
 public_html/components/ushop/images/products/*
