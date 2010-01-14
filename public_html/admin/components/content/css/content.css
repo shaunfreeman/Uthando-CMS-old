@@ -1,0 +1,52 @@
+/*
+form elements
+*/
+
+#contentPage {
+	position: absolute;
+	top:102px;
+	right:10px;
+	bottom:10px;
+	left:10px;
+	overflow:auto;
+}
+
+/*
+Buttons
+*/
+#content-24 {
+	width: 50px;
+	background: url(/templates/admin/images/24x24/File.png) no-repeat center 5px;
+}
+
+#new_page-24 {
+	width: 60px;
+	background: url(/templates/admin/images/24x24/NewPage.png) no-repeat center 5px;
+}
+
+#edit-24 {
+	width: 60px;
+	background: url(/templates/admin/images/24x24/Html.png) no-repeat center 5px;
+}
+
+#edit_params {
+	display:none;
+}
+
+/*
+tinyMCE table styles
+*/
+
+.mceEditor table {
+    position:relative;
+    top:0px;
+}
+
+.mceEditor tr {
+    background: none;
+}
+
+.mceEditor td {
+    padding:0px;
+    border-spacing:0px;
+}

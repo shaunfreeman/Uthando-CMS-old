@@ -1,0 +1,62 @@
+/*
+form elements
+*/
+
+
+
+/*
+Buttons
+*/
+#menuToolbarWrap {
+	width:696px;
+	height:137px;
+	margin: 0px auto;
+}
+
+#menuToolbar {width:675px;}
+
+#scrollRight, #scrollLeft {top:42px;}
+
+.button {
+	font-size:12px;
+	width:128px;
+	height:128px;
+	background-position:center -10px;
+	background-repeat:no-repeat
+}
+
+#user_manager-128 {
+	background-image: url(/templates/admin/images/128x128/UserManager.png);
+}
+
+#menu_manager-128 {
+	background-image: url(/templates/admin/images/128x128/MenuManager.png);
+}
+
+#media_manager-128 {
+	background-image: url(/templates/admin/images/128x128/FileManager.png);
+}
+
+#content_manager-128 {
+	background-image: url(/templates/admin/images/128x128/ContentManager.png);
+}
+
+#ushop_manager-128 {
+	background-image: url(/templates/admin/images/128x128/UShopManager.png);
+}
+
+#template_manager-128 {
+	background-image: url(/templates/admin/images/128x128/MootoolsManager.png);
+}
+
+#component_manager-128 {
+	background-image: url(/templates/admin/images/128x128/ComponentManager.png);
+}
+
+#module_manager-128 {
+	background-image: url(/templates/admin/images/128x128/ModuleManager.png);
+}
+
+#plugin_manager-128 {
+	background-image: url(/templates/admin/images/128x128/PluginManager.png);
+}

@@ -1,0 +1,112 @@
+/*
+Buttons
+*/
+#customers-24 { background: url(/templates/admin/images/24x24/UserGroup2.png) no-repeat center 5px; }
+
+#products-24 { background: url(/templates/admin/images/24x24/Barcode.png) no-repeat center 5px; }
+
+#postage-24 { background: url(/templates/admin/images/24x24/Post.png) no-repeat center 5px; }
+
+#tax-24 { background: url(/templates/admin/images/24x24/Tax.png) no-repeat center 5px; }
+
+#new_product-24 { background: url(/templates/admin/images/24x24/BarcodePlus.png) no-repeat center 0px; }
+
+#orders-24 { background: url(/templates/admin/images/24x24/Invoice.png) no-repeat center 5px; }
+
+#new_author-24 { background: url(/templates/admin/images/24x24/AuthorPlus.png) no-repeat center 5px; }
+
+#new_group-24 { background: url(/templates/admin/images/24x24/BarcodeGroupPlus.png) no-repeat center 5px; }
+
+/*
+Tables
+*/
+
+#categories table th  { text-align:left; }
+
+#categories table tr:first-child th { text-align:center; }
+
+/*
+Forms
+*/
+
+#add_product {
+	position:absolute;
+	top:80px;
+	right:10px;
+	bottom:10px;
+	left:10px;
+	overflow:auto;
+}
+
+.table-cell { width:130px; }
+
+#edit_params .table-cell { width:125px; }
+
+#edit_params .panel_content {
+	position:relative;
+	top:0px;
+	padding:10px;
+	width:auto;
+	margin:0px;
+	border:0px;
+}
+
+fieldset { width:auto; }
+
+#global .table-cell { width:150px; }
+
+
+#add_product .cell2, #edit_params .cell2 { width:auto; }
+
+#edit_params .leftcol {
+	margin:0px;
+	margin-bottom:10px;
+	float:left;
+}
+
+#edit_params .rightcol   {
+	position:relative;
+	left:10px;
+	margin:0px;
+	margin-right:10px;
+}
+
+#details, #price, #image { float:left; }
+
+#description, #attributes {
+	position:relative;
+	left:10px;
+	margin-right:20px;
+}
+
+.table-cell input, .table-cell label { vertical-align: middle; }
+
+#add_category .cell2, #edit_category .cell2 { width:200px; }
+
+#offline_textarea {
+	width:350px;
+	height:100px;
+}
+
+#info_textarea {
+	width:750px;
+	height:400px;
+}
+
+#descr_textarea { width:220px; }
+
+/*
+tinyMCE table styles
+*/
+
+.mceEditor table {
+    position:relative;
+    top:0px;
+}
+
+.mceEditor tr { background: none; }
+
+.mceEditor td {
+    padding:0px;
+    border-spacing:0px;
+}

@@ -1,0 +1,7 @@
+{
+	"ushop" : {
+		"url" : "ushop/view/",
+		"params" : "",
+		"links" : ["shopfront", "terms", "change details"]
+	}
+}
