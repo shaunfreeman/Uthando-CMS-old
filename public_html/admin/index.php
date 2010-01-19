@@ -1,5 +1,4 @@
 <?php
-print "test update";
 ob_start('ob_gzhandler');
 
 // Set flag that this is a parent file

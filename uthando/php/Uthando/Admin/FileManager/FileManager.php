@@ -113,7 +113,9 @@ class FileManager {
 		
 		require_once(FileManagerUtility::getPath().'/Assets/getid3/getid3.php');
 		
-		$url = $this->options['document_base_url'].$this->normalize(substr($file, strlen($this->path)+1));
+		$folder = (strlen($this->post['directory']) > strlen($this->post['folder'])) ? $this->post['directory'] : $this->post['folder'];
+		
+		$url = $this->options['document_base_url'] . $folder . '/' . $this->post['file'];
 		
 		$mime = $this->getMimeType($file);
 		$content = null;

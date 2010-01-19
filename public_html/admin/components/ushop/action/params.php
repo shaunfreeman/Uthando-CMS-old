@@ -113,6 +113,17 @@ if ($this->authorize()) {
 		$tabs->addPanels($renderer->toHtml());
 		$this->content .= $tabs->toHtml();
 		
+		$js = file_get_contents(__SITE_PATH.'/components/media/js/filemanager.js');
+
+		$manager_params = array(
+			'SESSION_ID' => session_id(),
+			'FOLDER' => 'userfiles/image',
+			'SELCETABLE' => true,
+			'FILTER' => "'image'"
+		);
+			
+		$this->content .= ('<script>'.$this->templateParser($js, $manager_params, '/*{', '}*/').'</script>');
+		
 		$this->loadJavaScript(array(
 			'/Common/editor/tiny_mce/tiny_mce_gzip.js',
 			'/Common/js/tinyMCEGz.js'
@@ -120,6 +131,11 @@ if ($this->authorize()) {
 
 		$this->registry->component_js = array(
 			'/components/ushop/js/params.js'
+		);
+		
+		$this->registry->component_css = array(
+			'/templates/'.$this->registry->template.'/css/FileManager.css',
+			'/templates/'.$this->registry->template.'/css/Additions.css'
 		);
 		
 	}

@@ -89,10 +89,11 @@ try
 
 		$browser = new FileManager(array(
 			'document_base_url' => $registry->config->get('web_url', 'SERVER').'/',
-			'directory' => $_SERVER['DOCUMENT_ROOT'].'/../userfiles',
+			'directory' => $_SERVER['DOCUMENT_ROOT'].'/../'.$_POST['folder'].'/',
 			'assetBasePath' => $_SERVER['DOCUMENT_ROOT'].'/templates/admin/images/FileManager',
 			'upload' => false,
 			'destroy' => false,
+			'filter' => (is_string($_POST['filter'])) ? $_POST['filter'].'/' : null
 		));
 
 		$browser->fireEvent(!empty($_GET['event']) ? $_GET['event'] : null);

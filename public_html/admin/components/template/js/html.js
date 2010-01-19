@@ -6,7 +6,7 @@ Request.implement({
 });
 
 function initCodeMirror() {
-	var editor = CodeMirror.fromTextArea('code', {
+	UthandoAdmin.codeEditor = CodeMirror.fromTextArea('code', {
 		width:"100%",
 		height: "350px",
 		parserfile: "parsexml.js",

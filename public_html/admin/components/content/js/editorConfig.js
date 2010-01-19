@@ -22,8 +22,8 @@ UthandoAdminConfig.extend({
 					url: '/plugins/ajax_content/filemanager.php',
 					assetBasePath: '/templates/admin/images/FileManager',
 					language: 'en',
-					selectable: true//,
-					//uploadAuthData: {session: 'MySessionId'}
+					selectable: true,
+					uploadAuthData: {folder: 'userfiles'}
 				};
 			}),
 			init_instance_callback : 'UthandoAdmin.tinyMCESize',

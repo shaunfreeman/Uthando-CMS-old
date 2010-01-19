@@ -12,10 +12,16 @@ if ($this->authorize()) {
 	$this->content .= $this->makeToolbar($menuBar, 24);
 
 	$js = file_get_contents(__SITE_PATH.'/components/media/js/filemanager.js');
-
-	$params = array('SESSION_ID' => session_id());
+	
+	$manager_params = array(
+		'SESSION_ID' => session_id(),
+		'FOLDER' => 'userfiles',
+		'SELCETABLE' => 'false',
+		'FILTER' => 'null',
+		'MANAGER_INIT_CODE' => 'UthandoAdmin.manager.show();'
+	);
 		
-	$this->addContent('<script>'.$this->templateParser($js, $params, '{', '}').'</script>');
+	$this->addContent('<script>'.$this->templateParser($js, $manager_params, '/*{', '}*/').'</script>');
 
 	$this->registry->component_css = array(
 		'/templates/'.$this->registry->template.'/css/FileManager.css',

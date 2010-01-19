@@ -57,6 +57,12 @@ UthandoAdminConfig.extend({
 	}
 });
 
+UthandoAdmin.managerCallback = function(path, file) {
+	$('pp_merchant_logo').set('value', '/userfiles/'+path);
+};
+
 window.addEvent('domready', function(){
 	UthandoAdmin.menuForm();
+	
+	$('pp_merchant_logo').addEvent('click', UthandoAdmin.manager.show.bind(UthandoAdmin.manager));
 });

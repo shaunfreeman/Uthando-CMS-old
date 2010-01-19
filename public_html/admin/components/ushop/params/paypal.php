@@ -34,7 +34,7 @@ if ($this->authorize()) {
 	$pp_cr[] = $form->createElement('radio', null, null, 'Off', '0');
 	$form->addGroup($pp_cr, 'PAYPAL[pp_cancel_return]', 'Paypal Cancel Return:');
 	
-	$form->addElement('text', 'PAYPAL[pp_merchant_logo]', 'Merchant Logo:', array('size' => 30, 'maxlength' => 100, 'class' => 'inputbox'));
+	$form->addElement('text', 'PAYPAL[pp_merchant_logo]', 'Merchant Logo:', array( 'id' => 'pp_merchant_logo' ,'size' => 30, 'maxlength' => 100, 'class' => 'inputbox'));
 	
 	$form->addElement('html', '</fieldset>');
 	

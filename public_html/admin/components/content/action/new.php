@@ -11,6 +11,7 @@ if ($this->authorize()) {
 	$form->removeAttribute('name');
 		
 	$menuBar = array(
+		'html' => '',
 		'edit' => '',
 		'params' => '',
 		'cancel' => '/content/overview',
@@ -23,7 +24,7 @@ if ($this->authorize()) {
 
 	$form->addElement('html', '<div id="edit_params">');
 	
-	$form->addElement('text', 'page', 'Page Title:', array('size' => 20, 'maxlength' => 255, 'class' => 'inputbox'));
+	$form->addElement('text', 'page', 'Page Title:', array('size' => 50, 'maxlength' => 255, 'class' => 'inputbox'));
 
 	$form->addElement('html', '<fieldset>');
 	
@@ -109,7 +110,8 @@ if ($this->authorize()) {
 
 		$this->loadJavaScript(array(
 			'/Common/editor/tiny_mce/tiny_mce_gzip.js',
-			'/components/content/js/tinyMCEGz.js'
+			'/components/content/js/tinyMCEGz.js',
+			'/Common/editor/CodeMirror/js/codemirror.js'
 		));
 
 		$this->registry->component_js = array(
