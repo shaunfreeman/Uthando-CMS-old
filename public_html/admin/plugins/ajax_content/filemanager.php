@@ -87,12 +87,14 @@ try
 			return false;
 		}
 
-		$browser = new FileManager(array(
-			'document_base_url' => $registry->config->get('web_url', 'SERVER').'/',
+		$browser = new File_Manager($registry, array(
+			'baseURL' => $registry->config->get('web_url', 'SERVER').'/',
 			'directory' => $_SERVER['DOCUMENT_ROOT'].'/../'.$_POST['folder'].'/',
 			'assetBasePath' => $_SERVER['DOCUMENT_ROOT'].'/templates/admin/images/FileManager',
-			'upload' => false,
-			'destroy' => false,
+			'move' => true,
+			'create' => true,
+			'upload' => true,
+			'destroy' => true,
 			'filter' => (is_string($_POST['filter'])) ? $_POST['filter'].'/' : null
 		));
 

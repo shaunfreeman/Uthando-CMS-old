@@ -237,11 +237,14 @@ var FileManager = new Class({
 				new FileManager.Request({
 					url: self.options.url+'?event=create',
 					onSuccess: function(j) {
-						if(!j || j.content!='created'){
-							new Dialog(self.language.nocreate, {language: {confirm: self.language.ok}, buttons: ['confirm']});
-							return;
+						switch (j.content) {
+							case 'nocreate':
+								new Dialog(self.language.nocreate, {language: {confirm: self.language.ok}, buttons: ['confirm']});
+								return;
+								break;
 						}
-						self.fill.bind(self);
+						
+						self.fill(j).bind(self);
 					},
 					data: $merge(self.options.uploadAuthData,{
 						file: this.el.getElement('input').get('value'),

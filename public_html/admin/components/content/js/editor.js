@@ -45,18 +45,35 @@ UthandoAdmin.extend({
 			UthandoAdmin.tinyMCESize();
 		});
 	},
+	// ============================================================
+	// = codeMirror initialize function                           =
+	// ============================================================
  	initCodeMirror: function() {
+		var w = $('edit_html').getWidth()-30;
 		this.codeEditor = CodeMirror.fromTextArea('content_textarea', {
-			width:"100%",
-			height: "350px",
+			width: w+"px",
+			height: "325px",
 			parserfile: "parsexml.js",
 			stylesheet: "/Common/editor/CodeMirror/css/xmlcolors.css",
 			path: "/Common/editor/CodeMirror/js/",
-			continuousScanning: 500,
-			lineNumbers: true,
-			textWrapping: true,
+			//continuousScanning: 500,
+			//lineNumbers: false,
 			indentUnit: 4,
 			tabMode:"shift"
   		});
+	},
+	// ============================================================
+	// = Submit form button                                       =
+	// ============================================================
+	saveFormButton: function() {
+		if ($('save-24')) {
+			$('save-24').addEvent('click', function(e){
+				e.stop();
+				try {
+					$('content_textarea').value = this.codeEditor.getCode();
+				} catch (e){}
+				$('mainDiv').getElement('form').submit();
+			}.bind(this));
+		}
 	}
 });

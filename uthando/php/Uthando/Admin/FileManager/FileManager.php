@@ -31,7 +31,8 @@ require_once(FileManagerUtility::getPath().'/Image.php');
 
 class FileManager {
 	
-	private $path = null,
+	private
+		$path = null,
 		$length = null,
 		$basedir = null,
 		$basename = null,

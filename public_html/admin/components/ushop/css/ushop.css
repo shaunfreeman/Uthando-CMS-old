@@ -42,6 +42,13 @@ Forms
 
 #edit_params .table-cell { width:125px; }
 
+#edit_product .panel_content {
+	position: relative;
+	top:20px;
+	width: auto;
+	border:1px solid #000;
+}
+
 #edit_params .panel_content {
 	position:relative;
 	top:0px;

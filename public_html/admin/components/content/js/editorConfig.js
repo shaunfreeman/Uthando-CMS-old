@@ -14,8 +14,9 @@ UthandoAdminConfig.extend({
 			theme : "advanced",
 			skin: 'o2k7',
 			skin_variant: 'silver',
-			//relative_urls : false,
-			document_base_url : 'http://uthandocms/',
+			relative_urls : false,
+			document_base_url : '',
+			extended_valid_elements: 'div[*]',
 			file_browser_callback: FileManager.TinyMCE(function(type){
 				//type=='image' ?
 				return {

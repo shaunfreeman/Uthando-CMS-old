@@ -124,7 +124,7 @@ class HTML_Paginate extends HTML_Element
 	private function nextLink()
 	{
 		$next = $this->createElement('div', null, array('class' => 'next'));
-		if ($this->current != ($this->num_pages)):
+		if ($this->current != $this->pages):
 			$link = str_replace("{start}", ($this->start + $this->per), $this->link);
 			$next->appendChild($this->createElement('a', 'Next', array('href' => $link)));
 		endif;

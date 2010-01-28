@@ -29,6 +29,8 @@ Buttons
 	background: url(/templates/admin/images/24x24/Html.png) no-repeat center 5px;
 }
 
+textarea {width:100%}
+
 /*
 tinyMCE table styles
 */

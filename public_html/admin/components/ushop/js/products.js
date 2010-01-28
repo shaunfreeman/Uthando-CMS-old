@@ -14,3 +14,6 @@ UthandoAdminConfig.extend({
 	}
 });
 
+UthandoAdmin.extend({
+});
+

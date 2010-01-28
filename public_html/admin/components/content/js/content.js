@@ -53,10 +53,11 @@ window.addEvent('domready', function() {
 		e.stop();
 		var buttonText = this.getElement('span');
 		if (!tinyMCE.get(id)){
-			$(id).value = UthandoAdmin.codeEditor.getCode();
+			$(id).set('value', UthandoAdmin.codeEditor.getCode());
 			$('edit_html').removeClass('codeWrap');
 			$('content_textarea').removeClass('code');
 			UthandoAdmin.codeMirror = $(id).getNext().dispose();
+			UthandoAdmin.codeMirror.eliminate();
 			tinyMCE.execCommand('mceAddControl', false, id);
 			$(id).getNext().removeProperty('style');
 			buttonText.set('text', 'Html');

@@ -2,46 +2,43 @@
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
     <itemcursorpositions>
-      <item line="23" column="8" url="public_html/admin/components/template/action/html.php" />
-      <item line="0" column="0" url="public_html/admin/Common/editor/CodeMirror/js/codemirror.js" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/action/overview.php" />
-      <item line="20" column="25" url="public_html/admin/components/content/action/edit.php" />
-      <item line="30" column="4" url="public_html/admin/components/content/js/editor.js" />
-      <item line="26" column="30" url="public_html/admin/components/content/js/content.js" />
+      <item line="0" column="0" url="uthando/ini/ftp.ini.php" />
+      <item line="0" column="0" url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" />
+      <item line="0" column="0" url="public_html/admin/components/ushop/js/products.js" />
+      <item line="0" column="0" url="public_html/admin/components/ushop/products/new_product.php" />
+      <item line="189" column="50" url="uthando/php/Uthando/File/Manager.php" />
+      <item line="0" column="0" url="uthando/php/Uthando/File/Upload.php" />
+      <item line="0" column="0" url="uthando/php/Uthando/File/FTP.php" />
+      <item line="247" column="21" url="public_html/Common/javascript/Source/uthando/FileManager/FileManager.js" />
+      <item line="0" column="0" url="uthando/php/Uthando/Admin/FileManager/FileManager.php" />
+      <item line="0" column="0" url="uthando/php/Uthando/File/Utility.php" />
     </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
     </uploadprofiles>
     <treestatus>
       <openfolder url="public_html" />
+      <openfolder url="public_html/Common" />
+      <openfolder url="public_html/Common/javascript" />
+      <openfolder url="public_html/Common/javascript/Source" />
+      <openfolder url="public_html/Common/javascript/Source/uthando" />
+      <openfolder url="public_html/Common/javascript/Source/uthando/FileManager" />
       <openfolder url="public_html/admin" />
-      <openfolder url="public_html/admin/Common" />
-      <openfolder url="public_html/admin/Common/editor" />
-      <openfolder url="public_html/admin/Common/editor/CodeMirror" />
-      <openfolder url="public_html/admin/Common/editor/CodeMirror/js" />
       <openfolder url="public_html/admin/components" />
-      <openfolder url="public_html/admin/components/content" />
-      <openfolder url="public_html/admin/components/content/action" />
-      <openfolder url="public_html/admin/components/content/js" />
       <openfolder url="public_html/admin/components/media" />
-      <openfolder url="public_html/admin/components/media/action" />
       <openfolder url="public_html/admin/components/media/js" />
-      <openfolder url="public_html/admin/components/template" />
-      <openfolder url="public_html/admin/components/template/action" />
-      <openfolder url="public_html/admin/components/template/css" />
-      <openfolder url="public_html/admin/components/template/html" />
-      <openfolder url="public_html/admin/components/template/js" />
-      <openfolder url="public_html/admin/components/ushop" />
-      <openfolder url="public_html/admin/components/ushop/action" />
-      <openfolder url="public_html/admin/components/ushop/js" />
-      <openfolder url="public_html/admin/components/ushop/params" />
       <openfolder url="public_html/admin/plugins" />
       <openfolder url="public_html/admin/plugins/ajax_content" />
       <openfolder url="uthando" />
+      <openfolder url="uthando/ini" />
       <openfolder url="uthando/php" />
       <openfolder url="uthando/php/Uthando" />
       <openfolder url="uthando/php/Uthando/Admin" />
       <openfolder url="uthando/php/Uthando/Admin/FileManager" />
+      <openfolder url="uthando/php/Uthando/File" />
+      <openfolder url="uthando/php/Uthando/HTML" />
+      <openfolder url="uthando/php/Uthando/Payment" />
+      <openfolder url="uthando/php/Uthando/Payment/Paypal" />
     </treestatus>
   </session>
   <teamdata yourself="" />

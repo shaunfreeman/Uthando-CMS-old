@@ -216,6 +216,8 @@ var UthandoAdmin = $H({
 	}
 });
 
+UthandoAdmin.uri = new URI(window.location);
+
 window.addEvent('domready', function(){
 	UthandoAdmin.initialize();
 });

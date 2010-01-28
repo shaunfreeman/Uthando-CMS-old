@@ -590,7 +590,6 @@
     <item url="uthando/php/Uthando/Admin/Registry.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/File/FTP.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/Exception.php" uploadstatus="1" />
-    <item url="uthando/php/Uthando/HTML/Paginate.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/HTML/Table.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/HTML/Tabs.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/HTML/Element.php" uploadstatus="1" />
@@ -2734,5 +2733,6 @@
     <item url="public_html/userfiles/image/student_08.png" uploadstatus="1" />
     <item url="public_html/userfiles/image/visa.png" uploadstatus="1" />
     <item url="public_html/userfiles/media/index.html" uploadstatus="1" />
+    <item url="uthando/php/Uthando/File/Utility.php" uploadstatus="1" />
   </project>
 </webproject>
