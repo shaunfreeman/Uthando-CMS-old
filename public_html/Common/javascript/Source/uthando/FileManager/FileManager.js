@@ -463,7 +463,7 @@ var FileManager = new Class({
 						copy: e.control ? 1 : 0
 					}),
 					onSuccess: function(j){
-						if(!j || j.content!='moved'){
+						if(!j || !j.name){
 							e.control = 1;
 							new Dialog(self.language.nomove, {language: {confirm: self.language.ok}, buttons: ['confirm']});
 						}

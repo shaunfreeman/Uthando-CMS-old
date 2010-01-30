@@ -584,7 +584,6 @@
     <item url="uthando/php/Uthando/File/getid3/module.tag.id3v1.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/File/getid3/module.tag.id3v2.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/File/getid3/module.tag.lyrics3.php" uploadstatus="1" />
-    <item url="uthando/php/Uthando/File/Image.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/File/MimeTypes.ini" uploadstatus="1" />
     <item url="uthando/php/Uthando/Registry.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/Admin/Registry.php" uploadstatus="1" />
@@ -2734,5 +2733,6 @@
     <item url="public_html/userfiles/image/visa.png" uploadstatus="1" />
     <item url="public_html/userfiles/media/index.html" uploadstatus="1" />
     <item url="uthando/php/Uthando/File/Utility.php" uploadstatus="1" />
+    <item url="uthando/php/Uthando/File/Image.php" uploadstatus="1" />
   </project>
 </webproject>

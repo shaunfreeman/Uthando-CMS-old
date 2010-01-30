@@ -55,23 +55,27 @@ class File_Manager
 	
 	protected function onView() {
 		$dir = $this->getDir(!empty($this->post['directory']) ? $this->post['directory'] : null);
-		$files = ($files = glob($dir . '/*')) ? $files : array();
 		
-		if ($dir != $this->basedir) array_unshift($files, $dir . '/..');
-		natcasesort($files);
+		$files = new DirectoryIterator($dir);
+		
 		foreach ($files as $file):
-			$mime = $this->getMimeType($file);
-			if ($this->options['filter'] && $mime != 'text/directory' && !File_Utility::startsWith($mime, $this->options['filter']))
-				continue;
 			
-			$out[is_dir($file) ? 0 : 1][] = array(
-				'name' => pathinfo($file, PATHINFO_BASENAME),
-				'date' => date($this->options['dateFormat'], filemtime($file)),
-				'mime' => $this->getMimeType($file),
-				'icon' => $this->getIcon($this->normalize($file)),
-				'size' => filesize($file)
+			$path = $file->getPathname();
+			
+			if ($file->getFilename() == '.' || ($dir == $this->basedir && $file->getFilename() == '..')) continue;
+			
+			if ($this->options['filter'] && $mime != 'text/directory' && !FileManagerUtility::startsWith($mime, $this->options['filter'])) continue;
+			
+			$out[$file->isDir() ? 0 : 1][$file->getFilename()] = array(
+				'name' => $file->getBasename(),
+				'date' => date($this->options['dateFormat'], $file->getMTime()),
+				'mime' => $this->getMimeType($path),
+				'icon' => $this->getIcon($this->normalize($path)),
+				'size' => $file->getSize()
 			);
 		endforeach;
+		
+		foreach ($out as $key => $value) uksort($out[$key], "strnatcmp");
 		
 		echo json_encode(array(
 			'path' => $this->getPath($dir),
@@ -97,46 +101,51 @@ class File_Manager
 		$mime = $this->getMimeType($file);
 		$content = null;
 		
-		if (File_Utility::startsWith($mime, 'image/')){
-			$size = getimagesize($file);
-			$content = '<img src="' . $url . '" class="preview" alt="" />
+		switch ($mime):
+			case (File_Utility::startsWith($mime, 'image/')):
+				$size = getimagesize($file);
+				$content = '<img src="' . $url . '" class="preview" alt="" />
 				<h2>${more}</h2>
 				<dl>
 					<dt>${width}</dt><dd>' . $size[0] . 'px</dd>
 					<dt>${height}</dt><dd>' . $size[1] . 'px</dd>
 				</dl>';
-		}elseif (File_Utility::startsWith($mime, 'text/') || $mime == 'application/x-javascript'){
-			$filecontent = file_get_contents($file, null, null, 0, 300);
-			if (!File_Utility::isBinary($filecontent)) $content = '<div class="textpreview">' . nl2br(str_replace(array('$', "\t"), array('&#36;', '&nbsp;&nbsp;'), htmlentities($filecontent))) . '</div>';
-		}elseif ($mime == 'application/zip'){
-			$out = array(array(), array());
-			$getid3 = new getID3();
-			$getid3->Analyze($file);
-			foreach ($getid3->info['zip']['files'] as $name => $size):
-				$icon = is_array($size) ? 'dir' : $this->getIcon($name);
-				$out[($icon == 'dir') ? 0 : 1][$name] = '<li><a><img src="' . $this->options['assetBasePath'] . '/Icons/' . $icon . '.png" alt="" /> ' . $name . '</a></li>';
-			endforeach;
-			natcasesort($out[0]);
-			natcasesort($out[1]);
-			$content = '<ul>' . implode(array_merge($out[0], $out[1])) . '</ul>';
-		}elseif (File_Utility::startsWith($mime, 'audio/')){
-			$getid3 = new getID3();
-			$getid3->Analyze($file);
-			
-			$content = '<div class="object">
-					<object type="application/x-shockwave-flash" data="' . $this->options['assetBasePath'] . '/dewplayer.swf?mp3=' . rawurlencode($url) . '&volume=30" width="200" height="20">
-						<param name="movie" value="' . $this->options['assetBasePath'] . '/dewplayer.swf?mp3=' . rawurlencode($url) . '&volume=30" />
-					</object>
-				</div>
-				<h2>${more}</h2>
-				<dl>
-					<dt>${title}</dt><dd>' . $getid3->info['comments']['title'][0] . '</dd>
-					<dt>${artist}</dt><dd>' . $getid3->info['comments']['artist'][0] . '</dd>
-					<dt>${album}</dt><dd>' . $getid3->info['comments']['album'][0] . '</dd>
-					<dt>${length}</dt><dd>' . $getid3->info['playtime_string'] . '</dd>
-					<dt>${bitrate}</dt><dd>' . round($getid3->info['bitrate']/1000) . 'kbps</dd>
-				</dl>';
-		}
+				break;
+			case (File_Utility::startsWith($mime, 'text/') || 'application/x-javascript'):
+				$filecontent = file_get_contents($file);
+				if (!File_Utility::isBinary($filecontent)) $content = '<div class="textpreview">' . nl2br(str_replace(array('$', "\t"), array('&#36;', '&nbsp;&nbsp;'), htmlentities($filecontent))) . '</div>';
+				break;
+			case 'application/zip':
+				$out = array(array(), array());
+				$getid3 = new getID3();
+				$getid3->Analyze($file);
+				foreach ($getid3->info['zip']['files'] as $name => $size):
+					$icon = is_array($size) ? 'dir' : $this->getIcon($name);
+					$out[($icon == 'dir') ? 0 : 1][$name] = '<li><a><img src="' . $this->options['assetBasePath'] . '/Icons/' . $icon . '.png" alt="" /> ' . $name . '</a></li>';
+				endforeach;
+				natcasesort($out[0]);
+				natcasesort($out[1]);
+				$content = '<ul>' . implode(array_merge($out[0], $out[1])) . '</ul>';
+				break;
+			case (File_Utility::startsWith($mime, 'audio/')):
+				$getid3 = new getID3();
+				$getid3->Analyze($file);
+				
+				$content = '<div class="object">
+						<object type="application/x-shockwave-flash" data="' . $this->options['assetBasePath'] . '/dewplayer.swf?mp3=' . rawurlencode($url) . '&volume=30" width="200" height="20">
+							<param name="movie" value="' . $this->options['assetBasePath'] . '/dewplayer.swf?mp3=' . rawurlencode($url) . '&volume=30" />
+						</object>
+					</div>
+					<h2>${more}</h2>
+					<dl>
+						<dt>${title}</dt><dd>' . $getid3->info['comments']['title'][0] . '</dd>
+						<dt>${artist}</dt><dd>' . $getid3->info['comments']['artist'][0] . '</dd>
+						<dt>${album}</dt><dd>' . $getid3->info['comments']['album'][0] . '</dd>
+						<dt>${length}</dt><dd>' . $getid3->info['playtime_string'] . '</dd>
+						<dt>${bitrate}</dt><dd>' . round($getid3->info['bitrate']/1000) . 'kbps</dd>
+					</dl>';
+				break;
+		endswitch;
 		
 		echo json_encode(array(
 			'content' => $content ? $content : '<div class="margin">
@@ -149,6 +158,7 @@ class File_Manager
 		if (!$this->options['destroy'] || empty($this->post['directory']) || empty($this->post['file'])) return;
 		
 		$file = realpath($this->path . '/' . $this->post['directory'] . '/' . $this->post['file']);
+		
 		if (!$this->checkFile($file)) return;
 		
 		$this->unlink($file);
@@ -166,15 +176,98 @@ class File_Manager
 		else:
 			$ftp = new File_FTP($this->registry);
 			
-			$file = $this->getName($this->post['file'], $this->getDir($this->post['directory'], $ftp->public_html));
+			$file = $this->getName($this->post['file'], $this->getDir($this->post['directory']));
 			if (!$file) return;
 			
-			$matches = explode($ftp->public_html, $file);
-			
-			$ftp->mkdir($ftp->public_html.$matches[1]);
+			$file = $this->getFTPPath($ftp->public_html, $file);
+			$ftp->mkdir($file);
 			
 			$this->onView();
 		endif;
+	}
+	
+	protected function onUpload(){
+		try{
+			if (!$this->options['upload'])
+				throw new FileManagerException('disabled');
+				
+			if (empty($this->get['directory']) || (function_exists('UploadIsAuthenticated') && !UploadIsAuthenticated($this->get)))
+				throw new FileManagerException('authenticated');
+			
+			$dir = $this->getDir($this->get['directory']);
+			
+			$name = pathinfo((File_Upload::exists('Filedata')) ? $this->getName($_FILES['Filedata']['name'], $dir) : null, PATHINFO_FILENAME);
+			
+			$ftp = new File_FTP($this->registry);
+			
+			$file = File_Upload::move('Filedata', $dir.'/', array(
+				'name' => $name,
+				'extension' => $this->options['safe'] && $name && in_array(strtolower(pathinfo($_FILES['Filedata']['name'], PATHINFO_EXTENSION)), array('exe', 'dll', 'php', 'php3', 'php4', 'php5', 'phps')) ? 'txt' : null,
+				'size' => $this->options['maxUploadSize'],
+				'mimes' => $this->getAllowedMimeTypes(),
+				'ftp' => $ftp
+			));
+			
+			if (File_Utility::startsWith(File_Upload::mime($file), 'image/') && !empty($this->get['resize'])){
+				$ftp_file = $this->getFTPPath($ftp->public_html, $file);
+				$ftp->chmod($ftp_file, 0646);
+				$img = new File_Image($file);
+				$size = $img->getSize();
+				if ($size['width'] > 800) $img->resize(800)->save();
+				elseif ($size['height'] > 600) $img->resize(null, 600)->save();
+				$ftp->chmod($ftp_file, 0644);
+			}
+			
+			echo json_encode(array(
+				'status' => 1,
+				'name' => pathinfo($file, PATHINFO_BASENAME)
+			));
+		}catch(Upload_Exception $e){
+			echo json_encode(array(
+				'status' => 0,
+				'error' => class_exists('ValidatorException') ? strip_tags($e->getMessage()) : '${upload.' . $e->getMessage() . '}' // This is for Styx :)
+			));
+		}catch(FileManagerException $e){
+			echo json_encode(array(
+				'status' => 0,
+				'error' => '${upload.' . $e->getMessage() . '}'
+			));
+		}
+	}
+	
+	/* This method is used by both move and rename */
+	protected function onMove(){
+		if (empty($this->post['directory']) || empty($this->post['file'])) return;
+		
+		$rename = empty($this->post['newDirectory']) && !empty($this->post['name']);
+		$dir = $this->getDir($this->post['directory']);
+		$file = realpath($dir . '/' . $this->post['file']);
+		
+		$is_dir = is_dir($file);
+		if (!$this->checkFile($file) || (!$rename && $is_dir))
+			return;
+		
+		$ftp = new File_FTP($this->registry);
+		
+		if ($rename || $is_dir){
+			if (empty($this->post['name'])) return;
+			$newname = $this->getName($this->post['name'], $dir);
+			//$fn = '$ftp->rename';
+		}else{
+			$newname = $this->getName(pathinfo($file, PATHINFO_FILENAME), $this->getDir($this->post['newDirectory']));
+			
+			//$fn = !empty($this->post['copy']) ? 'copy' : 'rename';
+		}
+		
+		if (!$newname) return;
+		
+		$ext = pathinfo($file, PATHINFO_EXTENSION);
+		if ($ext) $newname .= '.' . $ext;
+		$ftp->rename($this->getFTPPath($ftp->public_html, $file), $this->getFTPPath($ftp->public_html, $newname));
+		
+		echo json_encode(array(
+			'name' => pathinfo($this->normalize($newname), PATHINFO_BASENAME),
+		));
 	}
 	
 	protected function unlink($file){
@@ -184,15 +277,14 @@ class File_Manager
 			
 		$ftp = new File_FTP($this->registry);
 		
-		$matches = explode($ftp->public_html, $file);
-		$file_to_delete = $ftp->public_html.$matches[1];
+		$file_to_delete = $this->getFTPPath($ftp->public_html, $file);
 		
 		if (is_dir($file)) $file_to_delete .= '/';
 		
 		try{ if ($this->checkFile($file)) $ftp->rm($file_to_delete,true); }catch(Exception $e){}
 	}
 	
-	protected function getName($file, $dir){
+	protected function getName($file, $dir) {
 		$files = array();
 		foreach ((array)glob($dir . '/*') as $f):
 			$files[] = pathinfo($f, PATHINFO_FILENAME);
@@ -218,9 +310,8 @@ class File_Manager
 		return is_dir($file) ? 'text/directory' : File_Upload::mime($file);
 	}
 	
-	protected function getDir($dir, $ftp_path=null) {
-		$path = ($ftp_path) ? $ftp_path : $this->path;
-		$dir = realpath($path . '/' . (File_Utility::startsWith($dir, $this->basename) ? $dir : $this->basename));
+	protected function getDir($dir) {
+		$dir = realpath($this->path . '/' . (File_Utility::startsWith($dir, $this->basename) ? $dir : $this->basename));
 		return $this->checkFile($dir) ? $dir : $this->basedir;
 	}
 	
@@ -229,10 +320,16 @@ class File_Manager
 		return substr($file, File_Utility::startsWith($file, '/') ? 1 : 0);
 	}
 	
+	static function getFTPPath($ftp_path, $file) {
+		$matches = explode($ftp_path, $file);
+		return $ftp_path.$matches[1];
+	}
+	
 	protected function checkFile($file) {
 		$mimes = $this->getAllowedMimeTypes();
 		$hasFilter = $this->options['filter'] && count($mimes);
 		if ($hasFilter) array_push($mimes, 'text/directory');
+		
 		return !(!$file || !File_Utility::startsWith($file, $this->basedir) || !file_exists($file) || ($hasFilter && !in_array($this->getMimeType($file), $mimes)));
 	}
 	

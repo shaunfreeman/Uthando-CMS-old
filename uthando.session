@@ -2,16 +2,16 @@
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
     <itemcursorpositions>
-      <item line="0" column="0" url="uthando/ini/ftp.ini.php" />
+      <item line="46" column="14" url="uthando/php/Uthando/Admin/UthandoAdmin.php" />
       <item line="0" column="0" url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" />
       <item line="0" column="0" url="public_html/admin/components/ushop/js/products.js" />
       <item line="0" column="0" url="public_html/admin/components/ushop/products/new_product.php" />
-      <item line="189" column="50" url="uthando/php/Uthando/File/Manager.php" />
+      <item line="252" column="19" url="uthando/php/Uthando/File/Manager.php" />
       <item line="0" column="0" url="uthando/php/Uthando/File/Upload.php" />
-      <item line="0" column="0" url="uthando/php/Uthando/File/FTP.php" />
-      <item line="247" column="21" url="public_html/Common/javascript/Source/uthando/FileManager/FileManager.js" />
-      <item line="0" column="0" url="uthando/php/Uthando/Admin/FileManager/FileManager.php" />
-      <item line="0" column="0" url="uthando/php/Uthando/File/Utility.php" />
+      <item line="0" column="0" url="uthando/php/Uthando/Payment/Paypal/IPN.php" />
+      <item line="68" column="42" url="public_html/admin/plugins/ajax_content/filemanager.php" />
+      <item line="215" column="26" url="uthando/php/Uthando/File/FTP.php" />
+      <item line="0" column="0" url="public_html/Common/javascript/Source/mootools-core/Utilities/JSON.js" />
     </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
@@ -21,12 +21,14 @@
       <openfolder url="public_html/Common" />
       <openfolder url="public_html/Common/javascript" />
       <openfolder url="public_html/Common/javascript/Source" />
-      <openfolder url="public_html/Common/javascript/Source/uthando" />
-      <openfolder url="public_html/Common/javascript/Source/uthando/FileManager" />
+      <openfolder url="public_html/Common/javascript/Source/mootools-core" />
+      <openfolder url="public_html/Common/javascript/Source/mootools-core/Utilities" />
       <openfolder url="public_html/admin" />
       <openfolder url="public_html/admin/components" />
       <openfolder url="public_html/admin/components/media" />
       <openfolder url="public_html/admin/components/media/js" />
+      <openfolder url="public_html/admin/components/ushop" />
+      <openfolder url="public_html/admin/components/ushop/products" />
       <openfolder url="public_html/admin/plugins" />
       <openfolder url="public_html/admin/plugins/ajax_content" />
       <openfolder url="uthando" />

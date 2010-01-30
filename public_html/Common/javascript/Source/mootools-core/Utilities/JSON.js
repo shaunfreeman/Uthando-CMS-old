@@ -54,6 +54,7 @@ var JSON = new Hash(this.JSON && {
 	decode: function(string, secure){
 		if ($type(string) != 'string' || !string.length) return null;
 		if (secure && !(/^[,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]*$/).test(string.replace(/\\./g, '@').replace(/"[^"\\\n\r]*"/g, ''))) return null;
+		//console.log(string);
 		return eval('(' + string + ')');
 	}
 

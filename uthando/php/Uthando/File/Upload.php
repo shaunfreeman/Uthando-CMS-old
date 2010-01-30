@@ -5,6 +5,66 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 class File_Upload
 {
+	public static function move($file, $to, $options = null){
+		if(!self::exists($file)) return false;
+		
+		$options = array_merge(array(
+			'name' => null,
+			'extension' => null,
+			'size' => null,
+			'chmod' => 0644,
+			'overwrite' => false,
+			'mimes' => array(),
+		), $options);
+		
+		$file = $_FILES[$file];
+		$ftp = $options['ftp'];
+		
+		if($options['size'] && $file['size']>$options['size'])
+			throw new UploadException('size');
+		
+		$pathinfo = pathinfo($file['name']);
+		if($options['extension']) $pathinfo['extension'] = $options['extension'];
+		if(!$pathinfo['extension'])
+			throw new UploadException('extension');
+		
+		if(count($options['mimes'])){
+			$mime = self::mime($file['tmp_name'], array(
+				'default' => $file['type'],
+				'extension' => $pathinfo['extension'],
+			));
+			
+			if(!$mime || !in_array($mime, $options['mimes']))
+				throw new UploadException('extension');
+		}
+		
+		$file['ext'] = strtolower($pathinfo['extension']);
+		$file['base'] = basename($pathinfo['basename'], '.'.$pathinfo['extension']);
+		
+		$real = realpath($to);
+		
+		if(!$real) throw new UploadException('path');
+		if(is_dir($real)) $to = $real.'/Common/tmp/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext'];
+		
+		if(!$options['overwrite'] && file_exists($to))
+			throw new UploadException('exists');
+		
+		if(!move_uploaded_file($file['tmp_name'], $to))
+			throw new UploadException(strtolower($_FILES[$file]['error']<=2 ? 'size' : ($_FILES[$file]['error']==3 ? 'partial' : 'nofile')));
+		
+		$ftp_filepath = File_Manager::getFTPPath($ftp->public_html, $real.'/'.$_GET['directory']);
+		
+		$ftp->put($to, $ftp_filepath.'/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext']);
+		
+		unlink($to);
+		
+		return realpath($real.'/'.$_GET['directory'].'/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext']);
+	}
+	
+	public function exists($file){
+		return !(empty($_FILES[$file]['name']) || empty($_FILES[$file]['size']));
+	}
+	
 	public function mime($file, $options = array()){
 		$file = realpath($file);
 		$options = array_merge(array(

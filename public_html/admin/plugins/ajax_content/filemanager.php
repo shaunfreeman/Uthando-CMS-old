@@ -54,7 +54,7 @@ try
 	$registry->db = new UthandoDB($registry);
 
 	$registry->session = new Session($registry);
-	//$uthando->setUserInfo();
+	//UthandoUser::setUserInfo();
 	
 	// Load component.
 
@@ -65,20 +65,20 @@ try
 			if(!empty($get['session'])) {
 				if (isset($_SESSION['user_id']) && isset($_SESSION['username']) && $_SERVER['HTTP_USER_AGENT'] == 'Shockwave Flash') {
 
-					$sql = "
-						SELECT user_id
-						FROM ".$registry->user."users
-						WHERE user_id='".$_SESSION['user_id']."'
-						AND username='".$_SESSION['username']."'
-					";
+					// Query the database.
+					$row = $registry->db->getResult(
+						'user_id, username, user_group',
+						$registry->user.'users',
+						$registry->user.'user_groups',
+						array(
+							'where' =>'user_id='.$_SESSION['user_id'],
+							'and' => array("username='".$_SESSION['username']."'", "user_group != 'registered'")
+						),
+						false
+					);
 
-					$res = $registry->db->query($sql);
-
-					if (!$res) {
-						return false;
-					} else {
-						if ($res->numRows() == 1) return true;
-					}
+					if (count($row) == 1) return true;
+					return false;
 				} else {
 					return false;
 				}

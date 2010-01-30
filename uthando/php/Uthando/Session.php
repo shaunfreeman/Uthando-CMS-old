@@ -45,7 +45,9 @@ class Session {
 			array(&$this, 'gc')
 		);
 		register_shutdown_function('session_write_close');
-		if (isset($registry->sessionId)) session_id($registry->sessionId);
+		
+		if ($registry->sessionId) session_id($registry->sessionId);
+		
 		session_start();
 
 		return true;
