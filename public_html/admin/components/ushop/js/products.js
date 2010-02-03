@@ -1,5 +1,5 @@
 
-UthandoAdminConfig.plugins.load.push('tinyMCE');
+UthandoAdminConfig.plugins.load.push('tinyMCE', 'fileManager');
 
 UthandoAdminConfig.extend({
 	tinyMCE: {
@@ -11,9 +11,12 @@ UthandoAdminConfig.extend({
 			mode : "textareas",
 			theme : "simple"
 		}
+	},
+	fileManager: {
+		enable: UthandoAdmin.enableFileManager,
+		el: 'image',
+		pathPrefix: '',
+		file: true
 	}
-});
-
-UthandoAdmin.extend({
 });
 

@@ -35,7 +35,7 @@ UthandoAdmin.extend({
 	}
 });
 
-UthandoAdminConfig.plugins.load.push('tinyMCE');
+UthandoAdminConfig.plugins.load.push('tinyMCE', 'fileManager');
 
 UthandoAdminConfig.extend({
 	tinyMCE: {
@@ -54,15 +54,15 @@ UthandoAdminConfig.extend({
 			theme_advanced_buttons1 : "newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,outdent,indent|,undo,redo,|,link,unlink,cleanup|,sub,supt",
    			theme_advanced_buttons2 : ""
 		}
+	},
+	fileManager: {
+		enable: UthandoAdmin.enableFileManager,
+		el: 'pp_merchant_logo',
+		pathPrefix: '/userfiles/',
+		file: false
 	}
 });
 
-UthandoAdmin.managerCallback = function(path, file) {
-	$('pp_merchant_logo').set('value', '/userfiles/'+path);
-};
-
 window.addEvent('domready', function(){
 	UthandoAdmin.menuForm();
-	
-	$('pp_merchant_logo').addEvent('click', UthandoAdmin.manager.show.bind(UthandoAdmin.manager));
 });

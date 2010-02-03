@@ -327,7 +327,7 @@ if ($this->authorize()) {
 			$form->setDefaults(array(
 				'enabled' => $row->enabled,
 				'discontinued' => $row->discontinued,
-				'name' => $row->name,
+				'name' => HTML_Element::makeXmlSafe($row->name),
 				'sku' => $row->sku,
 				'category_id' => $row->category_id,
 				'short_description' => $row->short_description,

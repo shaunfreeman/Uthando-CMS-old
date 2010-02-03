@@ -78,7 +78,7 @@ fieldset { width:auto; }
 	margin-right:10px;
 }
 
-#details, #price, #image { float:left; }
+#details, #price, #image_upload { float:left; }
 
 #description, #attributes {
 	position:relative;

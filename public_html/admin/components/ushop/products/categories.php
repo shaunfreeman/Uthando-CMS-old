@@ -24,11 +24,17 @@ if ($this->authorize()) {
 			$this->content .= $paginate->toHTML();
 		endif;
 		
+		//$ftp = new File_FTP($this->registry);
+		
+		//$ftp->cd($ftp->public_html.'/components/ushop/images/products');
+		
 		foreach ($tree->getTree("$start, $display") as $row) {
+		
+			//$ftp->mkdir(str_replace(' ', '_', $row['category']));
 			
 			if ($row['category_image_status'] == 1) {
 	
-				if (file_exists($base_dir.$row['category_image']) && $row['category_image'] != null) {
+				if (file_exists($base_dir.str_replace(' ', '_', $row['category']).'/'.$row['category_image']) && $row['category_image'] != null) {
 					$img_file = '<img src="/templates/'.$this->registry->template.'/images/24x24/OK.png" />';
 		
 				} else {

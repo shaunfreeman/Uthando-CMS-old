@@ -123,7 +123,7 @@ class File_FTP
 		}
 	}
 	
-	public function cd($dir)
+	public function cd($dir, $report_error=true)
 	{
 		try
 		{
@@ -133,7 +133,7 @@ class File_FTP
 		}
 		catch (FTPException $e)
 		{
-			$this->registry->Error($e->getMessage());
+			if ($report_error) $this->registry->Error($e->getMessage());
 			return false;
 		}
 	}
@@ -157,7 +157,7 @@ class File_FTP
     {
 		$dir = $this->constructPath($dir);
 		$savedir = $this->pwd();
-		$e = $this->cd($dir);
+		$e = $this->cd($dir, false);
 		if ($e === true):
 			$this->cd($savedir);
 			return true;

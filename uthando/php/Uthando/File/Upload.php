@@ -52,13 +52,19 @@ class File_Upload
 		if(!move_uploaded_file($file['tmp_name'], $to))
 			throw new UploadException(strtolower($_FILES[$file]['error']<=2 ? 'size' : ($_FILES[$file]['error']==3 ? 'partial' : 'nofile')));
 		
-		$ftp_filepath = File_Manager::getFTPPath($ftp->public_html, $real.'/'.$_GET['directory']);
+		$dir_path = pathinfo(File_Manager::getFTPPath($real.'/'.$_GET['folder'], $_GET['directory']));
+		
+		$ftp_filepath = File_Manager::getFTPPath($ftp->public_html, $dir_path['dirname'].'/'.$_GET['directory']);
+		
+		//print_rr($ftp_filepath);
+		
+		//print_rr(pathinfo(File_Manager::getFTPPath($real.'/'.$_GET['folder'], $_GET['directory'])));
 		
 		$ftp->put($to, $ftp_filepath.'/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext']);
 		
 		unlink($to);
 		
-		return realpath($real.'/'.$_GET['directory'].'/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext']);
+		return realpath($dir_path['dirname'].'/'.$_GET['directory'].'/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext']);
 	}
 	
 	public function exists($file){

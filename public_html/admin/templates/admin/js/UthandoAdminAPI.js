@@ -77,6 +77,16 @@ var UthandoAdmin = $H({
 		});
 	},
 	// ============================================================
+	// = Setup mootools FileManager Class                         =
+	// ============================================================
+	enableFileManager: function() {
+		if ($(UthandoAdminConfig.fileManager.el)) $(UthandoAdminConfig.fileManager.el).addEvent('click', UthandoAdmin.manager.show.bind(UthandoAdmin.manager));
+	},
+	fileManagerCallback: function(path, file) {
+		var filePath = (UthandoAdminConfig.fileManager.file) ? file.name : path;
+		$(UthandoAdminConfig.fileManager.el).set('value', UthandoAdminConfig.fileManager.pathPrefix + filePath);
+	},
+	// ============================================================
 	// enable AjaxLinks Class                                     =
 	// ============================================================
 	enableAjaxLinks: function() {

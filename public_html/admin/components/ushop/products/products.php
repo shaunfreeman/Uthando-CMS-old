@@ -26,18 +26,21 @@ if ($this->authorize()) {
 		$this->content .= $paginate->toHTML();
 	endif;
 	
+	if ($products = $this->getResult('product_id, sku, name, price, image, enabled, image_status, category', $ushop->db_name.'products', array($ushop->db_name.'product_categories'), array('ORDER BY' => 'sku ASC', 'LIMIT' => "$start, $display"))) {
 	
-	if ($products = $this->getResult('product_id, sku, name, price, image, enabled, image_status', $ushop->db_name.'products', null, array('LIMIT' => "$start, $display"))) {
+		//$ftp = new File_FTP($this->registry);
 		
 		$c = 0;
 		$data = array();
 		$base_dir = __SITE_PATH . "/../components/ushop/images/products/";
 		
 		foreach ($products as $row) {
+		
+			//$ftp->rename($ftp->public_html.'/components/ushop/images/products/'.$row->image, $ftp->public_html.'/components/ushop/images/products/'.str_replace(' ', '_', $row->category).'/'.$row->image);
 			
 			if ($row->image_status == 1) {
 	
-				if (file_exists($base_dir.$row->image) && $row->image != null) {
+				if (file_exists($base_dir.str_replace(' ', '_', $row->category).'/'.$row->image) && $row->image != null) {
 					$img_file = '<img src="/templates/'.$this->registry->template.'/images/24x24/OK.png" />';
 		
 				} else {
@@ -50,7 +53,7 @@ if ($this->authorize()) {
 			$data[$c][] = $row->enabled ? '<a href="/ushop/products/enable-0/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->registry->template.'/images/16x16/IndicatorCircleGreenOn.png" /></a>' : '<a href="/ushop/products/enable-1/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->registry->template.'/images/16x16/IndicatorCircleRedOff.png" /></a>';
 			
 			$data[$c][] = $row->sku;
-			$data[$c][] = htmlentities(htmlspecialchars($row->name));
+			$data[$c][] = HTML_Element::makeXmlSafe($row->name);
 			$data[$c][] = '&pound;'.$row->price;
 			
 			$data[$c][] = $img_file;

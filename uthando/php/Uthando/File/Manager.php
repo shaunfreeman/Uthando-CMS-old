@@ -41,6 +41,7 @@ class File_Manager
 		
 		header('Expires: Fri, 01 Jan 1990 00:00:00 GMT');
 		header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
+		//print_rr($this->basedir);
 		
 		$this->get = $_GET;
 		$this->post = $_POST;
@@ -61,15 +62,16 @@ class File_Manager
 		foreach ($files as $file):
 			
 			$path = $file->getPathname();
+			$mime = $this->getMimeType($path);
 			
 			if ($file->getFilename() == '.' || ($dir == $this->basedir && $file->getFilename() == '..')) continue;
 			
-			if ($this->options['filter'] && $mime != 'text/directory' && !FileManagerUtility::startsWith($mime, $this->options['filter'])) continue;
+			if ($this->options['filter'] && $mime != 'text/directory' && !File_Utility::startsWith($mime, $this->options['filter'])) continue;
 			
 			$out[$file->isDir() ? 0 : 1][$file->getFilename()] = array(
 				'name' => $file->getBasename(),
 				'date' => date($this->options['dateFormat'], $file->getMTime()),
-				'mime' => $this->getMimeType($path),
+				'mime' => $mime,
 				'icon' => $this->getIcon($this->normalize($path)),
 				'size' => $file->getSize()
 			);
@@ -97,7 +99,10 @@ class File_Manager
 		
 		require_once($this->options['id3Path']);
 		
-		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen($this->path)+1));
+		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+1));
+		
+		//print_rr(substr(str_replace(realpath($_SERVER['DOCUMENT_ROOT'].'/../'), '', $this->path),1));
+		
 		$mime = $this->getMimeType($file);
 		$content = null;
 		
@@ -222,10 +227,10 @@ class File_Manager
 				'status' => 1,
 				'name' => pathinfo($file, PATHINFO_BASENAME)
 			));
-		}catch(Upload_Exception $e){
+		}catch(UploadException $e){
 			echo json_encode(array(
 				'status' => 0,
-				'error' => class_exists('ValidatorException') ? strip_tags($e->getMessage()) : '${upload.' . $e->getMessage() . '}' // This is for Styx :)
+				'error' => '${upload.' . $e->getMessage() . '}'
 			));
 		}catch(FileManagerException $e){
 			echo json_encode(array(

@@ -59,6 +59,8 @@ try
 	// Load component.
 
 	//user_agent|s:15:"Shockwave Flash";remote_addr|s:9:"127.0.0.1"
+	
+	$dir = $_SERVER['DOCUMENT_ROOT'].'/../'.$_POST['folder'].'/';
 			
 	function UploadIsAuthenticated($get){
 			global $registry;
@@ -76,7 +78,7 @@ try
 						),
 						false
 					);
-
+					$dir = $_SERVER['DOCUMENT_ROOT'].'/'.$_POST['folder'].'/';
 					if (count($row) == 1) return true;
 					return false;
 				} else {
@@ -89,7 +91,7 @@ try
 
 		$browser = new File_Manager($registry, array(
 			'baseURL' => $registry->config->get('web_url', 'SERVER').'/',
-			'directory' => $_SERVER['DOCUMENT_ROOT'].'/../'.$_POST['folder'].'/',
+			'directory' => $dir,
 			'assetBasePath' => $_SERVER['DOCUMENT_ROOT'].'/templates/admin/images/FileManager',
 			'move' => true,
 			'create' => true,

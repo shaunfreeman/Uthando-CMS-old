@@ -160,12 +160,10 @@ if ($this->authorize()) {
 		$form->addElement('html', '<div class="both"></div>');
 		
 		// Image.
-		$form->addElement('html', '<fieldset id="image">');
+		$form->addElement('html', '<fieldset id="image_upload">');
 		$form->addElement('header','image_header','Image');
 		
-		$form->addElement('checkbox', 'upload_image', 'Upload Image:', null, array('id' => 'upload_image'));
-		
-		$form->addElement('file','image','Product Image:', null, array('class' => 'inputbox'));
+		$form->addElement('text','image','Product Image:', array('id' => 'image','class' => 'inputbox'));
 		
 		$image_radio[] = $form->createElement('radio', null, null, 'On', '1');
 		$image_radio[] = $form->createElement('radio', null, null, 'Off', '0');
@@ -197,54 +195,6 @@ if ($this->authorize()) {
 			$menuBar['add_product'] = '/ushop/products/action-new_product';
 			$menuBar['back'] = '/ushop/products/overview';
 			
-			if ($values['upload_image'] == 1) {
-				
-				$file_exts = array('png', 'gif', 'jpeg', 'jpg');
-				
-				$upload = explode('.', $values['image']['name']);
-				// Rename files to the sku.
-				
-				if (in_array(end($upload), $file_exts)) {
-					
-					$new_name = $values['sku'].'.'.end($upload);
-					
-					$file =& $form->getElement('image');
-					
-					if ($file->moveUploadedFile($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp', $new_name)) {
-						
-						$ftp = new File_FTP($this->registry);
-						
-						if ($ftp) {
-							$image_save = $ftp->put($_SERVER['DOCUMENT_ROOT'].'/Common/tmp/'.$new_name, $login['public_html'].'/components/ushop/images/products/'.$new_name, true, FTP_BINARY);
-						
-							if (PEAR::isError($image_save)) {
-								$this->registry->Error($image_save->getMessage(), "The file could not be uploaded to /components/ushop/images/products/$new_name.");
-								$new_name = null;
-							}
-							$ftp->disconnect();
-						}
-						
-						unlink($_SERVER['DOCUMENT_ROOT'].'/Common/tmp/'.$new_name);
-						
-					} else {
-						$this->registry->Error("The file could not be uploaded to /tmp/$new_name.");
-					}
-					
-				} else {
-					
-					$new_name = null;
-				}
-				
-				$values['image'] = $new_name;
-				
-			} else {
-					
-				$values['image'] = null;
-					
-			}
-			
-			unset($values['MAX_FILE_SIZE'], $values['upload_image']);
-			
 			//check then enter the record.
 			if (!$this->getResult('product_id', $ushop->db_name.'products', null, array('where' => "name='".$values['name']."'"))) {
 				
@@ -270,10 +220,26 @@ if ($this->authorize()) {
 				
 			//$this->content .= $this->getTabs(array('details', 'description', 'price', 'attributes', 'image'));
 			
+			$js = file_get_contents(__SITE_PATH.'/components/media/js/filemanager.js');
+
+			$manager_params = array(
+				'SESSION_ID' => session_id(),
+				'FOLDER' => 'components/ushop/images/products',
+				'SELCETABLE' => true,
+				'FILTER' => "'image'"
+			);
+				
+			$this->content .= ('<script>'.$this->templateParser($js, $manager_params, '/*{', '}*/').'</script>');
+			
 			$this->loadJavaScript(array(
 				'/Common/editor/tiny_mce/tiny_mce_gzip.js',
 				'/Common/js/tinyMCEGz.js'
 			));
+			
+			$this->registry->component_css = array(
+				'/templates/'.$this->registry->template.'/css/FileManager.css',
+				'/templates/'.$this->registry->template.'/css/Additions.css'
+			);
 			
 			foreach ($errors as $value) {
 				$err = $form->getElementError($value);

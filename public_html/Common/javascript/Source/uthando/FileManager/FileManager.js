@@ -203,7 +203,6 @@ var FileManager = new Class({
 
 	open: function(e){
 		e.stop();
-
 		if(!this.Current) return false;
 		
 		this.fireEvent('complete', [

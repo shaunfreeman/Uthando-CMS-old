@@ -4,26 +4,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 class HTML_Element extends DOMDocument
 {
-	private $html_entities = array(
-		'/&quot;/' => '&#34;',
-		'/&amp;/' => '&#38;',
-		'/&apos;/' => '&#39;',
-		'/&lt;/' => '&#60;',
-		'/&gt;/' => '&#62;',
-		'/&hellip;/' => '&#133;',
-		'/&rsquo;/' => '&#146;',
-		'/&ldquo;/' => '&#147;',
-		'/&rdquo;/' => '&#148;',
-		'/&bull;/' => '&#149;',
-		'/&nbsp;/' => '&#160;',
-		'/&pound;/' => '&#163;',
-		'/&copy;/' => '&#169;',
-		'/&laquo;/' => '&#171;',
-		'/&reg;/' => '&#174;',
-		'/&raquo;/' => '&#187;',
-		'/&frac12;/' => '&#189;',
-		'/&trade;/' => '&#8482;'
-	);
+	private $html_entities = array("/> </" => "><");
 	
 	public function __construct($version='1.0', $encoding='utf-8')
 	{
@@ -31,6 +12,17 @@ class HTML_Element extends DOMDocument
 		$this->preserveWhiteSpace = false;
 		$this->formatOutput = true;
 		$this->strictErrorChecking = false;
+		$this->parse_entities();
+	}
+	
+	private function parse_entities()
+	{
+		$obj = new ArrayObject (parse_ini_file(pathinfo(__FILE__, PATHINFO_DIRNAME).'/entities.ini'));
+		$it = $obj->getIterator();
+		while ($it->valid()):
+			$this->html_entities['/&'.$it->key().';/'] = '&#'.$it->current().';';
+    		$it->next();
+		endwhile;
 	}
 	
 	public function createDocumentFragment($fragment, $attrs=null, $js=false)
@@ -96,6 +88,11 @@ class HTML_Element extends DOMDocument
 	private function entityDecode($value)
 	{
 		return preg_replace(array_keys($this->html_entities), array_values($this->html_entities), $value);
+	}
+	
+	public static function makeXmlSafe($value)
+	{
+		return  htmlentities(htmlspecialchars($value));
 	}
 }
 

@@ -9,7 +9,7 @@ UthandoAdmin.manager = new FileManager({
 		folder: '/*{FOLDER}*/',
 		filter: /*{FILTER}*/
 	},
-	onComplete: UthandoAdmin.managerCallback
+	onComplete: UthandoAdmin.fileManagerCallback
 });
 
 /*{MANAGER_INIT_CODE}*/
