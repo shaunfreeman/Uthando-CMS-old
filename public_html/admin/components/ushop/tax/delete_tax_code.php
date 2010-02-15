@@ -14,8 +14,6 @@ if ($this->authorize()) {
 	$this->content .= $this->makeToolbar($menuBar, 24);
 	
 	$menuBar = array();
-	
-	$ushop = new UShopAdmin();
 		
 	if ($this->registry->params['comfirm'] == 'delete') {
 		

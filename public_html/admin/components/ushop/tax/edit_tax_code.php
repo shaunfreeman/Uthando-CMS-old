@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	$rows = $this->getResult('tax_code_id, tax_rate_id, tax_code, description', $ushop->db_name.'tax_codes',null, array('where' => 'tax_code_id = '.$this->registry->params['id']));
 			
 	$form = new HTML_QuickForm('edit_tax_code', 'post', $_SERVER['REQUEST_URI']);

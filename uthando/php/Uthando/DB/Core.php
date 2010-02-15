@@ -2,7 +2,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class UthandoDB
+class DB_Core
 {
 	public $db;
 	protected $registry;

@@ -78,9 +78,9 @@ fieldset { width:auto; }
 	margin-right:10px;
 }
 
-#details, #price, #image_upload { float:left; }
+#add_product #details, #add_product #price, #add_product #image_upload { float:left; }
 
-#description, #attributes {
+#add_product #description, #add_product #attributes {
 	position:relative;
 	left:10px;
 	margin-right:20px;

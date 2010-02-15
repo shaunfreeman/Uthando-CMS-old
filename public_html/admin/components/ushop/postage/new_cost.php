@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin($this->registry);
-	
 	$post_zones = $this->getResult('post_zone_id, zone', $ushop->db_name.'post_zones');
 	$post_levels = $this->getResult('post_level_id, post_level', $ushop->db_name.'post_levels',null, array('ORDER BY' => 'post_level ASC'));
 	

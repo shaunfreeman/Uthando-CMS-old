@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	$tree = new NestedTreeAdmin($ushop->db_name.'product_categories', null, 'category', $this->registry);
 	
 	if ($this->registry->params['id']) {
@@ -150,13 +148,13 @@ if ($this->authorize()) {
 		$form->addElement('html', '</div></div>');
 		
 		// Image.
-		$form->addElement('html', '<div id="image" class="morphtabs_panel"><div class="panel_content">');
+		$form->addElement('html', '<div id="image_upload" class="morphtabs_panel"><div class="panel_content">');
 		//$form->addElement('header','image_header','Image');
 		$base_dir = realpath(__SITE_PATH . "/../components/ushop/images/products");
 		
 		if ($row->image_status == 1) {
 	
-			if (file_exists($base_dir.'/'.$row->image) && $row->image != null) {
+			if (file_exists($base_dir.'/'.$row->category . '/' .$row->image) && $row->image != null) {
 				
 				$form->addElement('checkbox', 'delete_image', 'Delete Image:');
 				
@@ -173,9 +171,7 @@ if ($this->authorize()) {
 		
 		$form->addElement('html', $img);
 		
-		$form->addElement('checkbox', 'upload_image', 'Upload Image:', null, array('id' => 'upload_image'));
-		
-		$form->addElement('file','image','Product Image:');
+		$form->addElement('text','image','Product Image:', array('id' => 'image','class' => 'inputbox'));
 		
 		$image_radio[] = $form->createElement('radio', null, null, 'On', '1');
 		$image_radio[] = $form->createElement('radio', null, null, 'Off', '0');
@@ -206,108 +202,7 @@ if ($this->authorize()) {
 			
 			$menuBar['back'] = '/ushop/products/overview';
 			
-			if ($values['sku'] != $row->sku && !$values['upload_image'] && $row->image) {
-				
-				$old_name = explode('.', $row->image);
-				
-				$new_name = $values['sku'].'.'.$old_name[1];
-				
-				$ftp = new File_FTP($this->registry);
-				
-				if ($ftp) {
-					$rename = $ftp->rename ($login['public_html'] . '/components/ushop/images/products/' . $row->image, $login['public_html'] . '/components/ushop/images/products/' . $new_name);
-					
-					if (PEAR::isError($rename)) {
-						$this->registry->Error($rename->getMessage());
-						$this->registry->Error("The file could not be renamed to $new_name.");
-					} else {
-						$values['image'] = $new_name;
-					}
-					
-					$ftp->disconnect();
-				} else {
-					$this->registry->Error("The file could not be renamed to $new_name.");
-				}
-			}
-			
-			if ($values['delete_image'] && $row->image != null) {
-				$di = true; // set delete flag.
-				
-				if (!is_array($values['image'])) {
-					$i = $values['image'];
-				} else {
-					$i = $row->image;
-				}
-		
-				if ($i) {
-					$ftp = new File_FTP($this->registry);
-					if ($ftp) {
-						$delete = $ftp->rm ($login['public_html'] . '/components/ushop/images/products/' . $i);
-			
-						if (PEAR::isError($delete)) {
-							$this->registry->Error($delete->getMessage());
-							$di = false;
-						}
-						$values['image'] = 'NULL';
-						$ftp->disconnect();
-					} else {
-						$di = false;
-					}
-				} else {
-					$di = false;
-				}
-			}
-			unset ($values['delete_image']);
-			
-			if ($values['upload_image'] == 1) {
-				
-				$file_exts = array('png', 'gif', 'jpeg', 'jpg');
-				
-				$upload = explode('.', $values['image']['name']);
-				// Rename files to the sku.
-				
-				if (in_array(end($upload), $file_exts)) {
-					
-					$new_name = $values['sku'].'.'.end($upload);
-					
-					$file =& $form->getElement('image');
-					
-					if ($file->moveUploadedFile($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp', $new_name)) {
-						
-						$ftp = new File_FTP($this->registry);
-						
-						if ($ftp) {
-							$image_save = $ftp->put($_SERVER['DOCUMENT_ROOT'].'/Common/tmp/'.$new_name, $login['public_html'].'/components/ushop/images/products/'.$new_name, true, FTP_BINARY);
-						
-							if (PEAR::isError($image_save)) {
-								$this->registry->Error($image_save->getMessage(), "The file could not be uploaded to /components/ushop/images/products/$new_name.");
-								$new_name = null;
-							}
-							$ftp->disconnect();
-						}
-						
-						unlink($_SERVER['DOCUMENT_ROOT'].'/Common/tmp/'.$new_name);
-						
-					} else {
-						$this->registry->Error("The file could not be uploaded to /tmp/$new_name.");
-					}
-					
-				} else {
-					
-					$new_name = null;
-					
-				}
-				
-				$values['image'] = $new_name;
-				
-			} else {
-				if (is_array($values['image'])) unset($values['image']);
-			}
-			
-			
 			if (!$values['enabled']) $values['enabled'] = 0;
-			
-			unset($values['MAX_FILE_SIZE'], $values['upload_image']);
 			
 			//check then enter the record.
 			$res = $this->update($values, $ushop->db_name.'products', array('where' => 'product_id='.$this->registry->params['id']));
@@ -339,10 +234,11 @@ if ($this->authorize()) {
 				'author_id' => $row->author_id,
 				'isbn' => $row->isbn,
 				'image_status' => $row->image_status,
-				'quantity' => $row->quantity
+				'quantity' => $row->quantity,
+				'image' => $row->image
 			));
 				
-			$tab_array = array('details' => null, 'description' => null, 'price' => null, 'attributes' => null, 'image' => null);
+			$tab_array = array('details' => null, 'description' => null, 'price' => null, 'attributes' => null, 'image_upload' => null);
 			
 			foreach ($errors as $value) {
 				$err = $form->getElementError($value);
@@ -361,11 +257,28 @@ if ($this->authorize()) {
 			$tabs = new HTML_Tabs($tab_array, true);
 			$tabs->addPanels($renderer->toHtml());
 			$this->content .= $tabs->toHtml();
+			//$this->content .= $renderer->toHtml();
+			
+			$js = file_get_contents(__SITE_PATH.'/components/media/js/filemanager.js');
+
+			$manager_params = array(
+				'SESSION_ID' => session_id(),
+				'FOLDER' => 'components/ushop/images/products',
+				'SELCETABLE' => true,
+				'FILTER' => "'image'"
+			);
+				
+			$this->content .= ('<script>'.$this->templateParser($js, $manager_params, '/*{', '}*/').'</script>');
 			
 			$this->loadJavaScript(array(
 				'/Common/editor/tiny_mce/tiny_mce_gzip.js',
 				'/Common/js/tinyMCEGz.js'
 			));
+			
+			$this->registry->component_css = array(
+				'/templates/'.$this->registry->template.'/css/FileManager.css',
+				'/templates/'.$this->registry->template.'/css/Additions.css'
+			);
 		
 		} 
 	} else {

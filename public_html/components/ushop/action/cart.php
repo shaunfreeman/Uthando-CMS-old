@@ -13,7 +13,7 @@ if ($this->ushop->GLOBAL['offline'] || $this->ushop->GLOBAL['catelogue_mode']) {
 	$cart = $this->ushop->retrieveCart();
 	
 	$this->addContent('<div id="products">');
-	$this->addContent($this->ushop->returnLink());
+	$this->addContent(UShop_Utility::returnLink());
 	
 	switch ($this->registry->params['action']) {
 		case 'add':

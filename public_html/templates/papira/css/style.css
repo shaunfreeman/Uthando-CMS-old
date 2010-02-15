@@ -1,0 +1,45 @@
+html {background:#53533a;}
+body {margin:0; font-size:14px; line-height:20px; font-family:Arial, Helvetica, sans-serif; background:url(/templates/papira/images/body_bckg.jpg) repeat-y center;}
+.brown {color:#936307;}
+a {color:#936307; text-decoration:none;}
+a:hover {color:#666666;}
+blockquote {color:#666666; border-left:2px solid #936307; padding-left:20px; margin:10px 0 10px 40px;}
+img {border:0px;}
+
+#all {background:url(images/container_bckg.jpg) no-repeat top center;}
+#container {width:1000px; margin:0 auto; background:url(http://www.charismabooks.co.uk/templates/papira/images/container_bckg.jpg) no-repeat top center;}
+
+#logo {height:50px; margin:0 60px; padding:80px 0 0 85px; background:url(/templates/papira/images/logo.gif) no-repeat 32px 70px;}
+#logo a {text-decoration:none; font-size:20px; color:#000000; font-family:"Times New Roman", Times, serif; text-transform:capitalize;}
+#menu {height:40px; margin:0 60px;}
+#menu ul {margin:0; padding:0;}
+#menu ul li {display:inline-block; float:left; list-style:none; text-align:center; color:#936307;}
+#menu a {padding:0 20px; font-family:"Times New Roman", Times, serif; font-size:20px; text-transform:lowercase; text-decoration:none; color:#936307;}
+#menu a:hover {color:#666666;}
+
+#main {background:url(/templates/papira/images/main_bottom.jpg) bottom center no-repeat; float:left; margin:0 60px;}
+#text {margin:0 270px 0 20px;}
+#text ul {padding:0; margin:10px 0 10px 40px;}
+#text li {list-style:none; padding-left:20px; background:url(/templates/papira/images/li.gif) no-repeat 0 7px;}
+#text p {margin:10px 0;}
+#sidebar {float:right; width:180px; padding:0 40px 0 10px;}
+h1, h2, .contentheading {font-family:"Times New Roman", Times, serif; margin:20px 0 0 0; font-size:1.8em; font-weight:bold;}
+
+#footer {height:130px; clear:both; background:url(/templates/papira/images/footer_bckg.jpg) no-repeat center #53533B; font-family:"Times New Roman", Times, serif; color:#666666; font-size:10px; text-transform:uppercase; padding:0 60px;}
+#left_footer {float:left; padding:20px 0 0 20px;}
+#right_footer {float:right; padding:20px 20px 0 0;}
+#left_footer span img,  #left_footer span a {vertical-align:middle}
+
+#benchmark {text-align:center;}
+
+/* Dates */
+.createdate {color: #4b4b4b; font-size: 11px; font-weight: bold; text-transform: none; padding-bottom: 15px; line-height: 12px; }
+.modifydate {color: #4b4b4b; font-size: 11px; font-style: normal; text-transform: none; line-height: 12px;}
+
+.center {text-align:center;}
+.both {clear: both;}
+
+#sidebar div.moduletable h3, #sidebar .moduletable_menu h3 {font: bold 11px;line-height: 16px; text-transform: none; text-align: center; letter-spacing: 0px;}
+
+#sidebar div.moduletable, #sidebar div.moduletable {text-align: center; margin-bottom: 2px;}
+

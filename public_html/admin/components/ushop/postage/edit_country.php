@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	if ($this->registry->params['id']) {
 		
 		$rows = $this->getResult('post_zone_id, country_id, country', $ushop->db_name.'countries',null, array('where' => 'country_id = '.$this->registry->params['id']));

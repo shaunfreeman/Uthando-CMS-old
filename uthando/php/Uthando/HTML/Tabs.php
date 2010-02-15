@@ -6,6 +6,11 @@ class HTML_Tabs extends HTML_Element
 {
 	private $root;
 	private $tabs_only;
+	public $tabId = 'morphTabs';
+	public $tabUlClass = 'morphtabs_title';
+	public $tabLiClass = 'gradient';
+	public $panelWrap = 'morphtabs_panelwrap';
+	public $panelClass = 'morphtabs_panel';
 	
 	public function __construct($data, $tabs_only=false)
 	{
@@ -13,22 +18,22 @@ class HTML_Tabs extends HTML_Element
 		
 		$this->tabs_only = $tabs_only;
 		
-		$this->root = $this->createElement('div', null, array('id' => 'morphTabs'));
+		$this->root = $this->createElement('div', null, array('id' => $this->tabId));
 		$this->createTabs($data);
 		$this->appendChild($this->root);
 	}
 	
 	public function addPanels($data)
 	{
-		$panel_set = $this->createDocumentFragment($data, array('id' => 'morphtabs_panelwrap'));
+		$panel_set = $this->createDocumentFragment($data, array('id' => $this->panelWrap));
 		$this->root->appendChild($panel_set);
 	}
 	
 	private function getTabs($data)
 	{
-		$tabs = $this->createElement('ul', null, array('class' => 'morphtabs_title'));
+		$tabs = $this->createElement('ul', null, array('class' => $this->tabUlClass));
 		foreach ($data as $tab):
-			$li = $this->createElement('li', null, array('class' => 'gradient', 'title' => $tab));
+			$li = $this->createElement('li', null, array('class' => $this->tabLiClass, 'title' => $tab));
 			$a = $this->createElement('a', ucwords(str_replace('_', ' ', $tab)), array('href' => '#'.$tab));
 			$li->appendChild($a);
 			$tabs->appendChild($li);
@@ -38,9 +43,9 @@ class HTML_Tabs extends HTML_Element
 	
 	private function getTabPanels($data)
 	{
-		$panel_set = $this->createElement('div', null, array('id' => 'morphtabs_panelwrap'));
+		$panel_set = $this->createElement('div', null, array('id' => $this->panelWrap));
 		foreach ($data as $tab => $div):
-			$panel_set->appendChild($this->createDocumentFragment($div, array('id' => $tab, 'class' => 'morphtabs_panel')));
+			$panel_set->appendChild($this->createDocumentFragment($div, array('id' => $tab, 'class' => $this->panelClass)));
 		endforeach;
 		$this->root->appendChild($panel_set);
 	}

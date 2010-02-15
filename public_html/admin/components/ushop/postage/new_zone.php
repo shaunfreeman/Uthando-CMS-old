@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	if ($this->getResult('tax_code_id', $ushop->db_name.'tax_codes')) {
 			
 		$form = new HTML_QuickForm('add_zone', 'post', $_SERVER['REQUEST_URI']);

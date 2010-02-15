@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	if ($this->registry->params['id']) {
 		
 		$rows = $this->getResult('post_zone_id, post_level_id, cost, vat_inc', $ushop->db_name.'post_costs',null, array('where' => 'post_cost_id = '.$this->registry->params['id']));

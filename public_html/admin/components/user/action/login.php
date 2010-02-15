@@ -70,7 +70,7 @@ if (!$this->authorize()) {
 		}
 	}
 	/*
-	$user_config = new ConfigMagik($this->registry, array('path' => $this->registry->ini_dir.'/user/user.ini.php'));
+	$user_config = new Config($this->registry, array('path' => $this->registry->ini_dir.'/user/user.ini.php'));
 	$key = $user_config->get('key', 'CIPHER');
 	$password = "password";
 	$pwd = UthandoUser::encodePassword($password, $key);

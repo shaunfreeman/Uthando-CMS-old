@@ -16,8 +16,6 @@ if ($this->authorize()) {
 		
 	$this->content .= $this->makeToolbar(array_merge($postageBar,$menuBar), 24);
 	
-	$ushop = new UShopAdmin($this->registry);
-	
 	$tax_codes = $this->getResult('tax_code_id', $ushop->db_name.'tax_codes');
 	
 	require_once('ushop/postage/zones.php');

@@ -77,7 +77,7 @@ class File_Manager
 			);
 		endforeach;
 		
-		foreach ($out as $key => $value) uksort($out[$key], "strnatcmp");
+		if (is_array($out)) foreach ($out as $key => $value) uksort($out[$key], "strnatcmp");
 		
 		echo json_encode(array(
 			'path' => $this->getPath($dir),

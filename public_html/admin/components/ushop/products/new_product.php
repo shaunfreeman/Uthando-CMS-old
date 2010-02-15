@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	$tree = new NestedTreeAdmin($ushop->db_name.'product_categories', null, 'category', $this->registry);
 	
 	$tax_codes = $this->getResult('tax_code_id', $ushop->db_name.'tax_codes');
@@ -257,7 +255,7 @@ if ($this->authorize()) {
 			// output the form
 			$this->content .= $renderer->toHtml();
 		
-		} 
+		}
 	} else {
 	
 		$params['TYPE'] = 'info';

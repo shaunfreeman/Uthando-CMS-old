@@ -2,53 +2,29 @@
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
     <itemcursorpositions>
-      <item line="1" column="0" url="uthando/php/Uthando/HTML/entities.ini" />
-      <item line="0" column="0" url="uthando/php/Uthando/HTML/Table.php" />
-      <item line="59" column="10" url="uthando/php/Uthando/Uthando.php" />
-      <item line="0" column="0" url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/products/new_product.php" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/js/products.js" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/products/overview.php" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/products/categories.php" />
-      <item line="28" column="213" url="public_html/admin/components/ushop/products/products.php" />
-      <item line="329" column="63" url="public_html/admin/components/ushop/products/edit_product.php" />
-      <item line="11" column="41" url="uthando/php/Uthando/HTML/Element.php" />
+      <item line="0" column="0" url="uthando/ini/barnaclesfinch/uthando.ini.php" />
     </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
     </uploadprofiles>
     <treestatus>
       <openfolder url="public_html" />
-      <openfolder url="public_html/Common" />
-      <openfolder url="public_html/Common/javascript" />
-      <openfolder url="public_html/Common/javascript/Source" />
-      <openfolder url="public_html/Common/javascript/Source/uthando" />
-      <openfolder url="public_html/Common/javascript/Source/uthando/FileManager" />
       <openfolder url="public_html/admin" />
       <openfolder url="public_html/admin/components" />
-      <openfolder url="public_html/admin/components/media" />
-      <openfolder url="public_html/admin/components/media/action" />
-      <openfolder url="public_html/admin/components/media/js" />
-      <openfolder url="public_html/admin/components/ushop" />
-      <openfolder url="public_html/admin/components/ushop/action" />
-      <openfolder url="public_html/admin/components/ushop/css" />
-      <openfolder url="public_html/admin/components/ushop/js" />
-      <openfolder url="public_html/admin/components/ushop/products" />
-      <openfolder url="public_html/admin/templates" />
-      <openfolder url="public_html/admin/templates/admin" />
-      <openfolder url="public_html/admin/templates/admin/js" />
-      <openfolder url="public_html/components" />
-      <openfolder url="public_html/components/ushop" />
-      <openfolder url="public_html/components/ushop/images" />
+      <openfolder url="public_html/admin/plugins" />
+      <openfolder url="public_html/admin/plugins/ajax_content" />
+      <openfolder url="public_html/templates" />
+      <openfolder url="public_html/templates/papira" />
+      <openfolder url="public_html/templates/papira/css" />
+      <openfolder url="public_html/templates/walls" />
+      <openfolder url="public_html/templates/walls/css" />
       <openfolder url="uthando" />
       <openfolder url="uthando/ini" />
+      <openfolder url="uthando/ini/barnaclesfinch" />
+      <openfolder url="uthando/ini/barnaclesfinch/user" />
+      <openfolder url="uthando/ini/charismabooks" />
       <openfolder url="uthando/php" />
       <openfolder url="uthando/php/Uthando" />
-      <openfolder url="uthando/php/Uthando/Admin" />
-      <openfolder url="uthando/php/Uthando/File" />
-      <openfolder url="uthando/php/Uthando/HTML" />
-      <openfolder url="uthando/php/Uthando/Payment" />
-      <openfolder url="uthando/php/Uthando/Payment/Paypal" />
     </treestatus>
   </session>
   <teamdata yourself="" />

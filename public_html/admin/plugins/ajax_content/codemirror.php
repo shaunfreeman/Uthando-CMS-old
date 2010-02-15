@@ -30,8 +30,10 @@ require_once('functions.php');
 
 $registry = new Admin_Registry();
 
+$server = explode('.', $_SERVER['SERVER_NAME']);
+
 /*{START_INI_DIR}*/
-$registry->ini_dir = realpath(__SITE_PATH.'/../../uthando/ini');
+$registry->ini_dir = realpath(__SITE_PATH.'/../../uthando/ini/'.$server[1]);
 /*{END_INI_DIR}*/
 
 $registry->config = new Admin_Config($registry, array('path' => $registry->ini_dir.'/uthando.ini.php'));
@@ -53,7 +55,7 @@ $uthando = new UthandoAdmin($registry);
 try
 {
 		
-	$registry->db = new UthandoDB($registry);
+	$registry->db = new DB_Core($registry);
 
 	$registry->session = new Session($registry);
 	UthandoUser::setUserInfo();

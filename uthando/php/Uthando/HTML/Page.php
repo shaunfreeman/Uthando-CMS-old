@@ -7,11 +7,12 @@ define('PAGE_APPEND',  0);
 define('PAGE_PREPEND', 1);
 define('PAGE_REPLACE', 2);
 
-class HTML_Page extends HTML_Element
+class HTML_Page
 {
+	private $doc;
 	private $body = array();
 	private $bodyAttributes = array();
-	private $_doctype = array('type'=>'xhtml','version'=>'1.0','variant'=>'strict');
+	private $doctype = array('type'=>'xhtml','version'=>'1.0','variant'=>'strict');
 	private $links = array();
 	private $metaTags = array('standard' => array ('Generator' => 'Uthano CMS'));
 	private $scripts = array();
@@ -43,12 +44,12 @@ class HTML_Page extends HTML_Element
 		if (isset($attributes['cache'])) $this->setCache($attributes['cache']);
 		if (isset($attributes['prolog'])) $this->xmlProlog = $attributes['prolog'];
 		
-		parent::__construct('1.0', $this->charset);
+		$this->doc = new HTML_Element('1.0', $this->charset);
 	}
 
 	private function generateHead()
 	{
-		$head = $this->createElement('head');
+		$head = $this->doc->createElement('head');
 		if ($this->profile) $head->setAttribute('profile', $this->profile);
 		
 		// Generate META tags
@@ -61,13 +62,13 @@ class HTML_Page extends HTML_Element
 					$attrs['name'] = $name;
 				endif;
 				$attrs['content'] = $content;
-				$metahttp = $this->createElement('meta', null, $attrs);
+				$metahttp = $this->doc->createElement('meta', null, $attrs);
 				$head->appendChild($metahttp);
 			endforeach;
 		endforeach;
 		
 		// Generate the title tag.
-		$title = $this->createElement('title', $this->getTitle());
+		$title = $this->doc->createElement('title', $this->getTitle());
 		$head->appendChild($title);
 		
 		// Generate link declarations
@@ -79,8 +80,8 @@ class HTML_Page extends HTML_Element
 		// Generate stylesheet declarations
 		foreach ($this->style as $styledecl):
 			foreach ($styledecl as $type => $content):
-				$ct = $this->createTextNode("\n" . $content . "\n");
-				$style = $this->createElement('style', null, array('type' => $type));
+				$ct = $this->doc->createTextNode("\n" . $content . "\n");
+				$style = $this->doc->createElement('style', null, array('type' => $type));
 				$style->appendChild($ct);
 				$head->appendChild($style);
 			endforeach;
@@ -92,9 +93,9 @@ class HTML_Page extends HTML_Element
 		// Generate script declarations
 		foreach ($this->script as $script):
 			foreach ($script as $type => $content):
-				$cm = $this->createTextNode("\n//");
-				$ct = $this->createCDATASection("\n" . $content . "\n//");
-				$script = $this->createElement('script', null, array('type' => $type));
+				$cm = $this->doc->createTextNode("\n//");
+				$ct = $this->doc->createCDATASection("\n" . $content . "\n//");
+				$script = $this->doc->createElement('script', null, array('type' => $type));
 				$script->appendChild($cm);
 				$script->appendChild($ct);
 				$head->appendChild($script);
@@ -106,9 +107,9 @@ class HTML_Page extends HTML_Element
 
 	private function generateBody()
 	{
-		$body = $this->createElement('body', null, $this->bodyAttributes);
+		$body = $this->doc->createElement('body', null, $this->bodyAttributes);
 		foreach ($this->body as $value):
-			if (is_string($value)) $value = $this->createDocumentFragment($value, null, true);
+			if (is_string($value)) $value = $this->doc->createDocumentFragment($value, null, true);
 			$body->appendChild($value);
 		endforeach;
 		return $body;
@@ -118,9 +119,9 @@ class HTML_Page extends HTML_Element
 	{
 		require('HTML/Page/Doctypes.php');
 
-		if (isset($this->_doctype['type'])) $type = $this->_doctype['type'];
-		if (isset($this->_doctype['version'])) $version = $this->_doctype['version'];
-		if (isset($this->_doctype['variant'])) $variant = $this->_doctype['variant'];
+		if (isset($this->doctype['type'])) $type = $this->doctype['type'];
+		if (isset($this->doctype['version'])) $version = $this->doctype['version'];
+		if (isset($this->doctype['variant'])) $variant = $this->doctype['variant'];
 		
 		$strDoctype = '';
 		
@@ -133,17 +134,17 @@ class HTML_Page extends HTML_Element
 				foreach ( $doctype[$type][$version] as $string) $strDoctype .= $string."\n";
 			else:
 				if (isset($default[$type][$version][0])):
-					$this->_doctype = $this->parseDoctypeString($default[$type][$version][0]);
+					$this->doctype = $this->parseDoctypeString($default[$type][$version][0]);
 					$strDoctype = $this->getDoctype();
 				endif;
 			endif;
 		elseif (isset($type)):
 			if (isset($default[$type][0])):
-				$this->_doctype = $this->parseDoctypeString($default[$type][0]);
+				$this->doctype = $this->parseDoctypeString($default[$type][0]);
 				$strDoctype = $this->getDoctype();
 			endif;
 		else:
-			$this->_doctype = $this->_parseDoctypeString($default['default'][0]);
+			$this->doctype = $this->_parseDoctypeString($default['default'][0]);
 			$strDoctype = $this->getDoctype();
 		endif;
 		
@@ -168,9 +169,9 @@ class HTML_Page extends HTML_Element
 	{
 		require('HTML/Page/Namespaces.php');
 		
-		if (isset($this->_doctype['type'])) $type = $this->_doctype['type'];
-		if (isset($this->_doctype['version'])) $version = $this->_doctype['version'];
-		if (isset($this->_doctype['variant'])) $variant = $this->_doctype['variant'];
+		if (isset($this->doctype['type'])) $type = $this->doctype['type'];
+		if (isset($this->doctype['version'])) $version = $this->doctype['version'];
+		if (isset($this->doctype['variant'])) $variant = $this->doctype['variant'];
 		
 		$strNamespace = '';
 		
@@ -230,7 +231,7 @@ class HTML_Page extends HTML_Element
 
 	public function addScript($url, $type="text/javascript")
 	{
-		$script = $this->createElement('script');
+		$script = $this->doc->createElement('script');
 		$script->setAttribute('src', $url);
 		$script->setAttribute('type', $type);
 		$this->scripts[] = $script;
@@ -272,7 +273,7 @@ class HTML_Page extends HTML_Element
 
 	public function addLink($href, $type, $relation)
 	{
-		$link = $this->createElement('link');
+		$link = $this->doc->createElement('link');
 		$link->setAttribute('href', $href);
 		if (!is_null($relation)) $link->setAttribute('rel', $relation);
 		if (!is_null($type)) $link->setAttribute('type', $type);
@@ -286,9 +287,9 @@ class HTML_Page extends HTML_Element
 
 	public function getDoctypeString()
 	{
-		$strDoctype = strtoupper($this->_doctype['type']);
-		$strDoctype .= ' '.ucfirst(strtolower($this->_doctype['version']));
-		if ($this->_doctype['variant']) $strDoctype .= ' ' . ucfirst(strtolower($this->_doctype['variant']));
+		$strDoctype = strtoupper($this->doctype['type']);
+		$strDoctype .= ' '.ucfirst(strtolower($this->doctype['version']));
+		if ($this->doctype['variant']) $strDoctype .= ' ' . ucfirst(strtolower($this->doctype['variant']));
 		return trim($strDoctype);
 	}
 
@@ -346,7 +347,7 @@ class HTML_Page extends HTML_Element
 
 	public function setDoctype($type = "XHTML 1.0 Transitional")
 	{
-		$this->_doctype = $this->parseDoctypeString($type);
+		$this->doctype = $this->parseDoctypeString($type);
 	}
 
 	public function setHeadProfile($profile = '')
@@ -425,18 +426,18 @@ class HTML_Page extends HTML_Element
 
 	public function toHTML()
 	{
-		$this->appendChild($this->getDoctype());
+		$this->doc->appendChild($this->getDoctype());
 
-		$html = $this->createElement('html');
+		$html = $this->doc->createElement('html');
 		
-		if ($this->_doctype['type'] == 'xhtml') $html->setAttribute('xml:lang', $this->getLang());
+		if ($this->doctype['type'] == 'xhtml') $html->setAttribute('xml:lang', $this->getLang());
 
-		$this->appendChild($html);
+		$this->doc->appendChild($html);
 		
 		$html->appendChild($this->generateHead());
 		$html->appendChild($this->generateBody());
 		
-		return $this->saveXML($this->xmlProlog);
+		return $this->doc->saveXML($this->xmlProlog);
 	}
 }
 

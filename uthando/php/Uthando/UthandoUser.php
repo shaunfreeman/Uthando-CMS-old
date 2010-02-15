@@ -51,14 +51,14 @@ class UthandoUser
 	
 	public static function decodePassword($password, $key, $iv)
 	{
-		$cipher = new Cipher(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CFB);
+		$cipher = new Security_Cipher(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CFB);
 		$key = self::encodeKey($key);
 		return $cipher->decrypt($password, $key, $iv);
 	}
 	
 	public static function encodePassword($password, $key)
 	{
-		$cipher = new Cipher(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CFB);
+		$cipher = new Security_Cipher(MCRYPT_RIJNDAEL_256, MCRYPT_MODE_CFB);
 		$key = self::encodeKey($key);
 		$pwd = $cipher->encrypt($password, $key);
 		$iv = $cipher->getIV();

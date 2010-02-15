@@ -47,6 +47,7 @@ class Module extends HTML_Element
 			$this->appendChild($this->module_wrap);
 			
 			return $this->toHTML();
+			//return $this->module_wrap;
   		endif;
 	}
 	

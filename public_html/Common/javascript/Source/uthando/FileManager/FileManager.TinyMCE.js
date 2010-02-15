@@ -21,6 +21,7 @@ FileManager.TinyMCE = function(options){
 	return function(field, url, type, win){
 		var manager = new FileManager($extend({
 			onComplete: function(path){
+				console.log(url);
 				if(!win.document) return;
 				win.document.getElementById(field).value = path;
 				if(win.ImageDialog) win.ImageDialog.showPreviewImage(path, 1);

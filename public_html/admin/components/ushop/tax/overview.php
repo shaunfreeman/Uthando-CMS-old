@@ -17,8 +17,6 @@ if ($this->authorize()) {
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
 	
-	$ushop = new UShopAdmin();
-	
 	$tax_rates = $ushop->getTaxRates(true);
 	
 	require_once('ushop/tax/tax_codes.php');

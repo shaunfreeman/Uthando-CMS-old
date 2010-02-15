@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	if ($this->registry->params['id']) {
 		
 		$rows = $this->getResult('price_group_id, price_group, price', $ushop->db_name.'price_groups',null, array('where' => 'price_group_id = '.$this->registry->params['id']));

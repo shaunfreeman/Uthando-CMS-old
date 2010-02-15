@@ -7,7 +7,7 @@ if (UthandoUser::authorize()):
 
 	$paypal_action = ($this->registry->params['callback']) ? $this->registry->params['callback'] : 'pay';
 	
-	$paypal = ($this->ushop->PAYPAL['ipn']) ? new Payment_Paypal_IPN($this->registry) : new Payment_Paypal($this->registry);
+	$paypal = ($this->ushop->PAYPAL['ipn']) ? new UShop_Payment_Paypal_IPN($this->registry) : new UShop_Payment_Paypal($this->registry);
 	
 	switch ($paypal_action):
 		case 'cancel':

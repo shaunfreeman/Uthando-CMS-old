@@ -15,7 +15,7 @@ if ($this->authorize()) {
 	
 	$manager_params = array(
 		'SESSION_ID' => session_id(),
-		'FOLDER' => 'userfiles',
+		'FOLDER' => 'userfiles_'.$this->registry->server,
 		'SELCETABLE' => 'false',
 		'FILTER' => 'null',
 		'MANAGER_INIT_CODE' => 'UthandoAdmin.manager.show();'

@@ -123,7 +123,7 @@ class UthandoAdmin extends Uthando {
 			$menuBar .= '</ul>';
 			$menuBar .= '<div class="both"><!-- --></div>';
 			$menuBar .= '</div>';
-			$menuBar .= '<img width="8" height="53" id="scrollRight" alt="scroll right" src="/templates/'.$this->registry->template.'/images//right_scroll.png"/>';
+			$menuBar .= '<img width="8" height="53" id="scrollRight" alt="scroll right" src="/templates/'.$this->registry->template.'/images/right_scroll.png"/>';
 			$menuBar .= '</div>';
 			return $menuBar;
 		} else {

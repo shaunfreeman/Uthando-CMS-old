@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class Payment_Paypal extends HTML_Element
+class UShop_Payment_Paypal extends HTML_Element
 {
 	private $fields = array(); // array holds the fields to submit to paypal
 	protected $paypal_url = 'https://www.paypal.com/cgi-bin/webscr';

@@ -28,8 +28,17 @@ require_once('functions.php');
 
 $registry = new Registry();
 
+$server = explode('.', $_SERVER['SERVER_NAME']);
+
+if ($server[0] == 'www'):
+	$registry->server = $server[1];
+	
+else:
+	$registry->server = $server[0];
+endif; 
+
 /*{START_INI_DIR}*/
-$registry->ini_dir = realpath(__SITE_PATH.'/../uthando/ini');
+$registry->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$registry->server);
 /*{END_INI_DIR}*/
 
 $registry->config = new Config($registry, array('path' => $registry->ini_dir.'/uthando.ini.php'));
@@ -61,8 +70,9 @@ $registry->template = $registry->config->get ('site_template', 'SERVER');
 	
 $uthando->setTemplate(__SITE_PATH . '/templates/' . $registry->template . '/index.html');
 
-if (is_file(__SITE_PATH.'/userfiles/image/favicon.ico')) {
-	$uthando->addFavicon('/userfiles/image/favicon.ico');
+if (is_file(__SITE_PATH.'/userfiles_'.$registry->server.'/image/favicon.ico')) {
+	
+	$uthando->addFavicon('/userfiles_'.$registry->server.'/image/favicon.ico');
 } else {
 	$uthando->addFavicon('/Common/images/favicon.ico');
 }
@@ -91,7 +101,7 @@ $registry->load_cache = $template_files->get('load', 'cache');
 try
 {
 
-	$registry->db = new UthandoDB(&$registry);
+	$registry->db = new DB_Core(&$registry);
 	
 	// Load component.
 	$uthando->loadComponent();

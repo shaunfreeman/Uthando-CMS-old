@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin($this->registry);
-	
 	if ($post_zones = $this->getResult('post_zone_id, zone', $ushop->db_name.'post_zones')) {
 			
 		$form = new HTML_QuickForm('add_country', 'post', $_SERVER['REQUEST_URI']);

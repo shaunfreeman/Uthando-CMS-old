@@ -18,7 +18,7 @@ HTML_List extends HTML_Element
 	public function makeList($list=null)
 	{
 		if (!$list) $list = $this->list_items;
-		$list = $this->createElement('ul', null, array('class' => ''));
+		$list = $this->createElement($this->list_type, null, array('class' => ''));
 		foreach ($list as $key => $value):
 			if (is_array($value)) $this->makeList($value);
 			$li = $this->createElement('li', $value, array('class' => ''));

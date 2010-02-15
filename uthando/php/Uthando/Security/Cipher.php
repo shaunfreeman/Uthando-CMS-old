@@ -22,7 +22,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class Cipher {
+class Security_Cipher {
 
     /**
 	* Algorithm to use.

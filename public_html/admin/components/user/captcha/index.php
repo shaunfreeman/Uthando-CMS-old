@@ -21,7 +21,7 @@ $captcha_init['TTF_RANGE'] = $ttf_range;
 
 $captcha_init['counter_filename'] =  $_SERVER['DOCUMENT_ROOT'] . $captcha_config->get ('counter_filename', 'CAPTCHA');
 
-$captcha = new HnCaptchaX1 ($captcha_init);
+$captcha = new Security_HnCaptchaX1 ($captcha_init);
 
 // Add form elements.
 // add html lines.

@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	$rate = $this->getResult('tax_rate', $ushop->db_name.'tax_rates', null, array('where' =>'tax_rate_id = '.$this->registry->params['id']));
 			
 	$form = new HTML_QuickForm('edit_tax_rate', 'post', $_SERVER['REQUEST_URI']);

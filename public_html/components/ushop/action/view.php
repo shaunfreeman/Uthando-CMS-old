@@ -6,7 +6,7 @@ define( 'SHOP_PARENT_FILE', 1 );
 
 $title .= " : ";
 
-$this->ushop = new UShop();
+$this->ushop = new UShop_Core();
 
 switch ($this->registry->params[0]) {
 	case 'shopfront':

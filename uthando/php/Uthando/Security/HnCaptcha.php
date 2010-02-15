@@ -204,7 +204,7 @@
   * @date 2007-December-24
   *
   **/
-class HnCaptcha
+class Security_HnCaptcha
 {
 
     ////////////////////////////////

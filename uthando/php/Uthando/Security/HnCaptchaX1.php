@@ -74,7 +74,7 @@
   * @date 2007-December-24
   *
   **/
-class HnCaptchaX1 extends HnCaptcha
+class Security_HnCaptchaX1 extends Security_HnCaptcha
 {
 
     ////////////////////////////////

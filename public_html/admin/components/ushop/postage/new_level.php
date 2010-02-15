@@ -17,8 +17,6 @@ if ($this->authorize()) {
 	$this->content .= $this->makeToolbar($menuBar, 24);
 	
 	$menuBar = array();
-	
-	$ushop = new UShopAdmin($this->registry);
 			
 	$form = new HTML_QuickForm('add_level', 'post', $_SERVER['REQUEST_URI']);
 			

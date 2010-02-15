@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	$tree = new NestedTreeAdmin($ushop->db_name.'product_categories', null, 'category');
 			
 	$form = new HTML_QuickForm('add_category', 'post', $_SERVER['REQUEST_URI']);

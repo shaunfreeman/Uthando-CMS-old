@@ -57,7 +57,7 @@ class Uthando extends HTML_Page {
 		endif;
 	}
 	
-	public function compress_styles($buffer) {
+	private function compress_styles($buffer) {
 		// remove comments, tabs, spaces, newlines, etc.
 		$search = array(
 			"/\/\*(.*?)\*\/|[\t\r\n]/s" => "",

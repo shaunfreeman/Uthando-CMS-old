@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	if ($tax_rates = $ushop->getTaxRates(true)) {
 			
 		$form = new HTML_QuickForm('add_tax_code', 'post', $_SERVER['REQUEST_URI']);

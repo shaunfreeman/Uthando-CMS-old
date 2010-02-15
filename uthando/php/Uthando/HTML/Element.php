@@ -44,7 +44,7 @@ class HTML_Element extends DOMDocument
 	
 	public function createElement($tagName, $value=null, $attrs=null)
 	{
-		$node = ($value != null) ? parent::createElement($tagName, $value) : parent::createElement($tagName);
+		$node = ($value != null) ? parent::createElement($tagName, $this->entityDecode($value)) : parent::createElement($tagName);
 		if (is_array($attrs)):
 			foreach ($attrs as $key => $value):
 				$node->setAttribute($key, $value);
@@ -64,7 +64,7 @@ class HTML_Element extends DOMDocument
 		return html_entity_decode($xml);
 	}
 	
-	public function toHTML($xmlProlog=false)
+	public function toHTML()
 	{
 		return $this->saveXML();
 	}

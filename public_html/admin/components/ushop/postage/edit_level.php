@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	if ($this->registry->params['id']) {
 		
 		$rows = $this->getResult('post_level_id, post_level', $ushop->db_name.'post_levels',null, array('where' => 'post_level_id = '.$this->registry->params['id']));

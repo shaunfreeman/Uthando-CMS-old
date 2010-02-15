@@ -9,8 +9,6 @@ if ($this->authorize()) {
 		'back' => '/ushop/overview'
 	);
 	
-	$ushop = new UShopAdmin();
-	
 	$tax_codes = $this->getResult('tax_code_id', $ushop->db_name.'tax_codes');
 	
 	$tab_array = array();

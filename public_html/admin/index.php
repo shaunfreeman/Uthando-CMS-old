@@ -1,4 +1,5 @@
 <?php
+
 ob_start('ob_gzhandler');
 
 // Set flag that this is a parent file
@@ -36,8 +37,11 @@ if ($_SERVER['DOCUMENT_ROOT'] == __SITE_PATH) {
 	$registry->admin_dir = '/'.$admin_path[count($admin_path) - 1];
 }
 
+$server = explode('.', $_SERVER['SERVER_NAME']);
+$registry->server = $server[1];
+
 /*{START_INI_DIR}*/
-$registry->ini_dir = realpath(__SITE_PATH.'/../../uthando/ini');
+$registry->ini_dir = realpath(__SITE_PATH.'/../../uthando/ini/'.$registry->server);
 /*{END_INI_DIR}*/
 
 $registry->config = new Admin_Config($registry, array('path' => $registry->ini_dir.'/uthando.ini.php'));
@@ -77,7 +81,7 @@ $registry->load_cache = $template_files->get('load', 'cache');
 	
 try
 {
-	$registry->db = new UthandoDBAdmin($registry);
+	$registry->db = new DB_Admin($registry);
 
 	$registry->session = new Session($registry);
 	UthandoUser::setUserInfo();

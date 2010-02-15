@@ -18,8 +18,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin();
-	
 	if ($this->registry->params['id']) {
 		
 		$rows = $this->getResult('category_id, category, category_image, category_image_status', $ushop->db_name.'product_categories', null, array('where' => 'category_id = '.$this->registry->params['id']));

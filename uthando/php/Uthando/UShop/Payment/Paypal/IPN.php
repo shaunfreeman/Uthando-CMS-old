@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class Payment_Paypal_IPN extends Payment_Paypal
+class UShop_Payment_Paypal_IPN extends UShop_Payment_Paypal
 {
 	private $last_error = '';                 // holds the last error encountered
 	private $ipn_log = true;                    // bool: log IPN results to text file?
@@ -118,18 +118,7 @@ class Payment_Paypal_IPN extends Payment_Paypal
 			
 			$logs = __SITE_PATH.'/../../uthando/logs';
 			
-			if (!is_file($logs.'/'.$this->ipn_log_file)):
-				
-				if (!is_dir($logs)) $dir = $ftp->mkdir($ftp->uthando_dir.'/logs');
-				
-				file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$this->ipn_log_file, '');
-				
-				$f = $ftp->put($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$this->ipn_log_file, $ftp->uthando_dir.'/logs/'.$this->ipn_log_file, true);
-				
-				unlink($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$this->ipn_log_file);
-				
-				$ftp->chmod($ftp->uthando_dir.'/logs', 0755);
-			endif;
+			if (!is_file($logs.'/'.$this->ipn_log_file)) $this->makeLogFile();
 			
 			$ftp->chmod($ftp->uthando_dir.'/logs/'.$this->ipn_log_file, 0646);
 			// Write to log
@@ -137,6 +126,19 @@ class Payment_Paypal_IPN extends Payment_Paypal
 			$ftp->chmod($ftp->uthando_dir.'/logs/'.$this->ipn_log_file, 0644);
 			
 		endif;
+	}
+	
+	private function makeLogFile()
+	{
+		if (!is_dir($logs)) $dir = $ftp->mkdir($ftp->uthando_dir.'/logs');
+				
+		file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$this->ipn_log_file, '');
+		
+		$f = $ftp->put($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$this->ipn_log_file, $ftp->uthando_dir.'/logs/'.$this->ipn_log_file, true);
+		
+		unlink($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$this->ipn_log_file);
+		
+		$ftp->chmod($ftp->uthando_dir.'/logs', 0755);
 	}
 }
 

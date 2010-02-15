@@ -2,7 +2,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class UthandoDBAdmin extends UthandoDB
+class DB_Admin extends DB_Core
 {
 	public function __construct($registry)
 	{

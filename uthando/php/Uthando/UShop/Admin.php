@@ -3,18 +3,20 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class UShopAdmin extends UShop {
-	
-	public function getDisplay($key) {
+class UShop_Admin extends UShop_Core
+{
+	public function getDisplay($key)
+	{
 		return $this->ADMIN_DISPLAY[$key];
 	}
 	
-	public function getSettings(){
+	public function getSettings()
+	{
 		return $this->vars;
 	}
 	
-	public function getTaxRates($format=false) {
-		
+	public function getTaxRates($format=false)
+	{
 		$result = $this->uthando->getResult('tax_rate_id, tax_rate', $this->db_name.'tax_rates', null, array('ORDER BY' => 'tax_rate ASC'));
 		
 		if ($result) {
@@ -29,8 +31,8 @@ class UShopAdmin extends UShop {
 		return false;
 	}
 	
-	public function formatTaxRates($rows) {
-		
+	public function formatTaxRates($rows)
+	{
 		foreach ($rows as $index => $row) {
 			if ($row->tax_rate > 0) {
 				$rows[$index]->tax_rate = substr ($row->tax_rate, 2);
@@ -52,8 +54,8 @@ class UShopAdmin extends UShop {
 		
 	}
 	
-	public function formatTaxCodes() {
-		
+	public function formatTaxCodes()
+	{
 		$rows = $this->uthando->getResult('tax_code_id, tax_rate, tax_code, description', $this->db_name.'tax_codes',$this->db_name.'tax_rates', null);
 		
 		$this->formatTaxRates($rows);
@@ -65,7 +67,6 @@ class UShopAdmin extends UShop {
 		}
 		
 		return $return_rows;
-	}
-	
+	}	
 }
 ?>

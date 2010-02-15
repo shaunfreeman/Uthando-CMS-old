@@ -16,8 +16,6 @@ if ($this->authorize()) {
 	
 	$menuBar = array();
 	
-	$ushop = new UShopAdmin($this->registry);
-	
 	$form = new HTML_QuickForm('edit_params', 'post', $_SERVER['REQUEST_URI']);
 			
 	// Remove name attribute for xhtml strict compliance.
