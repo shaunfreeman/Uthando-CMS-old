@@ -9,7 +9,7 @@ server.each(function(item, index){
 	if (server.length > 2) dot = '.';
 	if (index != 0) loc += item + dot;
 });
-console.log(loc);
+
 UthandoAdminConfig.extend({
 	tinyMCE: {
 		enable: UthandoAdmin.tinyMCEInit,
@@ -34,7 +34,8 @@ UthandoAdminConfig.extend({
 					language: 'en',
 					selectable: true,
 					uploadAuthData: {
-						folder: 'userfiles_'+url.get('host').split('.')[1]
+						folder: 'userfiles_'+url.get('host').split('.')[1],
+						session: UthandoAdmin.sid
 					}
 				};
 			}),

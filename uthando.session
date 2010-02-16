@@ -2,22 +2,41 @@
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
     <itemcursorpositions>
-      <item line="0" column="0" url="uthando/ini/barnaclesfinch/uthando.ini.php" />
+      <item line="9" column="23" url=".gitignore" />
+      <item line="70" column="89" url="public_html/index.php" />
+      <item line="40" column="0" url="public_html/admin/index.php" />
+      <item line="0" column="0" url="public_html/admin/plugins/ajax_content/filemanager.php" />
+      <item line="17" column="56" url="public_html/admin/components/media/action/overview.php" />
+      <item line="5" column="18" url="public_html/admin/components/content/js/editorConfig.js" />
+      <item line="84" column="23" url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" />
+      <item line="11" column="4" url="public_html/admin/components/media/js/filemanager.js" />
+      <item line="25" column="59" url="public_html/Common/javascript/Source/uthando/FileManager/FileManager.TinyMCE.js" />
     </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
     </uploadprofiles>
     <treestatus>
       <openfolder url="public_html" />
+      <openfolder url="public_html/Common" />
+      <openfolder url="public_html/Common/javascript" />
+      <openfolder url="public_html/Common/javascript/Source" />
+      <openfolder url="public_html/Common/javascript/Source/uthando" />
+      <openfolder url="public_html/Common/javascript/Source/uthando/FileManager" />
       <openfolder url="public_html/admin" />
+      <openfolder url="public_html/admin/Common" />
+      <openfolder url="public_html/admin/Common/editor" />
       <openfolder url="public_html/admin/components" />
+      <openfolder url="public_html/admin/components/content" />
+      <openfolder url="public_html/admin/components/content/action" />
+      <openfolder url="public_html/admin/components/content/js" />
+      <openfolder url="public_html/admin/components/media" />
+      <openfolder url="public_html/admin/components/media/action" />
+      <openfolder url="public_html/admin/components/media/js" />
       <openfolder url="public_html/admin/plugins" />
       <openfolder url="public_html/admin/plugins/ajax_content" />
-      <openfolder url="public_html/templates" />
-      <openfolder url="public_html/templates/papira" />
-      <openfolder url="public_html/templates/papira/css" />
-      <openfolder url="public_html/templates/walls" />
-      <openfolder url="public_html/templates/walls/css" />
+      <openfolder url="public_html/admin/templates" />
+      <openfolder url="public_html/admin/templates/admin" />
+      <openfolder url="public_html/admin/templates/admin/js" />
       <openfolder url="uthando" />
       <openfolder url="uthando/ini" />
       <openfolder url="uthando/ini/barnaclesfinch" />
@@ -25,6 +44,7 @@
       <openfolder url="uthando/ini/charismabooks" />
       <openfolder url="uthando/php" />
       <openfolder url="uthando/php/Uthando" />
+      <openfolder url="uthando/php/Uthando/File" />
     </treestatus>
   </session>
   <teamdata yourself="" />

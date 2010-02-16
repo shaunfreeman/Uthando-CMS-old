@@ -21,7 +21,7 @@ if ($this->authorize()) {
 		'MANAGER_INIT_CODE' => 'UthandoAdmin.manager.show();'
 	);
 		
-	$this->addContent('<script>'.$this->templateParser($js, $manager_params, '/*{', '}*/').'</script>');
+	$this->addScriptDeclaration($this->templateParser($js, $manager_params, '/*{', '}*/'));
 
 	$this->registry->component_css = array(
 		'/templates/'.$this->registry->template.'/css/FileManager.css',

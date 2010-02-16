@@ -120,6 +120,8 @@ if ($this->authorize()) {
 				'/templates/'.$this->registry->template.'/css/Additions.css'
 			);
 			
+			$this->addScriptDeclaration("UthandoAdmin.sid = '" . session_id() . "';");
+			
 		}
 		
 		if (isset($params)) {
