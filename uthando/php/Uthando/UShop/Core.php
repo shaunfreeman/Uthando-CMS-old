@@ -296,8 +296,8 @@ class UShop_Core {
 		$cb = file_get_contents('ushop/html/cart_body.html', true);
 		$ci = file_get_contents('ushop/html/cart_items.html', true);
 		
-		if (!$uthando->ushop->CHECKOUT['vat_state']) $ci = $this->removeSection($ci, 'vat');
-		if (!$uthando->ushop->CHECKOUT['vat_state']) $cb = $this->removeSection($cb, 'vat');
+		if (!$uthando->ushop->CHECKOUT['vat_state']) $ci = UShop_Utility::removeSection($ci, 'vat');
+		if (!$uthando->ushop->CHECKOUT['vat_state']) $cb = UShop_Utility::removeSection($cb, 'vat');
 
 		$params = array(
 			'COLSPAN' => ($uthando->ushop->CHECKOUT['vat_state']) ? 3 : 2,
@@ -404,7 +404,7 @@ class UShop_Core {
 		if (!$this->INVOICE['display_top']) $remove[] = 'top';
 		if (!$this->INVOICE['display_bottom']) $remove[] = "bottom";
 
-		foreach ($remove as $value) $html = $this->removeSection($html, $value);
+		foreach ($remove as $value) $html = UShop_Utility::removeSection($html, $value);
 
 		return $html;
 	}
@@ -432,7 +432,7 @@ class UShop_Core {
 		if (!$this->INVOICE['display_top']) $remove[] = 'top';
 		if (!$this->INVOICE['display_bottom']) $remove[] = "bottom";
 
-		foreach ($remove as $value) $html = $this->removeSection($html, $value);
+		foreach ($remove as $value) $html = UShop_Utility::removeSection($html, $value);
 
 		return $html;
 	}
@@ -523,7 +523,7 @@ class UShop_Core {
 	
 	private function getAdminConn()
 	{
-		$config = new ConfigMagik($this->registry, array('path' => $this->registry->ini_dir.'/uthandoAdmin.ini.php'));
+		$config = new Config($this->registry, array('path' => $this->registry->ini_dir.'/uthandoAdmin.ini.php'));
 		// connect user to database.
 
 		$dsn = $config->get('DATABASE');

@@ -2693,7 +2693,6 @@
     <item url="public_html/userfiles/bad_day.jpg" uploadstatus="1" />
     <item url="public_html/.htaccess" uploadstatus="1" />
     <item url="uthando/php/Uthando/HTML/Paginate.php" uploadstatus="1" />
-    <item url="uthando/php/Uthando/UShop/UShop.php" uploadstatus="1" />
     <item url="public_html/admin/components/webmail/css/webmail.css" uploadstatus="1" />
     <item url="public_html/admin/components/webmail/js/" uploadstatus="1" />
     <item url="public_html/admin/components/webmail/js/index.html" uploadstatus="1" />
@@ -2803,6 +2802,11 @@
     <item url="public_html/templates/walls/js/index.html" uploadstatus="1" />
     <item url="public_html/templates/walls/css/" uploadstatus="1" />
     <item url="public_html/templates/walls/css/style.css" uploadstatus="1" />
-    <item url="public_html/barnaclesfinch_userfiles/" />
+    <item url="public_html/Common/tmp/hn_captcha_675b3f.jpg" uploadstatus="1" />
+    <item url="public_html/userfiles_barnaclesfinch/" uploadstatus="1" />
+    <item url="public_html/userfiles_barnaclesfinch/image/" uploadstatus="1" />
+    <item url="public_html/userfiles_barnaclesfinch/image/favicon.ico" uploadstatus="1" />
+    <item url="public_html/userfiles_barnaclesfinch/luxus_02.jpg" uploadstatus="1" />
+    <item url="public_html/userfiles_barnaclesfinch/luxus_03.gif" uploadstatus="1" />
   </project>
 </webproject>

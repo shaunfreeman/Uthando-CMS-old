@@ -148,7 +148,7 @@ class UShop_ShoppingCart
 		
 		$html = Uthando::templateParser($vc, array('CART_BODY' => $cart_body, 'SSL_URL' => $this->registry->config->get('ssl_url', 'SERVER')), '{', '}');
 		
-		return Ushop_Utility::removeSection($html, 'item_quantity');
+		return UShop_Utility::removeSection($html, 'item_quantity');
 	}
 	
 	public function displayCart()
@@ -157,8 +157,8 @@ class UShop_ShoppingCart
 		$cb = file_get_contents('ushop/html/cart_body.html', true);
 		$ci = file_get_contents('ushop/html/cart_items.html', true);
 		
-		if (!$uthando->ushop->CHECKOUT['vat_state']) $ci = Ushop_Utility::removeSection($ci, 'vat');
-		if (!$uthando->ushop->CHECKOUT['vat_state']) $cb = Ushop_Utility::removeSection($cb, 'vat');
+		if (!$uthando->ushop->CHECKOUT['vat_state']) $ci = UShop_Utility::removeSection($ci, 'vat');
+		if (!$uthando->ushop->CHECKOUT['vat_state']) $cb = UShop_Utility::removeSection($cb, 'vat');
 
 		$params = array(
 			'COLSPAN' => ($uthando->ushop->CHECKOUT['vat_state']) ? 3 : 2,
@@ -178,7 +178,7 @@ class UShop_ShoppingCart
 			else:
 				$this->cart['postCost'] = 0;
 				$this->cart['postTax'] = 0;
-				$cb = Ushop_Utility::removeSection($cb, 'postage');
+				$cb = UShop_Utility::removeSection($cb, 'postage');
 			endif;
 			
 			$params = array_merge($params, $this->getCartTotals());
