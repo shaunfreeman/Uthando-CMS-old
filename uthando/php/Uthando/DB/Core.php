@@ -103,6 +103,7 @@ class DB_Core
 				$stmt->bindParam($key,$value);
 			endforeach;
 		endif;
+		//print_rr($stmt);
 		$stmt->execute();
 		$obj = $stmt->fetch(PDO::FETCH_OBJ);
 		return $obj;

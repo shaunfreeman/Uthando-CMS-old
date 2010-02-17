@@ -100,39 +100,33 @@ if ($this->authorize()) {
 		$email = $form->exportValue('email');
 		$password = $form->exportValue('password1');
 		$group = $form->exportValue('group');
-	
-		// If user exists then display message otherwise register them..
-		$sql = $this->registry->db->query("
-			SELECT user_id
+		
+		// If user exists then display message otherwise register them..	
+		$sql = $this->registry->db->getRow("
+			SELECT COUNT(user_id) AS num_rows
 			FROM ".$this->registry->user."users
 			WHERE email='$email'
 			OR username='$username'
 		");
-	
-		if (PEAR::isError($sql)) {
 		
-			$this->registry->Error ($sql->getMessage(), $sql->getDebugInfo ());
-		
-		} else {
-			$num_rows = $sql->numRows();
-		
-			if ($num_rows == 0) {
-				// lets now register the user
+		if ($sql->num_rows == 0):
+			try{
+				$conn = $this->registry->db->getConn();
+				$conn->beginTransaction();
+				
 				$user_config = new Config($registry, array('path' => $this->registry->ini_dir.'/user/user.ini.php'));
-				// encrypt password.
 				
 				// get group id
-				$ugid = $this->registry->db->getOne("
+				$stmt = $conn->prepare("
 					SELECT user_group
-					FROM {$this->registry->user}user_groups
-					WHERE user_group_id=$group
+					FROM ".$this->registry->user."user_groups
+					WHERE user_group_id=:group
 				");
 				
-				if (PEAR::isError($ugid)) {
-					$this->registry->Error ($ugid->getMessage(), $ugid->getDebugInfo ());
-				}
-						
-				if ($ugid == 'registered'){
+				$stmt->execute(array(':group' => $group));
+				$res = $stmt->fetch(PDO::FETCH_OBJ);
+				
+				if ($res->user_group == 'registered'){
 					$key = array($user_config->get('key', 'CIPHER'), $this->registry->config->get('web_url', 'SERVER'));
 				} else {
 					$key = $user_config->get('key', 'CIPHER');
@@ -140,29 +134,33 @@ if ($this->authorize()) {
 				
 				$pwd = UthandoUser::encodePassword($password, $key);
 				
-				$inserted = FALSE;
+				$stmt = $conn->prepare("
+					INSERT INTO ".$this->registry->user."users (user_group_id, first_name, last_name, username, email, password, iv, cdate)
+					VALUES (:user_group_id, :first_name, :last_name, :username, :email, :password, :iv, NOW())
+				");
 				
-				$sql = "
-					INSERT INTO {$this->registry->user}users (user_group_id, first_name, last_name, username, email, password, iv, cdate)
-					VALUES ($group, '{$name['first']}', '{$name['last']}', '$username', '$email', '{$pwd[0]}', '{$pwd[1]}', NOW())
-				";
-				$result = $this->registry->db->exec($sql);
-					
-				if (PEAR::isError($result)) {
-					$this->registry->Error ($result->getMessage(), $result->getDebugInfo ());
-					
-				} else {
+				$stmt->execute(array(
+					':user_group_id' => $group,
+					':first_name' => $name['first'],
+					':last_name' => $name['last'],
+					':username' => $username,
+					':email' => $email,
+					':password' => $pwd[0],
+					':iv' => $pwd[1]
+				));
+				
+				if($conn->commit()){
 					goto('/user/overview');
+				} else {
+					$this->registry->Error ("Sorry I could not register you due to a system error. Please try again later.", '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
 				}
-			
-			} else {
-			
-				// no user found.
-				$this->registry->Error ('The email entered already has been registered with us. Please use a different one.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
-				
+			} catch (PDOException $e){
+				$conn->rollBack();
+				$this->registry->Error ($e->getMessage());
 			}
-		
-		}
+		else:
+			$this->registry->Error ('The email or username entered already has been registered with us. Please use a different one.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
+		endif;
 		
 	} else {
 		

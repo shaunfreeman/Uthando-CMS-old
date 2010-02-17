@@ -146,15 +146,11 @@ if ($this->authorize()) {
 					// get group id
 					$ugid = $this->registry->db->getOne("
 						SELECT user_group
-						FROM {$this->registry->user}user_groups
-						WHERE user_group_id={$update['user_group_id']}
-					");
-				
-					if (PEAR::isError($ugid)) {
-						$this->registry->Error ($ugid->getMessage(), $ugid->getDebugInfo ());
-					}
+						FROM ".$this->registry->user."user_groups
+						WHERE user_group_id=:group
+					", array(':group' => $update['user_group_id']));
 						
-					if ($ugid == 'registered'){
+					if ($ugid->user_group == 'registered'){
 						$key = array($user_config->get('key', 'CIPHER'), $this->registry->config->get('web_url', 'SERVER'));
 					} else {
 						$key = $user_config->get('key', 'CIPHER');
@@ -165,38 +161,11 @@ if ($this->authorize()) {
 					$update['iv'] = $pwd[1];
 				}
 				
-				// now do the query.
-				$user_update = null;
-
-				$query_num = count ($update);	
-				$c = 1;
-
-				foreach ($update as $column => $value) {
-					if (is_numeric($value)) {
-						$user_update .= "$column=$value";
-
-					} else {
-						$user_update .= "$column='$value'";
-					}
-
-					if ($query_num > 1 && $query_num != $c) {
-						$user_update .= ",";
-					}
-
-					$c++;
-				}
 				
-				$sql = "
-					UPDATE {$this->registry->user}users
-					SET $user_update
-					WHERE user_id={$this->registry->params['id']}
-				";
-
-				$result = $this->registry->db->exec($sql);
-					
-				if (PEAR::isError($result)) {
-					$this->registry->Error ($result->getMessage(), $result->getDebugInfo ());
-					
+				$result = $this->registry->db->update($update, $this->registry->user.'users', array('WHERE' => 'user_id='.$this->registry->params['id']), $quote=true);
+				
+				if (!$result) {
+					$this->registry->Error ('record not updated.');
 				} else {
 					goto('/user/overview');
 				}

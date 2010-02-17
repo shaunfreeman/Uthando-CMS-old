@@ -26,6 +26,7 @@ class Uthando extends HTML_Page {
 	}
 	
 	private function loadScript($script) {
+		if (!is_array($script)) return false;
 		foreach ($script as $value):
 			if ($this->registry->load_cache || $this->registry->dbug || is_file($_SERVER['DOCUMENT_ROOT'].$value)):
 				$this->addScript($value);

@@ -613,9 +613,6 @@ Messages
 
 .message {
 	padding-top: 53px;
-	margin-left:auto;
-	margin-right:auto;
-	width:200px;
 	text-align:center;
 	font-weight:bold;
 }
@@ -628,15 +625,13 @@ Messages
 
 #info .message { background: url(/templates/admin/images/48x48/InfoCircle.png) no-repeat center 5px; }
 
-.action {
-	width:200px;
+.action #messageBarWrap {
+	width:134px;
 	margin-left:auto;
 	margin-right:auto;
 }
 
 .action #messageBar {
-	margin-left:49px;
-	margin-right:44px;
 }
 
 .fail { color:#FF0000; }

@@ -88,7 +88,7 @@ class UthandoAdmin extends Uthando {
 	// seperate this out to it's own HTML class.
 	public function makeMessageBar($items, $icon_size) {
 		if (is_array($items)) {
-			$menuBar = '<div id="messageBar" class="center">';
+			$menuBar = '<div id="messageBarWrap"><div id="messageBar" class="center">';
 			foreach ($items as $key => $value) {
 				
 				if ($key == 'seperator') {
@@ -98,7 +98,7 @@ class UthandoAdmin extends Uthando {
 				}
 			}
 			$menuBar .= '<div class="both"><!-- --></div>';
-			$menuBar .= '</div>';
+			$menuBar .= '</div></div>';
 			return $menuBar;
 		} else {
 			return false;
