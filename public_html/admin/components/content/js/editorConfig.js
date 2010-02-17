@@ -4,10 +4,13 @@ UthandoAdminConfig.plugins.load.push('tinyMCE');
 var url = new URI(window.location);
 var server = url.get('host').split('.');
 var loc = 'http://';
+var dot = '';
+if (server.length > 2) dot = '.';
 server.each(function(item, index){
-	var dot = '';
-	if (server.length > 2) dot = '.';
-	if (index != 0) loc += item + dot;
+	if (index != 0) {
+		loc += item;
+		if (index != server.length - 1) loc += dot;
+	}
 });
 
 UthandoAdminConfig.extend({
@@ -23,7 +26,7 @@ UthandoAdminConfig.extend({
 			theme : "advanced",
 			skin: 'o2k7',
 			skin_variant: 'silver',
-			relative_urls : true,
+			relative_urls : false,
 			document_base_url : loc,
 			extended_valid_elements: 'div[*]',
 			file_browser_callback: FileManager.TinyMCE(function(type){
@@ -34,7 +37,7 @@ UthandoAdminConfig.extend({
 					language: 'en',
 					selectable: true,
 					uploadAuthData: {
-						folder: 'userfiles_'+url.get('host').split('.')[1],
+						folder: '/userfiles/'+url.get('host').split('.')[1],
 						session: UthandoAdmin.sid
 					}
 				};

@@ -2,12 +2,6 @@
 // = Uthando Congiguration                                    =
 // ============================================================
 var UthandoConfig = $H({
-	dirs: {
-		image: '/userfiles/image/',
-		file: '/userfiles/file/',
-		images: '/userfiles/media/',
-		flash: '/userfiles/flash/'
-	},
 	plugins: {
 		path: '/Common/javascript/plugins/',
 		load: ['fixPNG', 'Paginate', 'ajaxLinks', 'swiff', 'tips', 'tabs', 'popupDetail']

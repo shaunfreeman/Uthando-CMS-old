@@ -6,8 +6,21 @@ var Uthando = $H({
 	// initialize Uthando Object                                  =
 	// ============================================================
 	initialize: function() {
+	
+		this.server = new URI (window.location).get('host').split('.');
 		
-		this.dirs = $H(UthandoConfig.get('dirs'));
+		if (this.server[0] == 'www'){
+			this.server = this.server[1];
+		}else{
+			this.server = this.server[0];
+		}
+		
+		this.dirs = $H({
+			image: '/userfiles/'+this.server+'/image/',
+			file: '/userfiles/'+this.server+'/file/',
+			images: '/userfiles/'+this.server+'/media/',
+			flash: '/userfiles/'+this.server+'/flash/'
+		});
 		
 		this.compatBrowser = (Browser.Engine.trident && Browser.Engine.version <= 4) ? false : true;
 		

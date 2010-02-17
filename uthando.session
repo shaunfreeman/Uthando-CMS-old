@@ -1,21 +1,36 @@
 <!DOCTYPE webprojectsession>
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
-    <itemcursorpositions/>
+    <itemcursorpositions>
+      <item line="0" column="0" url="uthando/php/Uthando/UShop/Core.php" />
+      <item line="53" column="0" url="public_html/index.php" />
+      <item line="0" column="0" url="public_html/templates/modernviewblue/js/UthandoConfig.js" />
+      <item line="14" column="33" url="public_html/templates/modernviewblue/js/UthandoAPI.js" />
+      <item line="3" column="0" url="public_html/admin/components/content/js/editorConfig.js" />
+    </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
     </uploadprofiles>
     <treestatus>
       <openfolder url="public_html" />
-      <openfolder url="public_html/components" />
-      <openfolder url="public_html/components/ushop" />
-      <openfolder url="public_html/components/ushop/action" />
-      <openfolder url="public_html/components/ushop/checkout" />
+      <openfolder url="public_html/Common" />
+      <openfolder url="public_html/admin" />
+      <openfolder url="public_html/admin/components" />
+      <openfolder url="public_html/admin/components/content" />
+      <openfolder url="public_html/admin/components/content/js" />
+      <openfolder url="public_html/admin/templates" />
+      <openfolder url="public_html/admin/templates/admin" />
+      <openfolder url="public_html/templates" />
+      <openfolder url="public_html/templates/modernviewblue" />
+      <openfolder url="public_html/templates/modernviewblue/js" />
       <openfolder url="uthando" />
       <openfolder url="uthando/ini" />
+      <openfolder url="uthando/ini/charismabooks" />
       <openfolder url="uthando/php" />
       <openfolder url="uthando/php/Uthando" />
       <openfolder url="uthando/php/Uthando/UShop" />
+      <openfolder url="uthando/php/Uthando/UShop/Payment" />
+      <openfolder url="uthando/php/Uthando/UShop/Payment/Paypal" />
     </treestatus>
   </session>
   <teamdata yourself="" />

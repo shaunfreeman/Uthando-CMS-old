@@ -32,10 +32,9 @@ $server = explode('.', $_SERVER['SERVER_NAME']);
 
 if ($server[0] == 'www'):
 	$registry->server = $server[1];
-	
 else:
 	$registry->server = $server[0];
-endif; 
+endif;
 
 /*{START_INI_DIR}*/
 $registry->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$registry->server);
@@ -43,7 +42,7 @@ $registry->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$registry->server);
 
 $registry->config = new Config($registry, array('path' => $registry->ini_dir.'/uthando.ini.php'));
 
-if (isset ($_SERVER['HTTPS'])):
+if ($_SERVER['HTTPS']):
 	$registry->host = $registry->config->get('ssl_url', 'SERVER');
 else:
 	$registry->host = $registry->config->get('web_url', 'SERVER');
@@ -70,9 +69,9 @@ $registry->template = $registry->config->get ('site_template', 'SERVER');
 	
 $uthando->setTemplate(__SITE_PATH . '/templates/' . $registry->template . '/index.html');
 
-if (is_file(__SITE_PATH.'/userfiles_'.$registry->server.'/image/favicon.ico')) {
+if (is_file(__SITE_PATH.'/userfiles/'.$registry->server.'/image/favicon.ico')) {
 	
-	$uthando->addFavicon('/userfiles_'.$registry->server.'/image/favicon.ico');
+	$uthando->addFavicon('/userfiles/'.$registry->server.'/image/favicon.ico');
 } else {
 	$uthando->addFavicon('/Common/images/favicon.ico');
 }
@@ -84,7 +83,7 @@ $registry->meta_tags = $registry->config->get('METADATA');
 
 $uthando->AddParameter ('MERCHANT_NAME', $registry->config->get('site_name', 'SERVER'));
 
-$registry->session = new Session(&$registry);
+$registry->session = new Session($registry);
 UthandoUser::setUserInfo();
 
 if (UthandoUser::authorize()):
@@ -118,7 +117,7 @@ catch (PDOException $e)
 $uthando->setCache(true);
 
 // load in JavaScript
-$js = new JsLoader(&$registry);
+$js = new JsLoader($registry);
 
 $js_end_files = $template_files->get('js_ini_files');
 
