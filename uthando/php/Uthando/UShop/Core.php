@@ -88,7 +88,7 @@ class UShop_Core {
 		$display = $this->getDisplay('product_list');
 		$html = null;
 		$start = 0;
-		$base_dir = realpath(__SITE_PATH . '/components/ushop/images/products/');
+		$base_dir = realpath(__SITE_PATH . '/userfiles/'.$this->registry->settings['resolve'].'/products/');
 		
 		$message = file_get_contents('ushop/html/product_list_display.html', true);
 		$popup = file_get_contents('ushop/html/popupDetails.html', true);
@@ -102,7 +102,7 @@ class UShop_Core {
 					$params['NAME'] = HTML_Element::makeXmlSafe($rows[$d]->name);
 					$params['PRICE'] = $rows[$d]->price;
 					$params['WIDTH'] = number_format(100 / $display, 0);
-					$params['IMAGE'] = '/components/ushop/images/' . (file_exists($base_dir.'/'.$rows[$d]->image) && $rows[$d]->image != null ? 'products/'.$rows[$d]->image : 'noimage.png');
+					$params['IMAGE'] = (file_exists($base_dir.'/'.$this->registry->params[0].'/'.$rows[$d]->image) && $rows[$d]->image != null) ? '/userfiles/'.$this->registry->settings['resolve'].'/products/'. $this->registry->params[0] . '/' .$rows[$d]->image : ' /components/ushop/images/noimage.png';
 					$params['LINK'] = '/ushop/view/product/id-'.$rows[$d]->product_id;
 					$params['CART_LINK'] = '/ushop/view/cart/action-add/id-'.$rows[$d]->product_id;
 
@@ -175,7 +175,7 @@ class UShop_Core {
 					$message1 = $message;
 					$params['CATEGORY'] = $rows[$d]['category'];
 					$params['WIDTH'] = number_format(100 / $display, 0);
-					$params['IMAGE'] = '/components/ushop/images/' . ($rows[$d]['category_image'] ? 'products/'.$rows[$d]['category_image'] : 'noimage.gif');
+					$params['IMAGE'] = ($rows[$d]['category_image'] ? '/userfiles/'.$this->registry->settings['resolve'].'/products/' . str_replace(' ', '_', $rows[$d]['category']) . '/' . $rows[$d]['category_image'] : '/components/ushop/images/noimage.gif');
 					$params['LINK'] = '/ushop/view/'.str_replace(' ', '_', $rows[$d]['category']);
 					
 					if (!$rows[$d]['category_image_status']) $message1 = UShop_Utility::removeSection($message1, 'image');

@@ -36,8 +36,12 @@ else:
 	$registry->server = $server[0];
 endif;
 
+//print_rr(md5($registry->server));
+$settings = parse_ini_file(realpath(__SITE_PATH.'/../uthando/ini/uthandoGlobal.ini.php'), true);
+$registry->settings = $settings[$registry->server];
+
 /*{START_INI_DIR}*/
-$registry->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$registry->server);
+$registry->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$registry->settings['resolve']);
 /*{END_INI_DIR}*/
 
 $registry->config = new Config($registry, array('path' => $registry->ini_dir.'/uthando.ini.php'));
@@ -69,9 +73,8 @@ $registry->template = $registry->config->get ('site_template', 'SERVER');
 	
 $uthando->setTemplate(__SITE_PATH . '/templates/' . $registry->template . '/index.html');
 
-if (is_file(__SITE_PATH.'/userfiles/'.$registry->server.'/image/favicon.ico')) {
-	
-	$uthando->addFavicon('/userfiles/'.$registry->server.'/image/favicon.ico');
+if (is_file(__SITE_PATH.'/userfiles/'.$registry->settings['resolve'].'/image/favicon.ico')) {
+	$uthando->addFavicon('/userfiles/'.$registry->settings['resolve'].'/image/favicon.ico');
 } else {
 	$uthando->addFavicon('/Common/images/favicon.ico');
 }

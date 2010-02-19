@@ -4,129 +4,144 @@
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()) {
-		
-	$form = new HTML_QuickForm('contentPage', 'post', $_SERVER['REQUEST_URI']);
-		
-	// Remove name attribute for xhtml strict compliance.
-	$form->removeAttribute('name');
-		
-	$menuBar = array(
-		'html' => '',
-		'edit' => '',
-		'params' => '',
-		'cancel' => '/content/overview',
-   		'save' => ''
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
+
+	$sql = "
+		SELECT page_id, page, mdate
+		FROM ".$this->registry->core."pages
+	";
+	$result = $this->registry->db->query($sql);
 	
-	$menuBar = array();
-
-	$form->addElement('html', '<div id="edit_params">');
+	$num_pages = count($result);
 	
-	$form->addElement('text', 'page', 'Page Title:', array('size' => 50, 'maxlength' => 255, 'class' => 'inputbox'));
-
-	$form->addElement('html', '<fieldset>');
-	
-	$form->addElement('header','parameters','Parameters');
-
-	$params = array('show_title', 'show_cdate', 'show_mdate');
-
-	foreach ($params as $value) {
-		$radio_set = array(
-			$form->createElement('radio', null, null, 'Yes', '1'),
-			$form->createElement('radio', null, null, 'No', '0')
+	if ($num_pages < $this->registry->settings['pages']):
+		
+		$form = new HTML_QuickForm('contentPage', 'post', $_SERVER['REQUEST_URI']);
+			
+		// Remove name attribute for xhtml strict compliance.
+		$form->removeAttribute('name');
+			
+		$menuBar = array(
+			'html' => '',
+			'edit' => '',
+			'params' => '',
+			'cancel' => '/content/overview',
+			'save' => ''
 		);
 			
-		$form->addGroup($radio_set, 'params['.$value.']', ucwords(str_replace('_', ' ', $value)).':');
-	}
-
-	$form->addElement('html', '</fieldset>');
-
-	$form->addElement('html', '<fieldset>');
-	$form->addElement('header','metadata','Metadata');
+		$this->content .= $this->makeToolbar($menuBar, 24);
+		
+		$menuBar = array();
 	
-	$form->addElement('textarea', 'params[metadata][description]', 'Description:');
-	$form->addElement('textarea', 'params[metadata][keywords]', 'Keywords:');
+		$form->addElement('html', '<div id="edit_params">');
 		
-	$form->addElement('html', '</fieldset>');
-
-	$form->addElement('html', '</div>');
-
-	$form->addElement('html', '<div id="edit_html">');
-
-	$form->addElement('textarea', 'content', null, array('id' => 'content_textarea', 'class' => 'mceEditor'));
+		$form->addElement('text', 'page', 'Page Title:', array('size' => 50, 'maxlength' => 255, 'class' => 'inputbox'));
 	
-	$form->addElement('html', '</div>');
+		$form->addElement('html', '<fieldset>');
+		
+		$form->addElement('header','parameters','Parameters');
 	
-	$form->addRule('page', 'Please enter a title', 'required');
-		
-		
-	if ($form->validate()) {
-			
-		// Apply form element filters.
-		$form->freeze();
-		$values = $form->process(array(&$this, 'formValues'));
-		
-		$values['params'] = serialize($values['params']);
-		
-		foreach ($values as $key => $value) {
-			$values[$key] = "'$value'";
+		$params = array('show_title', 'show_cdate', 'show_mdate');
+	
+		foreach ($params as $value) {
+			$radio_set = array(
+				$form->createElement('radio', null, null, 'Yes', '1'),
+				$form->createElement('radio', null, null, 'No', '0')
+			);
+				
+			$form->addGroup($radio_set, 'params['.$value.']', ucwords(str_replace('_', ' ', $value)).':');
 		}
-		$values['cdate'] = "NOW()";
+	
+		$form->addElement('html', '</fieldset>');
+	
+		$form->addElement('html', '<fieldset>');
+		$form->addElement('header','metadata','Metadata');
 		
-		$res = $this->insert($values, $this->registry->core.'pages', false);
+		$form->addElement('textarea', 'params[metadata][description]', 'Description:');
+		$form->addElement('textarea', 'params[metadata][keywords]', 'Keywords:');
+			
+		$form->addElement('html', '</fieldset>');
+	
+		$form->addElement('html', '</div>');
+	
+		$form->addElement('html', '<div id="edit_html">');
+	
+		$form->addElement('textarea', 'content', null, array('id' => 'content_textarea', 'class' => 'mceEditor'));
 		
-		$menuBar['back'] = '/content/overview';
+		$form->addElement('html', '</div>');
 		
-		if ($res) {
-			$params['TYPE'] = 'pass';
-			$params['MESSAGE'] = '<h2>Page was successfully created.</h2>';
+		$form->addRule('page', 'Please enter a title', 'required');
+			
+			
+		if ($form->validate()) {
+				
+			// Apply form element filters.
+			$form->freeze();
+			$values = $form->process(array(&$this, 'formValues'));
+			
+			$values['params'] = serialize($values['params']);
+			
+			foreach ($values as $key => $value) {
+				$values[$key] = "'$value'";
+			}
+			$values['cdate'] = "NOW()";
+			
+			$res = $this->insert($values, $this->registry->core.'pages', false);
+			
+			$menuBar['back'] = '/content/overview';
+			
+			if ($res) {
+				$params['TYPE'] = 'pass';
+				$params['MESSAGE'] = '<h2>Page was successfully created.</h2>';
+			} else {
+				$params['TYPE'] = 'error';
+				$params['MESSAGE'] = '<h2>Page could not be created.</h2>';
+			}
+				
 		} else {
-			$params['TYPE'] = 'error';
-			$params['MESSAGE'] = '<h2>Page could not be created.</h2>';
-		}
+	
+			$form->setDefaults(array(
+				'params' => array(
+					'show_title' => 1,
+					'show_cdate' => 1,
+					'show_mdate' => 1
+				)
+			));
 			
-	} else {
-
-		$form->setDefaults(array(
-			'params' => array(
-				'show_title' => 1,
-				'show_cdate' => 1,
-				'show_mdate' => 1
-			)
-		));
-		
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
-				
-		$renderer->setFormTemplate('form');
-		$renderer->setHeaderTemplate('header');
-		$renderer->setElementTemplate('element');
-		
-		$form->accept($renderer);
-				
-		// output the form
-		$this->content .= $renderer->toHtml();
-
-		$this->loadJavaScript(array(
-			'/Common/editor/tiny_mce/tiny_mce_gzip.js',
-			'/components/content/js/tinyMCEGz.js',
-			'/Common/editor/CodeMirror/js/codemirror.js'
-		));
-
-		$this->registry->component_js = array(
-			'/components/content/js/content.js',
-			'/components/content/js/editor.js',
-			'/components/content/js/editorConfig.js'
-		);
-
-		$this->registry->component_css = array(
-			'/templates/'.$this->registry->template.'/css/FileManager.css',
-			'/templates/'.$this->registry->template.'/css/Additions.css'
-		);
-		
-		$this->addScriptDeclaration("UthandoAdmin.sid = '" . session_id() . "';");
-	}
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+					
+			$renderer->setFormTemplate('form');
+			$renderer->setHeaderTemplate('header');
+			$renderer->setElementTemplate('element');
+			
+			$form->accept($renderer);
+					
+			// output the form
+			$this->content .= $renderer->toHtml();
+	
+			$this->loadJavaScript(array(
+				'/Common/editor/tiny_mce/tiny_mce_gzip.js',
+				'/components/content/js/tinyMCEGz.js',
+				'/Common/editor/CodeMirror/js/codemirror.js'
+			));
+	
+			$this->registry->component_js = array(
+				'/components/content/js/content.js',
+				'/components/content/js/editor.js',
+				'/components/content/js/editorConfig.js'
+			);
+	
+			$this->registry->component_css = array(
+				'/templates/'.$this->registry->template.'/css/FileManager.css',
+				'/templates/'.$this->registry->template.'/css/Additions.css'
+			);
+			
+			$this->addScriptDeclaration("UthandoAdmin.sid = '" . session_id() . "';");
+		}
+	else:
+		$params['TYPE'] = 'info';
+		$params['MESSAGE'] = '<h2>You have reach your page limit. To add more pages please contact your administrator.</h2>';
+		$menuBar['back'] = '/content/overview';
+	endif;
 	
 	if (isset($params)) {
 		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);

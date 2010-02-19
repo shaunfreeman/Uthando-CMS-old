@@ -10,14 +10,16 @@ if ($this->authorize()) {
 		FROM ".$this->registry->core."pages
 	";
 	$result = $this->registry->db->query($sql);
-
+	
+	$num_pages = count($result);
+	
 	$menuBar = array(
 		'new_page' => '/content/new',
 	);
 		
-	$this->content .= $this->makeToolbar($menuBar, 24);
+	$this->content .= ($num_pages < $this->registry->settings['pages']) ? $this->makeToolbar($menuBar, 24) : $this->message(array('TYPE' => 'info', 'MESSAGE' => '<h2>You have reach your page limit. To add more pages please contact your administrator.</h2>'));
 
-	if (count($result) > 0) {
+	if ($num_pages > 0) {
 		
 		$c = 0;
 		$data = array();
@@ -62,7 +64,9 @@ if ($this->authorize()) {
 		$this->content .= '</div>';
 	} else {
 		$this->content .= '<h3>No Content Yet</h3>';
-	}
+	}	
+	
+	//if (isset($params)) $this->content .= $this->message($params);
 
 } else {
 	header("Location:" . $registry->config->get('web_url', 'SERVER'));

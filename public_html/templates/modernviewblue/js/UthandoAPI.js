@@ -119,11 +119,13 @@ var Uthando = $H({
 		
 		this.flashMovies.each(function(value, key) {
 			this.params = $H(value);
-			$(this.params.get('container')).fade('hide');
-			this.file = this.flashDir + key + ".swf";
-			
-			this.get('swiff').set(key, new Swiff(this.file, value));
-			$(this.params.get('container')).fade('in');
+			if ($(this.params.get('container'))){
+				$(this.params.get('container')).fade('hide');
+				this.file = this.flashDir + key + ".swf";
+				
+				this.get('swiff').set(key, new Swiff(this.file, value));
+				$(this.params.get('container')).fade('in');
+			}
 		},this);
 	},
 	// ============================================================

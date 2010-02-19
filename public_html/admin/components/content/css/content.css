@@ -4,11 +4,21 @@ form elements
 
 #contentPage {
 	position: absolute;
-	top:102px;
+	top:110px;
 	right:10px;
 	bottom:10px;
 	left:10px;
 	overflow:auto;
+}
+
+#messageBar {
+	position: absolute;
+	top: 0px;
+}
+
+#tableWrap {
+	position: absolute;
+	top: 115px;
 }
 
 /*

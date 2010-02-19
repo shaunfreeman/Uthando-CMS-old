@@ -15,6 +15,8 @@ class Uthando extends HTML_Page {
 	public function __construct ($registry) {
 		$this->registry = $registry;
 		parent::__construct();
+		$this->addParameter('SITE_FOLDER', $this->registry->settings['resolve']);
+		$this->addParameter('SITE_LOGO', $this->registry->config->get('logo', 'SERVER'));
 	}
 	
 	public function __set($index, $value) {

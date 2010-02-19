@@ -2095,7 +2095,6 @@
     <item url="public_html/templates/abstractportal/images/content_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/images/emailButton.png" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/images/fcontent_bg.gif" uploadstatus="1" />
-    <item url="public_html/templates/abstractportal/images/firefox.png" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/images/indent1.png" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/images/left_col_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/images/left_col_bot_bg.gif" uploadstatus="1" />
@@ -2108,8 +2107,6 @@
     <item url="public_html/templates/abstractportal/images/right_col_h_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/images/toggler_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/images/top_bg.jpg" uploadstatus="1" />
-    <item url="public_html/templates/abstractportal/images/uthandoLogo.gif" uploadstatus="1" />
-    <item url="public_html/templates/abstractportal/images/uthandoLogo.png" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/ini/index.html" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/ini/template.ini.php" uploadstatus="1" />
     <item url="public_html/templates/abstractportal/js/index.html" uploadstatus="1" />
@@ -2140,7 +2137,6 @@
     <item url="public_html/templates/designsuite/images/design_studio.jpg" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/emailButton.png" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/fcontent_bg.gif" uploadstatus="1" />
-    <item url="public_html/templates/designsuite/images/firefox.png" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/indent1.png" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/index.html" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/jump_bg.gif" uploadstatus="1" />
@@ -2148,10 +2144,7 @@
     <item url="public_html/templates/designsuite/images/left_col_bot_bg.jpg" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/left_col_h_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/left_col_top_bg.jpg" uploadstatus="1" />
-    <item url="public_html/templates/designsuite/images/logo.gif" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/logo.jpg" uploadstatus="1" />
-    <item url="public_html/templates/designsuite/images/logo.png" uploadstatus="1" />
-    <item url="public_html/templates/designsuite/images/lplatebk.png" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/mb_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/mb_bot_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/designsuite/images/mb_top_bg.gif" uploadstatus="1" />
@@ -2185,15 +2178,12 @@
     <item url="public_html/templates/modernviewblue/images/arrow.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/body_bot_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/body_top_bg.gif" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/images/charismabooks.png" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/images/charismabooks2.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/checkbox.gif" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/con_address.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/con_fax.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/con_info.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/con_tel.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/emailButton.png" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/images/firefox.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/footer_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/h2_motto.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/indent1.png" uploadstatus="1" />
@@ -2241,7 +2231,6 @@
     <item url="public_html/templates/smebusiness/images/dots.gif" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/emailButton.png" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/favicon.ico" uploadstatus="1" />
-    <item url="public_html/templates/smebusiness/images/firefox.png" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/footer_bg.jpg" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/green_arrow.gif" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/h_line.gif" uploadstatus="1" />
@@ -2252,7 +2241,6 @@
     <item url="public_html/templates/smebusiness/images/larger.gif" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/li_a_active.gif" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/logo.jpg" uploadstatus="1" />
-    <item url="public_html/templates/smebusiness/images/logo.png" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/main_se_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/mod_5_bg.jpg" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/mod_6_bg.jpg" uploadstatus="1" />
@@ -2268,8 +2256,6 @@
     <item url="public_html/templates/smebusiness/images/right_h3_bg.jpg" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/search.gif" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/search_input_bg.gif" uploadstatus="1" />
-    <item url="public_html/templates/smebusiness/images/shaunfreeman.png" uploadstatus="1" />
-    <item url="public_html/templates/smebusiness/images/shaunfreeman1.png" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/show_panel.gif" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/smaller.gif" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/images/top_bg.jpg" uploadstatus="1" />
@@ -2358,7 +2344,6 @@
     <item url="public_html/templates/papira/ini/index.html" uploadstatus="1" />
     <item url="public_html/templates/papira/js/index.html" uploadstatus="1" />
     <item url="public_html/templates/papira/ini/template.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/" uploadstatus="1" />
     <item url="uthando/ini/kris3man/" uploadstatus="1" />
     <item url="uthando/ini/charismabooks/" uploadstatus="1" />
     <item url="uthando/ini/charismabooks/user/" uploadstatus="1" />
@@ -2367,10 +2352,6 @@
     <item url="uthando/ini/kris3man/user/" uploadstatus="1" />
     <item url="uthando/ini/kris3man/user/captcha.ini.php" uploadstatus="1" />
     <item url="uthando/ini/kris3man/user/user.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/user/" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/user/captcha.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/user/user.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/CompatRouter.ini.php" uploadstatus="1" />
     <item url="uthando/ini/charismabooks/CompatRouter.ini.php" uploadstatus="1" />
     <item url="uthando/ini/charismabooks/ftp.ini.php" uploadstatus="1" />
     <item url="uthando/ini/charismabooks/index.html" uploadstatus="1" />
@@ -2385,12 +2366,6 @@
     <item url="uthando/ini/kris3man/ushop.ini.php" uploadstatus="1" />
     <item url="uthando/ini/kris3man/uthandoAdmin.ini.php" uploadstatus="1" />
     <item url="uthando/ini/kris3man/uthando.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/ftp.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/index.html" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/mail.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/ushop.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/uthandoAdmin.ini.php" uploadstatus="1" />
-    <item url="uthando/ini/uthandocms/uthando.ini.php" uploadstatus="1" />
     <item url="uthando/ini/barnaclesfinch/" uploadstatus="1" />
     <item url="uthando/ini/barnaclesfinch/user/" uploadstatus="1" />
     <item url="uthando/ini/barnaclesfinch/user/captcha.ini.php" uploadstatus="1" />
@@ -2437,8 +2412,6 @@
     <item url="public_html/userfiles/barnaclesfinch/" uploadstatus="1" />
     <item url="public_html/userfiles/barnaclesfinch/image/" uploadstatus="1" />
     <item url="public_html/userfiles/barnaclesfinch/image/favicon.ico" uploadstatus="1" />
-    <item url="public_html/userfiles/barnaclesfinch/luxus_02.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/barnaclesfinch/luxus_03.gif" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/file/" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/file/index.html" uploadstatus="1" />
@@ -2819,6 +2792,42 @@
     <item url="public_html/userfiles/kris3man/media/" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/media/index.html" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/index.html" uploadstatus="1" />
-    <item url="public_html/userfiles/uthandocms/" uploadstatus="1" />
+    <item url="uthando/ini/uthandoGlobal.ini.php" uploadstatus="1" />
+    <item url="public_html/admin/Common/tmp/hn_captcha_08a8af.jpg" />
+    <item url="public_html/admin/Common/tmp/hn_captcha_94cc14.jpg" />
+    <item url="public_html/admin/Common/tmp/hn_captcha_a99483.jpg" />
+    <item url="public_html/admin/Common/tmp/hn_captcha_d611c6.jpg" />
+    <item url="public_html/admin/Common/tmp/hn_captcha_f13b4b.jpg" />
+    <item url="public_html/Common/images/firefox.png" />
+    <item url="public_html/Common/tmp/hn_captcha_44fa06.jpg" />
+    <item url="public_html/Common/tmp/hn_captcha_8b975e.jpg" />
+    <item url="public_html/Common/tmp/hn_captcha_ad5ff4.jpg" />
+    <item url="public_html/Common/tmp/hn_captcha_b2134c.jpg" />
+    <item url="public_html/Common/tmp/hn_captcha_caa849.jpg" />
+    <item url="public_html/userfiles/charismabooks/image/charismabooks2.png" />
+    <item url="public_html/userfiles/charismabooks/image/charismabooks.png" />
+    <item url="public_html/userfiles/kris3man/image/logo.gif" />
+    <item url="public_html/userfiles/kris3man/image/logo.png" />
+    <item url="public_html/userfiles/kris3man/image/lplatebk.png" />
+    <item url="public_html/userfiles/shaunfreeman/" />
+    <item url="public_html/userfiles/shaunfreeman/image/" />
+    <item url="public_html/userfiles/shaunfreeman/image/logo.png" />
+    <item url="public_html/userfiles/shaunfreeman/image/shaunfreeman1.png" />
+    <item url="public_html/userfiles/shaunfreeman/image/shaunfreeman.png" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/CompatRouter.ini.php" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/ftp.ini.php" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/index.html" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/mail.ini.php" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/user/" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/ushop.ini.php" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/uthando.ini.php" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/uthandoAdmin.ini.php" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/user/captcha.ini.php" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/user/user.ini.php" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/uthandoLogo.gif" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/uthandoLogo.png" />
   </project>
 </webproject>

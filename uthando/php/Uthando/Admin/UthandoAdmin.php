@@ -18,6 +18,10 @@ class UthandoAdmin extends Uthando {
 			exit();
 		}
 		
+		$settings = parse_ini_file(realpath(__SITE_PATH.'/../../uthando/ini/uthandoGlobal.ini.php'), true);
+		
+		$this->registry->settings = $settings[$this->registry->server];
+		
 		$this->loadLang();
 	}
 	
