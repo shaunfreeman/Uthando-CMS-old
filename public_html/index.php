@@ -40,6 +40,8 @@ endif;
 $settings = parse_ini_file(realpath(__SITE_PATH.'/../uthando/ini/uthandoGlobal.ini.php'), true);
 $registry->settings = $settings[$registry->server];
 
+if (!$registry->settings) goto('/index3.php');
+
 /*{START_INI_DIR}*/
 $registry->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$registry->settings['resolve']);
 /*{END_INI_DIR}*/
@@ -97,7 +99,7 @@ else:
 endif;
 
 // load in template files.
-$template_files = new Config($registry, array('path' => __SITE_PATH.'/templates/' . $registry->template.'/ini/template.ini.php'));
+$template_files = new Config($registry, array('path' => $registry->ini_dir.'/template.ini.php'));
 $registry->load_cache = $template_files->get('load', 'cache');
 
 try
@@ -153,7 +155,7 @@ $js->scripts = array_merge($js->scripts,$js_end_files);
 $registry->scripts = $js->load_js();
 
 $uthando->loadJavaScript($registry->scripts);
-
+$uthando->addScriptDeclaration("if (!Uthando) var Uthando = $H({}); Uthando.server = '".$registry->server."'; Uthando.resolve = '".$registry->settings['resolve']."';");
 
 // load CSS Styles
 $css_files = $template_files->get('css');

@@ -133,7 +133,7 @@ class UShop_Core {
 
 	public function productDetails($row)
 	{
-		$base_dir = realpath(__SITE_PATH . '/components/ushop/images/products/');
+		$base_dir = realpath(__SITE_PATH . '/userfiles/'.$this->registry->settings['resolve'].'/products/');
 		
 		$html = file_get_contents('ushop/html/product.html', true);
 
@@ -146,7 +146,7 @@ class UShop_Core {
 		foreach ($row as $key => $value):
 			
 			if ($key == 'image'):
-				$params[strtoupper($key)] = '/components/ushop/images/' . (file_exists($base_dir.'/'.$value) && $value != null ? 'products/'.$value : 'noimage.png');
+				$params[strtoupper($key)] = (file_exists($base_dir.'/'.str_replace(' ', '_', $row->category).'/'.$value) && $value != null) ? '/userfiles/'.$this->registry->settings['resolve'].'/products/'. str_replace(' ', '_', $row->category) . '/' .$value : ' /components/ushop/images/noimage.png';
 			else:
 				$params[strtoupper($key)] = $value;
 			endif;

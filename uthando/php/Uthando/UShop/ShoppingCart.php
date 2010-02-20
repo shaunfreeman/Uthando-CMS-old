@@ -161,7 +161,7 @@ class UShop_ShoppingCart
 		if (!$uthando->ushop->CHECKOUT['vat_state']) $cb = UShop_Utility::removeSection($cb, 'vat');
 
 		$params = array(
-			'COLSPAN' => ($uthando->ushop->CHECKOUT['vat_state']) ? 3 : 2,
+			'COLSPAN' => ($uthando->ushop->CHECKOUT['vat_state'] == 1) ? 3 : 2,
 			'CART_ITEMS' => null
 		);
 
