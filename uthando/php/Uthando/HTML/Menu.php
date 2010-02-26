@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class HTML_Menu extends DOMDocument
+class HTML_Menu
 {
 	
 	private $type;
@@ -11,6 +11,7 @@ class HTML_Menu extends DOMDocument
 	private $menu_id;
 	private $class_sfx = NULL;
 	private $moduleclass_sfx = NULL;
+	private $doc;
 	protected $registry;
 	protected $status;
 	protected $admin = false;
@@ -26,7 +27,7 @@ class HTML_Menu extends DOMDocument
 		$this->db_table = $this->registry->db_default;
 		
 		$this->status = $this->getStatus();
-		parent::__construct();
+		$this->doc = $this->registry->template->doc;
 	}
 	
 	private function getStatus()
@@ -45,134 +46,153 @@ class HTML_Menu extends DOMDocument
 		return $this->menu;
 	}
 	
-	private function getMenuHeader($menu)
+	private function getMenuWrap($menu)
 	{
 		if ($this->type == 'horizontal'):
-			$class = 'class="mainmenu"'; //mainmenu
-			$div_class = 'class="moduletable"';
-			$ulid = 'id="mainlevel'.$this->class_sfx.'"';
+			$div_attrs = array('class' => 'moduletable');
+			$ul_attrs = array(
+				'id' => 'mainlevel'.$this->class_sfx,
+				'class' => 'mainmenu'
+			);
 		else:
-			$class = 'class="menu"';
-			
-			$div_class = 'class="moduletable'.$this->moduleclass_sfx.'"';
-			$ulid = null;
+			$div_attrs = array(
+				'id' => $menu,
+				'class' => 'moduletable'.$this->moduleclass_sfx
+			);
+			$ul_attrs = array('class'=> 'menu');
 		endif;
-		$s .= "<div id=\"$menu\" $div_class><ul $ulid $class>";
-		return $s;
+		$this->menu = $this->doc->createElement('div', null, $div_attrs);
+		return $ul_attrs;
 	}
 	
-	private function getMenuFooter()
-	{
-		$s = "\r\n</ul></div>";
-		return $s;
-	}
-	
-	protected function returnLink ($row, $class, $children)
+	protected function returnLink ($row, $attrs, $children)
 	{
 		if ($children > 0):
-			$span_start = "<span class=\"accordion_toggler_" . ($row['depth'] + 1) . "\">";
+			$span_attrs = array('class' => 'accordion_toggler_'. ($row['depth'] + 1));
 		else:
-			$span_start = "<span>";
+			$span_attrs = null;
 		endif;
 		
-		$span_end = "</span>";
-		
-		$menu = null;
 		if (!$row['url']) $row['url'] == '/';
 		
 		if ($row['enssl']):
-			$host = $this->registry->config->get('ssl_url', 'SERVER');
+			$host = $this->registry->get('config.server.ssl_url').'/';
 		else:
-			$host = $this->registry->config->get('web_url', 'SERVER');
+			$host = $this->registry->get('config.server.web_url').'/';
 		endif;
 		
 		switch ($row['status']):
 			case "LI":
-				if ($this->status == "LI")
-					$menu = "<a $class href=\"".$host."/{$row['url']}\">".$span_start . htmlentities($row['item']) . $span_end."</a>";
+				if ($this->status == "LI") $attrs['href'] = $host.$row['url'];
 				break;
 			
 			case "LO":
-				if ($this->status == "LO")
-					$menu = "<a $class href=\"".$host."/{$row['url']}\">".$span_start . htmlentities($row['item']) . $span_end."</a>";
+				if ($this->status == "LO") $attrs['href'] = $host.$row['url'];
 				break;
 				
 			case "A":
-				$menu = "<a $class href=\"".$host."/{$row['url']}\">".$span_start . htmlentities($row['item']) . $span_end."</a>";
+				$attrs['href'] = $host.$row['url'];
 				break;
 		endswitch;
-		return $menu;
+		
+		$span = $this->doc->createElement('span', null, $span_attrs);
+		$link = $this->doc->createElement('a', htmlentities($row['item']), $attrs);
+		$span->appendChild($link);
+		return $span;
 	}
 	
 	// Navigaion bar function.
 	private function menuBar($menu_id, $menu)
 	{
-		$this->menu = $this->getMenuHeader(str_replace(" ", "", $menu));
+		$parents = array();
+		$submenus = array();
+		
+		$ul_attrs = $this->getMenuWrap(str_replace(" ", "", $menu));
+		
+		$root = $this->doc->createElement('ul', null , $ul_attrs);
 		
 		// Retrieve all children
-		$row = $this->queryMenu($menu_id);
+		$list_items = $this->queryMenu($menu_id);
 		
-		if ($row) {
+		if ($list_items):
 			// Display each menu item.
-			foreach ($row as $key => $value) {
+			foreach ($list_items as $key => $item):
+			
+				$children = (($item['rgt'] - $item['lft']) - 1) / 2;
 				
-				$children = (($row[$key]['rgt'] - $row[$key]['lft']) - 1) / 2;
+				if ($this->type == 'vertical'):
+					if ($item['depth'] > 0):
+						$a_attrs['class'] = 'sublevel';
+					else:
+						$a_attrs['class'] = 'mainlevel';
+					endif;
+				else:
+					$a_attrs['class'] = 'mainlevel'.$this->class_sfx;
+				endif;
 				
-				if ($this->type == 'vertical') {
-					if ($row[$key]['depth'] > 0) {
-						$class = "class=\"sublevel\"";
-					} else {
-						$class = "class=\"mainlevel\"";
-					}
-				} else {
-					$class = "class=\"mainlevel".$this->class_sfx."\"";
-				}
+				$curr = ($item['page_id']) ? $item['page'] : $item['url'];
 				
-				if ($this->admin) {
-					$curr = $row[$key]['item'];
-				} else {
+				$li_attrs = ($curr == $this->registry->page_title && $this->type == 'vertical') ? array('id' => 'current', 'class' => 'active') : null;
+				
+				$a = $this->returnLink($list_items[$key], $a_attrs, $children);
+				$li = $this->doc->createElement('li',null, $li_attrs);
+				$li->appendChild($a);
+				
+				// if item has no submenus just add it to the root, otherwise start making the submenus.
+				if ($item['depth'] == 0 && !$children):
+					$root->appendChild($li);
+				else:
 					
-					if ($row[$key]['page_id']) {
-						$curr = $row[$key]['page'];
-					} else {
-						$curr =  $row[$key]['url'];
-					}
+					// if next item is the same level append to submenu
+					$submenus[$item['depth']][$key] = $li;
+					
+					// if next item is a submenu of this item, add this item to the parents array.
+					if ($list_items[$key + 1]['depth'] > $item['depth']) $parents[] = $key;
+					
+					// if we are at the end of a submenu add it now to its parent.
+					for ($i = $item['depth']; $i > $list_items[$key + 1]['depth']; $i-- ):
+						$ul = $this->doc->createElement('ul', null, array('class' => 'accordion_content_'.$i));
+					
+						foreach ($submenus[$i] as $subitem) $ul->appendChild($subitem);
+					
+						unset($submenus[$i]);
+					
+						// attach submenu to its parent.
+						$parent = array_pop($parents);
+						$submenus[$i - 1][$parent]->appendChild($ul);
+					endfor;
+					
+					// if we are back at root level add all submenus to it.
+					if ($list_items[$key + 1]['depth'] == 0):
+						$root->appendChild($submenus[0][$parent]);
+						unset($submenus[0]);
+					endif;
+				endif;
+			endforeach;
+		endif;
+		
+		$this->menu->appendChild($root);
+		$this->doc->appendChild($this->menu);
+	}
+	
+	public function nestify( $arrs, $depth_key = 'depth' )
+	{
+		$nested = array();
+		$depths = array();
+		
+		foreach( $arrs as $key => $arr ) {
+			if( $arr[$depth_key] == 0 ) {
+				$nested[$key] = $arr;
+			} else {
+				$parent =& $nested;
+				for( $i = 1; $i <= ( $arr[$depth_key] ); $i++ ) {
+					$parent =& $parent[$depths[$i]];
 				}
-				
-				if ($curr == $this->registry->page_title && $this->type == 'vertical') {
-					$active = 'class="active"';
-					$current = 'id="current"';
-				} else {
-					$active = null;
-					$current = null;
-				}
-				
-				$this->menu .= "<li $current $active>\n";
-				
-				$this->menu .= $this->returnLink($row[$key], $class, $children);
-				
-				if ($children > 0) $this->menu .= "<ul class=\"accordion_content_".($row[$key]['depth'] + 1)."\">\n";
-				
-				if ($row[$key]['depth'] > 0) {
-				
-					// find the end of the array.
-					$end = end($row);
-				
-					if ($row[$key]['item_id'] == $end['item_id']) {
-						$this->menu .= str_repeat("</li></ul>\n", $row[$key]['depth']);
-						$this->menu .= "</li>\n";
-					} else if ($row[$key + 1]['depth'] < $row[$key]['depth']) {
-						$this->menu .= str_repeat("</li></ul>\n", ($row[$key]['depth'] - $row[$key + 1]['depth']));
-						$this->menu .= "</li>\n";
-					} else {
-						if ($children == 0) $this->menu .= "</li>\n";
-					}	
-				} else {	
-					if ($children == 0) $this->menu .= "</li>\n";
-				}
+				$parent[$key] = $arr;
 			}
+			$depths[$arr[$depth_key] + 1] = $key;
 		}
-		$this->menu .= $this->getMenuFooter();
+		return $nested;
 	}
 	
 	private function queryMenu ($menu_id)

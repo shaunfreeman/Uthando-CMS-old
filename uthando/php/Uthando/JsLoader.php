@@ -21,8 +21,8 @@ class JsLoader {
 	protected $registry;
 	
 	public function __construct($registry) {
-		$this->dbug = $registry->dbug;
-		$this->compress_file = $registry->compress_files;
+		$this->dbug = $registry->template->settings['general']['dbug'];
+		$this->compress_file = $registry->template->settings['general']['compress_files'];
 	}
 	
 	public function __set($index, $value) {

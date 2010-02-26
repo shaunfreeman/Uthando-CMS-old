@@ -25,9 +25,9 @@ class HTML_Element extends DOMDocument
 		endwhile;
 	}
 	
-	public function createDocumentFragment($fragment, $attrs=null, $js=false)
+	public function createDocumentFragment($fragment, $attrs=null, $js=false, $fragment_wrap='div')
 	{
-		$wrap = $this->createElement('div', null, $attrs);
+		$wrap = $this->createElement($fragment_wrap, null, $attrs);
 		if ($js):
 			$fragment = $this->removeJS($fragment);
 			$javaScript = $fragment[1];

@@ -15,10 +15,6 @@ class NestedTree {
 		$this->category_field = $field;
 	}
 	
-	public function __destruct () {
-		unset($this);
-	}
-	
 	public function __set($index, $value) {
 		$this->vars[$index] = $value;
 	}

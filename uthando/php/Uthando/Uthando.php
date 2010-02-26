@@ -3,20 +3,16 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class Uthando extends HTML_Page {
-	
+class Uthando
+{
 	// Set the attributes.
-	public $html;
-	protected $parameters = array('ERROR' => null, 'MERCHANT_NAME' => null);
 	protected $vars = array(); 
 	protected $registry; // registry
 	public $striptags = false;
 			
-	public function __construct ($registry) {
+	public function __construct ($registry)
+	{
 		$this->registry = $registry;
-		parent::__construct();
-		$this->addParameter('SITE_FOLDER', $this->registry->settings['resolve']);
-		$this->addParameter('SITE_LOGO', $this->registry->config->get('logo', 'SERVER'));
 	}
 	
 	public function __set($index, $value) {
@@ -25,39 +21,6 @@ class Uthando extends HTML_Page {
 	
 	public function __get($index) {
 		return $this->vars[$index];
-	}
-	
-	private function loadScript($script) {
-		if (!is_array($script)) return false;
-		foreach ($script as $value):
-			if ($this->registry->load_cache || $this->registry->dbug || is_file($_SERVER['DOCUMENT_ROOT'].$value)):
-				$this->addScript($value);
-			else:
-				$this->addScriptDeclaration($value);
-			endif;
-		endforeach;
-	}
-	
-	public function loadJavaScript($scripts) {
-		$this->loadScript($scripts);
-	}
-	
-	private function addStyle($style) {
-		$this->addStyleSheet($style[0], $style[1], $style[2]);
-	}
-	
-	public function loadStyles($styles) {
-		
-		if (is_array($styles)):
-			foreach ($styles as $style):
-				if (is_array($style)):
-					$this->addStyle($style);
-				else:
-					if ($this->registry->compress_files) $style = $this->compress_styles($style);
-					$this->addStyleDeclaration($style);
-				endif;
-			endforeach;
-		endif;
 	}
 	
 	private function compress_styles($buffer) {
@@ -83,23 +46,6 @@ class Uthando extends HTML_Page {
 		$buffer = preg_replace(array_keys($search), array_values($search), $buffer);
 		return $buffer;
 	}
-
-	public function setTemplate($template) {
-		//$this->template = $template;
-		$this->html = file_get_contents($template);
-	}
-
-	public function setMetaTags($meta_tags) {
-		if (is_array($meta_tags)):
-			foreach ($meta_tags as $key => $value):
-				if (is_array($value)):
-					$this->setMetaData($key, $value[0], $value[1]);
-				else:
-					$this->setMetaData($key, $value);
-				endif;
-			endforeach;
-		endif;
-	}
 	
 	public function deleteParameter($variable) {
 		unset ($this->parameters[$variable]);
@@ -118,19 +64,6 @@ class Uthando extends HTML_Page {
 		return $template;
 	}
 	
-	// This function does the bulk of the work.
-	public function CreateBody() {
-		// check php errors.
-		$this->ErrorCheck();
-		//print_r($this->parameters);
-		$this->html = $this->templateParser($this->html, $this->parameters, '<!--{', '}-->');
-		return $this->compress_page($this->html);
-	}
-	
-	public function addContent($content) {
-		$this->AddParameter ('CONTENT', $content);
-	}
-	
 	public function loadComponent() {
 		
 		$this->file = __SITE_PATH . '/components/' . $this->registry->component;
@@ -143,9 +76,9 @@ class Uthando extends HTML_Page {
 		
 		if ($load->enabled):
 			include ($this->file. "/index.php");
-			$this->addContent($this->content);
+			$this->registry->template->addContent($this->content);
 		else:
-			$this->addContent('<p>Component is not enabled.</p>');
+			$this->registry->template->addContent('<p>Component is not enabled.</p>');
 		endif;
 	}
 	
@@ -159,14 +92,13 @@ class Uthando extends HTML_Page {
 		$result = $this->getResult('position_id, position', 'modules_position', null, null, true);
 		
 		$cols = 2;
-		
 		if ($result):
 		
 			foreach ($result as $mod):
 			
 				if ($mod->position == 'right') $cols = 3;
 				
-				$module_position = 'MODULE['.$mod->position.']';
+				$module_position = $mod->position;
 				
 				$modules = $this->getResult(
 					'module_id, module_name, module, show_title, params, html',
@@ -180,20 +112,16 @@ class Uthando extends HTML_Page {
 				);
 				
 				if ($modules):
-					
-					$value = null;
 					foreach ($modules as $mod):
 						$module = new Module($this->registry);
-						$value .= $module->makeModule($mod);
+						$value[$module_position][] = $module->makeModule($mod);
 						unset($module);
 					endforeach;
-					
-					$this->AddParameter ($module_position, $value);
 				endif;
 			endforeach;
 		endif;
-		
-		$this->html = $this->removeSection($cols.'_col', $this->html);
+		$this->registry->template->addModules($value);
+		$this->registry->template->cols = $cols.'col';
 	}
 	
 	public function removeSection($type, $html) {

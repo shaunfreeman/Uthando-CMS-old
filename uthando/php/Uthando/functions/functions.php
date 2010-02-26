@@ -89,7 +89,7 @@ function find_files($dirname, $ext, $file_list = array()) {
 	$dir = dir($dirname); 
 	while (false !== $entry = $dir->read()) { 
         // Skip pointers 
-		if ($entry == '.' || $entry == '..' || $entry == '.svn') {
+		if ($entry == '.' || $entry == '..') {
 			continue;
 		}
 		

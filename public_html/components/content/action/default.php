@@ -2,7 +2,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-$route = split("/", $this->registry->config->get('default_page', 'SERVER'));
+$route = split("/", $this->registry->get('config.site.default_page'));
 
 $this->registry->action = $route[0];
 unset($route[0]);

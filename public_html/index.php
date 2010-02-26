@@ -26,86 +26,39 @@ set_include_path($ini_path);
 // Include functions.
 require_once('functions.php');
 
+$timer = new Benchmark_Timer();
+$timer->start();
+
 $registry = new Registry();
 
-$server = explode('.', $_SERVER['SERVER_NAME']);
-
-if ($server[0] == 'www'):
-	$registry->server = $server[1];
-else:
-	$registry->server = $server[0];
-endif;
+$registry->setSite(realpath(__SITE_PATH.'/../uthando/ini/uthandoSites.ini.php'));
+$registry->loadIniFile('uthando', 'config');
+$registry->setDefaults();
 
 //print_rr(md5($registry->server));
-$settings = parse_ini_file(realpath(__SITE_PATH.'/../uthando/ini/uthandoGlobal.ini.php'), true);
-$registry->settings = $settings[$registry->server];
+//print_rr($registry);
 
-if (!$registry->settings) goto('/index3.php');
-
-/*{START_INI_DIR}*/
-$registry->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$registry->settings['resolve']);
-/*{END_INI_DIR}*/
-
-$registry->config = new Config($registry, array('path' => $registry->ini_dir.'/uthando.ini.php'));
-
-if ($_SERVER['HTTPS']):
-	$registry->host = $registry->config->get('ssl_url', 'SERVER');
-else:
-	$registry->host = $registry->config->get('web_url', 'SERVER');
-endif;
-
-$registry->db_default = $registry->config->get('core','DATABASE').'.';
-$registry->core = $registry->config->get('core', 'DATABASE').'.';
-$registry->user = $registry->config->get('user', 'DATABASE').'.';
-$registry->sessions = $registry->config->get('session', 'DATABASE').'.';
-
-$registry->dbug = $registry->config->get ('dbug', 'SERVER');
-$registry->compress_files = $registry->config->get ('compress_files', 'SERVER');
-
-if ($registry->config->get ('compat_router', 'SERVER')) {
-	require_once('includes/CompatRouter.php');
-}
+if ($registry->get('config.server.compat_router')) require_once('includes/CompatRouter.php');
 
 $uthando = new Uthando($registry);
+$registry->template = new HTML_Template($registry);
 
-$uthando->timer = new Benchmark_Timer();
-$uthando->timer->start();
 
-$registry->template = $registry->config->get ('site_template', 'SERVER');
-	
-$uthando->setTemplate(__SITE_PATH . '/templates/' . $registry->template . '/index.html');
-
-if (is_file(__SITE_PATH.'/userfiles/'.$registry->settings['resolve'].'/image/favicon.ico')) {
-	$uthando->addFavicon('/userfiles/'.$registry->settings['resolve'].'/image/favicon.ico');
-} else {
-	$uthando->addFavicon('/Common/images/favicon.ico');
-}
-
-$uthando->xmlProlog = false;
-$uthando->setDoctype("XHTML 1.0 Strict");
-
-$registry->meta_tags = $registry->config->get('METADATA');
-
-$uthando->AddParameter ('MERCHANT_NAME', $registry->config->get('site_name', 'SERVER'));
+$registry->template->AddParameter ('merchant_name', $registry->get('config.server.site_name'));
 
 $registry->session = new Session($registry);
 UthandoUser::setUserInfo();
 
 if (UthandoUser::authorize()):
 	$registry->loggedInUser = true;
-	$uthando->AddParameter ('LOGIN_STATUS', "<p>You are logged in as: ".$_SESSION['name']."</p>");
+	$uthando->AddParameter ('login_status', "<p>You are logged in as: ".$_SESSION['name']."</p>");
 else:
 	$registry->loggedInUser = false;
 endif;
 
-// load in template files.
-$template_files = new Config($registry, array('path' => $registry->ini_dir.'/template.ini.php'));
-$registry->load_cache = $template_files->get('load', 'cache');
-
 try
 {
-
-	$registry->db = new DB_Core(&$registry);
+	$registry->db = new DB_Core($registry);
 	
 	// Load component.
 	$uthando->loadComponent();
@@ -119,71 +72,13 @@ catch (PDOException $e)
 	$registry->Error ($e->getMessage());
 }
 
-$uthando->setCache(true);
+$registry->template->AddParameter ('date', date("Y"));
 
-// load in JavaScript
-$js = new JsLoader($registry);
+$timer->stop();
+$timer_result = $timer->getProfiling();
 
-$js_end_files = $template_files->get('js_ini_files');
-
-// add any component javascript.
-if ($registry->component_js):
-	$js_end_files = array_merge($js_end_files, $registry->component_js);
-endif;
-
-foreach ($js_end_files as $key => $files):
-	$js_end_files[$key] = $registry->host.$files;
-endforeach;
-
-if ($registry->load_cache):
-
-	$js->dbug = true;
-	$js->scripts = array($registry->host.$template_files->get('js', 'cache'));
-	
-else:
-
-	$js->scripts = $template_files->get('mootools_js');
-
-	foreach ($js->scripts as $key => $files):
-		$js->scripts[$key] = $registry->host.$files;
-	endforeach;
-
-endif;
-
-$js->scripts = array_merge($js->scripts,$js_end_files);
-
-$registry->scripts = $js->load_js();
-
-$uthando->loadJavaScript($registry->scripts);
-$uthando->addScriptDeclaration("if (!Uthando) var Uthando = $H({}); Uthando.server = '".$registry->server."'; Uthando.resolve = '".$registry->settings['resolve']."';");
-
-// load CSS Styles
-$css_files = $template_files->get('css');
-
-if ($registry->component_css) {
-	$css_files = array_merge($css_files, $registry->component_css);
-}
-	
-foreach ($css_files as $filename) {
-	if (!$registry->dbug && !$template_files->get('load', 'cache')) {
-		$styles[] = file_get_contents(__SITE_PATH.$filename);
-	} else {
-		$styles[] = array($filename, 'text/css' ,null);
-	}
-}
-
-$uthando->loadStyles($styles);
-
-// set page metadata.
-$uthando->setMetaTags($registry->meta_tags);
-
-$uthando->AddParameter ('DATE', date("Y"));
-
-$uthando->timer->stop();
-$timer_result = $uthando->timer->getProfiling();
-
-$uthando->AddParameter ('BENCHMARK', "Page generated in {$timer_result[1]['total']} seconds.");
-
+$registry->template->AddParameter ('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
+/*
 $uthando->addBodyContent($uthando->CreateBody());
 
 if (!$registry->compress_files):
@@ -191,8 +86,10 @@ if (!$registry->compress_files):
 else:
 	print $uthando->compress_page($uthando->toHtml());
 endif;
-
-$registry->db = null;
+*/
+//print_rr($registry->template);
+echo $registry->template;
+$registry = null;
 
 ob_end_flush();
 

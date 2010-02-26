@@ -16,12 +16,12 @@ class Session {
 	function __construct($registry)
 	{
 		$dsn = array(
-			'hostspec' => $registry->config->get('hostspec','DATABASE'),
-			'phptype' => $registry->config->get('phptype','DATABASE'),
-			'database' => $registry->config->get('session','DATABASE')
+			'hostspec' => $registry->get('config.database.hostspec'),
+			'phptype' => $registry->get('config.database.phptype'),
+			'database' => $registry->get('config.database.session')
 		);
 		
-		$dsn = array_merge($dsn,$registry->config->get('DATABASE_GUEST'));
+		$dsn = array_merge($dsn,$registry->get('config.database_guest'));
 		
 		$this->dsn = $dsn['phptype'] . ":host=" . $dsn['hostspec'] . ";dbname=" .$dsn['database'];
 		

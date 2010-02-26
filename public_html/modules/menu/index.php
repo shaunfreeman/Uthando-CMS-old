@@ -17,13 +17,12 @@ if ($menu) {
 	
 	$params['menu_category_id'] = $menu->item_id;
 	// Start Navibar class.
+	
 	$navibar = new HTML_Menu($this->registry, $params);
 		
 	$module = $navibar->getMenu($menu->item_id, $menu->item, $menu->menu_type);
 
-	$mod_data = $this->createDocumentFragment(htmlspecialchars($module));
-	//$mod_data->appendXML($module);
-	$this->module_wrap->appendChild($mod_data);
+	$this->module_wrap->appendChild($module);
 	
 	unset($navibar);
 }

@@ -10,15 +10,15 @@ class DB_Core
 	public function __construct($registry)
 	{
 		$dsn = array(
-			'hostspec' => $registry->config->get('hostspec','DATABASE'),
-			'phptype' => $registry->config->get('phptype','DATABASE'),
-			'database' => $registry->config->get('core','DATABASE')
+			'hostspec' => $registry->get('config.datase.hostspec'),
+			'phptype' => $registry->get('config.database.phptype'),
+			'database' => $registry->get('config.database.core')
 		);
 
 		if ($registry->loggedInUser):
-			$dsn = array_merge($dsn,$registry->config->get('DATABASE_USER'));
+			$dsn = array_merge($dsn,$registry->get('config.database_user'));
 		else:
-			$dsn = array_merge($dsn,$registry->config->get('DATABASE_GUEST'));
+			$dsn = array_merge($dsn,$registry->get('config.database_guest'));
 		endif;
 		
 		$this->dsn = $dsn['phptype'] . ":host=" . $dsn['hostspec'] . ";dbname=" .$dsn['database'];

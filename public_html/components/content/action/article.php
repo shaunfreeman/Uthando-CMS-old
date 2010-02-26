@@ -33,19 +33,19 @@ if ($this->registry->params['page']) {
 			$cdate = ($row->params['show_cdate'] == 0) ? null : $row->cdate;
 			$mdate = ($row->params['show_mdate'] == 0) ? null : $row->mdate;
 
-			if ($this->registry->meta_tags) {
+			if ($this->registry->template->meta_tags) {
 				if (isset($row->params['metadata'])) {
 					foreach ($row->params['metadata'] as $key => $value) {
 						if (empty($value)) unset ($row->params['metadata'][$key]);
 					}
-					$this->registry->meta_tags = array_merge($this->registry->meta_tags, $row->params['metadata']);
+					$this->registry->template->meta_tags = array_merge($this->registry->template->meta_tags, $row->params['metadata']);
 				}
 			}
 			
-			$this->setTitle($row->page . ' | ' . $this->registry->config->get('site_name', 'SERVER'));
+			$this->registry->template->setTitle($row->page . ' | ' . $this->registry->get('config.server.site_name'));
 			$this->registry->page_title = $row->page;
 			
-			$this->addContent($this->displayContentpane(htmlspecialchars($row->content),$page,$cdate,$mdate));
+			$this->registry->template->addContent($this->displayContentpane(htmlspecialchars($row->content),$page,$cdate,$mdate));
 			
 			
 		} else {

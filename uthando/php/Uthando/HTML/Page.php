@@ -9,8 +9,8 @@ define('PAGE_REPLACE', 2);
 
 class HTML_Page
 {
-	private $doc;
-	private $body = array();
+	public $doc;
+	protected $body = array();
 	private $bodyAttributes = array();
 	private $doctype = array('type'=>'xhtml','version'=>'1.0','variant'=>'strict');
 	private $links = array();

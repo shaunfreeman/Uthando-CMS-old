@@ -32,5 +32,19 @@ class MenuAdmin extends HTML_Menu {
 		return $menu;
 	}
 	
+	private function menuBar($menu_id, $menu)
+	{
+		if ($this->admin) {
+					$curr = $row[$key]['item'];
+				} else {
+					
+					if ($row[$key]['page_id']) {
+						$curr = $row[$key]['page'];
+					} else {
+						$curr =  $row[$key]['url'];
+					}
+				}
+	}
+	
 }
 ?>

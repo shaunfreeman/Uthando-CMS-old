@@ -8,22 +8,78 @@ Class Registry {
 	private $vars = array();
 	public  $errors = null;
 	
-	public function __construct() {
-		
+	public function __construct()
+	{
 		$this->path = urldecode($_SERVER['REQUEST_URI']);
 		$this->registerPath();
+		$this->registerServer();
 	}
 	
-	public function __set($index, $value) {
+	public function __set($index, $value)
+	{
 		$this->vars[$index] = $value;
 	}
 	
-	public function __get($index) {
+	public function __get($index)
+	{
 		return $this->vars[$index];
 	}
 	
-	public function registerPath() {
-		
+	public function get($key=null)
+	{
+		$key = explode('.', $key);
+		switch(count($key)):
+			case 3:
+				$value = $this->{$key[0]}[$key[1]][$key[2]];
+				break;
+			case 2:
+				$value = $this->{$key[0]}[$key[1]];
+				break;
+			case 1:
+				$value = $this->{$key[0]};
+				break;
+			default:
+				$value = false;
+		endswitch;
+		return ($value===false) ? null : $value;
+	}
+	
+	private function registerServer()
+	{
+		$this->server = (substr($_SERVER['SERVER_NAME'], 0, 3) == 'www') ? substr($_SERVER['SERVER_NAME'], 0, 4) : $this->server = $_SERVER['SERVER_NAME'];
+	}
+	
+	public function setSite($file)
+	{
+		$settings = parse_ini_file(realpath(__SITE_PATH.'/../uthando/ini/uthandoSites.ini.php'), true);
+		$this->settings = $settings[$this->server];
+		if (!$this->settings) goto('/index3.php');
+		$this->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$this->settings['resolve']);
+	}
+	
+	public function loadIniFiles($files)
+	{
+		foreach ($files as $section => $file):
+			$this->loadIniFile($file, $section);
+		endforeach;
+	}
+	
+	public function setDefaults()
+	{
+		$this->host = (isset($_SERVER['HTTPS'])) ? $this->config['server']['ssl_url'] : $this->config['server']['web_url'];
+		$this->db_default = $this->config['database']['core'].'.';
+		$this->core = $this->config['database']['core'].'.';
+		$this->user = $this->config['database']['user'].'.';
+		$this->sessions = $this->config['database']['session'].'.';
+	}
+	
+	public function loadIniFile($file, $section)
+	{
+		$this->$section = parse_ini_file($this->ini_dir.'/'.$file.'.ini.php', true);
+	}
+	
+	public function registerPath()
+	{
 		if ($this->path == '/index.php' || $this->path == '/') {
 			$this->component = 'content';
 			$this->action = 'default';
@@ -55,31 +111,31 @@ Class Registry {
 		}
 	}
 	
-	public function Ok($error, $debug=NULL) {
-		
-		if (isset ($debug)) {
+	public function Ok($error, $debug=null)
+	{
+		if (isset ($debug)):
 			$this->errors .= "<span class=\"smcap\"><p class=\"pass\"><img src=\"/Common/images/OKShield.png\" /> " . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p></span>\n";
-		} else {
+		else:
 			$this->errors .= "<span class=\"smcap\"><p class=\"pass\"><img src=\"/Common/images/OKShield.png\" /> " . $error . "</p></span>";
-		}
+		endif;
 	}
 	
-	public function Warning($error, $debug=NULL) {
-		
-		if (isset ($debug)) {
+	public function Warning($error, $debug=null)
+	{
+		if (isset ($debug)):
 			$this->errors .= "<span class=\"smcap\"><p class=\"info\"><img src=\"/Common/images/WarningShield.png\" /> " . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p></span>\n";
-		} else {
+		else:
 			$this->errors .= "<span class=\"smcap\"><p class=\"info\"><img src=\"/Common/images/WarningShield.png\" /> " . $error . "</p></span>";
-		}
+		endif;
 	}
 	
-	public function Error($error, $debug=NULL) {
-		
-		if (isset ($debug)) {
+	public function Error($error, $debug=null)
+	{
+		if (isset ($debug)):
 			$this->errors .= "<span class=\"smcap\"><p class=\"fail\"><img src=\"/Common/images/ErrorShield.png\" /> " . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p></span>\n";
-		} else {
+		else:
 			$this->errors .= "<span class=\"smcap\"><p class=\"fail\"><img src=\"/Common/images/ErrorShield.png\" /> " . $error . "</p></span>";
-		}
+		endif;
 	}
 }
 ?>

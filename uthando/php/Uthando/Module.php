@@ -3,17 +3,18 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class Module extends HTML_Element
+class Module
 {
 	public $module = null;
 	public $title = null;
 	public $moduleclass_sfx = null;
 	public $params;
+	protected $registry;
 	
 	public function __construct($registry)
 	{
 		$this->registry = $registry;
-		parent::__construct();
+		//parent::__construct();
 	}
 	
 	function makeModule($params)
@@ -44,10 +45,10 @@ class Module extends HTML_Element
 			
 			$this->module = $this->getModule($params->module_name, $this->getParams($params->params));
 			
-			$this->appendChild($this->module_wrap);
+			//$this->appendChild($this->module_wrap);
 			
-			return $this->toHTML();
-			//return $this->module_wrap;
+			//return $this->toHTML();
+			return $this->module_wrap;
   		endif;
 	}
 	
@@ -71,14 +72,14 @@ class Module extends HTML_Element
 	
 	function getModuleHeader()
 	{
-		$this->module_wrap = $this->createElement('div');
+		$this->module_wrap = $this->registry->template->doc->createElement('div');
 		$this->module_wrap->setAttribute('class', 'moduletable'.$this->moduleclass_sfx);
 	}
 	
 	function getModuleTitle($title)
 	{
-		$this->title = $this->createElement('h3');
-		$this->title->appendChild($this->createElement('span', $title));
+		$this->title = $this->registry->template->doc->createElement('h3');
+		$this->title->appendChild($this->registry->template->doc->createElement('span', $title));
 	}
 }
 
