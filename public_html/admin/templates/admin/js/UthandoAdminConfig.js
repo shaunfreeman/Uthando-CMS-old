@@ -68,12 +68,13 @@ var UthandoAdminConfig = $H({
 				}
 			},
 			onScroll: function(index, newRange) {
+				console.log(index, newRange, this.imgs.length)
 				if (newRange.start > 0) $('scrollLeft').setStyle('display', 'block');
 				if (newRange.start == 0) {
 					$('scrollLeft').setStyle('display', 'none');
 					$('scrollRight').setStyle('display', 'block');
 				}
-				if (newRange.elements.length < 5 ) $('scrollRight').setStyle('display', 'none');
+				if (newRange.elements.length < 5 || newRange.end <= this.imgs.length) $('scrollRight').setStyle('display', 'none');
 				if (newRange.end < this.imgs.length) $('scrollRight').setStyle('display', 'block');
 			}
 		}

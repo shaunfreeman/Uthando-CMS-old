@@ -3,9 +3,9 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	if (isset($this->registry->params['item'])) {
+	if (isset($this->registry->params['item'])):
 	
 		$form = new HTML_QuickForm('menuitemEdit', 'post', $_SERVER['REQUEST_URI']);
 		
@@ -29,11 +29,11 @@ if ($this->authorize()) {
 				
 		$result = $this->getResult('item_type_id, item_type', $this->registry->core.'menu_item_types');
 			
-		if ($result) {
-			foreach ($result as $row) {
+		if ($result):
+			foreach ($result as $row):
 				$form->addElement('radio', 'item_type_id', $row->item_type.' Link:', null, $row->item_type_id.'|'.$row->item_type, array('id' => $row->item_type));
-			}
-		}
+			endforeach;
+		endif;
 		
 		$form->addElement('html', '</fieldset>');
 		
@@ -59,19 +59,19 @@ if ($this->authorize()) {
 		$select1[0] = '--- Component ---';
 		$select2[0][0] = '--- Page ---';
 		
-		foreach ($components as $component) {
+		foreach ($components as $component):
 			
 			$dir = realpath($_SERVER['DOCUMENT_ROOT']."/../components/".$component->component);
 			
 			$json = file_get_contents($dir.'/action.json');
 			$json = json_decode($json, true);
 			
-			foreach ($json as $key => $value) {
+			foreach ($json as $key => $value):
 				$url = $value['url'].$value['params'];
 				$select1[$url] = ucwords($key);
 				$select2[$url][0] = '--- Choose Page ---';
 				
-				if ($value['links'] == 'database') {
+				if ($value['links'] == 'database'):
 					
 					$links = $this->getResult(
 						$value['fields'],
@@ -80,16 +80,16 @@ if ($this->authorize()) {
 						$value['filter']
 					);
 				
-					foreach ($links as $page) {
+					foreach ($links as $page):
 						$select2[$url][str_replace(' ', '_', $page->page).'|'.$page->page_id] = ucwords($page->page);
-					}
-				} else {
-					foreach ($value['links'] as $value) {
+					endforeach;
+				else:
+					foreach ($value['links'] as $value):
 						$select2[$url][str_replace(' ', '_',$value)] = ucwords($value);
-					}
-				}
-			}
-		}
+					endforeach;
+				endif;
+			endforeach;
+		endforeach;
 		
 		$sel = $form->addElement('hierselect', 'url', 'Choose Page:');
 		
@@ -111,8 +111,8 @@ if ($this->authorize()) {
 			array('order by' => 'status_id')
 		);
 		
-		foreach ($access_level as $level) {
-			switch($level->status) {
+		foreach ($access_level as $level):
+			switch($level->status):
 				case 'A':
 					$status = 'Always show';
 					break;
@@ -122,9 +122,9 @@ if ($this->authorize()) {
 				case 'LO':
 					$status = 'Only show when logged out';
 					break;
-			}
+			endswitch;
 			$access_level_opts[$level->status_id] = $status;
-		}
+		endforeach;
 		
 		$s = $form->createElement('select', 'status_id', 'Access Level:', null, array('size' => '3', 'id' => 'access_level'));
 		$s->loadArray($access_level_opts);
@@ -141,7 +141,7 @@ if ($this->authorize()) {
 		$form->addRule('item_type_id', 'Select a item type', 'required');
 		$form->addRule('insert_type', 'Select a insert type', 'required');
 	
-		if ($form->validate()) {
+		if ($form->validate()):
 			
 			$menuBar = array();
 			
@@ -159,7 +159,7 @@ if ($this->authorize()) {
 			$item_type = $i[1];
 					
 			// format url.
-			switch ($item_type) {
+			switch ($item_type):
 				case 'component':
 					$p = explode('|', $values['url'][1]);
 					$values['page_id'] = $p[1];
@@ -173,7 +173,7 @@ if ($this->authorize()) {
 					$values['url'] = 'NULL';
 					$values['page_id'] = 'NULL';
 					break;
-			}
+			endswitch;
 			
 			// insert the url and get the url id.
 			$res = $this->getResult(
@@ -186,21 +186,21 @@ if ($this->authorize()) {
 			
 			$pass = false;
 			
-			if ($res) {
+			if ($res):
 				$values['url_id'] = $res->url_id;
 				$pass = true;
-			} else {
+			else:
 				$res = $this->insert(
 					array('url' => $values['url']),
 					$this->registry->core.'menu_urls'
 				);
-				if ($res) {
+				if ($res):
 					$values['url_id'] = $this->registry->db->lastInsertID();
 					$pass = true;
-				} else {
+				else:
 					$pass = false;
-				}
-			}
+				endif;
+			endif;
 			
 			$res = $this->update(
 				array('enssl' => $values['enssl']),
@@ -209,24 +209,23 @@ if ($this->authorize()) {
 				false
 			);
 			
-			if ($pass) {
+			if ($pass):
 				unset($values['insert_type'], $values['item_position'], $values['external_link'], $values['url'], $values['enssl']);
 				
 				$result = $this->update($values, $this->registry->core.'menu_items', array('where' => 'item_id='.$this->registry->params['item']));
 				
-				if ($result || $res){
+				if ($result || $res):
 					$params['TYPE'] = 'pass';
 					$params['MESSAGE'] = '<h2>Menu item was successfully edited.</h2>';
-				} else {
+				else:
 					$params['TYPE'] = 'error';
 					$params['MESSAGE'] = '<h2>Menu item could not be edited to the database.</h2>';
-				}
-			} else {
+				endif;
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Menu item could not be edited to the database.</h2>';
-			}
-		
-		} else {
+			endif;
+		else:
 			
 			$tree->linked_columns = array(
 				'url' => $this->registry->core.'menu_urls',
@@ -250,18 +249,18 @@ if ($this->authorize()) {
 				'enssl' => $ssl[0]->enssl
 			);
 				
-			switch($row['item_type']) {
+			switch($row['item_type']):
 				case 'component':
 					$url = split('/',$row['url']);
 					$url_end = split('-', end($url));
 					array_pop($url);
-					if (count($url_end) == 2) {
+					if (count($url_end) == 2):
 						$defaults['url'][0] = implode('/', $url) . '/' . $url_end[0] . '-';
 						$defaults['url'][1] = $url_end[1] . '|' . $row['page_id'];
-					} else {
+					else:
 						$defaults['url'][0] = implode('/', $url) . '/';
 						$defaults['url'][1] = $url_end[0];
-					}
+					endif;
 					
 					break;
 				case 'external':
@@ -270,11 +269,11 @@ if ($this->authorize()) {
 				case 'heading':
 					$defaults['heading_link'] = 1;
 					break;
-			}
+			endswitch;
 			
 			$form->setDefaults($defaults);
 			 
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
 		
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -290,19 +289,15 @@ if ($this->authorize()) {
 				'/components/menu/js/menu.js'
 			);
 		
-		}
+		endif;
 		
-		if (isset($params)) {
-			$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+		if (isset($params)):
+			$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 			$this->content .= $this->message($params);
-		}
+		endif;
 		
-	} else {
+	else:
 		goto('/menu/overview');
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+	endif;
+endif;
 ?>

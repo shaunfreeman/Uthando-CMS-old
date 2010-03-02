@@ -10,11 +10,11 @@ class HTML_Template extends HTML_Page
 	protected $modules = array();
 	protected $registry;
 	
-	public function __construct($registry)
+	public function __construct($registry, $template)
 	{
 		parent::__construct();
 		$this->registry = $registry;
-		$this->settings = parse_ini_file($this->registry->ini_dir.'/template.ini.php', true);
+		$this->settings = parse_ini_file($this->registry->ini_dir.'/templates/'.$template.'.ini.php', true);
 		$this->setTemplate();
 		
 		//$this->addParameter('SITE_FOLDER', $this->registry->settings['resolve']);
@@ -102,12 +102,14 @@ class HTML_Template extends HTML_Page
 		return $buffer;
 	}
 
-	public function setTemplate()
+	public function setTemplate($template=null)
 	{
-		$this->setBody($this->doc->createDocumentFragment($this->compress(file_get_contents(__SITE_PATH . '/templates/' . $this->settings['general']['name'] . '/index.html')), null, true));
+		$template = ($template) ? $template : __SITE_PATH . '/templates/' . $this->settings['general']['name'] . '/index.html';
+		$this->setBody($this->doc->createDocumentFragment($this->compress(file_get_contents($template)), null, true));
 	}
 
-	public function setMetaTags($meta_tags) {
+	public function setMetaTags($meta_tags)
+	{
 		if (is_array($meta_tags)):
 			foreach ($meta_tags as $key => $value):
 				if (is_array($value)):
@@ -119,19 +121,23 @@ class HTML_Template extends HTML_Page
 		endif;
 	}
 	
-	public function deleteParameter($variable) {
+	public function deleteParameter($variable)
+	{
 		unset ($this->parameters[$variable]);
 	}
 	
-	public function addParameter($variable, $value) {
+	public function addParameter($variable, $value)
+	{
 		$this->parameters[$variable][] = $value;
 	}
 	
-	public function addModules($value) {
+	public function addModules($value)
+	{
 		$this->modules = $value;
 	}
 	
-	public function templateParser($template, $params, $key_start, $key_end) {
+	public function templateParser($template, $params, $key_start, $key_end)
+	{
 		// Loop through all the parameters and set the variables to values.
 		foreach ($params as $key => $value):
 			$template_name = $key_start . $key . $key_end;
@@ -140,8 +146,9 @@ class HTML_Template extends HTML_Page
 		return $template;
 	}
 	
-	public function addContent($content) {
-		$this->AddParameter ('content', $content);
+	public function addContent($content)
+	{
+		$this->addParameter('content', $content);
 	}
 	
 	private function parseElements()
@@ -166,7 +173,7 @@ class HTML_Template extends HTML_Page
 		$i = $elements->length - 1;
 		while ($i > -1) {
 			$element = $elements->item($i);
-			if (array_key_exists($element->getAttribute('name'), $this->modules)):
+			if ($this->modules[$element->getAttribute('name')]):
 				$newelement = $this->doc->createElement('div');
 				foreach ($this->modules[$element->getAttribute('name')] as $el):
 					$newelement->appendChild($el);
@@ -183,23 +190,28 @@ class HTML_Template extends HTML_Page
 	{
 		$elements = $this->body[0]->getElementsByTagName('param');
 		$i = $elements->length - 1;
-		while ($i > -1) {
+		while ($i > -1):
+			$newelement = null;
 			$element = $elements->item($i);
-			if (array_key_exists($element->getAttribute('name'), $this->parameters)):
-				//$newelement = $this->doc->createElement('span');
+			if ($this->parameters[$element->getAttribute('name')]):
 				foreach ($this->parameters[$element->getAttribute('name')] as $content):
-					if ($content) $newelement = $this->doc->createDocumentFragment($content,null,true,'span');
+					if (is_string($content)) {
+						$newelement = $this->doc->createDocumentFragment($this->compress($content),array('id' => $element->getAttribute('name')),true,'span');
+					} else if ($content instanceof DOMElement) {
+						$newelement = $content;
+					}
 				endforeach;
 				$element->parentNode->replaceChild($newelement, $element);
 			else:
 				$element->parentNode->removeChild($element);
 			endif;
 			$i--;
-		}
+		endwhile;
 	}
 	
 	// This function does the bulk of the work.
-	public function __toString() {
+	public function __toString()
+	{
 		// check php errors.
 		//$this->ErrorCheck();
 		$this->parseElements();
@@ -210,7 +222,7 @@ class HTML_Template extends HTML_Page
 		// load CSS Styles
 		$css_files = $this->settings['css'];
 		
-		if ($registry->component_css) $css_files = array_merge($css_files, $registry->component_css);
+		if ($this->registry->component_css) $css_files = array_merge($css_files, $this->registry->component_css);
 			
 		foreach ($css_files as $filename):
 			if (!$this->settings['general']['dbug'] && !$this->settings['general']['cache']):
@@ -237,11 +249,11 @@ class HTML_Template extends HTML_Page
 		
 		if ($this->settings['general']['cache']):
 			$js->dbug = true;
-			$js->scripts = array($registry->host.$this->settings['cacheJS']);
+			$js->scripts = array($this->registry->host.$this->settings['cacheJS']);
 		else:
 			$js->scripts = $this->settings['mootools'];
 			foreach ($js->scripts as $key => $files):
-				$js->scripts[$key] = $this->registry->host.$files;
+				$js->scripts[$key] = $this->registry->get('config.server.web_url').$files;
 			endforeach;
 		endif;
 		
@@ -258,7 +270,7 @@ class HTML_Template extends HTML_Page
 				 break;
 			endif;
 		endforeach;
-		//print_rr($this);
+		
 		return $this->toHTML();
 	}
 }

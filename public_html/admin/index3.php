@@ -17,7 +17,6 @@
 			<h1>
 				<img src="/Common/images/uthandocms.png" />
 				<h2>This site is unconfigured.</h2>
-				<h2>Please setup this site this via the control panel.</h2>
 			</h1>
 		</center>
 	</body>

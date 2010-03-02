@@ -8,39 +8,38 @@ if ($this->authorize()):
 	if (isset($_POST['tmpl'])):
 		$template = explode(':', $_POST['tmpl']);
 		
-		if ($template == 'administration'):
-			$this->registry->admin_config->set('admin_template',$template[1],'SERVER');
-			$this->registry->admin_config->save();
-		else:
-			$this->registry->config->set('site_template',$template[1],'SERVER');
-			$this->registry->config->save();
-		endif;
+		$path = ($template == 'administration') ? $this->registry->ini_dir.'/uthandoAdmin.ini.php')) : $this->registry->ini_dir.'/uthando.ini.php'));
+		
+		$config = new Admin_Config($this->registry, array('path' => $path));
+		
+		$config->set('template',$template[1],'site');
+		$config->save();
 	endif;
 	
-	foreach ($dirs as $key => $value){
+	foreach ($dirs as $key => $value):
 		$iterator = new DirectoryIterator($value);
-		foreach ($iterator as $fileinfo) {
-			if (!$fileinfo->isDot()) {
-				if ($fileinfo->isDir()) {
+		foreach ($iterator as $fileinfo):
+			if (!$fileinfo->isDot()):
+				if ($fileinfo->isDir()):
 					$templates[$key][] = $fileinfo->getFilename();
-				}
-			}
-		}
+				endif;
+			endif;
+		endforeach;
 		sort($templates[$key]);
 		unset($iterator);
-	}
+	endforeach;
 	
 	// create the tabs.
 	foreach($templates as $key => $value):
 		$c = 0;
 		$data = array();
 		
-		$default = ($key == 'site') ? $this->registry->config->get('site_template', 'SERVER') : $this->registry->admin_config->get ('admin_template', 'SERVER');
+		$default = ($key == 'site') ? $this->get('config.site.template') : $this->get('admin_config.site.template');
 		
 		foreach($value as $tmpl_name):
 			$data[$c][] = '<input type="radio" name="tmpl" id="'.$tmpl_name.'_radio" value="'.$key.':'.$tmpl_name.'" />';
 			$data[$c][] = $tmpl_name;
-			$data[$c][] = ($default == $tmpl_name) ? '<img src="/templates/'.$this->registry->template.'/images/16x16/Favorites.png" />' : '';
+			$data[$c][] = ($default == $tmpl_name) ? '<img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/Favorites.png" />' : '';
 			$c++;
 		endforeach;
 		
@@ -66,9 +65,5 @@ if ($this->authorize()):
 	$this->registry->component_js = array(
 		'/components/template/js/template.js'
 	);
-	
-else:
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
 endif;
 ?>

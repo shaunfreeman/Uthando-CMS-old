@@ -33,7 +33,7 @@ $action = split(":", $action);
 			
 			//$form->addElement('submit', 'submit', 'Submit');
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->get('admin_config.site.template'));
 		
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');

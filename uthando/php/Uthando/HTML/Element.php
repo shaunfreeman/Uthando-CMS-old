@@ -59,7 +59,7 @@ class HTML_Element extends DOMDocument
 		if ($xmlProlog):
 			$xml = parent::saveXML();
 		else:
-			foreach ($this->childNodes as $node) $xml .= parent::saveXML($node)."\n";
+			foreach ($this->childNodes as $node) $xml .= parent::saveXML($node);
 		endif;
 		return html_entity_decode($xml);
 	}

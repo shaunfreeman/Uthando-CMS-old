@@ -28,27 +28,18 @@ set_include_path($ini_path);
 // Include functions.
 require_once('functions.php');
 
-$registry = new Registry();
+$registry = new Admin_Registry();
 
-$server = explode('.', $_SERVER['SERVER_NAME']);
+$registry->setSite(realpath(__SITE_PATH.'/../../uthando/ini/uthandoSites.ini.php'));
 
-/*{START_INI_DIR}*/
-$registry->ini_dir = realpath(__SITE_PATH.'/../../uthando/ini/'.$server[1]);
-/*{END_INI_DIR}*/
+$registry->loadIniFiles(array('admin_config' => 'uthandoAdmin', 'config' => 'uthando'));
+$registry->setDefaults();
 
-$registry->config = new Admin_Config($registry, array('path' => $registry->ini_dir.'/uthando.ini.php'));
-
-$registry->admin_config = new Admin_Config($registry, array('path' => $registry->ini_dir.'/uthandoAdmin.ini.php'));
-
-$registry->db_default = $registry->admin_config->get('database', 'DATABASE').'.';
-$registry->core = $registry->config->get('core', 'DATABASE').'.';
-$registry->user = $registry->config->get('user', 'DATABASE').'.';
-
-if (isset($_GET['session'])) {
+if (isset($_GET['session'])):
 	$registry->sessionId = $_GET['session'];
-} else if (isset($_POST['session'])) {
+elseif (isset($_POST['session'])):
 	$registry->sessionId = $_POST['session'];
-}
+endif;
 	
 try
 {
@@ -62,7 +53,7 @@ try
 
 	//user_agent|s:15:"Shockwave Flash";remote_addr|s:9:"127.0.0.1"
 	
-	$dir = $_SERVER['DOCUMENT_ROOT'].'/../'.$_POST['folder'].'/';
+	$dir = $_SERVER['DOCUMENT_ROOT'].'/../userfiles/'.$_POST['folder'].'/';
 			
 	function UploadIsAuthenticated($get){
 			global $registry;
@@ -80,7 +71,7 @@ try
 						),
 						false
 					);
-					$dir = $_SERVER['DOCUMENT_ROOT'].'/'.$_POST['folder'].'/';
+					$dir = $_SERVER['DOCUMENT_ROOT'].'/userfiles/'.$_POST['folder'].'/';
 					if (count($row) == 1) return true;
 					return false;
 				} else {
@@ -92,7 +83,7 @@ try
 		}
 
 		$browser = new File_Manager($registry, array(
-			'baseURL' => $registry->config->get('web_url', 'SERVER').'/',
+			'baseURL' => $registry->get('config.server.web_url').'/',
 			'directory' => $dir,
 			'assetBasePath' => $_SERVER['DOCUMENT_ROOT'].'/templates/admin/images/FileManager',
 			'move' => true,

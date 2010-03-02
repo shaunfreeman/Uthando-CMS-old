@@ -3,9 +3,9 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	if (isset($this->registry->params['id'])) {
+	if (isset($this->registry->params['id'])):
 		
 		$row = $this->getResult(
 			'menu_type_id, status_id, item',
@@ -40,9 +40,7 @@ if ($this->authorize()) {
 		$s = $form->createElement('select', 'menu_type_id', 'Menu Type:');
 		$opts[0] = 'Select One';
 			
-		foreach ($menu_types as $type) {
-			$opts[$type->menu_type_id] = ucwords($type->menu_type);
-		}
+		foreach ($menu_types as $type) $opts[$type->menu_type_id] = ucwords($type->menu_type);
 		
 		$s->loadArray($opts);
 		$form->addElement($s);
@@ -55,8 +53,8 @@ if ($this->authorize()) {
 			array('order by' => 'status_id')
 		);
 			
-		foreach ($access_level as $level) {
-			switch($level->status) {
+		foreach ($access_level as $level):
+			switch($level->status):
 				case 'A':
 					$status = 'Always show';
 					break;
@@ -66,9 +64,9 @@ if ($this->authorize()) {
 				case 'LO':
 					$status = 'Only show when logged out';
 					break;
-			}
+			endswitch;
 			$access_level_opts[$level->status_id] = $status;
-		}
+		endforeach;
 			
 		$s = $form->createElement('select', 'status_id', 'Access Level:', null, array('size' => '3', 'id' => 'access_level'));
 		$s->loadArray($access_level_opts);
@@ -81,7 +79,7 @@ if ($this->authorize()) {
 		$form->addRule('type_id','Please Select a menu type','nonzero');
 		$form->addRule('status_id','Please Select a access level','nonzero');
 		
-		if ($form->validate()) {
+		if ($form->validate()):
 			
 			$menuBar = array();
 			
@@ -94,15 +92,14 @@ if ($this->authorize()) {
 			$menuBar['back'] = '/menu/overview';
 			
 			// Always check that result is not an error
-			if ($result) {
+			if ($result):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Menu was successfully edited.</h2>';
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Menu could not be edited to the database.</h2>';
-			}
-			
-		} else {
+			endif;
+		else:
 				
 			$form->setDefaults(array(
 				'item' => $row->item,
@@ -110,7 +107,7 @@ if ($this->authorize()) {
 				'status_id' => $row->status_id
 			));
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -120,20 +117,15 @@ if ($this->authorize()) {
 			
 			// output the form
 			$this->content .= $renderer->toHtml();
-			
-		}
+		endif;
 		
-		if (isset($params)) {
-			$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+		if (isset($params)):
+			$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 			$this->content .= $this->message($params);
-		}
+		endif;
 		
-	} else {
+	else:
 		goto('/menu/overview');
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+	endif;
+endif;
 ?>

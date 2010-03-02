@@ -1,32 +1,57 @@
 <!DOCTYPE webprojectsession>
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
-    <itemcursorpositions/>
+    <itemcursorpositions>
+      <item line="103" column="5" url="uthando/php/Uthando/Admin/MenuAdmin.php" />
+      <item line="104" column="13" url="uthando/php/Uthando/HTML/Menu.php" />
+      <item line="55" column="104" url="public_html/admin/index.php" />
+      <item line="8" column="34" url="uthando/php/Uthando/HTML/Template.php" />
+      <item line="0" column="0" url="uthando/php/Uthando/Uthando.php" />
+      <item line="15" column="4" url="public_html/admin/components/admin/action/overview.php" />
+      <item line="35" column="38" url="public_html/admin/templates/admin/index.html" />
+      <item line="25" column="1" url="public_html/admin/components/admin/index.php" />
+    </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
     </uploadprofiles>
     <treestatus>
       <openfolder url="public_html" />
+      <openfolder url="public_html/admin" />
+      <openfolder url="public_html/admin/components" />
+      <openfolder url="public_html/admin/components/admin" />
+      <openfolder url="public_html/admin/components/admin/action" />
+      <openfolder url="public_html/admin/components/component" />
+      <openfolder url="public_html/admin/components/component/action" />
+      <openfolder url="public_html/admin/components/user" />
+      <openfolder url="public_html/admin/components/user/action" />
+      <openfolder url="public_html/admin/components/user/captcha" />
+      <openfolder url="public_html/admin/components/user/validate" />
+      <openfolder url="public_html/admin/modules" />
+      <openfolder url="public_html/admin/modules/menu" />
+      <openfolder url="public_html/admin/templates" />
+      <openfolder url="public_html/admin/templates/admin" />
+      <openfolder url="public_html/admin/templates/admin/css" />
       <openfolder url="public_html/components" />
       <openfolder url="public_html/components/content" />
       <openfolder url="public_html/components/content/action" />
       <openfolder url="public_html/modules" />
-      <openfolder url="public_html/modules/custom" />
       <openfolder url="public_html/modules/menu" />
       <openfolder url="public_html/templates" />
-      <openfolder url="public_html/templates/modernviewblue" />
-      <openfolder url="public_html/templates/modernviewblue/ini" />
       <openfolder url="public_html/templates/smebusiness" />
-      <openfolder url="public_html/templates/smebusiness/css" />
-      <openfolder url="public_html/userfiles" />
-      <openfolder url="public_html/userfiles/shaunfreeman" />
-      <openfolder url="public_html/userfiles/shaunfreeman/images" />
-      <openfolder url="public_html/userfiles/shaunfreeman/template_files" />
       <openfolder url="uthando" />
       <openfolder url="uthando/ini" />
-      <openfolder url="uthando/ini/kris3man" />
       <openfolder url="uthando/ini/shaunfreeman" />
+      <openfolder url="uthando/ini/shaunfreeman/templates" />
+      <openfolder url="uthando/ini/shaunfreeman/user" />
       <openfolder url="uthando/php" />
+      <openfolder url="uthando/php/Uthando" />
+      <openfolder url="uthando/php/Uthando/Admin" />
+      <openfolder url="uthando/php/Uthando/DB" />
+      <openfolder url="uthando/php/Uthando/Dbug" />
+      <openfolder url="uthando/php/Uthando/HTML" />
+      <openfolder url="uthando/php/Uthando/Security" />
+      <openfolder url="uthando/php/Uthando/UShop" />
+      <openfolder url="uthando/php/Uthando/functions" />
     </treestatus>
   </session>
   <teamdata yourself="" />

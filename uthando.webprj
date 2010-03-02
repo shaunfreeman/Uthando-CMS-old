@@ -1335,11 +1335,8 @@
     <item url="public_html/admin/templates/admin/form/" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/html/" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/images/" uploadstatus="1" />
-    <item url="public_html/admin/templates/admin/index.html" uploadstatus="1" />
-    <item url="public_html/admin/templates/admin/index.php" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/ini/" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/js/" uploadstatus="1" />
-    <item url="public_html/admin/templates/admin/login.php" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/css/Additions.css" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/css/FileManager.css" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/css/index.html" uploadstatus="1" />
@@ -2365,9 +2362,6 @@
     <item url="uthando/ini/barnaclesfinch/mail.ini.php" uploadstatus="0" />
     <item url="uthando/ini/barnaclesfinch/uthando.ini.php" uploadstatus="0" />
     <item url="uthando/ini/barnaclesfinch/uthandoAdmin.ini.php" uploadstatus="0" />
-    <item url="public_html/admin/Common/tmp/hn_captcha_4273f9.jpg" uploadstatus="1" />
-    <item url="public_html/admin/Common/tmp/hn_captcha_4aa1c3.jpg" uploadstatus="1" />
-    <item url="public_html/admin/Common/tmp/hn_captcha_b69ef6.jpg" uploadstatus="1" />
     <item url="public_html/templates/walls/" uploadstatus="1" />
     <item url="public_html/templates/walls/images/" uploadstatus="1" />
     <item url="public_html/templates/walls/images/body_bckg.jpg" uploadstatus="1" />
@@ -2781,11 +2775,6 @@
     <item url="public_html/userfiles/kris3man/media/" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/media/index.html" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/index.html" uploadstatus="1" />
-    <item url="public_html/admin/Common/tmp/hn_captcha_08a8af.jpg" uploadstatus="1" />
-    <item url="public_html/admin/Common/tmp/hn_captcha_94cc14.jpg" uploadstatus="1" />
-    <item url="public_html/admin/Common/tmp/hn_captcha_a99483.jpg" uploadstatus="1" />
-    <item url="public_html/admin/Common/tmp/hn_captcha_d611c6.jpg" uploadstatus="1" />
-    <item url="public_html/admin/Common/tmp/hn_captcha_f13b4b.jpg" uploadstatus="1" />
     <item url="public_html/Common/images/firefox.png" uploadstatus="1" />
     <item url="public_html/Common/tmp/hn_captcha_44fa06.jpg" uploadstatus="1" />
     <item url="public_html/Common/tmp/hn_captcha_8b975e.jpg" uploadstatus="1" />
@@ -3160,7 +3149,6 @@
     <item url="public_html/userfiles/shaunfreeman/images/logo.png" uploadstatus="1" />
     <item url="public_html/userfiles/shaunfreeman/images/shaunfreeman.png" uploadstatus="1" />
     <item url="public_html/userfiles/shaunfreeman/images/shaunfreeman1.png" uploadstatus="1" />
-    <item url="uthando/ini/shaunfreeman/template.ini.php" uploadstatus="0" />
     <item url="public_html/templates/smebusiness/js/" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/js/index.html" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/js/md_stylechanger.js" uploadstatus="1" />
@@ -3175,5 +3163,15 @@
     <item url="public_html/userfiles/shaunfreeman/template_files/js/UthandoAPI.js" uploadstatus="1" />
     <item url="public_html/userfiles/shaunfreeman/template_files/js/UthandoConfig.js" uploadstatus="1" />
     <item url="uthando/ini/shaunfreeman/mootools.ini.php" uploadstatus="0" />
+    <item url="public_html/admin/index3.php" uploadstatus="1" />
+    <item url="public_html/admin/Common/images/favicon.ico" uploadstatus="1" />
+    <item url="uthando/ini/shaunfreeman/templates/" uploadstatus="1" />
+    <item url="uthando/ini/shaunfreeman/templates/smebusiness.ini.php" uploadstatus="1" />
+    <item url="uthando/ini/shaunfreeman/templates/admin.ini.php" uploadstatus="1" />
+    <item url="public_html/admin/templates/admin/index.html" uploadstatus="1" />
+    <item url="public_html/admin/templates/admin/login.html" uploadstatus="1" />
+    <item url="uthando/php/Uthando/Dbug/" uploadstatus="1" />
+    <item url="uthando/php/Uthando/Dbug/fb.php" uploadstatus="1" />
+    <item url="uthando/php/Uthando/Dbug/FirePHP.class.php" uploadstatus="1" />
   </project>
 </webproject>

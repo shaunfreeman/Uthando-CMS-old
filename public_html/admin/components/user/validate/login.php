@@ -32,6 +32,9 @@ if (UthandoUser::checkUser() && !$this->authorize()) {
 
 		// decrypt password.
 		$decrypted = UthandoUser::decodePassword($row->password, $user_config->get('key', 'CIPHER'), $row->iv);
+		
+		$this->registry->firephp->log($row);
+		$this->registry->firephp->log($decrypted);
 
 		// split the password for checking.
 		$decrypted = str_split($decrypted);
@@ -60,8 +63,9 @@ if (UthandoUser::checkUser() && !$this->authorize()) {
 			//if ($this->registry->config->get('enable_ssl','SERVER')) {
 			//	$url = $this->registry->config->get ('ssl_url', 'SERVER');
 			//} else {
-				$url = $this->registry->admin_config->get ('admin_url', 'SERVER');
+				$url = $this->registry->get ('admin_config.server.admin_url');
 			//}
+			
 			header ("Location: ". $url);
 			exit();
 		} else {

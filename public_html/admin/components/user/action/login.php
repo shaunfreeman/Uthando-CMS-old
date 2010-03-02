@@ -5,7 +5,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if (!$this->authorize()) {
 	
-	$this->setTemplate(__SITE_PATH.'/templates/' . $this->registry->template . '/login.php');
+	$this->registry->template->setTemplate(__SITE_PATH.'/templates/' . $this->registry->get('admin_config.site.template') . '/login.html');
 	
 	$form = new HTML_QuickForm('adminLogin', 'post', $_SERVER['REQUEST_URI']);
 	
@@ -56,7 +56,7 @@ if (!$this->authorize()) {
 			$form->addElement('submit', 'submit', 'Submit');
 			
 			// Output the form
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->get('admin_config.site.template'));
 		
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -74,7 +74,7 @@ if (!$this->authorize()) {
 	$key = $user_config->get('key', 'CIPHER');
 	$password = "password";
 	$pwd = UthandoUser::encodePassword($password, $key);
-	print_rr($pwd);
+	$this->registry->firephp->log($pwd);
 	*/
 }
 

@@ -7,12 +7,12 @@ if ($this->authorize()):
 	
 	if (is_readable($this->file."/action/".$this->registry->action.".php") == false || $this->registry->action == "index"):
 		$this->registry->Error('404 Page NOT Found', $this->registry->path);
-		$this->AddParameter ('PAGE',  'Page Not Found');
+		$this->addParameter ('page',  'Page Not Found');
 	else:
 
 		$title = ucwords($this->registry->component) . " " . ucwords($this->registry->action);
 		$this->registry->page_title = ucwords($this->registry->component).'s';
-		$this->setTitle($title . ' | ' . $this->registry->config->get('site_name', 'SERVER'));
+		$this->setTitle($title . ' | ' . $this->get('config.server.site_name'));
 		
 		if ($this->upid == 1):
 			$dirs = array('site' => $_SERVER['DOCUMENT_ROOT'].'/../templates/', 'administration' => $_SERVER['DOCUMENT_ROOT'].'/templates/');
@@ -26,13 +26,9 @@ if ($this->authorize()):
 			$this->addContent($this->message($params));
 		endif;
 		
-		$this->AddParameter ('PAGE',  $title);
+		$this->addParameter ('page',  $title);
 		
 		$this->registry->component_css = array('/components/template/css/'.$this->registry->component.'.css');
 	endif;
-
-else:
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
 endif;
 ?>

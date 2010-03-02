@@ -3,28 +3,28 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	if (isset($this->registry->params['id']) && $this->upid <= 2) {
+	if (isset($this->registry->params['id']) && $this->upid <= 2):
 		
-		if (isset($this->registry->params['action']) == 'delete') {
+		if (isset($this->registry->params['action']) == 'delete'):
 			
 			$tree = new NestedTreeAdmin($this->registry->core.'menu_items', $this->registry->params['id'], 'item');
 			
 			$res = $tree->remove($this->registry->params['id']);
 			
 			// Always check that result is not an error
-			if ($res) {
+			if ($res):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Menu was successfully deleted.</h2>';
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Menu could not be deleted due to an error.</h2>';
-			}
+			endif;
 			
 			$menuBar = array('back' => '/menu/overview');
 			
-		} else {
+		else:
 			
 			$menuBar = array(
 				'cancel' => '/menu/overview',
@@ -33,20 +33,16 @@ if ($this->authorize()) {
 			$params['TYPE'] = 'warning';
 			$params['MESSAGE'] = 'Are you sure you want to delete this menu';
 			
-		}
-	} else {
+		endif;
+	else:
 		$menuBar['back']= '/menu/overview';
 		$params['TYPE'] = 'warning';
 		$params['MESSAGE'] = 'You do not have permission to delete this menu';
-	}
+	endif;
 	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+	endif;
+endif;
 ?>

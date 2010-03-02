@@ -3,9 +3,9 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	$res = $this->registry->db->getResult('component', $this->db_default.'components', null, array('WHERE' => 'enabled=1'), false);
+	$res = $this->registry->db->getResult('component', $this->registry->db_default.'components', null, array('WHERE' => 'enabled=1'), false);
 	
 	foreach ($res as $value):
 		if ($value->component == 'admin') continue;
@@ -14,10 +14,6 @@ if ($this->authorize()) {
 	
 	ksort($menuBar);
 	$this->content .= $this->makeToolbar($menuBar, 128);
-	
+endif;
 
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
-}
 ?>

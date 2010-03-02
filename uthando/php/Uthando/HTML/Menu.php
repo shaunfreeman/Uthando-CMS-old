@@ -6,12 +6,12 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 class HTML_Menu
 {
 	
-	private $type;
-	private $menu;
-	private $menu_id;
-	private $class_sfx = NULL;
-	private $moduleclass_sfx = NULL;
-	private $doc;
+	protected $type;
+	protected $menu;
+	protected $menu_id;
+	protected $class_sfx = NULL;
+	protected $moduleclass_sfx = NULL;
+	protected $doc;
 	protected $registry;
 	protected $status;
 	protected $admin = false;
@@ -46,7 +46,7 @@ class HTML_Menu
 		return $this->menu;
 	}
 	
-	private function getMenuWrap($menu)
+	protected function getMenuWrap($menu)
 	{
 		if ($this->type == 'horizontal'):
 			$div_attrs = array('class' => 'moduletable');
@@ -102,7 +102,7 @@ class HTML_Menu
 	}
 	
 	// Navigaion bar function.
-	private function menuBar($menu_id, $menu)
+	protected function menuBar($menu_id, $menu)
 	{
 		$parents = array();
 		$submenus = array();
@@ -175,27 +175,7 @@ class HTML_Menu
 		$this->doc->appendChild($this->menu);
 	}
 	
-	public function nestify( $arrs, $depth_key = 'depth' )
-	{
-		$nested = array();
-		$depths = array();
-		
-		foreach( $arrs as $key => $arr ) {
-			if( $arr[$depth_key] == 0 ) {
-				$nested[$key] = $arr;
-			} else {
-				$parent =& $nested;
-				for( $i = 1; $i <= ( $arr[$depth_key] ); $i++ ) {
-					$parent =& $parent[$depths[$i]];
-				}
-				$parent[$key] = $arr;
-			}
-			$depths[$arr[$depth_key] + 1] = $key;
-		}
-		return $nested;
-	}
-	
-	private function queryMenu ($menu_id)
+	protected function queryMenu ($menu_id)
 	{
 		$menu = array();
 		
@@ -208,6 +188,8 @@ class HTML_Menu
 		$tree = new NestedTree($this->db_table.'menu_items', $menu_id, 'item');
 		
 		$decendants = $tree->getDecendants(true);
+		
+		//print_rr($tree->getTree());
 		
 		if ($decendants):
 		

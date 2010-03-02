@@ -35,13 +35,10 @@ $registry->setSite(realpath(__SITE_PATH.'/../uthando/ini/uthandoSites.ini.php'))
 $registry->loadIniFile('uthando', 'config');
 $registry->setDefaults();
 
-//print_rr(md5($registry->server));
-//print_rr($registry);
-
 if ($registry->get('config.server.compat_router')) require_once('includes/CompatRouter.php');
 
 $uthando = new Uthando($registry);
-$registry->template = new HTML_Template($registry);
+$registry->template = new HTML_Template($registry, $registry->get('config.site.template'));
 
 
 $registry->template->AddParameter ('merchant_name', $registry->get('config.server.site_name'));
@@ -51,7 +48,7 @@ UthandoUser::setUserInfo();
 
 if (UthandoUser::authorize()):
 	$registry->loggedInUser = true;
-	$uthando->AddParameter ('login_status', "<p>You are logged in as: ".$_SESSION['name']."</p>");
+	$uthando->AddParameter('login_status', "<p>You are logged in as: ".$_SESSION['name']."</p>");
 else:
 	$registry->loggedInUser = false;
 endif;
@@ -77,20 +74,10 @@ $registry->template->AddParameter ('date', date("Y"));
 $timer->stop();
 $timer_result = $timer->getProfiling();
 
-$registry->template->AddParameter ('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
-/*
-$uthando->addBodyContent($uthando->CreateBody());
+$registry->template->AddParameter('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
 
-if (!$registry->compress_files):
-	$uthando->display();
-else:
-	print $uthando->compress_page($uthando->toHtml());
-endif;
-*/
-//print_rr($registry->template);
 echo $registry->template;
-$registry = null;
+unset($registry);
 
 ob_end_flush();
-
 ?>

@@ -153,13 +153,6 @@ h3 { margin: 0px; }
 
 #leftDivWrap .headerDiv, #mainDivWrap .headerDiv, .moduletable h3 { color: #003399; }
 
-.pagegen {
-    text-align:right;
-    font-size:10px;
-    margin-left:5px;
-}
-
-
 .moduletable h3 {
 	background-color: rgba(225,205,0,1);
 	background-image: url(/templates/admin/images/headDiv.png);
@@ -695,7 +688,6 @@ Tool Tips
     width: 139px;
 }
 
-
 .tip-title {
     font-weight: bold;
     font-size: 11px;
@@ -704,7 +696,6 @@ Tool Tips
     padding: 8px 8px 4px;
     background: url(/templates/admin/images/bubble.png) top left;
 }
-
 
 .tip-text {
     font-size: 11px;
@@ -722,3 +713,7 @@ misc styles
 	vertical-align:super;
 	font-size:4px;
 }
+
+#login_status { position:absolute; right:0px; }
+
+.benchmark { font-size:10px; margin-left:5px; }

@@ -8,8 +8,8 @@ class DB_Admin extends DB_Core
 	{
 		$this->registry = $registry;
 		
-		$dsn = $this->registry->admin_config->get ('DATABASE');
-		$this->dsn = $dsn['phptype'] . ":host=" . $dsn['hostspec'] . ";dbname=" .$dsn['database'];
+		$dsn = $this->registry->get ('admin_config.database');
+		$this->dsn = $dsn['phptype'] . ":host=" . $dsn['hostspec'] . ";dbname=" .$dsn['admin'];
 		$this->username = $dsn['username'];
 		$this->password = $dsn['password'];
 		$this->conn();

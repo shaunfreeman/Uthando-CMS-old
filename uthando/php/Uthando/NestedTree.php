@@ -30,6 +30,26 @@ class NestedTree {
 		return $return_array;
 	}
 	
+	public function listToMultiArray( $arrs, $depth_key = 'depth' )
+	{
+		$nested = array();
+		$depths = array();
+		
+		foreach( $arrs as $key => $arr ) {
+			if( $arr[$depth_key] == 0 ) {
+				$nested[$key] = $arr;
+			} else {
+				$parent =& $nested;
+				for( $i = 1; $i <= ( $arr[$depth_key] ); $i++ ) {
+					$parent =& $parent[$depths[$i]];
+				}
+				$parent[$key] = $arr;
+			}
+			$depths[$arr[$depth_key] + 1] = $key;
+		}
+		return $nested;
+	}
+	
 	private function format_link_query() {
 		
 		$linked_array = array(

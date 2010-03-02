@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 
 	$sql = "
 		SELECT page_id, page, mdate
@@ -13,7 +13,7 @@ if ($this->authorize()) {
 	
 	$num_pages = count($result);
 	
-	if ($num_pages < $this->registry->settings['pages']):
+	if ($this->registry->settings['pages'] <= $num_pages):
 		
 		$form = new HTML_QuickForm('contentPage', 'post', $_SERVER['REQUEST_URI']);
 			
@@ -42,14 +42,14 @@ if ($this->authorize()) {
 	
 		$params = array('show_title', 'show_cdate', 'show_mdate');
 	
-		foreach ($params as $value) {
+		foreach ($params as $value):
 			$radio_set = array(
 				$form->createElement('radio', null, null, 'Yes', '1'),
 				$form->createElement('radio', null, null, 'No', '0')
 			);
 				
 			$form->addGroup($radio_set, 'params['.$value.']', ucwords(str_replace('_', ' ', $value)).':');
-		}
+		endforeach;
 	
 		$form->addElement('html', '</fieldset>');
 	
@@ -72,7 +72,7 @@ if ($this->authorize()) {
 		$form->addRule('page', 'Please enter a title', 'required');
 			
 			
-		if ($form->validate()) {
+		if ($form->validate()):
 				
 			// Apply form element filters.
 			$form->freeze();
@@ -80,24 +80,22 @@ if ($this->authorize()) {
 			
 			$values['params'] = serialize($values['params']);
 			
-			foreach ($values as $key => $value) {
-				$values[$key] = "'$value'";
-			}
+			foreach ($values as $key => $value) $values[$key] = "'$value'";
+			
 			$values['cdate'] = "NOW()";
 			
 			$res = $this->insert($values, $this->registry->core.'pages', false);
 			
 			$menuBar['back'] = '/content/overview';
 			
-			if ($res) {
+			if ($res):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Page was successfully created.</h2>';
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Page could not be created.</h2>';
-			}
-				
-		} else {
+			endif;
+		else:
 	
 			$form->setDefaults(array(
 				'params' => array(
@@ -107,7 +105,7 @@ if ($this->authorize()) {
 				)
 			));
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
 					
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -131,25 +129,21 @@ if ($this->authorize()) {
 			);
 	
 			$this->registry->component_css = array(
-				'/templates/'.$this->registry->template.'/css/FileManager.css',
-				'/templates/'.$this->registry->template.'/css/Additions.css'
+				'/templates/'.$this->get ('admin_config.site.template').'/css/FileManager.css',
+				'/templates/'.$this->get ('admin_config.site.template').'/css/Additions.css'
 			);
 			
 			$this->addScriptDeclaration("UthandoAdmin.sid = '" . session_id() . "';");
-		}
+		endif;
 	else:
 		$params['TYPE'] = 'info';
 		$params['MESSAGE'] = '<h2>You have reach your page limit. To add more pages please contact your administrator.</h2>';
 		$menuBar['back'] = '/content/overview';
 	endif;
 	
-	if (isset($params)) {
+	if (isset($params)):
 		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $this->registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+	endif;
+endif;
 ?>

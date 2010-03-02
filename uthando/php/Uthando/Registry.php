@@ -5,7 +5,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 Class Registry {
 	
-	private $vars = array();
+	protected $vars = array();
 	public  $errors = null;
 	
 	public function __construct()
@@ -44,14 +44,14 @@ Class Registry {
 		return ($value===false) ? null : $value;
 	}
 	
-	private function registerServer()
+	protected function registerServer()
 	{
 		$this->server = (substr($_SERVER['SERVER_NAME'], 0, 3) == 'www') ? substr($_SERVER['SERVER_NAME'], 0, 4) : $this->server = $_SERVER['SERVER_NAME'];
 	}
 	
 	public function setSite($file)
 	{
-		$settings = parse_ini_file(realpath(__SITE_PATH.'/../uthando/ini/uthandoSites.ini.php'), true);
+		$settings = parse_ini_file($file, true);
 		$this->settings = $settings[$this->server];
 		if (!$this->settings) goto('/index3.php');
 		$this->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$this->settings['resolve']);
@@ -71,6 +71,7 @@ Class Registry {
 		$this->core = $this->config['database']['core'].'.';
 		$this->user = $this->config['database']['user'].'.';
 		$this->sessions = $this->config['database']['session'].'.';
+		date_default_timezone_set($this->config['server']['timezone']);
 	}
 	
 	public function loadIniFile($file, $section)

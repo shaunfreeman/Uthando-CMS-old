@@ -13,15 +13,6 @@ class UthandoAdmin extends Uthando {
 		
 		parent::__construct($registry);
 		
-		if (substr($this->registry->admin_config->get('admin_url', 'SERVER'), 7) != $_SERVER["SERVER_NAME"]) {
-			header("Location: ".$this->registry->config->get('web_url', 'SERVER'));
-			exit();
-		}
-		
-		$settings = parse_ini_file(realpath(__SITE_PATH.'/../../uthando/ini/uthandoGlobal.ini.php'), true);
-		
-		$this->registry->settings = $settings[$this->registry->server];
-		
 		$this->loadLang();
 	}
 	
@@ -113,7 +104,7 @@ class UthandoAdmin extends Uthando {
 	public function makeToolbar($items, $icon_size) {
 		if (is_array($items)) {
 			$menuBar = '<div id="menuToolbarWrap">';
-			$menuBar .= '<img width="8" height="53" id="scrollLeft" alt="scroll left" src="/templates/'.$this->registry->template.'/images/left_scroll.png"/>';
+			$menuBar .= '<img width="8" height="53" id="scrollLeft" alt="scroll left" src="/templates/'.$this->get('admin_config.site.template').'/images/left_scroll.png"/>';
 			$menuBar .= '<div id="menuToolbar">';
 			$menuBar .= '<ul id="iconMenuStrip">';
 			foreach ($items as $key => $value) {
@@ -127,7 +118,7 @@ class UthandoAdmin extends Uthando {
 			$menuBar .= '</ul>';
 			$menuBar .= '<div class="both"><!-- --></div>';
 			$menuBar .= '</div>';
-			$menuBar .= '<img width="8" height="53" id="scrollRight" alt="scroll right" src="/templates/'.$this->registry->template.'/images/right_scroll.png"/>';
+			$menuBar .= '<img width="8" height="53" id="scrollRight" alt="scroll right" src="/templates/'.$this->get('admin_config.site.template').'/images/right_scroll.png"/>';
 			$menuBar .= '</div>';
 			return $menuBar;
 		} else {

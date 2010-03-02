@@ -3,9 +3,9 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	if (isset($this->registry->params['id'])) {
+	if (isset($this->registry->params['id'])):
 		
 		$form = new HTML_QuickForm('contentPage', 'post', $_SERVER['REQUEST_URI']);
 		
@@ -34,14 +34,14 @@ if ($this->authorize()) {
 
 		$params = array('show_title', 'show_cdate', 'show_mdate');
 
-		foreach ($params as $value) {
+		foreach ($params as $value):
 			$radio_set = array(
 				$form->createElement('radio', null, null, 'Yes', '1'),
 				$form->createElement('radio', null, null, 'No', '0')
 			);
 			
 			$form->addGroup($radio_set, 'params['.$value.']', ucwords(str_replace('_', ' ', $value)).':');
-		}
+		endforeach;
 
 		$form->addElement('html', '</fieldset>');
 
@@ -63,7 +63,7 @@ if ($this->authorize()) {
 		
 		$form->addRule('page', 'Please enter a title', 'required');
 		
-		if ($form->validate()) {
+		if ($form->validate()):
 			
 			// Apply form element filters.
 			$form->freeze();
@@ -75,16 +75,14 @@ if ($this->authorize()) {
 		
 			$menuBar['back'] = '/content/overview';
 			
-			if ($res) {
+			if ($res):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Page was successfully edited.</h2>';
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Page could not be edited.</h2>';
-			}
-			
-			
-		} else {
+			endif;
+		else:
 		
 			$row = $this->getResult('page, content, params', $this->registry->core.'pages', null, array('where'=> 'page_id='.$this->registry->params['id']),false);
 
@@ -92,7 +90,7 @@ if ($this->authorize()) {
 		
 			$form->setDefaults(Uthando::objectToArray($row));
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -116,25 +114,21 @@ if ($this->authorize()) {
 			);
 
 			$this->registry->component_css = array(
-				'/templates/'.$this->registry->template.'/css/FileManager.css',
-				'/templates/'.$this->registry->template.'/css/Additions.css'
+				'/templates/'.$this->get ('admin_config.site.template').'/css/FileManager.css',
+				'/templates/'.$this->get ('admin_config.site.template').'/css/Additions.css'
 			);
 			
 			$this->addScriptDeclaration("UthandoAdmin.sid = '" . session_id() . "';");
 			
-		}
+		endif;
 		
-		if (isset($params)) {
+		if (isset($params)):
 			$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 			$this->content .= $this->message($params);
-		}
+		endif;
 		
-	} else {
+	else:
 		goto('/content/overview');
-	}
-	
-} else {
-	header("Location:" . $this->registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+	endif;
+endif;
 ?>

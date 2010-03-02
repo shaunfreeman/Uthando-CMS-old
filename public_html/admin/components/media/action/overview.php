@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'back' => '/admin/overview'
@@ -15,7 +15,7 @@ if ($this->authorize()) {
 	
 	$manager_params = array(
 		'SESSION_ID' => session_id(),
-		'FOLDER' => 'userfiles/'.$this->registry->server,
+		'FOLDER' => $this->registry->settings['resolve'],
 		'SELCETABLE' => 'false',
 		'FILTER' => 'null',
 		'MANAGER_INIT_CODE' => 'UthandoAdmin.manager.show();'
@@ -24,13 +24,8 @@ if ($this->authorize()) {
 	$this->addScriptDeclaration($this->templateParser($js, $manager_params, '/*{', '}*/'));
 
 	$this->registry->component_css = array(
-		'/templates/'.$this->registry->template.'/css/FileManager.css',
-		'/templates/'.$this->registry->template.'/css/Additions.css'
+		'/templates/'.$this->get('admin_config.site.template').'/css/FileManager.css',
+		'/templates/'.$this->get('admin_config.site.template').'/css/Additions.css'
 	);
-	
-
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+endif;
 ?>

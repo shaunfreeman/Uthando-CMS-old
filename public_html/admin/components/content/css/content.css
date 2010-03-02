@@ -11,11 +11,6 @@ form elements
 	overflow:auto;
 }
 
-#messageBar {
-	position: absolute;
-	top: 0px;
-}
-
 #tableWrap {
 	position: absolute;
 	top: 115px;

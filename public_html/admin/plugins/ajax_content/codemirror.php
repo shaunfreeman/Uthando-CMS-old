@@ -30,19 +30,10 @@ require_once('functions.php');
 
 $registry = new Admin_Registry();
 
-$server = explode('.', $_SERVER['SERVER_NAME']);
+$registry->setSite(realpath(__SITE_PATH.'/../../uthando/ini/uthandoSites.ini.php'));
 
-/*{START_INI_DIR}*/
-$registry->ini_dir = realpath(__SITE_PATH.'/../../uthando/ini/'.$server[1]);
-/*{END_INI_DIR}*/
-
-$registry->config = new Admin_Config($registry, array('path' => $registry->ini_dir.'/uthando.ini.php'));
-
-$registry->admin_config = new Admin_Config($registry, array('path' => $registry->ini_dir.'/uthandoAdmin.ini.php'));
-
-$registry->db_default = $registry->admin_config->get('database', 'DATABASE').'.';
-$registry->core = $registry->config->get('core', 'DATABASE').'.';
-$registry->user = $registry->config->get('user', 'DATABASE').'.';
+$registry->loadIniFiles(array('admin_config' => 'uthandoAdmin', 'config' => 'uthando'));
+$registry->setDefaults();
 
 if (isset($_GET['session'])) {
 	$registry->sessionId = $_GET['session'];

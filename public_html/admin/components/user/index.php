@@ -10,13 +10,13 @@ if (is_readable($this->file."/action/".$this->registry->action.".php") == false 
 
 	$title = ucwords($this->registry->component) . " " . ucwords($this->registry->action);
 	$this->registry->page_title = ucwords($this->registry->component);
-	$this->setTitle($title . ' | ' . $this->registry->config->get('site_name', 'SERVER'));
+	$this->registry->template->setTitle($title . ' | ' . $this->registry->get('config.server.site_name'));
 		
 	require_once('action/'.$this->registry->action.'.php');
 	
 	$this->registry->component_css = array('/components/user/css/user.css');
 	
-	$this->AddParameter ('PAGE',  $title);
+	$this->registry->template->AddParameter ('page',  $title);
 }
 
 ?>

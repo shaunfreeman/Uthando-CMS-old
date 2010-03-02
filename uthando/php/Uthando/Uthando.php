@@ -15,57 +15,18 @@ class Uthando
 		$this->registry = $registry;
 	}
 	
-	public function __set($index, $value) {
+	public function __set($index, $value)
+	{
 		$this->vars[$index] = $value;
 	}
 	
-	public function __get($index) {
+	public function __get($index)
+	{
 		return $this->vars[$index];
 	}
 	
-	private function compress_styles($buffer) {
-		// remove comments, tabs, spaces, newlines, etc.
-		$search = array(
-			"/\/\*(.*?)\*\/|[\t\r\n]/s" => "",
-			"/ +\{ +|\{ +| +\{/" => "{",
-			"/ +\} +|\} +| +\}/" => "}",
-			"/ +: +|: +| +:/" => ":",
-			"/ +; +|; +| +;/" => ";",
-			"/ +, +|, +| +,/" => ","
-		);
-		$buffer = preg_replace(array_keys($search), array_values($search), $buffer);
-		return $buffer;
-	}
-	
-	public function compress_page($buffer) {
-		// remove comments, tabs, spaces, newlines, etc.
-		$search = array(
-			"/ +/" => " ",
-			"/<!--\{(.*?)\}-->|<!--(.*?)-->|[\t\r\n]|<!--|-->|\/\/ <!--|\/\/ -->|<!\[CDATA\[|\/\/ \]\]>|\]\]>|\/\/\]\]>|\/\/<!\[CDATA\[/" => ""
-		);
-		$buffer = preg_replace(array_keys($search), array_values($search), $buffer);
-		return $buffer;
-	}
-	
-	public function deleteParameter($variable) {
-		unset ($this->parameters[$variable]);
-	}
-	
-	public function addParameter($variable, $value) {
-		$this->parameters[$variable] .= $value;
-	}
-	
-	public function templateParser($template, $params, $key_start, $key_end) {
-		// Loop through all the parameters and set the variables to values.
-		foreach ($params as $key => $value):
-			$template_name = $key_start . $key . $key_end;
-			$template = str_replace ($template_name, $value, $template);
-		endforeach;
-		return $template;
-	}
-	
-	public function loadComponent() {
-		
+	public function loadComponent()
+	{
 		$this->file = __SITE_PATH . '/components/' . $this->registry->component;
 		
 		if (is_readable($this->file . "/index.php") == false):
@@ -82,13 +43,14 @@ class Uthando
 		endif;
 	}
 	
-	public function addModules() {
+	public function addModules()
+	{
 		// Get Modules and add them.
 		$this->getModules();
 	}
 	
-	private function getModules() {
-		
+	private function getModules()
+	{
 		$result = $this->getResult('position_id, position', 'modules_position', null, null, true);
 		
 		$cols = 2;
@@ -124,19 +86,22 @@ class Uthando
 		$this->registry->template->cols = $cols.'col';
 	}
 	
-	public function removeSection($type, $html) {
+	public function removeSection($type, $html)
+	{
 		return preg_replace("/<!--".$type."_start-->(.*?)<!--".$type."_end-->/s", "", $html);
 	}
 	
 	// form functions
-	public function escape_db_data ($data) {
+	public function escape_db_data ($data)
+	{
 		if (ini_get('magic_quotes_gpc')) $data = stripslashes($data);
 		if ($this->striptags) $data = strip_tags($data);
 		
 		return $this->registry->db->escape(trim($data));
 	}
 	
-	public function formValues($values) {
+	public function formValues($values)
+	{
 		foreach ($values as $key => $value):
 			if (is_array($value)):
 				$values[$key] = $this->formValues($value);
@@ -147,11 +112,113 @@ class Uthando
 		return $values;
 	}
 	
-	public function returnFormValues($values) {
+	public function returnFormValues($values)
+	{
 		return $values;
 	}
+	
+	public function objectToArray($object)
+	{
+		$array = array();
+		if (is_object($object)) $array = get_object_vars($object);
+		return $array;
+	}
 
-	// sql functions. here for compatability, will be removed later.
+	function arrayToObject($array)
+	{
+		$object = new stdClass();
+		if (is_array($array) && count($array) > 0):
+			foreach ($array as $name=>$value):
+				$name = strtolower(trim($name));
+				if (!empty($name)) $object->$name = $value;
+			endforeach;
+		endif;
+		return $object;
+	}
+	
+	public function dataTable($data, $header=null, $class=null)
+	{
+		$table = new HTML_Table();
+		$table->setAutoGrow(true);
+		$table->setAutoFill('');
+	
+		$hrAttrs = ($class) ? array('class' => $class) : null;
+		
+		for ($nr = 0; $nr < count($data); $nr++):
+			$table->setHeaderContents($nr+1, 0, (string)$data[$nr][0]);
+			for ($i = 1; $i < count($data[$nr]); $i++):
+				if ('' != $data[$nr][$i]) $table->setCellContents($nr+1, $i, $data[$nr][$i]);
+				$table->setRowAttributes($nr+1, $hrAttrs, true);
+			endfor;
+		endfor;
+		
+		for ($i = 0; $i < count($header); $i++) $table->setHeaderContents(0, $i, $header[$i]);
+		
+		return $table;
+	}
+	
+	private function contentpaneHeading($heading)
+	{
+		$table = new HTML_Table(array('class' => 'contentpaneopen'));
+		$table->setCellContents(0, 0, stripslashes($heading));
+		$table->setColAttributes(0, array('class' => 'contentheading'));
+		return $table->toHTML();
+	}
+	
+	private function getCdate($date)
+	{
+		return '<div class="createdate">'.$date.'</div>';
+	}
+	
+	private function getMdate($date) {
+		return  '<div class="modifydate">Last Updated ( '.$date.' )</div><span class="article_separator"></span>';
+	}
+	
+	public function displayContentpane($data, $heading=null, $cdate=null, $mdate=null)
+	{
+		$pane = null;
+		if ($heading) $pane .= $this->contentpaneHeading($heading);
+		if ($cdate) $pane .= $this->getCdate($cdate);
+		$pane .= '<div class="contentpaneopen">'.$data.'</div>';
+		if ($mdate) $pane .= $this->getMdate($mdate);
+		return $pane;
+	}
+	
+	public function message($params)
+	{
+		$message = file_get_contents(__SITE_PATH.'/templates/' . $this->get('admin_config.site.template') . '/html/message.html');
+		return $this->templateParser($message, $params, '<!--{', '}-->');
+	}
+	
+	public function array_flatten(array $array)
+	{
+		if($array):
+			$flat = array();
+			foreach(new RecursiveIteratorIterator(new RecursiveArrayIterator($array), RecursiveIteratorIterator::SELF_FIRST) as $key=>$value) if(!is_array($value)) $flat[] = $value;
+			return $flat;
+		else:
+			return false;
+		endif;
+	}
+	
+	public function ErrorCheck()
+	{
+		if ($this->registry->errors):
+			
+			if (is_file(__SITE_PATH.'/templates/' . $this->registry->template . '/html/errors.html')):
+				
+				$message = file_get_contents(__SITE_PATH.'/templates/' . $this->registry->template . '/html/errors.html');
+				
+				$message = $this->templateParser($message, array('ERROR' => $this->registry->errors), '<!--{', '}-->');
+				
+				$this->registry->errors = $message;
+			endif;
+			
+			$this->addParameter ('ERROR', $this->registry->errors);
+		endif;
+	}
+	
+	// shortcut functions for the modules and components.
 	public function remove($table, $where)
 	{
 		return $this->registry->db->remove($table, $where);
@@ -172,98 +239,44 @@ class Uthando
 		return $this->registry->db->getResult($values, $table, $join, $filter, $array_mode);
 	}
 	
-	public function objectToArray($object) {
-		$array = array();
-		if (is_object($object)) $array = get_object_vars($object);
-		return $array;
-	}
-
-	function arrayToObject($array) {
-		$object = new stdClass();
-		if (is_array($array) && count($array) > 0):
-			foreach ($array as $name=>$value):
-				$name = strtolower(trim($name));
-				if (!empty($name)) $object->$name = $value;
-			endforeach;
-		endif;
-		return $object;
+	public function addParameter($variable, $value)
+	{
+		$this->registry->template->addParameter($variable, $value);
 	}
 	
-	public function dataTable($data, $header=null, $class=null) {
-		
-		$table = new HTML_Table();
-		$table->setAutoGrow(true);
-		$table->setAutoFill('');
-	
-		$hrAttrs = ($class) ? array('class' => $class) : null;
-		
-		for ($nr = 0; $nr < count($data); $nr++):
-			$table->setHeaderContents($nr+1, 0, (string)$data[$nr][0]);
-			for ($i = 1; $i < count($data[$nr]); $i++):
-				if ('' != $data[$nr][$i]) $table->setCellContents($nr+1, $i, $data[$nr][$i]);
-				$table->setRowAttributes($nr+1, $hrAttrs, true);
-			endfor;
-		endfor;
-		
-		for ($i = 0; $i < count($header); $i++) $table->setHeaderContents(0, $i, $header[$i]);
-		
-		return $table;
+	public function setTitle($title)
+	{
+		$this->registry->template->setTitle($title);
 	}
 	
-	private function contentpaneHeading($heading) {
-		$table = new HTML_Table(array('class' => 'contentpaneopen'));
-		$table->setCellContents(0, 0, stripslashes($heading));
-		$table->setColAttributes(0, array('class' => 'contentheading'));
-		return $table->toHTML();
+	public function addScriptDeclaration($value)
+	{
+		$this->registry->template->addScriptDeclaration($value);
 	}
 	
-	private function getCdate($date) {
-		return '<div class="createdate">'.$date.'</div>';
+	public function loadJavaScript($scripts)
+	{
+		$this->registry->template->loadJavaScript($scripts);
 	}
 	
-	private function getMdate($date) {
-		return  '<div class="modifydate">Last Updated ( '.$date.' )</div><span class="article_separator"></span>';
+	private function compressCSS($buffer)
+	{
+		return HTML_Template::compressStyles($buffer);
 	}
 	
-	public function displayContentpane($data, $heading=null, $cdate=null, $mdate=null) {
-		$pane = null;
-		if ($heading) $pane .= $this->contentpaneHeading($heading);
-		if ($cdate) $pane .= $this->getCdate($cdate);
-		$pane .= '<div class="contentpaneopen">'.$data.'</div>';
-		if ($mdate) $pane .= $this->getMdate($mdate);
-		return $pane;
+	public function compress($buffer)
+	{
+		return HTML_Template::compress($buffer);
 	}
 	
-	public function message($params) {
-		$message = file_get_contents(__SITE_PATH.'/templates/' . $this->registry->template . '/html/message.html');
-		return $this->templateParser($message, $params, '<!--{', '}-->');
+	public function templateParser($template, $params, $key_start, $key_end)
+	{
+		return HTML_Template::templateParser($template, $params, $key_start, $key_end);
 	}
 	
-	public function array_flatten(array $array){
-		if($array):
-			$flat = array();
-			foreach(new RecursiveIteratorIterator(new RecursiveArrayIterator($array), RecursiveIteratorIterator::SELF_FIRST) as $key=>$value) if(!is_array($value)) $flat[] = $value;
-			return $flat;
-		else:
-			return false;
-		endif;
-	}
-	
-	public function ErrorCheck() {
-		
-		if ($this->registry->errors):
-			
-			if (is_file(__SITE_PATH.'/templates/' . $this->registry->template . '/html/errors.html')):
-				
-				$message = file_get_contents(__SITE_PATH.'/templates/' . $this->registry->template . '/html/errors.html');
-				
-				$message = $this->templateParser($message, array('ERROR' => $this->registry->errors), '<!--{', '}-->');
-				
-				$this->registry->errors = $message;
-			endif;
-			
-			$this->AddParameter ('ERROR', $this->registry->errors);
-		endif;
+	public function get($key=null)
+	{
+		return $this->registry->get($key);
 	}
 }
 ?> 

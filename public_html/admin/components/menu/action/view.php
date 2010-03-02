@@ -3,13 +3,13 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	if (isset($this->registry->params['action'])) {
+	if (isset($this->registry->params['action'])):
 		$action = $this->registry->params['action'];
-	} else {
+	else:
 		$action = 'overview';	
-	}
+	endif;
 	
 	$result = $this->getResult(
 		'item',
@@ -23,8 +23,5 @@ if ($this->authorize()) {
 	
 	require_once('menu/items/'.$action.'.php');
 	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+endif;
 ?>

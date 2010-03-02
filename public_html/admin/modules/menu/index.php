@@ -21,9 +21,7 @@ if ($menu) {
 		
 	$module = $navibar->getMenu($menu->item_id, $menu->item, $menu->menu_type);
 
-	$mod_data = $this->createDocumentFragment(htmlspecialchars($module));
-	//$mod_data->appendXML($module);
-	$this->module_wrap->appendChild($mod_data);
+	$this->module_wrap->appendChild($module);
 	
 	unset($navibar);
 }
