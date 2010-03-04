@@ -24,15 +24,11 @@ if ($this->authorize()):
 	
 	$this->addContent($this->makeToolbar($menuBar, 24));
 	
-	if (isset($this->registry->params['action'])) {
+	if (isset($this->registry->params['action'])):
 		$action = $this->registry->params['action'];
 		require_once('template/html/'.$action.'.php');
-	} else {
+	else:
 		
-	}
-
-else:
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
+	endif;
 endif;
 ?>

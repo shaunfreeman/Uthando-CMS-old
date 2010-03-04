@@ -5,10 +5,12 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
+	$content = null;
+	
 	if (isset($_POST['tmpl'])):
 		$template = explode(':', $_POST['tmpl']);
 		
-		$path = ($template == 'administration') ? $this->registry->ini_dir.'/uthandoAdmin.ini.php')) : $this->registry->ini_dir.'/uthando.ini.php'));
+		$path = ($template == 'administration') ? $this->registry->ini_dir.'/uthandoAdmin.ini.php' : $this->registry->ini_dir.'/uthando.ini.php';
 		
 		$config = new Admin_Config($this->registry, array('path' => $path));
 		
@@ -54,13 +56,15 @@ if ($this->authorize()):
 		'edit' => null
 	);
 	
-	$this->addContent($this->makeToolbar($menuBar, 24));
-	$this->addContent('<form id="template" method="post" action="'.$_SERVER['REQUEST_URI'].'">');
+	$content .= $this->makeToolbar($menuBar, 24);
+	$content .= '<form id="template" method="post" action="'.$_SERVER['REQUEST_URI'].'">';
 	
 	$tabs = new HTML_Tabs($tab_array);
-	$this->addContent($tabs->toHtml());
+	$content .= $tabs->toHtml();
 	
-	$this->addContent('</form>');
+	$content .= '</form>';
+	
+	$this->addContent($content);
 	
 	$this->registry->component_js = array(
 		'/components/template/js/template.js'

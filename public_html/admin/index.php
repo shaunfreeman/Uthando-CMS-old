@@ -90,5 +90,4 @@ echo $registry->template;
 unset($registry);
 
 ob_end_flush();
-
 ?>

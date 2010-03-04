@@ -13,7 +13,7 @@ if ($this->authorize()):
 	
 	$num_pages = count($result);
 	
-	if ($this->registry->settings['pages'] <= $num_pages):
+	if ($num_pages <= $this->registry->settings['pages'] || $this->registry->settings['pages'] == -1):
 		
 		$form = new HTML_QuickForm('contentPage', 'post', $_SERVER['REQUEST_URI']);
 			

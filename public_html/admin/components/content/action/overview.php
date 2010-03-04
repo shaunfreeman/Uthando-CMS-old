@@ -16,8 +16,8 @@ if ($this->authorize()):
 	$menuBar = array(
 		'new_page' => '/content/new',
 	);
-		
-	$this->content .= ($this->registry->settings['pages'] <= $num_pages) ? $this->makeToolbar($menuBar, 24) : $this->message(array('TYPE' => 'info', 'MESSAGE' => '<h2>You have reach your page limit. To add more pages please contact your administrator.</h2>'));
+	
+	$this->content .= ($num_pages <= $this->registry->settings['pages'] || $this->registry->settings['pages'] == -1) ? $this->makeToolbar($menuBar, 24) : $this->message(array('TYPE' => 'info', 'MESSAGE' => '<h2>You have reach your page limit. To add more pages please contact your administrator.</h2>'));
 
 	if ($num_pages > 0):
 		

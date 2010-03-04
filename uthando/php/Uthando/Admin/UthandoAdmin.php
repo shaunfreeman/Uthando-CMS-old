@@ -126,6 +126,12 @@ class UthandoAdmin extends Uthando {
 		}
 	}
 	
+	public function message($params)
+	{
+		$message = file_get_contents(__SITE_PATH.'/templates/' . $this->get('admin_config.site.template') . '/html/message.html');
+		return $this->templateParser($message, $params, '<!--{', '}-->');
+	}
+	
 	public function array_search_recursive($needle, $haystack, $strict=false, $path=array()) {
 		if( !is_array($haystack) ) {
 			return false;

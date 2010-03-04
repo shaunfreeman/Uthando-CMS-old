@@ -20,7 +20,7 @@ if ($this->authorize()):
 			require_once('action/'.$this->registry->action.'.php');
 		else:
 			$menuBar['back'] = '/admin/overview';
-			$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+			$params['CONTENT'] = $this->makeMessagebar($menuBar, 24);
 			$params['TYPE'] = 'warning';
 			$params['MESSAGE'] = '<h2>You do not have permission to access this component.</h2>';
 			$this->addContent($this->message($params));

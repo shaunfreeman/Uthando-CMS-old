@@ -186,7 +186,7 @@ class Uthando
 	
 	public function message($params)
 	{
-		$message = file_get_contents(__SITE_PATH.'/templates/' . $this->get('admin_config.site.template') . '/html/message.html');
+		$message = file_get_contents(__SITE_PATH.'/templates/' . $this->get('config.site.template') . '/html/message.html');
 		return $this->templateParser($message, $params, '<!--{', '}-->');
 	}
 	
@@ -237,6 +237,11 @@ class Uthando
 	public function getResult($values, $table, $join=null, $filter=null, $array_mode=true)
 	{
 		return $this->registry->db->getResult($values, $table, $join, $filter, $array_mode);
+	}
+	
+	public function addContent($value)
+	{
+		$this->registry->template->addContent($value);
 	}
 	
 	public function addParameter($variable, $value)

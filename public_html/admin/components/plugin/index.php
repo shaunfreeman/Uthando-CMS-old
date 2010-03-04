@@ -5,7 +5,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	if (is_readable($this->file."/action/".$this->registry->action.".php") == false || $this->registry->action == "index") {
+	if (is_readable($this->file."/action/".$this->registry->action.".php") == false || $this->registry->action == "index"):
 		$this->registry->Error('404 Page NOT Found', $this->registry->path);
 		$this->addParameter ('page',  'Page Not Found');
 	else:

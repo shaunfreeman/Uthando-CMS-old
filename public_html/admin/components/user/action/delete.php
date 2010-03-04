@@ -2,11 +2,9 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	$confirm = file_get_contents(__SITE_PATH.'/templates/' . $this->registry->template . '/html/message.html');
-	
-	if (isset($this->registry->params['id']) && $this->upid <= 3) {
+	if (isset($this->registry->params['id']) && $this->upid <= 3):
 		
 		$sql = "
 			SELECT *
@@ -27,34 +25,33 @@ if ($this->authorize()) {
 		$num_su = $res->num_rows;
 		
 		// if we can delete this user or not!
-		if ($_SESSION['user_id'] == $user->user_id) {
+		if ($_SESSION['user_id'] == $user->user_id):
 			$params['TYPE'] = 'info';
 			$params['MESSAGE'] = 'You cannot delete yourself';
 			$pass = false;
-		} else if (($this->upid == 2 && $user->user_group == 'super administrator') || ($this->upid == 3 && ($user->user_group == 'super administrator' || $user->user_group == 'administrator')) || ($this->upid == 3 && $user->user_group == 'manager')) {
+		elseif (($this->upid == 2 && $user->user_group == 'super administrator') || ($this->upid == 3 && ($user->user_group == 'super administrator' || $user->user_group == 'administrator')) || ($this->upid == 3 && $user->user_group == 'manager')):
 			$params['TYPE'] = 'info';
 			$params['MESSAGE'] = 'You do not have permission to delete this user';
 			$pass = false;
-		} else if ($this->upid == 1 && $num_su == 1 && $user->user_group == 'super administrator') {
+		elseif ($this->upid == 1 && $num_su == 1 && $user->user_group == 'super administrator'):
 			$params['TYPE'] = 'info';
 			$params['MESSAGE'] = 'You must have at least one super administrator';
 			$pass = false;
-		} else {
+		else:
 			$pass = true;
-		}
+		endif;
 		
-		if (isset($this->registry->params['action']) == 'delete' && $pass) {
+		if (isset($this->registry->params['action']) == 'delete' && $pass):
 			
 			$result = $this->registry->db->remove($this->registry->user.'users', 'user_id='.$this->registry->params['id']);
 			
 			// Always check that result is not an error
-			if (!$result) {
+			if (!$result):
 				$this->registry->Error ("Could not delete user.");
-			} else {
+			else:
 				goto('/user/overview');
-			}
-			
-		} elseif ($pass) {
+			endif;
+		elseif ($pass):
 			
 			$menuBar = array(
 				'cancel' => '/user/overview',
@@ -63,21 +60,18 @@ if ($this->authorize()) {
 			$params['TYPE'] = 'warning';
 			$params['MESSAGE'] = 'Are you sure you want to delete this user';
 			
-		} else {
+		else:
 			$menuBar['back']= '/user/overview';
-		}
-		
-	} else {
+		endif;
+	else:
 		$menuBar['back']= '/user/overview';
 		$params['TYPE'] = 'info';
 		$params['MESSAGE'] = 'You do not have permission to delete this user';
-	}
+	endif;
 	
-	$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
-	$this->content .= $this->templateParser($confirm, $params, '<!--{', '}-->');
-	
-} else {
-	header("Location:" . $this->registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
+		$this->content .= $this->message($params);
+	endif;
+endif;
 ?>

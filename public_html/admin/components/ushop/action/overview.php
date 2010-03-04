@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	if (isset ($_POST['oid']) && isset ($_POST['order_status'])):
 		$this->update(
@@ -42,7 +42,7 @@ if ($this->authorize()) {
 	);
 	
 	// New orders.
-	if ($orders) {
+	if ($orders):
 		$c = 0;
 		$data = array();
 		
@@ -57,11 +57,9 @@ if ($this->authorize()) {
 			$form .= '<select name="order_status" onChange="this.form.submit()">';
 			
 			foreach ($orderRow as $or):
-					
 				$form .= '<option value="'.$or->order_status_id.'" ';
 				if ($row->order_status == $or->order_status) $form .= 'selected="selected"';
 				$form .= '>'.$or->order_status.'</option>';
-					
 			endforeach;
 			
 			$form .= '</select>';
@@ -79,14 +77,10 @@ if ($this->authorize()) {
 		
 		$orders = $table->toHtml();
 		$tab_array['New Orders'] = $orders;
-	}
+	endif;
 	
 	
 	$tabs = new HTML_Tabs($tab_array);
 	$this->addContent($tabs->toHtml());
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+endif;
 ?>

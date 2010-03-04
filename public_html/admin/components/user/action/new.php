@@ -2,7 +2,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$form = new HTML_QuickForm('addUser', 'post', $_SERVER['REQUEST_URI']);
 		
@@ -44,9 +44,7 @@ if ($this->authorize()) {
 	if ($this->upid > 1) unset($groups[0]);
 	if ($this->upid > 2) unset($groups[1], $groups[2]);
 	
-	foreach ($groups as $group) {
-		$opts[$group->user_group_id] = ucwords($group->user_group);
-	}
+	foreach ($groups as $group) $opts[$group->user_group_id] = ucwords($group->user_group);
 	
 	$s->loadArray($opts);
 	$form->addElement($s);
@@ -88,7 +86,7 @@ if ($this->authorize()) {
 	// group rules
 	$form->addRule('group','Please Select a group','nonzero');
 	
-	if ($form->validate()) {
+	if ($form->validate()):
 		
 		// Apply form element filters.
 		$form->applyFilter('__ALL__', 'escape_data');
@@ -126,11 +124,11 @@ if ($this->authorize()) {
 				$stmt->execute(array(':group' => $group));
 				$res = $stmt->fetch(PDO::FETCH_OBJ);
 				
-				if ($res->user_group == 'registered'){
-					$key = array($user_config->get('key', 'CIPHER'), $this->registry->config->get('web_url', 'SERVER'));
-				} else {
+				if ($res->user_group == 'registered'):
+					$key = array($user_config->get('key', 'CIPHER'), $this->get('config.server.web_url'));
+				else:
 					$key = $user_config->get('key', 'CIPHER');
-				}
+				endif;
 				
 				$pwd = UthandoUser::encodePassword($password, $key);
 				
@@ -149,11 +147,11 @@ if ($this->authorize()) {
 					':iv' => $pwd[1]
 				));
 				
-				if($conn->commit()){
+				if($conn->commit()):
 					goto('/user/overview');
-				} else {
+				else:
 					$this->registry->Error ("Sorry I could not register you due to a system error. Please try again later.", '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
-				}
+				endif;
 			} catch (PDOException $e){
 				$conn->rollBack();
 				$this->registry->Error ($e->getMessage());
@@ -162,10 +160,10 @@ if ($this->authorize()) {
 			$this->registry->Error ('The email or username entered already has been registered with us. Please use a different one.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
 		endif;
 		
-	} else {
+	else:
 		
 		// Output the form
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get('admin_config.site.template'));
 		
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');
@@ -177,10 +175,6 @@ if ($this->authorize()) {
 			
 		// output the form
 		$this->content .= $renderer->toHtml();
-	}
-	
-} else {
-	header("Location:" . $this->registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+	endif;
+endif;
 ?>

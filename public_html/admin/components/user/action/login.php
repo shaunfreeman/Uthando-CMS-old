@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (!$this->authorize()) {
+if (!$this->authorize()):
 	
 	$this->registry->template->setTemplate(__SITE_PATH.'/templates/' . $this->registry->get('admin_config.site.template') . '/login.html');
 	
@@ -24,14 +24,14 @@ if (!$this->authorize()) {
 	$form->addElement('header','log_in','Login');
 	$form->addElement('text', 'username', 'Username:', array('size' => 20, 'maxlength' => 20, 'class' => 'inputbox'));
 	
-	foreach ($rand_chars as $key => $value) {
+	foreach ($rand_chars as $key => $value):
 		$form->addElement('password', 'pwd'.$key, 'Enter the '.$num_chars[$value].' charactor of your password:', array('size' => 1, 'maxlength' => 1, 'class' => 'inputbox'));
 		
 		// password rules.
 		$form->addRule('pwd'.$key, 'Please enter your password', 'required');
 		$form->addRule('pwd'.$key, 'Enter a one character password', 'rangelength', array(1,1), 'server');
 		$form->addRule('pwd'.$key, 'Enter a valid password (numbers, letters and ! £ $ % & / \ ( ) = ? + # - . , ; : _ only)', 'regex', '/^[a-zA-Z0-9!£$\%&\/\\\()=?+#-.,;:_]+$/', 'server');
-	}
+	endforeach;
 	
 	// add links for register and reset user account.
 	//$form->addElement('link',null,'Forgot Password:',$this->registry->config->get('ssl_url', 'server').'/'.$this->registry->component.'/reminder', 'Click Here', 'id="reset_password" class="category"'); 
@@ -43,20 +43,18 @@ if (!$this->authorize()) {
 	$form->addRule('username', 'Please enter your username', 'required');
 	
 	// validate the form or just display it.
-	if ($user_config->get('captcha_status', 'LOGIN') == 'on') {
+	if ($user_config->get('captcha_status', 'LOGIN') == 'on'):
 		require_once('user/captcha/index.php');
-	} else {
+	else:
 		
-		if ($form->validate() && $_SESSION['rand_chars']) {
-			
+		if ($form->validate() && $_SESSION['rand_chars']):
 			require_once('user/validate/login.php');
-		
-		} else {
+		else:
 			$_SESSION['rand_chars'] = $rand_chars;
 			$form->addElement('submit', 'submit', 'Submit');
 			
 			// Output the form
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->get('admin_config.site.template'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get('admin_config.site.template'));
 		
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -67,8 +65,8 @@ if (!$this->authorize()) {
 			
 			// output the form
 			$this->content .= $renderer->toHtml();
-		}
-	}
+		endif;
+	endif;
 	/*
 	$user_config = new Config($this->registry, array('path' => $this->registry->ini_dir.'/user/user.ini.php'));
 	$key = $user_config->get('key', 'CIPHER');
@@ -76,6 +74,5 @@ if (!$this->authorize()) {
 	$pwd = UthandoUser::encodePassword($password, $key);
 	$this->registry->firephp->log($pwd);
 	*/
-}
-
+endif;
 ?>

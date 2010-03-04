@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (UthandoUser::checkUser() && !$this->authorize()) {
+if (UthandoUser::checkUser() && !$this->authorize()):
 	
 	// Apply form element filters.
 	$form->applyFilter('__ALL__', 'escape_data');
@@ -13,9 +13,7 @@ if (UthandoUser::checkUser() && !$this->authorize()) {
 	$rand_chars = $_SESSION['rand_chars'];
 	unset($_SESSION['rand_chars']);
 	
-	foreach ($rand_chars as $key => $value) {
-		$password[$value] = $form->exportValue('pwd'.$key);
-	}
+	foreach ($rand_chars as $key => $value) $password[$value] = $form->exportValue('pwd'.$key);
 	
 	// If user exists then login user else display form.
 	$row = $this->registry->db->getRow("
@@ -28,32 +26,23 @@ if (UthandoUser::checkUser() && !$this->authorize()) {
 	
 	$num_rows = count($row);
 
-	if ($num_rows == 1) {
+	if ($num_rows == 1):
 
 		// decrypt password.
 		$decrypted = UthandoUser::decodePassword($row->password, $user_config->get('key', 'CIPHER'), $row->iv);
-		
-		$this->registry->firephp->log($row);
-		$this->registry->firephp->log($decrypted);
 
 		// split the password for checking.
 		$decrypted = str_split($decrypted);
 
 		// check password against the characters submitted
-		foreach ($password as $key => $value) {
-			if ($value == $decrypted[$key - 1]) {
-				$pwd_validate[$key] = TRUE;
-			} else {
-				$pwd_validate[$key] = FALSE;
-			}
-		}
+		foreach ($password as $key => $value):
+			$pwd_validate[$key] = ($value == $decrypted[$key - 1]) ? true : false;
+		endforeach;
 		// did it pass?
 		$validated = TRUE;
-		foreach ($pwd_validate as $value) {
-			if (!$value) $validated = FALSE;
-		}
+		foreach ($pwd_validate as $value) if (!$value) $validated = FALSE;
 
-		if ($validated) {
+		if ($validated):
 			session_regenerate_id();
 
 			$_SESSION['user_id'] = $row->user_id;
@@ -63,27 +52,20 @@ if (UthandoUser::checkUser() && !$this->authorize()) {
 			//if ($this->registry->config->get('enable_ssl','SERVER')) {
 			//	$url = $this->registry->config->get ('ssl_url', 'SERVER');
 			//} else {
-				$url = $this->registry->get ('admin_config.server.admin_url');
+				$url = $this->get('admin_config.server.admin_url');
 			//}
 			
 			header ("Location: ". $url);
 			exit();
-		} else {
+		else:
 			// password didn't match.
-			$this->registry->Error ('The password entered does not match that on file.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
-		}
-
-	} else if ($num_row > 1) {
-
+			$this->registry->Error('The password entered does not match that on file.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
+		endif;
+	elseif ($num_row > 1):
 		$this->registry->Error ("Are you trying to hack this site?");
-
-	} else {
-
+	else:
 		// no user found.
-		$this->registry->Error ('The username entered does not match those on file.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
-
-	}
-	
-}
-
+		$this->registry->Error('The username entered does not match those on file.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
+	endif;
+endif;
 ?>

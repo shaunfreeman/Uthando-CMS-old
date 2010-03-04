@@ -194,7 +194,8 @@ class HTML_Template extends HTML_Page
 			$newelement = null;
 			$element = $elements->item($i);
 			if ($this->parameters[$element->getAttribute('name')]):
-				foreach ($this->parameters[$element->getAttribute('name')] as $content):
+				foreach ($this->parameters[$element->getAttribute('name')] as $key => $content):
+					if (!$content) continue;
 					if (is_string($content)) {
 						$newelement = $this->doc->createDocumentFragment($this->compress($content),array('id' => $element->getAttribute('name')),true,'span');
 					} else if ($content instanceof DOMElement) {

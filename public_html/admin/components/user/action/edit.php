@@ -2,11 +2,9 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	$confirm = file_get_contents(__SITE_PATH.'/templates/' . $this->registry->template . '/html/confirm.html');
-	
-	if (isset($this->registry->params['id']) && $this->upid <= 3) {
+	if (isset($this->registry->params['id']) && $this->upid <= 3):
 		
 		$sql = "
 			SELECT *
@@ -27,14 +25,14 @@ if ($this->authorize()) {
 		$num_su = count($res);
 		
 		// if we can edit this user or not!
-		if (($this->upid == 2 && $user->user_group == 'super administrator') || ($this->upid == 3 && ($user->user_group == 'super administrator' || $user->user_group == 'administrator')) || ($this->upid == 3 && $user->user_group == 'manager')) {
+		if (($this->upid == 2 && $user->user_group == 'super administrator') || ($this->upid == 3 && ($user->user_group == 'super administrator' || $user->user_group == 'administrator')) || ($this->upid == 3 && $user->user_group == 'manager')):
 			$params['MESSAGE'] = 'You do not have permission to edit this user';
 			$pass = false;
-		} else {
+		else:
 			$pass = true;
-		}
+		endif;
 		
-		if ($pass) {
+		if ($pass):
 			
 			$form = new HTML_QuickForm('addUser', 'post', $_SERVER['REQUEST_URI']);
 		
@@ -70,11 +68,11 @@ if ($this->authorize()) {
 			$form->addElement('password', 'password1', 'New password:', array('size' => 15, 'maxlength' => 12, 'class' => 'inputbox'));
 			$form->addElement('password', 'password2', 'Comfirm new password:', array('size' => 15, 'maxlength' => 12, 'class' => 'inputbox'));
 			
-			if (($this->upid == 1 && $num_su == 1 && $user->user_group == 'super administrator') || ($_SESSION['user_id'] == $user->user_id)) {
+			if (($this->upid == 1 && $num_su == 1 && $user->user_group == 'super administrator') || ($_SESSION['user_id'] == $user->user_id)):
 				$group_options['disabled'] = 'true';
-			} else {
+			else:
 				$group_options = null;
-			}
+			endif;
 	
 			$s = $form->createElement('select', 'group', 'Group:', null, $group_options);
 			$opts[0] = 'Select One';
@@ -124,7 +122,7 @@ if ($this->authorize()) {
 			// group rules
 			$form->addRule('group','Please Select a group','nonzero');
 			
-			if ($form->validate()) {
+			if ($form->validate()):
 				
 				// Apply form element filters.
 				$form->applyFilter('__ALL__', 'escape_data');
@@ -139,7 +137,7 @@ if ($this->authorize()) {
 				
 				if ($update['user_group_id'] == 0) $update['user_group_id'] = $user->user_group_id;
 				
-				if(!empty($password)) {
+				if(!empty($password)):
 					$user_config = new Config($registry, array('path' => $this->registry->ini_dir.'/user/user.ini.php'));
 					// encrypt password.
 				
@@ -150,27 +148,25 @@ if ($this->authorize()) {
 						WHERE user_group_id=:group
 					", array(':group' => $update['user_group_id']));
 						
-					if ($ugid->user_group == 'registered'){
-						$key = array($user_config->get('key', 'CIPHER'), $this->registry->config->get('web_url', 'SERVER'));
-					} else {
+					if ($ugid->user_group == 'registered'):
+						$key = array($user_config->get('key', 'CIPHER'), $this->get('config.server.web_url'));
+					else:
 						$key = $user_config->get('key', 'CIPHER');
-					}
+					endif;
 				
 					$pwd = UthandoUser::encodePassword($password, $key);
 					$update['password'] = $pwd[0];
 					$update['iv'] = $pwd[1];
-				}
-				
+				endif;
 				
 				$result = $this->registry->db->update($update, $this->registry->user.'users', array('WHERE' => 'user_id='.$this->registry->params['id']), $quote=true);
 				
-				if (!$result) {
+				if (!$result):
 					$this->registry->Error ('record not updated.');
-				} else {
+				else:
 					goto('/user/overview');
-				}
-				
-			} else {
+				endif;
+			else:
 				
 				$form->setDefaults(array(
 					'name' => array('first' => $user->first_name, 'last' => $user->last_name),
@@ -180,7 +176,7 @@ if ($this->authorize()) {
 				));
 				
 				// Output the form
-				$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+				$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
 		
 				$renderer->setFormTemplate('form');
 				$renderer->setHeaderTemplate('header');
@@ -191,27 +187,21 @@ if ($this->authorize()) {
 				// output the form
 				$this->content .= $renderer->toHtml();
 				
-			}
-			
-		} else {
+			endif;
+		else:
 			$menuBar['back']= '/user/overview';
-			
+			$params['TYPE'] = 'info';
 			$params['MESSAGE'] = 'You do not have permission to edit this user';
-		}
-		
-	} else {
+		endif;
+	else:
 		$menuBar['back']= '/user/overview';
-			
+		$params['TYPE'] = 'info';
 		$params['MESSAGE'] = 'You do not have permission to edit this user';
-	}
+	endif;
 	
-	if (!$pass) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
-		$this->content .= $this->templateParser($confirm, $params, '<!--{', '}-->');
-	}
-	
-} else {
-	header("Location:" . $this->registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+	if (!$pass):
+		$params['CONTENT'] = $this->makeMessagebar($menuBar, 24);
+		$this->content .= $this->message($params);
+	endif;
+endif;
 ?>
