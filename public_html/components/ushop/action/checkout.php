@@ -4,9 +4,9 @@ defined( 'SHOP_PARENT_FILE' ) or die( 'Restricted access' );
 
 $title .= 'Checkout';
 
-if ($this->ushop->GLOBAL['offline'] || $this->ushop->GLOBAL['catelogue_mode']) {
+if ($this->ushop->global['offline'] || $this->ushop->global['catelogue_mode']):
 	$this->addContent('<h3>Shopping is unavialible</h3><p><a href="/ushop/view/shopfront">Click here to continue</a></p>');
-} else {
+else:
 	if (UthandoUser::authorize()):
 
 		switch ($this->registry->params['stage']):
@@ -39,10 +39,9 @@ if ($this->ushop->GLOBAL['offline'] || $this->ushop->GLOBAL['catelogue_mode']) {
 				require_once('user/action/login.php');
 				
 				$this->addContent('<h3>New Customers</h3><br />');
-				$this->addContent('<div id="products"><a class="button" href="'.$this->registry->config->get('ssl_url', 'SERVER').'/ushop/view/checkout/new_customer-1">Click here to create an account</a></div>');
+				$this->addContent('<div id="products"><a class="button" href="'.$this->get('config.server.ssl_url').'/ushop/view/checkout/new_customer-1">Click here to create an account</a></div>');
 				break;
 		endswitch;
 	endif;
-	
-}
+endif;
 ?>

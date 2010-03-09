@@ -3,14 +3,12 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
+if (UthandoUser::checkUser() && !UthandoUser::authorize()):
 	
 	// Apply form element filters.
 	$form->applyFilter('__ALL__', 'escape_data');
 	
 	$email = $form->exportValue('email');
-	
-	$db = $this->registry->config->get('user','DATABASE');
 	
 	$sql = $this->registry->db->query("
 		SELECT CONCAT(first_name, ' ', last_name) AS name, email, email_type, password, iv
@@ -23,12 +21,12 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 		
 	$num_rows = count($sql);
 
-	if ($num_rows == 1) {
+	if ($num_rows == 1):
 
 		$row = $sql[0];
 
 		// decrypt password.
-		$password = UthandoUser::decodePassword($row->password, $user_config->get('key', 'CIPHER'), $row->iv);
+		$password = UthandoUser::decodePassword($row->password, $user_config->get('key', 'cipher'), $row->iv);
 
 		// get mail config.
 		$this->registry->mail_config = new Config($this->registry, array('path' => $this->registry->ini_dir.'/mail.ini.php'));
@@ -42,7 +40,7 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 		$headers = array(
 			'From' => $this->registry->mail_config->get('email', 'mailer'),
 			'To' => $row->email,
-			'Subject' => 'Password Reminder - ' . $this->registry->config->get('site_name', 'SERVER'),
+			'Subject' => 'Password Reminder - ' . $this->get('config.server.site_name'),
 			'MIME-Version' => "1.0",
 			'X-Priority' => "1",
 			'Content-Type' => 'text/'.$row->email_type.'; charset="utf-8"',
@@ -62,28 +60,23 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 		$params = array(
 			'USER' => $row->name,
 			'PASSWORD' => $password,
-			'SITE' => $this->registry->config->get('site_name', 'SERVER'),
-			'ADMINISTRATOR' => $this->registry->config->get('site_name', 'SERVER')
+			'SITE' => $this->get('config.server.site_name'),
+			'ADMINISTRATOR' => $this->get('config.server.site_name')
 		);
 
 		$sent_mail = $mail->send($params);
 
-		if (PEAR::isError($sent_mail)) {
+		if (PEAR::isError($sent_mail)):
 			$this->registry->Error ($sent_mail->getMessage(), 'email failed due to a system error');
-		} else {
+		else:
 			$this->content .= $sent_message;
-		}
-
-	} else if ($num_row > 1) {
-
+		endif;
+	elseif ($num_row > 1):
 		$this->registry->Error ("Are you trying to hack this site?");
-
-	} else {
-
+	else:
 		// no user found.
 		$this->registry->Error ('The email entered does not match those on file.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
-
-	}
-}
+	endif;
+endif;
 
 ?>

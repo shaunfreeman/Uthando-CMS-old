@@ -16,6 +16,8 @@ if ($this->authorize()):
 		
 		$this->setTitle($title . ' | ' . $this->get('config.server.site_name'));
 		
+		$template = $this->get('admin_config.site.template');
+		
 		$menuBar = array(
 			'customers' => '/ushop/customers',
 			'orders' => '/ushop/orders',

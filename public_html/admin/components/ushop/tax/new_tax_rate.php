@@ -3,15 +3,11 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/tax/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'products' => '/ushop/products',
-   		'postage' => '/ushop/postage'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
@@ -33,7 +29,7 @@ if ($this->authorize()) {
 	$form->addRule('tax_code', 'Tax rates must be a number', 'numeric');
 		
 			
-	if ($form->validate()) {
+	if ($form->validate()):
 		
 		$form->freeze();
 		$values = $form->process(array(&$this, 'formValues'), false);
@@ -42,29 +38,25 @@ if ($this->authorize()) {
 		$menuBar['back'] = '/ushop/tax/overview';
 			
 		//check then enter the record.
-		if (!$this->getResult('tax_rate_id', $ushop->db_name.'tax_rates', null, array('where' => 'tax_rate='.$values['taxrate']))) {
+		if (!$this->getResult('tax_rate_id', $ushop->db_name.'tax_rates', null, array('where' => 'tax_rate='.$values['taxrate']))):
 			
 			$res = $this->insert($values, $ushop->db_name.'tax_rates');
 			
-			if ($res) {
+			if ($res):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Tax rate was successfully entered.</h2>';
-				
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Tax rate could not be entered into the database due to an error.</h2>';
-			}
-			
-		} else {
+			endif;
+		else:
 			$params['TYPE'] = 'info';
 			$params['MESSAGE'] = '<h2>This rate already exits.</h2>';
-		}
-				
+		endif;
 		// done!
-			
-	} else {
-				
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+	else:
+		
+		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');
@@ -74,16 +66,14 @@ if ($this->authorize()) {
 		
 		// output the form
 		$this->content .= $renderer->toHtml();
-				
-	}
+	endif;
 	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

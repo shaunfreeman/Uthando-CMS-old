@@ -3,15 +3,11 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/products/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'postage' => '/ushop/postage',
-   		'tax' => '/ushop/tax'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
@@ -32,9 +28,9 @@ if ($this->authorize()) {
 	
 	$items_opts[0] = 'Top';
 		
-	foreach ($items = $tree->getTree() as $item) {
+	foreach ($items = $tree->getTree() as $item):
 		$items_opts[$item['category_id']] = str_repeat(str_repeat('&nbsp;',4), ($item['depth'])).$item['category'];
-	}
+	endforeach;
 		
 	$s = $form->createElement('select', 'item_position', 'Position:', null, array('size' => '10', 'id' => 'item_position'));
 	
@@ -44,9 +40,9 @@ if ($this->authorize()) {
 	// Creates a radio buttons group
 	$radio[] = $form->createElement('radio', null, null, 'at top', 'new child');
 		
-	if (count($items) > 0) {
+	if (count($items) > 0):
 		$radio[] = $form->createElement('radio', null, null, 'after this item', 'after child');
-	}
+	endif;
 		
 	$form->addGroup($radio, 'insert_type', 'Insert as new sub item'); 
 			
@@ -54,7 +50,7 @@ if ($this->authorize()) {
 		
 	$form->addRule('category', 'Please enter a category', 'required');
 			
-	if ($form->validate()) {
+	if ($form->validate()):
 			
 		$c = ucwords($form->exportValue('category'));
 		$ip = $form->exportValue('item_position');
@@ -70,7 +66,7 @@ if ($this->authorize()) {
 		$menuBar['back'] = '/ushop/products/overview';
 			
 		//check then enter the record.
-		if (!$this->getResult('category_id', $ushop->db_name.'product_categories', null, array('where' => "category='".$values['category']."'"))) {
+		if (!$this->getResult('category_id', $ushop->db_name.'product_categories', null, array('where' => "category='".$values['category']."'"))):
 				
 			$insert = array (
 				'category' => $values['category']
@@ -78,30 +74,26 @@ if ($this->authorize()) {
 			
 			$category_id = $tree->insert($values['item_position'], $insert, $values['insert_type']);
 			
-			if ($category_id) {
+			if ($category_id):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Category was successfully entered.</h2>';
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Category could not be entered into the database.</h2>';
-			}
-			
-		} else {
+			endif;
+		else:
 			$params['TYPE'] = 'warning';
 			$params['MESSAGE'] = '<h2>This category already exits.</h2>';
-		}
-				
+		endif;
 		// done!
-			
-			
-	} else {
+	else:
 			
 		$form->setDefaults(array(
 			'item_position' => 0,
 			'insert_type' => 'new child'
 		));
 				
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');
@@ -111,16 +103,15 @@ if ($this->authorize()) {
 		
 		// output the form
 		$this->content .= $renderer->toHtml();
-		
-	}
+	endif;
 	
-	if (isset($params)) {
+	if (isset($params)):
 		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
+	endif;
 	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

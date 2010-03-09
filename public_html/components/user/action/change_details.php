@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (UthandoUser::authorize()) {
+if (UthandoUser::authorize()):
 
 	$form = new HTML_QuickForm('login', 'post', '/user/change_details');
 
@@ -60,7 +60,7 @@ if (UthandoUser::authorize()) {
 	// compare rules
 	$form->addRule(array('password1', 'password2'),'Passwords do not match','compare');
 
-	if ($form->validate()) {
+	if ($form->validate()):
 			
 		// Apply form element filters.
 		$form->applyFilter('__ALL__', 'escape_data');
@@ -72,15 +72,15 @@ if (UthandoUser::authorize()) {
 		$update['email'] = $form->exportValue('email');
 		$password = $form->exportValue('password1');
 
-		if (!empty($password)) {
-			$pwd = $this->encodePassword($password, $user_config->get('key', 'CIPHER'));
+		if (!empty($password)):
+			$pwd = $this->encodePassword($password, $user_config->get('key', 'cipher'));
 			$update['password'] = $pwd[0];
 			$update['iv'] = $pwd[1];
-		}
+		endif;
 
 		$result = $this->registry->db->update($update, $this->registry->user."users", array('WHERE' => 'user_id='.$_SESSION['user_id']));
 
-		if ($result) {
+		if ($result):
 			$this->addContent("Update Succesful");
 			
 			$_SESSION['name'] = $update['first_name'] . " " . $update['last_name'];
@@ -93,11 +93,11 @@ if (UthandoUser::authorize()) {
 			
 			header ("Location: ". $url . $page);
 			exit();
-		} else {
+		else:
 			$this->addContent("Could not update your details due to a database error.");
-		}
+		endif;
 		
-	} else {
+	else:
 
 		$form->setDefaults(array(
 			'name' => array('first' => $user->first_name, 'last' => $user->last_name),
@@ -109,11 +109,8 @@ if (UthandoUser::authorize()) {
 			
 		// Output the form
 		$this->addContent($form->toHtml());
-	}
-	
-} else {
-	
+	endif;
+else:
 	goto ('../../index.php');
-}
-
+endif;
 ?>

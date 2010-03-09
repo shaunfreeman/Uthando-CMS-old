@@ -7,12 +7,10 @@ $this->registry->page_title = 'ushop/view/shopfront';
 
 $title .= 'Shop Front';
 
-if ($this->ushop->GLOBAL['offline']) {
-
+if ($this->ushop->global['offline']):
 	$content = '<center><img src="/components/ushop/images/closed-sign.png" /></center>';
 	$content .= file_get_contents('ushop/html/offline_message.html', true);
-	
-} else {
+else:
 
 	$content = '<div id="products">';
 
@@ -21,7 +19,7 @@ if ($this->ushop->GLOBAL['offline']) {
 	$content .= $this->displayContentpane($this->ushop->getCategories(true), 'Shop Front');
 	
 	$content .= '</div>';
-}
+endif;
 
 $this->addContent($content);
 

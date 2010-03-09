@@ -3,13 +3,13 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 
 	if (isset($params)) unset($params);
 	
 	$tree = new NestedTree($ushop->db_name.'product_categories', null, 'category');
 	
-	if ($num = $tree->numTree()) {
+	if ($num = $tree->numTree()):
 		
 		$c = 0;
 		$data = array();
@@ -28,64 +28,55 @@ if ($this->authorize()) {
 		
 		//$ftp->cd($ftp->public_html.'/components/ushop/images/products');
 		
-		foreach ($tree->getTree("$start, $display") as $row) {
+		foreach ($tree->getTree("$start, $display") as $row):
 		
 			//$ftp->mkdir(str_replace(' ', '_', $row['category']));
 			
-			if ($row['category_image_status'] == 1) {
+			if ($row['category_image_status'] == 1):
 	
-				if (file_exists($base_dir.str_replace(' ', '_', $row['category']).'/'.$row['category_image']) && $row['category_image'] != null) {
-					$img_file = '<img src="/templates/'.$this->registry->template.'/images/24x24/OK.png" />';
+				if (file_exists($base_dir.str_replace(' ', '_', $row['category']).'/'.$row['category_image']) && $row['category_image'] != null):
+					$img_file = '<img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/OK.png" />';
 		
-				} else {
-					$img_file = '<img src="/templates/'.$this->registry->template.'/images/24x24/DeleteRed.png" />';
-				}
-			} else {
+				else:
+					$img_file = '<img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/DeleteRed.png" />';
+				endif;
+			else:
 				$img_file = "IMAGE OFF";
-			}
+			endif;
 			
-			if ($row['depth'] > 0) {
+			if ($row['depth'] > 0):
 				$r = str_repeat(str_repeat('&nbsp;', 4),($row['depth']));
-				$r .= "&bull;&nbsp;".htmlentities(htmlspecialchars($row['category']));
+				$r .= "&bull;&nbsp;".HTML_Element::makeXmlSafe($row['category']);
 				$data[$c][] = $r;
-			} else {
-				$data[$c][] = htmlentities(htmlspecialchars($row['category']));
-			}
+			else:
+				$data[$c][] = HTML_Element::makeXmlSafe($row['category']);
+			endif;
 			
 			$data[$c][] = $img_file;
 				
-			$data[$c][] = '<a href="/ushop/products/action-edit_category/id-'.$row['category_id'].'"  style="text-decoration:none;" ><img src="/templates/'.$this->registry->template.'/images/24x24/Edit3.png" class="Tips" title="Edit Category" rel="Click to edit this category." /></a>';
-			$data[$c][] = '<a href="/ushop/products/action-delete_category/id-'.$row['category_id'].'" ><img src="/templates/'.$this->registry->template.'/images/24x24/Delete.png" class="Tips" title="Delete Category" rel="Click to delete this category" /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-edit_category/id-'.$row['category_id'].'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Category" rel="Click to edit this category." /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-delete_category/id-'.$row['category_id'].'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Delete.png" class="Tips" title="Delete Category" rel="Click to delete this category" /></a>';
 			
 			$c++;
-			
-		}
+		endforeach;
 		
 		$header = array('Category', 'image', '', '');
-		
 		$table = $this->dataTable($data, $header);
-		
 		$categories = $table->toHtml();
 		
-	} else {
-			
+	else:
 		$params['TYPE'] = 'info';
-		
 		$params['MESSAGE'] = '<h2>There are currently no records.</h2>';
-		
-	}
+	endif;
 	
-	if (isset($params)) {
-		
-		$categories = $this->message($params);
-	}
+	if (isset($params)) $categories = $this->message($params);
 	
 	$productsBar['new_category'] = '/ushop/products/action-new_category';
 	
 	$tab_array['categories'] = $categories;
 	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

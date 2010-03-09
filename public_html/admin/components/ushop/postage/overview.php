@@ -3,15 +3,14 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$postageBar = array(
 		'back' => '/ushop/overview',
 		'new_zone' => '/ushop/postage/action-new_zone',
 		'new_country' => '/ushop/postage/action-new_country',
 		'new_level' => '/ushop/postage/action-new_level',
-		'new_cost' => '/ushop/postage/action-new_cost',
-		'seperator' => ''
+		'new_cost' => '/ushop/postage/action-new_cost'
 	);
 		
 	$this->content .= $this->makeToolbar(array_merge($postageBar,$menuBar), 24);
@@ -27,9 +26,8 @@ if ($this->authorize()) {
 	
 	$tabs = new HTML_Tabs($tab_array);
 	$this->content .= $tabs->toHtml();
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

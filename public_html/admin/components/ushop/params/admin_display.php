@@ -3,19 +3,19 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$form->addElement('html', '<fieldset id="admin_display" class="rightcol">');
-	$form->addElement('header','admin_display','Admin Display');
+	$form->addElement('header','admin_display_head','Admin Display');
 	
-	foreach ($ushop->ADMIN_DISPLAY as $key => $value) {
-		$form->addElement('text', 'ADMIN_DISPLAY['.$key.']', ucwords(str_replace('_', ' ', $key)).':', array('size' => 2, 'maxlength' => 2, 'class' => 'inputbox'));
-	}
+	foreach ($ushop->admin_display as $key => $value):
+		$form->addElement('text', 'admin_display['.$key.']', ucwords(str_replace('_', ' ', $key)).':', array('size' => 2, 'maxlength' => 2, 'class' => 'inputbox'));
+	endforeach;
 	
 	$form->addElement('html', '</fieldset>');
 	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

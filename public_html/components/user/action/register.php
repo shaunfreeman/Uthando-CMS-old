@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (!UthandoUser::authorize()) {
+if (!UthandoUser::authorize()):
 	
 	$form = new HTML_QuickForm('login', 'post', '/user/register');
 	
@@ -56,21 +56,16 @@ if (!UthandoUser::authorize()) {
 	$form->addRule(array('password1', 'password2'),'Passwords do not match','compare');
 	
 			
-	if ($user_config->get('captcha_status', 'REGISTER') == 'on') {
+	if ($user_config->get('captcha_status', 'register') == 'on'):
 		require_once('user/captcha/index.php');
-	} else {
-		
-		if ($form->validate()) {
-			
+	else:
+		if ($form->validate()):
 			require_once('user/validate/register.php');
-		
-		} else {
-			
+		else:
 			$form->addElement('submit', null, 'Send', array('class' => 'button'));
-			
 			// Output the form
 			$this->addContent($form->toHtml());
-		}
-	}
-}
+		endif;
+	endif;
+endif;
 ?>

@@ -9,12 +9,12 @@ $category = str_replace('_', ' ', $this->registry->params[0]);
 
 $title .= $category;
 
-if ($this->ushop->GLOBAL['offline']) {
+if ($this->ushop->global['offline']):
 	
 	$content = '<center><img src="/components/ushop/images/closed-sign.png" /></cente>';
 	$content .= file_get_contents('ushop/html/offline_message.html', true);
 	
-} else {
+else:
 	
 	// set referer.
 	$_SESSION['http_referer'] = urlencode(stripslashes($this->registry->path));
@@ -40,22 +40,32 @@ if ($this->ushop->GLOBAL['offline']) {
 	endif;
 	
 	$filter_array[] = 'enabled=1';
-	if ($this->ushop->CHECKOUT['stock_control']) $filter_array[] = 'quantity > 0';
+	if ($this->ushop->checkout['stock_control']) $filter_array[] = 'quantity > 0';
 	
-	if ($products = $this->getResult("product_id, sku, name, CONCAT(forename, ' ', surname) AS author, price, isbn, image, image_status, description, quantity", $this->ushop->db_name.'products', $this->ushop->db_name.'authors', array('WHERE' => 'category_id='.$this->ushop->category_id, 'AND' => $filter_array , 'LIMIT' => "$start,$display"))) {
-		
+	$products = $this->getResult(
+		"product_id, sku, name, CONCAT(forename, ' ', surname) AS author, price, isbn, image, image_status, description, quantity",
+		$this->ushop->db_name.'products',
+		$this->ushop->db_name.'authors',
+		array(
+			'WHERE' => 'category_id='.$this->ushop->category_id,
+			'AND' => $filter_array ,
+			'LIMIT' => "$start,$display"
+		)
+	);
+	
+	if ($products):
 		$content .= $this->ushop->productList($products, count($products));
-		
-		if ($num > $display) $content .= $paginate;
-	
-	} else {
+		if ($num > $display):
+			$content .= $paginate;
+		endif;
+	else:
 		$params['TYPE'] = 'info';
 		$params['MESSAGE'] = '<h2>There are currently no records.</h2>';
 		$content .= $this->message($params);
-	}
+	endif;
 	
 	$content .= '</div>';
-}
+endif;
 
 $this->addContent($content);
 

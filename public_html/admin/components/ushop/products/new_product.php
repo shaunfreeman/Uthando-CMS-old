@@ -3,15 +3,11 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/products/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'postage' => '/ushop/postage',
-   		'tax' => '/ushop/tax'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
@@ -25,19 +21,17 @@ if ($this->authorize()) {
 	
 	$attr = array();
 	
-	foreach ($ushop->ATTRIBUTES as $key => $value) {
-		if ($value) {
-			$attr[$key] = $this->getResult('*', $ushop->db_name.$key);
-		}
-	}
+	foreach ($ushop->attributes as $key => $value):
+		if ($value) $attr[$key] = $this->getResult('*', $ushop->db_name.$key);
+	endforeach;
 	
 	$attrs = true;
 	
-	foreach ($attr as $key => $value) {
+	foreach ($attr as $key => $value):
 		if (!$value) $attrs = false;
-	}
+	endforeach;
 	
-	if ($tax_codes && $categories && $attrs) {
+	if ($tax_codes && $categories && $attrs):
 			
 		$form = new HTML_QuickForm('add_product', 'post', $_SERVER['REQUEST_URI']);
 			
@@ -57,9 +51,9 @@ if ($this->authorize()) {
 		
 		$items_opts[0] = 'Select One';
 		
-		foreach ($items = $tree->getTree() as $item) {
+		foreach ($items = $tree->getTree() as $item):
 			$items_opts[$item['category_id']] = str_repeat(str_repeat('&nbsp;',4), ($item['depth'])).$item['category'];
-		}
+		endforeach;
 		
 		$s = $form->createElement('select', 'category_id', 'Category:');
 		$errors[] = 'category_id';
@@ -87,14 +81,14 @@ if ($this->authorize()) {
 		$form->addElement('text', 'price', 'Price:', array('size' => 10, 'maxlength' => 10, 'class' => 'inputbox'));
 		$errors[] = 'price';
 		
-		if ($ushop->CHECKOUT['stock_control']) {
+		if ($ushop->checkout['stock_control']):
 			$form->addElement('text', 'quantity', 'Quantity:', array('size' => 5, 'maxlength' => 5, 'class' => 'inputbox'));
 			
 			$form->addRule('quantity', 'quatity has to be a number.', 'numeric');
 			$errors[] = 'quantity';
-		}
+		endif;
 		
-		if ($ushop->CHECKOUT['vat_state'] == 1) {
+		if ($ushop->checkout['vat_state'] == 1):
 		
 			$group_radio[] = $form->createElement('radio', null, null, 'Yes', '1');
 			$group_radio[] = $form->createElement('radio', null, null, 'No', '0');
@@ -104,38 +98,38 @@ if ($this->authorize()) {
 			$s = $form->createElement('select', 'tax_code_id', 'Tax Code:');
 			$opts[0] = 'Select One';
 			
-			foreach ($ushop->formatTaxCodes() as $code) {
+			foreach ($ushop->formatTaxCodes() as $code):
 				$opts[$code['tax_code_id']] = $code['tax_code'];
-			}
+			endforeach;
 		
 			$s->loadArray($opts);
 			$form->addElement($s);
 			$errors[] = 'taxcode_id';
-		} else {
+		else:
 			$no_tax = $this->getResult('tax_code_id', $ushop->db_name.'tax_codes', null, array('where' => "tax_code='N'"));
 			$form->addElement('hidden', 'tax_code_id', $no_tax[0]->tax_code_id);
 			$form->addElement('hidden', 'vat_inc', 0);
-		}
+		endif;
 		
 		// price groups.
 		$groups = $this->getResult('price_group_id, price_group, price', $ushop->db_name.'price_groups');
 		
-		if ($groups) {
+		if ($groups):
 			
 			$group_s = $form->createElement('select', 'price_group_id', 'Price Group:');
 			$group_opts[0] = 'Select One';
 			
-			foreach ($groups as $value) {
+			foreach ($groups as $value):
 				$group_opts[$value->price_group_id] = $value->price_group . ' - &pound;' . $value->price;
-			}
+			endforeach;
 		
 			$group_s->loadArray($group_opts);
 			$form->addElement($group_s);
-		} else {
+		else:
 			$group = $this->templateParser($tmpl, array('LABEL' => 'Price Group:', 'ELEMENT' => 'No groups aviliable'), '{', '}');
 			$form->addElement('hidden', 'price_group_id', 0);
 			$form->addElement('html', $group);
-		}
+		endif;
 		
 		$postage_radio[] = $form->createElement('radio', null, null, 'On', '1');
 		$postage_radio[] = $form->createElement('radio', null, null, 'Off', '0');
@@ -150,9 +144,9 @@ if ($this->authorize()) {
 
 		$form->addElement('text', 'weight', 'Weight (grams):', array('size' => 10, 'maxlength' => 10, 'class' => 'inputbox'));
 		
-		foreach ($ushop->ATTRIBUTES as $key => $value) {
+		foreach ($ushop->attributes as $key => $value):
 			require_once('ushop/products/attributes/'.$key.'_form.php');
-		}
+		endforeach;
 		
 		$form->addElement('html', '</fieldset>');
 		$form->addElement('html', '<div class="both"></div>');
@@ -185,7 +179,7 @@ if ($this->authorize()) {
 		
 		$form->addRule('image_status', 'Please choose weather to display an image or not.', 'required');
 			
-		if ($form->validate()) {
+		if ($form->validate()):
 			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'));
@@ -194,27 +188,23 @@ if ($this->authorize()) {
 			$menuBar['back'] = '/ushop/products/overview';
 			
 			//check then enter the record.
-			if (!$this->getResult('product_id', $ushop->db_name.'products', null, array('where' => "name='".$values['name']."'"))) {
+			if (!$this->getResult('product_id', $ushop->db_name.'products', null, array('where' => "name='".$values['name']."'"))):
 				
 				$res = $this->insert($values, $ushop->db_name.'products');
 			
-				if ($res) {
+				if ($res):
 					$params['TYPE'] = 'pass';
 					$params['MESSAGE'] = '<h2>Product was successfully entered.</h2>';
-				} else {
+				else:
 					$params['TYPE'] = 'error';
 					$params['MESSAGE'] = '<h2>Product could not be entered into the database.</h2>';
-				}
-			
-			} else {
+				endif;
+			else:
 				$params['TYPE'] = 'warning';
 				$params['MESSAGE'] = '<h2>This product already exits.</h2>';
-			}
-				
+			endif;
 			// done!
-			
-			
-		} else {
+		else:
 				
 			//$this->content .= $this->getTabs(array('details', 'description', 'price', 'attributes', 'image'));
 			
@@ -235,16 +225,16 @@ if ($this->authorize()) {
 			));
 			
 			$this->registry->component_css = array(
-				'/templates/'.$this->registry->template.'/css/FileManager.css',
-				'/templates/'.$this->registry->template.'/css/Additions.css'
+				'/templates/'.$this->get('admin_config.site.template').'/css/FileManager.css',
+				'/templates/'.$this->get('admin_config.site.template').'/css/Additions.css'
 			);
 			
-			foreach ($errors as $value) {
+			foreach ($errors as $value):
 				$err = $form->getElementError($value);
 				if ($err) $this->registry->Warning($err);
-			}
+			endforeach;
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -254,29 +244,25 @@ if ($this->authorize()) {
 		
 			// output the form
 			$this->content .= $renderer->toHtml();
-		
-		}
-	} else {
-	
+		endif;
+	else:
 		$params['TYPE'] = 'info';
 		
-		if (!$tax_codes) {
+		if (!$tax_codes):
 			$params['MESSAGE'] = '<h2>First define some tax codes.</h2>';
-		} elseif (!$categories) {
+		elseif (!$categories):
 			$params['MESSAGE'] = '<h2>First define some categories.</h2>';
-		} else {
+		else:
 			$params['MESSAGE'] = '<h2>First define some attributes.</h2>';
-		}
+		endif;
+	endif;
 	
-	}
-	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

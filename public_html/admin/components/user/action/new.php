@@ -125,9 +125,9 @@ if ($this->authorize()):
 				$res = $stmt->fetch(PDO::FETCH_OBJ);
 				
 				if ($res->user_group == 'registered'):
-					$key = array($user_config->get('key', 'CIPHER'), $this->get('config.server.web_url'));
+					$key = array($user_config->get('key', 'cipher'), $this->get('config.server.web_url'));
 				else:
-					$key = $user_config->get('key', 'CIPHER');
+					$key = $user_config->get('key', 'cipher');
 				endif;
 				
 				$pwd = UthandoUser::encodePassword($password, $key);

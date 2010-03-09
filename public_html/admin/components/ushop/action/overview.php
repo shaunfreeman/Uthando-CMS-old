@@ -15,8 +15,6 @@ if ($this->authorize()):
 		
 	$this->addContent($this->makeToolbar($menuBar, 24));
 	
-	$tab_array = array();
-	
 	$orders = $this->getResult(
 		"CONCAT(first_name, ' ', last_name ) AS name,
 		invoice,
@@ -45,6 +43,7 @@ if ($this->authorize()):
 	if ($orders):
 		$c = 0;
 		$data = array();
+		$tab_array = array();
 		
 		$orderRow = $this->getResult('order_status_id, order_status', $this->registry->core.'ushop_order_status');
 		
@@ -77,10 +76,9 @@ if ($this->authorize()):
 		
 		$orders = $table->toHtml();
 		$tab_array['New Orders'] = $orders;
+		
+		$tabs = new HTML_Tabs($tab_array);
+		$this->addContent($tabs->toHtml());
 	endif;
-	
-	
-	$tabs = new HTML_Tabs($tab_array);
-	$this->addContent($tabs->toHtml());
 endif;
 ?>

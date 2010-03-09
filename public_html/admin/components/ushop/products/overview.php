@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$productsBar = array(
 		'back' => '/ushop/overview'
@@ -24,9 +24,5 @@ if ($this->authorize()) {
 	
 	$tabs = new HTML_Tabs($tab_array);
 	$this->content .= $tabs->toHtml();
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
-	exit();
-}
+endif;
 ?>

@@ -13,7 +13,7 @@ class UShop_Core {
 		$this->registry = $GLOBALS['registry'];
 		$this->setOptions();
 		
-		$this->img_dir = $this->registry->config->get('web_url', 'SERVER')."/components/ushop/images/products/";
+		$this->img_dir = $this->registry->get('config.server.web_url')."/components/ushop/images/products/";
 		
 		$this->prefix = 'ushop_';
 		$this->db_name = $this->registry->core.$this->prefix;
@@ -32,7 +32,7 @@ class UShop_Core {
 	
 	public function getDisplay($key)
 	{
-		return $this->FRONTEND_DISPLAY[$key];
+		return $this->frontend_display[$key];
 	}
 	
 	private function setOptions()
@@ -154,7 +154,7 @@ class UShop_Core {
 
 		if (!$row->image_status) $html = UShop_Utility::removeSection($html, 'image');
 					
-		if ($this->GLOBAL['catelogue_mode']) $html = UShop_Utility::removeSection($html, 'add_cart');
+		if ($this->global['catelogue_mode']) $html = UShop_Utility::removeSection($html, 'add_cart');
 
 		$html = Uthando::templateParser($html, $params, '{', '}');
 
@@ -264,7 +264,7 @@ class UShop_Core {
 
 	public function getMerchantInfo()
 	{
-		$store = $this->STORE;
+		$store = $this->store;
 
 		$c = 0;
 		$data = array();
@@ -276,10 +276,10 @@ class UShop_Core {
 			endif;
 		endforeach;
 
-		array_unshift($data, array('Company', $this->registry->config->get('site_name', 'SERVER')));
+		array_unshift($data, array('Company', $this->registry->get('config.server.site_name')));
 
-		$data[] = array('Phone', $this->CONTACT['phone']);
-		$data[] = array('Email', $this->CONTACT['email']);
+		$data[] = array('Phone', $this->contact['phone']);
+		$data[] = array('Email', $this->contact['email']);
 
 		$header = array('From');
 
@@ -296,11 +296,11 @@ class UShop_Core {
 		$cb = file_get_contents('ushop/html/cart_body.html', true);
 		$ci = file_get_contents('ushop/html/cart_items.html', true);
 		
-		if (!$uthando->ushop->CHECKOUT['vat_state']) $ci = UShop_Utility::removeSection($ci, 'vat');
-		if (!$uthando->ushop->CHECKOUT['vat_state']) $cb = UShop_Utility::removeSection($cb, 'vat');
+		if (!$uthando->ushop->checkout['vat_state']) $ci = UShop_Utility::removeSection($ci, 'vat');
+		if (!$uthando->ushop->checkout['vat_state']) $cb = UShop_Utility::removeSection($cb, 'vat');
 
 		$params = array(
-			'COLSPAN' => ($uthando->ushop->CHECKOUT['vat_state']) ? 3 : 2,
+			'COLSPAN' => ($uthando->ushop->checkout['vat_state']) ? 3 : 2,
 			'CART_ITEMS' => null
 		);
 
@@ -354,9 +354,9 @@ class UShop_Core {
 			}
 			
 			if (file_exists(__SITE_PATH.'/components/ushop/images/products/'.$row->image)):
-				$image = $this->registry->config->get('web_url', 'SERVER').'/components/ushop/images/products/'.$row->image;
+				$image = $this->registry->get('config.server.web_url').'/components/ushop/images/products/'.$row->image;
 			else:
-				$image = $this->registry->config->get('web_url', 'SERVER').'/components/ushop/images/noimage.png';
+				$image = $this->registry->get('config.server.web_url').'/components/ushop/images/noimage.png';
 			endif;
 			
 			$item = array(
@@ -401,8 +401,8 @@ class UShop_Core {
 		$html = preg_replace("/<th>(.*?)<\/th>/s", "", $html);
 
 		$remove = array('delete_item', 'item_quantity_input');
-		if (!$this->INVOICE['display_top']) $remove[] = 'top';
-		if (!$this->INVOICE['display_bottom']) $remove[] = "bottom";
+		if (!$this->invoice['display_top']) $remove[] = 'top';
+		if (!$this->invoice['display_bottom']) $remove[] = "bottom";
 
 		foreach ($remove as $value) $html = UShop_Utility::removeSection($html, $value);
 
@@ -429,8 +429,8 @@ class UShop_Core {
 		$html = preg_replace("/<th>(.*?)<\/th>/s", "", $html);
 
 		$remove = array('delete_item', 'item_quantity_input');
-		if (!$this->INVOICE['display_top']) $remove[] = 'top';
-		if (!$this->INVOICE['display_bottom']) $remove[] = "bottom";
+		if (!$this->invoice['display_top']) $remove[] = 'top';
+		if (!$this->invoice['display_bottom']) $remove[] = "bottom";
 
 		foreach ($remove as $value) $html = UShop_Utility::removeSection($html, $value);
 
@@ -455,12 +455,12 @@ class UShop_Core {
 			$conn->beginTransaction();
 
 			$sth = $conn->prepare("
-				SELECT MAX(invoice) as invoice, status.order_status_id
-				FROM ".$this->registry->user."ushop_orders, (
+				SELECT MAX(invoice) as invoice, (
 					SELECT order_status_id
 					FROM ".$this->registry->core."ushop_order_status
 					WHERE order_status = 'Waiting for Payment'
-				) as status
+				) as order_status_id
+				FROM ".$this->registry->user."ushop_orders
 			");
 			$sth->execute();
 			$result = $sth->fetch(PDO::FETCH_OBJ);
@@ -483,7 +483,7 @@ class UShop_Core {
 					VALUES (:user, :order, :product, :qty, :price, :tax)
 				");
 				
-				if ($this->CHECKOUT['stock_control']):
+				if ($this->checkout['stock_control']):
 					$admin_conn = $this->getAdminConn();
 					$qty_update = $admin_conn->prepare("
 						UPDATE ".$this->registry->core."ushop_products
@@ -502,7 +502,7 @@ class UShop_Core {
 						':tax' => $value['VAT']
 					);
 					$sth->execute($params);
-					if ($this->CHECKOUT['stock_control']) $qty_update->execute(array(':qty' => $value['QUANTITY'], ':pid' => $value['PRODUCT_ID']));
+					if ($this->checkout['stock_control']) $qty_update->execute(array(':qty' => $value['QUANTITY'], ':pid' => $value['PRODUCT_ID']));
 					
 				endforeach;
 				
@@ -513,7 +513,7 @@ class UShop_Core {
 		} catch(PDOException $e)
 		{
 			$conn->rollBack();
-			$this->registry->Error ($e->getMessage());
+			$this->registry->Error($e->getMessage());
 			return false;
 		}
 		
@@ -526,7 +526,7 @@ class UShop_Core {
 		$config = new Config($this->registry, array('path' => $this->registry->ini_dir.'/uthandoAdmin.ini.php'));
 		// connect user to database.
 
-		$dsn = $config->get('DATABASE');
+		$dsn = $config->get('database');
 		$username = $dsn['username'];
 		$password = $dsn['password'];
 
@@ -548,7 +548,7 @@ class UShop_Core {
 		if (count($cart['items']) > 0):
 			$buttons = '
 				<div class="checkout_buttons">
-				<a class="button" href="'.$this->registry->config->get('ssl_url', 'SERVER').'/ushop/view/checkout">Check Out</a>
+				<a class="button" href="'.$this->registry->get('config.server.ssl_url').'/ushop/view/checkout">Check Out</a>
 				<a class="button" href="/ushop/view/cart">View Cart</a>
 				<a class="button" href="/ushop/view/cart/action-empty">Empty Cart</a>
 				</div>

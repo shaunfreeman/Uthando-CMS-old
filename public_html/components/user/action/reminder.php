@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (!UthandoUser::authorize()) {
+if (!UthandoUser::authorize()):
 	
 	$form = new HTML_QuickForm('reset_password', 'post', '/user/reminder');
 	
@@ -20,22 +20,16 @@ if (!UthandoUser::authorize()) {
 	$form->addRule('email', 'Enter a valid email address.', 'email', null, 'server');
 	
 	// validate the form or just display it.
-	if ($user_config->get('captcha_status', 'REMINDER') == 'on') {
+	if ($user_config->get('captcha_status', 'reminder') == 'on'):
 		require_once('user/captcha/index.php');
-	} else {
-		
-		if ($form->validate()) {
-			
+	else:
+		if ($form->validate()):
 			require_once('user/validate/reminder.php');
-		
-		} else {
-			
+		else:
 			$form->addElement('submit', null, 'Send', array('class' => 'button'));
-			
 			// Output the form
 			$this->content .= $form->toHtml();
-		}
-	}
-}
-
+		endif;
+	endif;
+endif;
 ?>

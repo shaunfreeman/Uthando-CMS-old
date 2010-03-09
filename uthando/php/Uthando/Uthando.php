@@ -249,6 +249,11 @@ class Uthando
 		$this->registry->template->addParameter($variable, $value);
 	}
 	
+	public function deleteParameter($variable)
+	{
+		$this->registry->template->deleteParameter($variable);
+	}
+	
 	public function setTitle($title)
 	{
 		$this->registry->template->setTitle($title);

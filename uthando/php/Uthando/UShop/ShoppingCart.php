@@ -90,7 +90,7 @@ class UShop_ShoppingCart
 				false
 			);
 
-			if ($uthando->ushop->CHECKOUT['stock_control']):
+			if ($uthando->ushop->checkout['stock_control']):
 				if ($value['qty'] > $row->quantity):
 					$value['qty'] = $row->quantity;
 					$this->updateCart($key, $value['qty']);
@@ -146,7 +146,7 @@ class UShop_ShoppingCart
 
 		$cart_body = $this->displayCart();
 		
-		$html = Uthando::templateParser($vc, array('CART_BODY' => $cart_body, 'SSL_URL' => $this->registry->config->get('ssl_url', 'SERVER')), '{', '}');
+		$html = Uthando::templateParser($vc, array('CART_BODY' => $cart_body, 'SSL_URL' => $this->registry->get('config.server.ssl_url')), '{', '}');
 		
 		return UShop_Utility::removeSection($html, 'item_quantity');
 	}
@@ -157,11 +157,11 @@ class UShop_ShoppingCart
 		$cb = file_get_contents('ushop/html/cart_body.html', true);
 		$ci = file_get_contents('ushop/html/cart_items.html', true);
 		
-		if (!$uthando->ushop->CHECKOUT['vat_state']) $ci = UShop_Utility::removeSection($ci, 'vat');
-		if (!$uthando->ushop->CHECKOUT['vat_state']) $cb = UShop_Utility::removeSection($cb, 'vat');
+		if (!$uthando->ushop->checkout['vat_state']) $ci = UShop_Utility::removeSection($ci, 'vat');
+		if (!$uthando->ushop->checkout['vat_state']) $cb = UShop_Utility::removeSection($cb, 'vat');
 
 		$params = array(
-			'COLSPAN' => ($uthando->ushop->CHECKOUT['vat_state'] == 1) ? 3 : 2,
+			'COLSPAN' => ($uthando->ushop->checkout['vat_state'] == 1) ? 3 : 2,
 			'CART_ITEMS' => null
 		);
 
@@ -202,7 +202,7 @@ class UShop_ShoppingCart
 	{
 		global $uthando;
 		
-		if ($uthando->ushop->CHECKOUT['post_state'] == 1):
+		if ($uthando->ushop->checkout['post_state'] == 1):
 			$itemLevel = $this->cart['postWeight'];
 		else:
 			$itemLevel = $this->cart['subTotal'] - $this->cart['noPostage'];
@@ -249,7 +249,7 @@ class UShop_ShoppingCart
 	{
 		global $uthando;
 		$vat_inc = 1;
-		if ($uthando->ushop->CHECKOUT['vat_state'] == 1 && $tax_rate != 0):
+		if ($uthando->ushop->checkout['vat_state'] == 1 && $tax_rate != 0):
 			if ($vat_inc == 0):
 				$pat = round ($price * $tax_rate, 2);
 				$tax = $pat - $price;

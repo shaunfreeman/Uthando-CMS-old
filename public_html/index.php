@@ -30,6 +30,9 @@ $timer = new Benchmark_Timer();
 $timer->start();
 
 $registry = new Registry();
+require('Dbug/FirePHP.class.php');
+
+$registry->firephp = FirePHP::getInstance(true);
 
 $registry->setSite(realpath(__SITE_PATH.'/../uthando/ini/uthandoSites.ini.php'));
 $registry->loadIniFile('uthando', 'config');

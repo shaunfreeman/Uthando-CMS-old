@@ -3,22 +3,18 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/postage/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'products' => '/ushop/products',
-   		'postage' => '/ushop/tax'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
 	
 	$menuBar = array();
 	
-	if ($this->registry->params['id']) {
+	if ($this->registry->params['id']):
 		
 		$rows = $this->getResult('post_zone_id, tax_code_id, zone', $ushop->db_name.'post_zones',null, array('where' => 'post_zone_id = '.$this->registry->params['id']));
 			
@@ -27,9 +23,7 @@ if ($this->authorize()) {
 		$s = $form->createElement('select', 'tax_code_id', 'Tax Code:');
 		$opts[0] = 'Select One';
 			
-		foreach ($ushop->formatTaxCodes() as $code) {
-			$opts[$code['tax_code_id']] = $code['tax_code'];
-		}
+		foreach ($ushop->formatTaxCodes() as $code) $opts[$code['tax_code_id']] = $code['tax_code'];
 			
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
@@ -47,7 +41,7 @@ if ($this->authorize()) {
 		$form->addRule('zone', 'Please enter a zone', 'required');
 		$form->addRule('tax_code_id', 'Please enter a tax code', 'nonzero');
 			
-		if ($form->validate()) {
+		if ($form->validate()):
 			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
@@ -57,26 +51,22 @@ if ($this->authorize()) {
 			//check then enter the record.
 			$res = $this->update($values, $ushop->db_name.'post_zones', array('where' => 'post_zone_id='.$this->registry->params['id']));
 			
-			if ($res) {
+			if ($res):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Post zone was successfully edited.</h2>';
-				
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Post zone could not be edited due to an error.</h2>';
-			}
-				
+			endif;
 			// done!
-			
-			
-		} else {
+		else:
 				
 			$form->setDefaults(array(
 			'tax_code_id' => $rows[0]->tax_code_id,
    			'zone' => $rows[0]->zone,
 			));
 				
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -86,18 +76,15 @@ if ($this->authorize()) {
 		
 			// output the form
 			$this->content .= $renderer->toHtml();
-				
-		}
-			
-	}
+		endif;
+	endif;
 	
-	if (isset($params)) {
+	if (isset($params)):
 		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

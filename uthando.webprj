@@ -2163,7 +2163,6 @@
     <item url="public_html/templates/modernviewblue/html/" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/index.html" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/ini/" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/js/" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/template_thumbnail.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/css/template_css.css" uploadstatus="1" />
@@ -2192,15 +2191,10 @@
     <item url="public_html/templates/modernviewblue/images/top_bg.gif" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/top_menu_bg.png" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/images/yourlogo.png" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/ini/index.html" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/ini/template.ini.php" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/js/cot.js" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/js/fx_styles.js" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/js/index.html" uploadstatus="1" />
     <item url="public_html/templates/modernviewblue/js/trustLogo.js" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/js/UthandoAPI.js" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/js/UthandoConfig.js" uploadstatus="1" />
-    <item url="public_html/templates/modernviewblue/js/UthandoJsCache.js" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/ajax_content.php" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/css/" uploadstatus="1" />
     <item url="public_html/templates/smebusiness/html/" uploadstatus="1" />
@@ -2287,12 +2281,6 @@
     <item url="public_html/admin/components/webmail/css/" uploadstatus="1" />
     <item url="public_html/admin/components/webmail/css/index.html" uploadstatus="1" />
     <item url="public_html/admin/.htaccess" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_5eec34.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_71a4a3.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_8e5310.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_a89c1e.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_aaa9bc.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_e78ca9.jpg" uploadstatus="1" />
     <item url="public_html/.htaccess" uploadstatus="1" />
     <item url="uthando/php/Uthando/HTML/Paginate.php" uploadstatus="1" />
     <item url="public_html/admin/components/webmail/css/webmail.css" uploadstatus="1" />
@@ -2390,7 +2378,6 @@
     <item url="public_html/templates/walls/js/index.html" uploadstatus="1" />
     <item url="public_html/templates/walls/css/" uploadstatus="1" />
     <item url="public_html/templates/walls/css/style.css" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_675b3f.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/" uploadstatus="1" />
     <item url="public_html/userfiles/barnaclesfinch/" uploadstatus="1" />
     <item url="public_html/userfiles/barnaclesfinch/image/" uploadstatus="1" />
@@ -2776,11 +2763,6 @@
     <item url="public_html/userfiles/kris3man/media/index.html" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/index.html" uploadstatus="1" />
     <item url="public_html/Common/images/firefox.png" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_44fa06.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_8b975e.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_ad5ff4.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_b2134c.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_caa849.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/image/charismabooks2.png" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/image/charismabooks.png" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/image/logo.gif" uploadstatus="1" />
@@ -2799,12 +2781,8 @@
     <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/user/captcha.ini.php" uploadstatus="0" />
     <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/user/user.ini.php" uploadstatus="0" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/" uploadstatus="1" />
     <item url="public_html/index3.php" uploadstatus="1" />
     <item url="public_html/Common/images/uthandocms.png" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_8a9c36.jpg" uploadstatus="1" />
-    <item url="public_html/Common/tmp/hn_captcha_96d11f.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/uthandocms.png" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1249.jpg" uploadstatus="1" />
@@ -3177,5 +3155,15 @@
     <item url="public_html/admin/Common/tmp/b3081f.jpg" uploadstatus="1" />
     <item url="public_html/admin/Common/tmp/c61044.jpg" uploadstatus="1" />
     <item url="public_html/admin/Common/tmp/ebd3e0.jpg" uploadstatus="1" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/templates/" uploadstatus="1" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/templates/admin.ini.php" uploadstatus="1" />
+    <item url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/templates/modernviewblue.ini.php" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/html/" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/index.html" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoAPI.js" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoConfig.js" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoJsCache.js" uploadstatus="1" />
   </project>
 </webproject>

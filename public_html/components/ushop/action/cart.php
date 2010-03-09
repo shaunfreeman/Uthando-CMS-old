@@ -4,18 +4,18 @@ defined( 'SHOP_PARENT_FILE' ) or die( 'Restricted access' );
 
 $title .= 'Shopping Cart';
 
-if ($this->ushop->GLOBAL['offline'] || $this->ushop->GLOBAL['catelogue_mode']) {
+if ($this->ushop->global['offline'] || $this->ushop->global['catelogue_mode']):
 	$this->addContent('<h3>Shopping is unavialible</h3><p><a href="/ushop/view/shopfront">Click here to continue</a></p>');
-} else {
+else:
 
 	$item = $this->registry->params['id'];
 
 	$cart = $this->ushop->retrieveCart();
 	
-	$this->addContent('<div id="products">');
-	$this->addContent(UShop_Utility::returnLink());
+	$this->content .= ('<div id="products">');
+	$this->content .= (UShop_Utility::returnLink());
 	
-	switch ($this->registry->params['action']) {
+	switch ($this->registry->params['action']):
 		case 'add':
 			$cart->addItem($item);
 			break;
@@ -32,18 +32,16 @@ if ($this->ushop->GLOBAL['offline'] || $this->ushop->GLOBAL['catelogue_mode']) {
 		case 'empty':
 			$cart->cart = null;
 			break;
-	}
+	endswitch;
 
-	if (count($cart->cart['items']) > 0) {
-		$this->addContent($cart->viewCart());
-	} else {
-		$this->addContent('<h3>Shopping cart is empty</h3>');
-	}
+	if (count($cart->cart['items']) > 0):
+		$this->content .= ($cart->viewCart());
+	else:
+		$this->content .= ('<h3>Shopping cart is empty</h3>');
+	endif;
 
 	$this->ushop->storeCart($cart);
 	
-	$this->addContent('</div>');
-	
-}
-
+	$this->content .= ('</div>');
+endif;
 ?>

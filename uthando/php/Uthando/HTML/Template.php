@@ -176,6 +176,7 @@ class HTML_Template extends HTML_Page
 			if ($this->modules[$element->getAttribute('name')]):
 				$newelement = $this->doc->createElement('div');
 				foreach ($this->modules[$element->getAttribute('name')] as $el):
+					if (!$el) continue;
 					$newelement->appendChild($el);
 				endforeach;
 				$element->parentNode->replaceChild($newelement, $element);
@@ -197,11 +198,12 @@ class HTML_Template extends HTML_Page
 				foreach ($this->parameters[$element->getAttribute('name')] as $key => $content):
 					if (!$content) continue;
 					if (is_string($content)) {
-						$newelement = $this->doc->createDocumentFragment($this->compress($content),array('id' => $element->getAttribute('name')),true,'span');
+						$newelement .= $content;
 					} else if ($content instanceof DOMElement) {
 						$newelement = $content;
 					}
 				endforeach;
+				$newelement = $this->doc->createDocumentFragment($this->compress($newelement),array('id' => $element->getAttribute('name')),true,'span');
 				$element->parentNode->replaceChild($newelement, $element);
 			else:
 				$element->parentNode->removeChild($element);

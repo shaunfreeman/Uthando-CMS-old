@@ -7,7 +7,7 @@ class UShop_Admin extends UShop_Core
 {
 	public function getDisplay($key)
 	{
-		return $this->ADMIN_DISPLAY[$key];
+		return $this->admin_display[$key];
 	}
 	
 	public function getSettings()

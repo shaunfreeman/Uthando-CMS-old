@@ -9,9 +9,9 @@ $captcha_config = new Config($registry, array('path' => $this->registry->ini_dir
 $captcha_init = $captcha_config->get('CAPTCHA');
 $ttf_range = $captcha_config->get ('TTF_RANGE', 'CAPTCHA');
 	
-if ($captcha_init['TTF_RANGE'] != "AUTO") {
+if ($captcha_init['TTF_RANGE'] != "auto"):
 	$ttf_range = explode (',', $captcha_config->get ('TTF_RANGE', 'CAPTCHA'));
-}
+endif;
 	
 $captcha_init['tempfolder'] = $_SERVER['DOCUMENT_ROOT'] . $captcha_config->get ('tempfolder', 'CAPTCHA');
 	
@@ -34,7 +34,7 @@ $form->addElement('submit', null, 'Send', array('class' => 'button'));
 
 $form->addElement('html', '<tr><td align="right"><b>'.$captcha->display_form_part('refresh_text').'</b></td><td align="left">'.$captcha->display_form_part('refresh_button').'</td></tr>');
 
-switch($captcha->validate_submit()) {
+switch($captcha->validate_submit()):
 
      // was submitted and has valid keys
 	case 1:
@@ -45,7 +45,7 @@ switch($captcha->validate_submit()) {
 
 	// was submitted, has bad keys and also reached the maximum try's
 	case 3:
-		if(!headers_sent() && isset($captcha->badguys_url)) header('Location: '.$this->registry->config->get('web_url', 'SERVER'));
+		if(!headers_sent() && isset($captcha->badguys_url)) header('Location: '.$this->get('config.server.web_url'));
 		break;
 
 	// was submitted with no matching keys, but has not reached the maximum try's
@@ -57,7 +57,6 @@ switch($captcha->validate_submit()) {
 		$action = $this->registry->action.":display";
 		require_once('captcha.php');
 		break;
-
-}
+endswitch;
 	
 ?>

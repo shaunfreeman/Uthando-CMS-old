@@ -69,10 +69,12 @@ if (!$this->authorize()):
 	endif;
 	/*
 	$user_config = new Config($this->registry, array('path' => $this->registry->ini_dir.'/user/user.ini.php'));
-	$key = $user_config->get('key', 'CIPHER');
+	$key = $user_config->get('key', 'cipher');
 	$password = "password";
 	$pwd = UthandoUser::encodePassword($password, $key);
 	$this->registry->firephp->log($pwd);
 	*/
+else:
+	goto();
 endif;
 ?>

@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
+if (UthandoUser::checkUser() && !UthandoUser::authorize()):
 	
 	// Apply form element filters.
 	$form->applyFilter('__ALL__', 'escape_data');
@@ -23,17 +23,17 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 	
 	$num_rows = $sql->num_rows;
 
-	if ($num_rows == 0) {
+	if ($num_rows == 0):
 		// lets now register the user
 
 		// connect user to database.
 		$dsn = array(
-			'hostspec' => $this->registry->config->get('hostspec','DATABASE'),
-			'phptype' => $this->registry->config->get('phptype','DATABASE'),
-			'database' => $this->registry->config->get('user','DATABASE')
+			'hostspec' => $this->get('config.database.hostspec'),
+			'phptype' => $this->get('config.database.phptype'),
+			'database' => $this->get('config.database.user')
 		);
 
-		$dsn = array_merge($dsn,$this->registry->config->get('DATABASE_USER'));
+		$dsn = array_merge($dsn,$this->get('config.database_user'));
 
 		$this->dsn = $dsn['phptype'] . ":host=" . $dsn['hostspec'] . ";dbname=" .$dsn['database'];
 		
@@ -49,7 +49,7 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 			
 			// encrypt password.
 			$user_config = new Config($this->registry, array('path' => $this->registry->ini_dir.'/user/user.ini.php'));
-			$pwd = UthandoUser::encodePassword($password, $user_config->get('key', 'CIPHER'));
+			$pwd = UthandoUser::encodePassword($password, $user_config->get('key', 'cipher'));
 			
 			// get user group for user.
 			$stmt = $conn->prepare("
@@ -75,7 +75,7 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 				':iv' => $pwd[1]
 			));
 
-			if ($conn->commit()) {
+			if ($conn->commit()):
 				// mail user comfirmation.
 				// get mail config.
 				$this->registry->mail_config = new Config($this->registry, array('path' => $this->registry->ini_dir.'/mail.ini.php'));
@@ -91,7 +91,7 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 				$headers = array(
 					'From' => $this->registry->mail_config->get('email', 'mailer'),
 					'To' => $email,
-					'Subject' => 'Login Details - ' . $this->registry->config->get('site_name', 'SERVER'),
+					'Subject' => 'Login Details - ' . $this->get('config.server.site_name'),
 					'MIME-Version' => "1.0",
 					'X-Priority' => "1",
 					'Content-Type' => 'text/'.$email_type.'; charset="utf-8"',
@@ -112,21 +112,21 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 				$params = array(
 					'USER' => implode(' ', $name),
 					'PASSWORD' => $password,
-					'SITE' => $this->registry->config->get('site_name', 'SERVER'),
-					'ADMINISTRATOR' => $this->registry->config->get('site_name', 'SERVER')
+					'SITE' => $this->get('config.server.site_name'),
+					'ADMINISTRATOR' => $this->get('config.server.site_name')
 				);
 
 				$sent_mail = $mail->send($params);
 
-				if (PEAR::isError($sent_mail)) {
+				if (PEAR::isError($sent_mail)):
 					$this->registry->Error ($sent_mail->getMessage(), 'email failed due to a system error');
-				} else {
+				else:
 					if (isset($_SESSION['http_referer'])):
-						if ($this->registry->config->get('enable_ssl','SERVER')) {
-							$url = $this->registry->config->get ('ssl_url', 'SERVER');
-						} else {
-							$url = $this->registry->config->get ('web_url', 'SERVER');
-						}
+						if ($this->get('config.server.enable_ssl')):
+							$url = $this->get('config.server.ssl_url');
+						else:
+							$url = $this->get('config.server.web_url');
+						endif;
 
 						$page = urldecode($_SESSION['http_referer']);
 						unset($_SESSION['http_referer']);
@@ -152,10 +152,10 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 						$this->addcontent($sent_message);
 					endif;
 					
-				}
-			} else {
+				endif;
+			else:
 				$this->registry->Error ("Sorry I could not register you due to a system error. Please try again later.");
-			}
+			endif;
 		}
 		catch (PDOException $e)
 		{
@@ -165,17 +165,11 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()) {
 
 		//$conn = null;
 
-	} else if ($num_row > 1) {
-
+	elseif ($num_row > 1):
 		$this->registry->Error ("Are you trying to hack this site?");
-
-	} else {
-
-		// no user found.
+	else:
+		// user found.
 		$this->registry->Error ('The email entered already has been registered with us. Please use a different one.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
-
-	}
-	
-}
-
+	endif;
+endif;
 ?>

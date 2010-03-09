@@ -3,20 +3,19 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	if (isset($this->registry->params['action'])) {
+	if (isset($this->registry->params['action'])):
 		$action = $this->registry->params['action'];
-	} else {
+	else:
 		$action = 'overview';	
-	}
+	endif;
 	
 	$title .= " : " . ucwords(str_replace('_', ' ',$action));
 	
 	require_once('ushop/postage/'.$action.'.php');
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

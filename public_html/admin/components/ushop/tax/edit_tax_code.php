@@ -3,15 +3,11 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/tax/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'products' => '/ushop/products',
-   		'postage' => '/ushop/postage'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
@@ -30,9 +26,7 @@ if ($this->authorize()) {
 	
 	$tax_rates = $ushop->getTaxRates(true);
 			
-	foreach ($tax_rates as $rate) {
-		$opts[$rate->tax_rate_id] = ucwords($rate->tax_rate);
-	}
+	foreach ($tax_rates as $rate) $opts[$rate->tax_rate_id] = ucwords($rate->tax_rate);
 			
 	$form->addElement('html', '<fieldset>');
 	$form->addElement('header','edit_tax_code','Edit Tax Code');
@@ -51,7 +45,7 @@ if ($this->authorize()) {
 	$form->addRule('tax_code', 'Tax codes have only letters', 'lettersonly');
 	
 			
-	if ($form->validate()) {
+	if ($form->validate()):
 		
 		$form->freeze();
 		$values = $form->process(array(&$this, 'formValues'), false);
@@ -63,18 +57,15 @@ if ($this->authorize()) {
 		//check then enter the record.
 		$res = $this->update($values, $ushop->db_name.'tax_codes',  array('where' => 'tax_code_id='.$this->registry->params['id']));
 			
-		if ($res) {
+		if ($res):
 			$params['TYPE'] = 'pass';
 			$params['MESSAGE'] = '<h2>Tax code was successfully edited.</h2>';
-				
-		} else {
+		else:
 			$params['TYPE'] = 'error';
 			$params['MESSAGE'] = '<h2>Tax code could not be edited due to an error.</h2>';
-		}
-				
+		endif;	
 		// done!
-			
-	} else {
+	else:
 			
 		$form->setDefaults(array(
 			'tax_code' => $rows[0]->tax_code,
@@ -82,7 +73,7 @@ if ($this->authorize()) {
    			'description' => $rows[0]->description,
 		));
 				
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');
@@ -92,16 +83,14 @@ if ($this->authorize()) {
 		
 		// output the form
 		$this->content .= $renderer->toHtml();
-				
-	}
+	endif;
 	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

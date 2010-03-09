@@ -3,22 +3,18 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/postage/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'products' => '/ushop/products',
-   		'tax' => '/ushop/tax'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
 	
 	$menuBar = array();
 	
-	if ($this->registry->params['id']) {
+	if ($this->registry->params['id']):
 		
 		$rows = $this->getResult('post_zone_id, country_id, country', $ushop->db_name.'countries',null, array('where' => 'country_id = '.$this->registry->params['id']));
 			
@@ -29,9 +25,7 @@ if ($this->authorize()) {
 		
 		$post_zones = $this->getResult('post_zone_id, zone', $ushop->db_name.'post_zones');
 			
-		foreach ($post_zones as $value) {
-			$opts[$value->post_zone_id] = $value->zone;
-		}
+		foreach ($post_zones as $value) $opts[$value->post_zone_id] = $value->zone;
 			
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
@@ -49,7 +43,7 @@ if ($this->authorize()) {
 		$form->addRule('country', 'Please enter a country', 'required');
 		$form->addRule('post_zone_id', 'Please enter a post zone', 'nonzero');
 			
-		if ($form->validate()) {
+		if ($form->validate()):
 			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
@@ -59,26 +53,22 @@ if ($this->authorize()) {
 			//check then enter the record.
 			$res = $this->update($values, $ushop->db_name.'countries', array('where' => 'country_id='.$this->registry->params['id']));
 			
-			if ($res) {
+			if ($res):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Country was successfully edited.</h2>';
-				
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Country could not be edited due to an error.</h2>';
-			}
-				
+			endif;
 			// done!
-			
-			
-		} else {
+		else:
 				
 			$form->setDefaults(array(
 			'country' => $rows[0]->country,
    			'post_zone_id' => $rows[0]->post_zone_id,
 			));
 				
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -88,18 +78,15 @@ if ($this->authorize()) {
 		
 			// output the form
 			$this->content .= $renderer->toHtml();
-				
-		}
-			
-	}
+		endif;
+	endif;
 	
-	if (isset($params)) {
+	if (isset($params)):
 		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

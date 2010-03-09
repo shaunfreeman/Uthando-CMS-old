@@ -3,37 +3,28 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
-	
-	$menuBar = array(
-   		'customers' => '/ushop/customers',
-   		'postage' => '/ushop/postage',
-   		'tax' => '/ushop/tax'
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
+if ($this->authorize()):
 	
 	$menuBar = array();
 		
-	if ($this->registry->params['comfirm'] == 'delete') {
+	if ($this->registry->params['comfirm'] == 'delete'):
 		
 		$tree = new NestedTreeAdmin($ushop->db_name.'product_categories', $this->registry->params['id'], 'category');
 		
 		$res = $tree->remove($this->registry->params['id']);
 			
-		if ($res) {
+		if ($res):
 			$params['TYPE'] = 'pass';
 			$params['MESSAGE'] = '<h2>Category was successfully deleted.</h2>';
 				
-		} else {
+		else:
 			$params['TYPE'] = 'error';
 			$params['MESSAGE'] = '<h2>Category could not be deleted due to an error.</h2>';
-		}
+		endif;
 				
 		// done!
 		$menuBar = array('back' => '/ushop/products/overview');
-			
-	} else {
+	else:
 		
 		$menuBar = array(
 			'cancel' => '/ushop/products/overview',
@@ -41,15 +32,14 @@ if ($this->authorize()) {
 		);
 		$params['TYPE'] = 'warning';
 		$params['MESSAGE'] = 'Are you sure you want to delete this category';
-	}
+	endif;
 	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

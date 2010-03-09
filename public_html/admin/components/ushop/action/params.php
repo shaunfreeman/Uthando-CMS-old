@@ -3,13 +3,12 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$paramsBar = array(
 		'back' => '/ushop/overview',
 		'cancel' => '/ushop/overview',
-		'save' => '',
-		'seperator' => ''
+		'save' => ''
 	);
 		
 	$this->content .= $this->makeToolbar(array_merge($paramsBar,$menuBar), 24);
@@ -41,7 +40,7 @@ if ($this->authorize()) {
 	
 	$form->addElement('html', '</div></div>');
 	
-	if ($form->validate()) {
+	if ($form->validate()):
 			
 		// Apply form element filters.
 		$form->freeze();
@@ -49,24 +48,22 @@ if ($this->authorize()) {
 		
 		$ushop_ini = new Admin_Config($this->registry, array('path' => $this->registry->ini_dir . '/ushop.ini.php'));
 		
-		if ($values['INFORMATION']) {
+		if ($values['information']):
 			$ftp = new File_FTP($this->registry);
-			foreach ($values['INFORMATION'] as $key => $value) {
+			foreach ($values['information'] as $key => $value):
 				$message = file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$key.'.html',stripslashes(str_replace('\r\n', '', $value)));
 				$ftp->put($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$key.'.html', $login['public_html'].'/components/ushop/html/'.$key.'.html', true);
 				unlink($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$key.'.html');
-			}
-			unset($values['INFORMATION']);
+			endforeach;
+			unset($values['information']);
 			$ftp->disconnect();
-		}
+		endif;
 		
-		foreach($values as $section => $value) {
-			
-			foreach ($value as $key => $value) {
-				
+		foreach($values as $section => $value):
+			foreach ($value as $key => $value):
 				$ushop_ini->set($key,$value,$section);
-			}
-		}
+			endforeach;
+		endforeach;
 		
 		$saved = $ushop_ini->save();
 		
@@ -74,18 +71,15 @@ if ($this->authorize()) {
 			
 		//check then enter the record.
 			
-		if ($saved) {
+		if ($saved):
 			$params['TYPE'] = 'pass';
 			$params['MESSAGE'] = '<h2>Params was successfully updated.</h2>';
-		} else {
+		else:
 			$params['TYPE'] = 'error';
 			$params['MESSAGE'] = '<h2>Params could not be updated.</h2>';
-		}
-				
+		endif;
 		// done!
-			
-			
-	} else {
+	else:
 		
 		$tab_array = array('information' => null, 'configuration' => null, 'display' => null);
 		
@@ -94,11 +88,11 @@ if ($this->authorize()) {
 			'offline_message' => file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../components/ushop/html/offline_message.html')
 		);
 		
-		$ushop->INFORMATION = $info;
+		$ushop->information = $info;
 			
 		$form->setDefaults($ushop->getSettings());
 		
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');
@@ -132,19 +126,17 @@ if ($this->authorize()) {
 		);
 		
 		$this->registry->component_css = array(
-			'/templates/'.$this->registry->template.'/css/FileManager.css',
-			'/templates/'.$this->registry->template.'/css/Additions.css'
+			'/templates/'.$template.'/css/FileManager.css',
+			'/templates/'.$template.'/css/Additions.css'
 		);
-		
-	}
+	endif;
 	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

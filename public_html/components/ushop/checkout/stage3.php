@@ -9,12 +9,12 @@ if (UthandoUser::authorize()):
 		define( 'SHOP_STAGE_3', 1 );
 		require_once('ushop/checkout/payment/'.$this->registry->params['payment'].'.php');
 	else:
-		header("Location" . $this->registry->config->get('web_url', 'SERVER'));
+		header("Location" . $this->get('config.server.web_url'));
 		exit();
 	endif;
 		
 else:
-	header("Location" . $this->registry->config->get('web_url', 'SERVER'));
+	header("Location" . $this->get('config.server.web_url'));
 	exit();
 endif;
 ?>

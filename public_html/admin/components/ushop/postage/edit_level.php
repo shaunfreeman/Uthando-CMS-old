@@ -3,22 +3,18 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/postage/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'products' => '/ushop/products',
-   		'tax' => '/ushop/tax'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
 	
 	$menuBar = array();
 	
-	if ($this->registry->params['id']) {
+	if ($this->registry->params['id']):
 		
 		$rows = $this->getResult('post_level_id, post_level', $ushop->db_name.'post_levels',null, array('where' => 'post_level_id = '.$this->registry->params['id']));
 			
@@ -37,7 +33,7 @@ if ($this->authorize()) {
 		$form->addRule('post_level', 'Please enter a post level', 'required');
 		$form->addRule('post_level', 'Post Levels have to be a number.', 'numeric');
 			
-		if ($form->validate()) {
+		if ($form->validate()):
 			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
@@ -47,24 +43,21 @@ if ($this->authorize()) {
 			//check then enter the record.
 			$res = $this->update($values, $ushop->db_name.'post_levels', array('where' => 'post_level_id='.$this->registry->params['id']));
 			
-			if ($res) {
+			if ($res):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Post Level was successfully edited.</h2>';
-				
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Post Level could not be edited due to an error.</h2>';
-			}
-				
+			endif;
 			// done!
-			
-		} else {
+		else:
 				
 			$form->setDefaults(array(
    			'post_level' => $rows[0]->post_level,
 			));
 				
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -74,17 +67,15 @@ if ($this->authorize()) {
 		
 			// output the form
 			$this->content .= $renderer->toHtml();
-		
-		}
+		endif;
 	
-		if (isset($params)) {
-			$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+		if (isset($params)):
+			$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 			$this->content .= $this->message($params);
-		}
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+		endif;
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

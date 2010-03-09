@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (!UthandoUser::authorize()) {
+if (!UthandoUser::authorize()):
 	
 	$form = new HTML_QuickForm('login', 'post', '/user/login');
 	
@@ -21,17 +21,17 @@ if (!UthandoUser::authorize()) {
 	// Add form elements.
 	$form->addElement('text', 'email', 'Enter your email address:', array('size' => 20, 'maxlength' => 100, 'class' => 'inputbox'));
 	
-	foreach ($rand_chars as $key => $value) {
+	foreach ($rand_chars as $key => $value):
 		$form->addElement('password', 'pwd'.$key, 'Enter the '.$num_chars[$value].' charactor of your password:', array('size' => 1, 'maxlength' => 1, 'class' => 'inputbox'));
 		
 		// password rules.
 		$form->addRule('pwd'.$key, 'Please enter your password', 'required');
 		$form->addRule('pwd'.$key, 'Enter a one character password', 'rangelength', array(1,1), 'server');
 		$form->addRule('pwd'.$key, 'Enter a valid password (numbers, letters and ! £ $ % & / \ ( ) = ? + # - . , ; : _ only)', 'regex', '/^[a-zA-Z0-9!£$\%&\/\\\()=?+#-.,;:_]+$/', 'server');
-	}
+	endforeach;
 	
 	// add links for register and reset user account.
-	$form->addElement('link',null,'Forgot Password:',$this->registry->config->get('ssl_url', 'server').'/'.$this->registry->component.'/reminder', 'Click Here', 'id="reset_password" class="category"'); 
+	$form->addElement('link',null,'Forgot Password:',$this->get('config.server.ssl_url').'/'.$this->registry->component.'/reminder', 'Click Here', 'id="reset_password" class="category"'); 
 		
 	// Add form element rules.
 	// email rules.
@@ -39,24 +39,18 @@ if (!UthandoUser::authorize()) {
 	$form->addRule('email', 'Enter a valid email address.', 'email', null, 'server');
 	
 	// validate the form or just display it.
-	if ($user_config->get('captcha_status', 'LOGIN') == 'on') {
+	if ($user_config->get('captcha_status', 'login') == 'on'):
 		require_once('user/captcha/index.php');
-	} else {
-		
-		if ($form->validate() && $_SESSION['rand_chars']) {
-			
+	else:
+		if ($form->validate() && $_SESSION['rand_chars']):
 			require_once('user/validate/login.php');
-		
-		} else {
-			
+		else:
 			$_SESSION['rand_chars'] = $rand_chars;
-			
 			$form->addElement('submit', null, 'Send', array('class' => 'button'));
-			
 			// Output the form
 			$this->addContent($form->toHtml());
-		}
-	}
-}
+		endif;
+	endif;
+endif;
 
 ?>

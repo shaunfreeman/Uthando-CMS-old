@@ -2,18 +2,18 @@
 // no direct access
 defined( 'SHOP_PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->ushop->GLOBAL['offline'] || $this->ushop->GLOBAL['catelogue_mode']):
+if ($this->ushop->global['offline'] || $this->ushop->global['catelogue_mode']):
 	$this->addContent('<h3>Shopping is unavialible</h3><p><a href="/ushop/view/shopfront">Click here to continue</a></p>');
 else:
 	if (UthandoUser::authorize()):
 		
-		foreach ($this->ushop->CHECKOUT as $key => $value):
+		foreach ($this->ushop->checkout as $key => $value):
 			if (preg_match('/^pay_/', $key) && $value) $payment_options[] = $key;
 		endforeach;
 
 		$this->addContent('<div id="products">');
 		
-		$form = new HTML_QuickForm('order_confirm', 'post', $this->registry->config->get('ssl_url', 'SERVER').'/ushop/view/checkout/stage-2');
+		$form = new HTML_QuickForm('order_confirm', 'post', $this->get('config.server.ssl_url').'/ushop/view/checkout/stage-2');
 
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
@@ -80,9 +80,9 @@ else:
 
 				// set some headers.
 				$headers = array(
-					'From' => $this->ushop->CHECKOUT['orders_email'],
+					'From' => $this->ushop->checkout['orders_email'],
 					'To' => $user->email,
-					 'Subject' => 'Purchase Order form  - ' . $this->registry->config->get('site_name', 'SERVER') . ': Invoice #' . $invoice,
+					 'Subject' => 'Purchase Order form  - ' . $this->get('config.server.site_name') . ': Invoice #' . $invoice,
 					'MIME-Version' => "1.0",
 					'X-Priority' => "1",
 					'Content-Type' => 'text/'.$email_type.'; charset="utf-8"',
@@ -103,11 +103,11 @@ else:
 				// mail to merchant.
 				$mail->setHeaders(array(
 					'From' => $user->email,
-					'To' => $this->ushop->CHECKOUT['orders_email']
+					'To' => $this->ushop->checkout['orders_email']
 				));
 
 				// mail to customer.
-				$mail->setRecipients($this->ushop->CHECKOUT['orders_email']);
+				$mail->setRecipients($this->ushop->checkout['orders_email']);
 
 				$sent_mail = $mail->send();
 

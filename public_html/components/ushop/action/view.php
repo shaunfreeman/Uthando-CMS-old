@@ -8,7 +8,7 @@ $title .= " : ";
 
 $this->ushop = new UShop_Core();
 
-switch ($this->registry->params[0]) {
+switch ($this->registry->params[0]):
 	case 'shopfront':
 		require_once('ushop/action/shopfront.php');
 		break;
@@ -30,6 +30,6 @@ switch ($this->registry->params[0]) {
 	default:
 		require_once('ushop/action/browse.php');
 		break;
-}
+endswitch;
 
 ?>

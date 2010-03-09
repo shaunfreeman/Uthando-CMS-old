@@ -3,19 +3,11 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
-	
-	$menuBar = array(
-   		'customers' => '/ushop/customers',
-   		'postage' => '/ushop/postage',
-   		'tax' => '/ushop/tax'
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
+if ($this->authorize()):
 	
 	$menuBar = array();
 		
-	if ($this->registry->params['comfirm'] == 'delete') {
+	if ($this->registry->params['comfirm'] == 'delete'):
 		
 		// delete image file first.
 		$login = $this->registry->admin_config->get('FTP');
@@ -24,43 +16,41 @@ if ($this->authorize()) {
 		
 		$di = true; // set delete flag.
 		
-		if ($row) {
+		if ($row):
 			$ftp = new File_FTP($this->registry);
 				
-			if ($ftp) {
+			if ($ftp):
 				$delete = $ftp->rm($login['public_html'] . '/components/ushop/images/products/' . $row[0]->image);
 					
 				if (!$delete) $di = false;
 				
 				$ftp->disconnect();
-			} else {
+			else:
 				$di = false;
-			}
-		} else {
+			endif;
+		else:
 			$di = false;
-		}
+		endif;
 		
 		$res = $this->remove($ushop->db_name.'products', 'product_id='.$this->registry->params['id']);
 			
-		if ($res) {
+		if ($res):
 			$params['TYPE'] = 'pass';
 			$params['MESSAGE'] = '<h2>Product was successfully deleted.</h2>';
-				
-		} else {
+		else:
 			$params['TYPE'] = 'error';
 			$params['MESSAGE'] = '<h2>Product could not be deleted due to an error.</h2>';
-		}
+		endif;
 		
-		if (!$di) {
+		if (!$di):
 			$params['TYPE'] = 'error';
 			$params['MESSAGE'] = '<h2>Product image could not be deleted due to an error. Please delete manually</h2>';
 			$this->registry->Error("Product image, ".$row[0]->image.", could not be deleted due to an error. Please delete manually");
-		}
+		endif;
 				
 		// done!
 		$menuBar = array('back' => '/ushop/products/overview');
-			
-	} else {
+	else:
 		
 		$menuBar = array(
 			'cancel' => '/ushop/products/overview',
@@ -68,15 +58,14 @@ if ($this->authorize()) {
 		);
 		$params['TYPE'] = 'warning';
 		$params['MESSAGE'] = 'Are you sure you want to delete this product';
-	}
+	endif;
 	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

@@ -33,7 +33,7 @@ class Session {
 		
 		ini_set ('session.session_cookie', $this->lifeTime);
 		ini_set ('session.gc_maxlifetime', $this->lifeTime);
-		ini_set ('session.gc_probability', 33);
+		ini_set ('session.gc_probability', 100);
 		// get session-lifetime
 		$this->lifeTime = ini_get("session.gc_maxlifetime");
 		session_set_save_handler(

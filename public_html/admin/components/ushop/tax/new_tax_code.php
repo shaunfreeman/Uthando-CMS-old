@@ -3,31 +3,25 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/tax/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'products' => '/ushop/products',
-   		'postage' => '/ushop/postage'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
 	
 	$menuBar = array();
 	
-	if ($tax_rates = $ushop->getTaxRates(true)) {
+	if ($tax_rates = $ushop->getTaxRates(true)):
 			
 		$form = new HTML_QuickForm('add_tax_code', 'post', $_SERVER['REQUEST_URI']);
 			
 		$s = $form->createElement('select', 'tax_rate', 'Tax Rate:');
 		$opts[0] = 'Select One';
 			
-		foreach ($tax_rates as $rate) {
-			$opts[$rate->tax_rate_id] = ucwords($rate->tax_rate);
-		}
+		foreach ($tax_rates as $rate) $opts[$rate->tax_rate_id] = ucwords($rate->tax_rate);
 			
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
@@ -50,7 +44,7 @@ if ($this->authorize()) {
 		// group rules
 		$form->addRule('tax_rate','Please Select a menu type','nonzero');
 			
-		if ($form->validate()) {
+		if ($form->validate()):
 			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
@@ -59,29 +53,25 @@ if ($this->authorize()) {
 			$menuBar['back'] = '/ushop/tax/overview';
 			
 			//check then enter the record.
-			if (!$this->getResult('tax_code_id', $ushop->db_name.'tax_codes', null, array('where' => "tax_code='".$value['tax_code']."'"))) {
+			if (!$this->getResult('tax_code_id', $ushop->db_name.'tax_codes', null, array('where' => "tax_code='".$value['tax_code']."'"))):
 				
 				$res = $ushop->insert($values, $ushop->db_name.'tax_codes');
 			
-				if ($res) {
+				if ($res):
 					$params['TYPE'] = 'pass';
 					$params['MESSAGE'] = '<h2>Tax code was successfully entered.</h2>';
-				} else {
+				else:
 					$params['TYPE'] = 'error';
 					$params['MESSAGE'] = '<h2>Tax code could not be entered into the database.</h2>';
-				}
-			
-			} else {
+				endif;
+			else:
 				$params['TYPE'] = 'warning';
 				$params['MESSAGE'] = '<h2>This code already exits.</h2>';
-			}
-				
+			endif;
 			// done!
-			
-			
-		} else {
+		else:
 				
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -91,22 +81,18 @@ if ($this->authorize()) {
 		
 			// output the form
 			$this->content .= $renderer->toHtml();
-				
-		}
-			
-	} else {
+		endif;
+	else:
 		$params['TYPE'] = 'info';
 		$params['MESSAGE'] = '<h2>First define some tax rates.</h2>';
-		
-	}
+	endif;
 	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

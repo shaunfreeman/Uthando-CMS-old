@@ -4,7 +4,7 @@ defined( 'SHOP_PARENT_FILE' ) or die( 'Restricted access' );
 
 $title .= ' - Comfirm Address';
 
-if ($this->ushop->GLOBAL['offline'] || $this->ushop->GLOBAL['catelogue_mode']):
+if ($this->ushop->global['offline'] || $this->ushop->global['catelogue_mode']):
 	$this->addContent('<h3>Shopping is unavialible</h3><p><a href="/ushop/view/shopfront">Click here to continue</a></p>');
 else:
 	if (UthandoUser::authorize()):
@@ -20,7 +20,7 @@ else:
 			$this->addContent($user_info['info']);
 			$this->addContent($user_info['cda']);
 			$this->addContent('<div class="both"></div>');
-			$this->addContent('<div id="products"><a href="'.$this->registry->config->get('ssl_url', 'SERVER').'/ushop/view/change_details" class="button">Update Details</a><p>Please click confirm address to continue to check out.</p><a href="'.$this->registry->config->get('ssl_url', 'SERVER').'/ushop/view/checkout/stage-2" class="button">Confirm Address</a></div>');
+			$this->addContent('<div id="products"><a href="'.$this->get('config.server.ssl_url').'/ushop/view/change_details" class="button">Update Details</a><p>Please click confirm address to continue to check out.</p><a href="'.$this->get('config.server.ssl_url').'/ushop/view/checkout/stage-2" class="button">Confirm Address</a></div>');
 			
 		else:
 			// no address, create one.
@@ -30,7 +30,7 @@ else:
 		endif;
 		
 	else:
-		header("Location" . $registry->config->get('web_url', 'SERVER'));
+		header("Location" . $this->get('config.server.web_url'));
 		exit();
 	endif;
 endif;

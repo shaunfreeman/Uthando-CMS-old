@@ -3,14 +3,14 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
-	foreach ($ushop->ATTRIBUTES as $key => $value) {
+	foreach ($ushop->attributes as $key => $value):
 		if ($value) require_once ('ushop/products/attributes/'.$key.'.php');
-	}
+	endforeach;
 	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>

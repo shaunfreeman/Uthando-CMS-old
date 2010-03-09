@@ -6,7 +6,7 @@ defined( 'SHOP_STAGE_2' ) or die( 'Restricted access' );
 
 if (UthandoUser::authorize()):
 else:
-	header("Location" . $this->registry->config->get('web_url', 'SERVER'));
+	header("Location" . $this->get('config.server.web_url'));
 	exit();
 endif;
 ?>

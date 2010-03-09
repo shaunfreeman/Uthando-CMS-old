@@ -7,7 +7,7 @@ if (UthandoUser::authorize()):
 
 	$paypal_action = ($this->registry->params['callback']) ? $this->registry->params['callback'] : 'pay';
 	
-	$paypal = ($this->ushop->PAYPAL['ipn']) ? new UShop_Payment_Paypal_IPN($this->registry) : new UShop_Payment_Paypal($this->registry);
+	$paypal = ($this->ushop->paypal['ipn']) ? new UShop_Payment_Paypal_IPN($this->registry) : new UShop_Payment_Paypal($this->registry);
 	
 	switch ($paypal_action):
 		case 'cancel':
@@ -22,7 +22,7 @@ if (UthandoUser::authorize()):
 		case 'pay':
 		default:
 			defined( 'SHOP_STAGE_2' ) or die( 'Restricted access' );
-			$site = $this->registry->config->get('ssl_url', 'SERVER');
+			$site = $this->get('config.server.ssl_url');
 			$this_script = $site.'/ushop/view/checkout/stage-3/payment-paypal';
 			
 			try
@@ -39,13 +39,13 @@ if (UthandoUser::authorize()):
 				$this->registry->Error ($e->getMessage());
 			}
 			
-			$paypal->addField('business', $this->ushop->PAYPAL['pp_merchant_id']);
+			$paypal->addField('business', $this->ushop->paypal['pp_merchant_id']);
 			$paypal->addField('cmd','_cart');
 			$paypal->addField('upload','1');
-			if ($this->ushop->PAYPAL['pp_auto_return']) $paypal->addField('return', $this_script.'/callback-return/oid-'.$order->order_id);
-			if ($this->ushop->PAYPAL['pp_cancel_return']) $paypal->addField('cancel_return', $this_script.'/callback-cancel/oid-'.$order->order_id);
-			if ($this->ushop->PAYPAL['pp_ipn']) $paypal->addField('notify_url', $site.'/components/ushop/paypal/ipn.php');
-			if ($this->ushop->PAYPAL['pp_merchant_logo']) $paypal->addField('image_url', $site.$this->ushop->PAYPAL['pp_merchant_logo']);
+			if ($this->ushop->paypal['pp_auto_return']) $paypal->addField('return', $this_script.'/callback-return/oid-'.$order->order_id);
+			if ($this->ushop->paypal['pp_cancel_return']) $paypal->addField('cancel_return', $this_script.'/callback-cancel/oid-'.$order->order_id);
+			if ($this->ushop->paypal['pp_ipn']) $paypal->addField('notify_url', $site.'/components/ushop/paypal/ipn.php');
+			if ($this->ushop->paypal['pp_merchant_logo']) $paypal->addField('image_url', $site.$this->ushop->paypal['pp_merchant_logo']);
 			$paypal->addField('custom', $order->order_id);
 			$paypal->addField('invoice', $invoice);
 			$paypal->addField('rm','2');
@@ -83,7 +83,7 @@ if (UthandoUser::authorize()):
 			}
 				
 			$paypal->addField('shipping_1', $order->shipping);
-			$paypal->addField('currency_code', $this->ushop->PAYPAL['pp_currency']);
+			$paypal->addField('currency_code', $this->ushop->paypal['pp_currency']);
 			
 			// add address fields for customer convienience
 			
@@ -97,7 +97,7 @@ if (UthandoUser::authorize()):
 	endswitch;
 	
 else:
-	header("Location: " . $this->registry->config->get('web_url', 'SERVER'));
+	header("Location: " . $this->get('config.server.web_url'));
 	exit();
 endif;
 ?>

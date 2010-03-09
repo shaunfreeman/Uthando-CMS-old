@@ -3,15 +3,11 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if ($this->authorize()) {
+if ($this->authorize()):
 	
 	$menuBar = array(
 		'cancel' => '/ushop/products/overview',
-		'save' => null,
-   		'seperator' => null,
-   		'customers' => '/ushop/customers',
-   		'postage' => '/ushop/postage',
-   		'tax' => '/ushop/tax'
+		'save' => null
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
@@ -35,7 +31,7 @@ if ($this->authorize()) {
 	$form->addRule('level', 'Please enter a price group', 'required');
 	$form->addRule('price', 'Price have to be a number.', 'numeric');
 			
-	if ($form->validate()) {
+	if ($form->validate()):
 		
 		$form->freeze();
 		$values = $form->process(array(&$this, 'formValues'), false);
@@ -47,29 +43,25 @@ if ($this->authorize()) {
 		$menuBar['back'] = '/ushop/products/overview';
 			
 		//check then enter the record.
-		if (!$this->getResult('price_group_id', $ushop->db_name.'price_groups', null, array('where' => "price_group='".$values['price_group']."'"))) {
+		if (!$this->getResult('price_group_id', $ushop->db_name.'price_groups', null, array('where' => "price_group='".$values['price_group']."'"))):
 				
 			$res = $this->insert($values, $ushop->db_name.'price_groups');
 			
-			if ($res) {
+			if ($res):
 				$params['TYPE'] = 'pass';
 				$params['MESSAGE'] = '<h2>Price group was successfully entered.</h2>';
-			} else {
+			else:
 				$params['TYPE'] = 'error';
 				$params['MESSAGE'] = '<h2>Price group could not be entered into the database.</h2>';
-			}
-			
-		} else {
+			endif;
+		else:
 			$params['TYPE'] = 'warning';
 			$params['MESSAGE'] = '<h2>This price group already exits.</h2>';
-		}
-				
+		endif;	
 		// done!
-			
-			
-	} else {
-				
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->registry->admin_config->get ('admin_template', 'SERVER'));
+	else:
+		
+		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');
@@ -79,16 +71,14 @@ if ($this->authorize()) {
 		
 		// output the form
 		$this->content .= $renderer->toHtml();
-		
-	}
+	endif;
 	
-	if (isset($params)) {
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+	if (isset($params)):
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
-	}
-	
-} else {
-	header("Location:" . $registry->config->get('web_url', 'SERVER'));
+	endif;
+else:
+	header("Location:" . $this->get('config.server.web_url'));
 	exit();
-}
+endif;
 ?>
