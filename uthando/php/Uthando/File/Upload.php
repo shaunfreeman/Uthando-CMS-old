@@ -42,9 +42,10 @@ class File_Upload
 		$file['base'] = basename($pathinfo['basename'], '.'.$pathinfo['extension']);
 		
 		$real = realpath($to);
+		//print_rr($real);
 		
 		if(!$real) throw new UploadException('path');
-		if(is_dir($real)) $to = $real.'/Common/tmp/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext'];
+		if(is_dir($real)) $to = $real.'/../Common/tmp/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext'];
 		
 		if(!$options['overwrite'] && file_exists($to))
 			throw new UploadException('exists');

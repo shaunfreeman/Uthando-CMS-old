@@ -1,42 +1,50 @@
 <!DOCTYPE webprojectsession>
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
-    <itemcursorpositions>
-      <item line="8" column="53" url="public_html/admin/components/ushop/params/frontend_display.php" />
-      <item line="8" column="43" url="public_html/admin/components/ushop/params/paypal.php" />
-      <item line="137" column="0" url="public_html/admin/components/ushop/action/params.php" />
-      <item line="87" column="0" url="public_html/admin/index.php" />
-      <item line="0" column="0" url="uthando/php/Uthando/Uthando.php" />
-      <item line="0" column="0" url="uthando/php/Uthando/HTML/Template.php" />
-      <item line="10" column="29" url="public_html/admin/components/ushop/action/customers.php" />
-    </itemcursorpositions>
+    <itemcursorpositions/>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
     </uploadprofiles>
     <treestatus>
       <openfolder url="public_html" />
+      <openfolder url="public_html/Common" />
+      <openfolder url="public_html/Common/javascript" />
+      <openfolder url="public_html/Common/javascript/Source" />
+      <openfolder url="public_html/Common/javascript/Source/mootools-core" />
+      <openfolder url="public_html/Common/javascript/Source/mootools-core/Request" />
+      <openfolder url="public_html/Common/javascript/Source/mootools-core/Utilities" />
+      <openfolder url="public_html/Common/javascript/Source/uthando" />
+      <openfolder url="public_html/Common/javascript/Source/uthando/FileManager" />
       <openfolder url="public_html/admin" />
       <openfolder url="public_html/admin/components" />
-      <openfolder url="public_html/admin/components/user" />
-      <openfolder url="public_html/admin/components/user/action" />
+      <openfolder url="public_html/admin/components/media" />
+      <openfolder url="public_html/admin/components/media/action" />
+      <openfolder url="public_html/admin/components/media/js" />
       <openfolder url="public_html/admin/components/ushop" />
       <openfolder url="public_html/admin/components/ushop/action" />
+      <openfolder url="public_html/admin/components/ushop/js" />
+      <openfolder url="public_html/admin/plugins" />
+      <openfolder url="public_html/admin/plugins/ajax_content" />
+      <openfolder url="public_html/admin/templates" />
+      <openfolder url="public_html/admin/templates/admin" />
+      <openfolder url="public_html/admin/templates/admin/js" />
+      <openfolder url="public_html/userfiles" />
+      <openfolder url="public_html/userfiles/charismabooks" />
+      <openfolder url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac" />
+      <openfolder url="public_html/userfiles/shaunfreeman" />
       <openfolder url="uthando" />
       <openfolder url="uthando/ini" />
       <openfolder url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac" />
       <openfolder url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/templates" />
       <openfolder url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/user" />
-      <openfolder url="uthando/ini/shaunfreeman" />
-      <openfolder url="uthando/ini/shaunfreeman/templates" />
-      <openfolder url="uthando/ini/shaunfreeman/user" />
       <openfolder url="uthando/php" />
       <openfolder url="uthando/php/Uthando" />
       <openfolder url="uthando/php/Uthando/Admin" />
       <openfolder url="uthando/php/Uthando/DB" />
       <openfolder url="uthando/php/Uthando/Dbug" />
+      <openfolder url="uthando/php/Uthando/File" />
       <openfolder url="uthando/php/Uthando/HTML" />
       <openfolder url="uthando/php/Uthando/Security" />
-      <openfolder url="uthando/php/Uthando/UShop" />
       <openfolder url="uthando/php/Uthando/functions" />
     </treestatus>
   </session>

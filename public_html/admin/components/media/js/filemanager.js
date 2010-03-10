@@ -3,13 +3,13 @@ window.addEvent('domready', function(){
 		url: '/plugins/ajax_content/filemanager.php',
 		assetBasePath: '/templates/admin/images/FileManager',
 		language: 'en',
-		selectable: /*{SELCETABLE}*/,
+		selectable: {SELCETABLE},
 		uploadAuthData: {
-			session: '/*{SESSION_ID}*/',
-			folder: '/*{FOLDER}*/',
-			filter: /*{FILTER}*/
+			session: '{SESSION_ID}',
+			folder: '{FOLDER}',
+			filter: {FILTER}
 		},
 		onComplete: UthandoAdmin.fileManagerCallback
 	});
-	/*{MANAGER_INIT_CODE}*/
+	{MANAGER_INIT_CODE}
 });

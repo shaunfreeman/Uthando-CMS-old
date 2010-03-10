@@ -5,6 +5,16 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 Class Admin_Registry extends Registry
 {
+	public function __construct($ajax=false)
+	{
+		if ($ajax):
+			$this->path = urldecode($_SERVER['REQUEST_URI']);
+			$this->registerServer();
+		else:
+			parent::__construct();
+		endif;
+	}
+	
 	protected function registerServer()
 	{
 		$pos = strpos($_SERVER['SERVER_NAME'], '.') + 1;

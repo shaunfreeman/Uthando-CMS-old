@@ -257,12 +257,13 @@ if ($this->authorize()):
 
 			$manager_params = array(
 				'SESSION_ID' => session_id(),
-				'FOLDER' => 'components/ushop/images/products',
+				'FOLDER' => $this->registry->settings['resolve'].'/products',
 				'SELCETABLE' => true,
-				'FILTER' => "'image'"
+				'FILTER' => "'image'",
+				'MANAGER_INIT_CODE' => "$('image').addEvent('click', UthandoAdmin.manager.show.bind(UthandoAdmin.manager));"
 			);
 				
-			$this->content .= ('<script>'.$this->templateParser($js, $manager_params, '/*{', '}*/').'</script>');
+			$this->addScriptDeclaration($this->templateParser($js, $manager_params, '{', '}'));
 			
 			$this->loadJavaScript(array(
 				'/Common/editor/tiny_mce/tiny_mce_gzip.js',

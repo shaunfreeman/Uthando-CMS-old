@@ -28,7 +28,11 @@ set_include_path($ini_path);
 // Include functions.
 require_once('functions.php');
 
-$registry = new Admin_Registry();
+$registry = new Admin_Registry(true);
+
+require('Dbug/FirePHP.class.php');
+
+$registry->firephp = FirePHP::getInstance(true);
 
 $registry->setSite(realpath(__SITE_PATH.'/../../uthando/ini/uthandoSites.ini.php'));
 
@@ -40,7 +44,7 @@ if (isset($_GET['session'])):
 elseif (isset($_POST['session'])):
 	$registry->sessionId = $_POST['session'];
 endif;
-	
+
 try
 {
 		
@@ -71,7 +75,7 @@ try
 						),
 						false
 					);
-					$dir = $_SERVER['DOCUMENT_ROOT'].'/userfiles/'.$_POST['folder'].'/';
+					$dir = $_SERVER['DOCUMENT_ROOT'].'/../userfiles/'.$_POST['folder'].'/';
 					if (count($row) == 1) return true;
 					return false;
 				} else {

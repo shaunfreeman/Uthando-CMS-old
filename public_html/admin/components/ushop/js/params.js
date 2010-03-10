@@ -35,7 +35,7 @@ UthandoAdmin.extend({
 	}
 });
 
-UthandoAdminConfig.plugins.load.push('tinyMCE', 'fileManager');
+UthandoAdminConfig.plugins.load.push('tinyMCE');
 
 UthandoAdminConfig.extend({
 	tinyMCE: {
@@ -56,7 +56,6 @@ UthandoAdminConfig.extend({
 		}
 	},
 	fileManager: {
-		enable: UthandoAdmin.enableFileManager,
 		el: 'pp_merchant_logo',
 		pathPrefix: '/userfiles/',
 		file: false

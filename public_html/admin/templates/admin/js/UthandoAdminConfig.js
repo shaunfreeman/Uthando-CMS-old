@@ -68,7 +68,6 @@ var UthandoAdminConfig = $H({
 				}
 			},
 			onScroll: function(index, newRange) {
-				console.log(index, newRange, this.imgs.length)
 				if (newRange.start > 0) $('scrollLeft').setStyle('display', 'block');
 				if (newRange.start == 0) {
 					$('scrollLeft').setStyle('display', 'none');

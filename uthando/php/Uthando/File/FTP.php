@@ -49,7 +49,7 @@ class File_FTP
 		
 		$config = new Config($this->registry, array('path' => $this->registry->ini_dir . '/ftp.ini.php'));
 		
-		foreach ($config->get('FTP') as $key => $value):
+		foreach ($config->get('ftp') as $key => $value):
 			$this->$key = $value;
 		endforeach;
 		

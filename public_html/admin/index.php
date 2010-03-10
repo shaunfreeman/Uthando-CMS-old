@@ -82,10 +82,10 @@ $timer_result = $timer->getProfiling();
 
 $registry->template->AddParameter('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
 
-$registry->firephp->log($_SESSION);
-$registry->firephp->log($uthando);
-$registry->firephp->log($registry);
-$registry->firephp->log($_SERVER);
+//$registry->firephp->log($_SESSION);
+//$registry->firephp->log($uthando);
+//$registry->firephp->log($registry);
+//$registry->firephp->log($_SERVER);
 
 echo $registry->template;
 unset($registry);

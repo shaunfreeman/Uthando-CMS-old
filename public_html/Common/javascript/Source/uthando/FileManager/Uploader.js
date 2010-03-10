@@ -184,6 +184,7 @@ FileManager.implement({
 				this.ui.cancel = this.ui.cancel.destroy();
 				
 				var response = JSON.decode(this.response.text);
+				console.log(response);
 				if(!response.status)
 					new Dialog((''+response.error).substitute(self.language, /\\?\$\{([^{}]+)\}/g) , {language: {confirm: self.language.ok}, buttons: ['confirm']});
 				

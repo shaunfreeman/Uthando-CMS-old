@@ -2389,12 +2389,6 @@
     <item url="public_html/userfiles/charismabooks/flash/book.swf" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/flash/index.html" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/flash/logo.swf" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/image/" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/image/cot.gif" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/image/favicon.ico" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/image/index.html" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/image/paypal_merchant_logo.png" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/image/tl_transp.gif" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/media/" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/media/index.html" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/products/" uploadstatus="1" />
@@ -2763,8 +2757,6 @@
     <item url="public_html/userfiles/kris3man/media/index.html" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/index.html" uploadstatus="1" />
     <item url="public_html/Common/images/firefox.png" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/image/charismabooks2.png" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/image/charismabooks.png" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/image/logo.gif" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/image/logo.png" uploadstatus="1" />
     <item url="public_html/userfiles/kris3man/image/lplatebk.png" uploadstatus="1" />
@@ -3165,5 +3157,17 @@
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoAPI.js" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoConfig.js" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoJsCache.js" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/images/" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/images/" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/images/charismabooks.png" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/images/charismabooks2.png" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/images/cot.gif" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/images/favicon.ico" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/images/index.html" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/images/paypal_merchant_logo.png" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/images/tl_transp.gif" uploadstatus="1" />
+    <item url="uthando/php/Uthando/AJAX/" />
+    <item url="uthando/php/Uthando/AJAX/index.html" />
+    <item url="uthando/php/Uthando/AJAX/Registry.php" />
   </project>
 </webproject>
