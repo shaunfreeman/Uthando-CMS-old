@@ -105,17 +105,8 @@ if ($this->authorize()):
 		$tabs->addPanels($renderer->toHtml());
 		$this->content .= $tabs->toHtml();
 		
-		$js = file_get_contents(__SITE_PATH.'/components/media/js/filemanager.js');
-
-		$manager_params = array(
-			'SESSION_ID' => session_id(),
-			'FOLDER' => $this->registry->settings['resolve'],
-			'SELCETABLE' => true,
-			'FILTER' => "'image'",
-			'MANAGER_INIT_CODE' => "$('pp_merchant_logo').addEvent('click', UthandoAdmin.manager.show.bind(UthandoAdmin.manager));"
-		);
-			
-		$this->addScriptDeclaration($this->templateParser($js, $manager_params, '{', '}'));
+		$session = Utility::encodeString(session_id());
+		$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
 		
 		$this->loadJavaScript(array(
 			'/Common/editor/tiny_mce/tiny_mce_gzip.js',

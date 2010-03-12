@@ -35,7 +35,7 @@ class UthandoUser
 		endif;
 	}
 
-	public static function encodeKey($key)
+	private static function encodeKey($key)
 	{
 		if (is_array($key)):
 			$server = str_replace('http://', '', $key[1]);

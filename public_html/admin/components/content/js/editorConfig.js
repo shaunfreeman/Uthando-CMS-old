@@ -34,10 +34,10 @@ UthandoAdminConfig.extend({
 				return {
 					url: '/plugins/ajax_content/filemanager.php',
 					assetBasePath: '/templates/admin/images/FileManager',
+					//directory: Uthando.resolve,
 					language: 'en',
 					selectable: true,
 					uploadAuthData: {
-						folder: '/userfiles/'+url.get('host').split('.')[1],
 						session: UthandoAdmin.sid
 					}
 				};

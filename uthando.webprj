@@ -1157,9 +1157,7 @@
     <item url="public_html/admin/components/media/index.php" uploadstatus="1" />
     <item url="public_html/admin/components/media/js/" uploadstatus="1" />
     <item url="public_html/admin/components/media/action/index.html" uploadstatus="1" />
-    <item url="public_html/admin/components/media/action/manager.php" uploadstatus="1" />
     <item url="public_html/admin/components/media/action/overview.php" uploadstatus="1" />
-    <item url="public_html/admin/components/media/action/selectImage.php" uploadstatus="1" />
     <item url="public_html/admin/components/media/css/index.php" uploadstatus="1" />
     <item url="public_html/admin/components/media/js/filemanager.js" uploadstatus="1" />
     <item url="public_html/admin/components/media/js/index.html" uploadstatus="1" />
@@ -2385,10 +2383,6 @@
     <item url="public_html/userfiles/charismabooks/" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/file/" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/file/index.html" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/flash/" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/flash/book.swf" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/flash/index.html" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/flash/logo.swf" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/media/" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/media/index.html" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/products/" uploadstatus="1" />
@@ -3157,7 +3151,6 @@
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoAPI.js" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoConfig.js" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/template_files/js/UthandoJsCache.js" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/images/" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/images/" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/images/charismabooks.png" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/images/charismabooks2.png" uploadstatus="1" />
@@ -3166,8 +3159,19 @@
     <item url="public_html/userfiles/charismabooks/images/index.html" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/images/paypal_merchant_logo.png" uploadstatus="1" />
     <item url="public_html/userfiles/charismabooks/images/tl_transp.gif" uploadstatus="1" />
-    <item url="uthando/php/Uthando/AJAX/" />
-    <item url="uthando/php/Uthando/AJAX/index.html" />
-    <item url="uthando/php/Uthando/AJAX/Registry.php" />
+    <item url="uthando/php/Uthando/AJAX/" uploadstatus="1" />
+    <item url="uthando/php/Uthando/AJAX/index.html" uploadstatus="1" />
+    <item url="uthando/php/Uthando/AJAX/Registry.php" uploadstatus="1" />
+    <item url="uthando/php/Uthando/Utility.php" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/uthandocms.png" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/file/" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/file/index.html" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/index.html" />
+    <item url="public_html/userfiles/charismabooks/media/book.swf" />
+    <item url="public_html/userfiles/charismabooks/media/logo.swf" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/book.swf" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/logo.swf" />
   </project>
 </webproject>

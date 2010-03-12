@@ -10,18 +10,14 @@ if ($this->authorize()):
 	);
 		
 	$this->content .= $this->makeToolbar($menuBar, 24);
-
-	$js = file_get_contents(__SITE_PATH.'/components/media/js/filemanager.js');
 	
-	$manager_params = array(
-		'SESSION_ID' => session_id(),
-		'FOLDER' => $this->registry->settings['resolve'],
-		'SELCETABLE' => 'false',
-		'FILTER' => 'null',
-		'MANAGER_INIT_CODE' => 'UthandoAdmin.manager.show();'
+	$session = Utility::encodeString(session_id());
+	
+	$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
+	
+	$this->registry->component_js = array(
+		'/components/media/js/filemanager.js'
 	);
-		
-	$this->addScriptDeclaration($this->templateParser($js, $manager_params, '{', '}'));
 
 	$this->registry->component_css = array(
 		'/templates/'.$this->get('admin_config.site.template').'/css/FileManager.css',

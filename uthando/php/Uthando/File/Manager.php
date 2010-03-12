@@ -327,6 +327,7 @@ class File_Manager
 	
 	static function getFTPPath($ftp_path, $file) {
 		$matches = explode($ftp_path, $file);
+		//print_rr($matches);
 		return $ftp_path.$matches[1];
 	}
 	

@@ -77,11 +77,35 @@ var UthandoAdmin = $H({
 		});
 	},
 	// ============================================================
+	// = Setup mootools FileManager                               =
+	// ============================================================
+	fileManagerInit: function() {
+		this.manager = new FileManager({
+			url: '/plugins/ajax_content/filemanager.php',
+			assetBasePath: '/templates/admin/images/FileManager',
+			//directory: UthandoAdminConfig.fileManager.directory,
+			language: 'en',
+			selectable: UthandoAdminConfig.fileManager.selectable,
+			uploadAuthData: {
+				session: UthandoAdmin.sid,
+				filter: UthandoAdminConfig.fileManager.filter
+			},
+			onComplete: UthandoAdmin.fileManagerCallback
+		});
+		if (UthandoAdminConfig.fileManager.el) {
+			$(UthandoAdminConfig.fileManager.el).addEvent('click', this.manager.show.bind(this.manager));
+		} else {
+			this.manager.show();
+		}
+	},
+	// ============================================================
 	// = Setup mootools FileManager callback                      =
 	// ============================================================
 	fileManagerCallback: function(path, file) {
-		var filePath = (UthandoAdminConfig.fileManager.file) ? file.name : path;
-		$(UthandoAdminConfig.fileManager.el).set('value', UthandoAdminConfig.fileManager.pathPrefix + filePath);
+		if (UthandoAdminConfig.fileManager.el) {
+			var filePath = (UthandoAdminConfig.fileManager.file) ? file.name : path;
+			$(UthandoAdminConfig.fileManager.el).set('value', UthandoAdminConfig.fileManager.pathPrefix + filePath);
+		}
 	},
 	// ============================================================
 	// enable AjaxLinks Class                                     =

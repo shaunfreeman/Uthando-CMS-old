@@ -208,17 +208,8 @@ if ($this->authorize()):
 				
 			//$this->content .= $this->getTabs(array('details', 'description', 'price', 'attributes', 'image'));
 			
-			$js = file_get_contents(__SITE_PATH.'/components/media/js/filemanager.js');
-
-			$manager_params = array(
-				'SESSION_ID' => session_id(),
-				'FOLDER' => $this->registry->settings['resolve'].'/products',
-				'SELCETABLE' => true,
-				'FILTER' => "'image'",
-				'MANAGER_INIT_CODE' => "$('image').addEvent('click', UthandoAdmin.manager.show.bind(UthandoAdmin.manager));"
-			);
-				
-			$this->addScriptDeclaration($this->templateParser($js, $manager_params, '{', '}'));
+			$session = Utility::encodeString(session_id());
+			$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
 			
 			$this->loadJavaScript(array(
 				'/Common/editor/tiny_mce/tiny_mce_gzip.js',

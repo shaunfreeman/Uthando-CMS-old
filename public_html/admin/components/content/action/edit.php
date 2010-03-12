@@ -118,7 +118,8 @@ if ($this->authorize()):
 				'/templates/'.$this->get ('admin_config.site.template').'/css/Additions.css'
 			);
 			
-			$this->addScriptDeclaration("UthandoAdmin.sid = '" . session_id() . "';");
+			$session = Utility::encodeString(session_id());
+			$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
 			
 		endif;
 		

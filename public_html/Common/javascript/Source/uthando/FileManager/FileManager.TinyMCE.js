@@ -23,7 +23,7 @@ FileManager.TinyMCE = function(options){
 			onComplete: function(path){
 				if(!win.document) return;
 				win.document.getElementById(field).value = '/userfiles/'+path;
-				if(win.ImageDialog) win.ImageDialog.showPreviewImage(path, 1);
+				if(win.ImageDialog) win.ImageDialog.showPreviewImage('/userfiles/'+path, 1);
 				this.container.destroy();
 			}
 		}, options(type)));
