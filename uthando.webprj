@@ -3163,15 +3163,15 @@
     <item url="uthando/php/Uthando/AJAX/index.html" uploadstatus="1" />
     <item url="uthando/php/Uthando/AJAX/Registry.php" uploadstatus="1" />
     <item url="uthando/php/Uthando/Utility.php" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/image/uthandocms.png" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/file/" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/file/index.html" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/index.html" />
-    <item url="public_html/userfiles/charismabooks/media/book.swf" />
-    <item url="public_html/userfiles/charismabooks/media/logo.swf" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/book.swf" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/logo.swf" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/file/" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/file/index.html" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/index.html" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/media/book.swf" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/media/logo.swf" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/book.swf" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/logo.swf" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/images/" uploadstatus="1" />
+    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/images/uthandocms.png" uploadstatus="1" />
   </project>
 </webproject>

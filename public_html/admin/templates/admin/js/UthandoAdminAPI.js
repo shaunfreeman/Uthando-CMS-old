@@ -83,7 +83,7 @@ var UthandoAdmin = $H({
 		this.manager = new FileManager({
 			url: '/plugins/ajax_content/filemanager.php',
 			assetBasePath: '/templates/admin/images/FileManager',
-			//directory: UthandoAdminConfig.fileManager.directory,
+			directory: Uthando.resolve+UthandoAdminConfig.fileManager.directory,
 			language: 'en',
 			selectable: UthandoAdminConfig.fileManager.selectable,
 			uploadAuthData: {
@@ -92,11 +92,13 @@ var UthandoAdmin = $H({
 			},
 			onComplete: UthandoAdmin.fileManagerCallback
 		});
+		/*
 		if (UthandoAdminConfig.fileManager.el) {
-			$(UthandoAdminConfig.fileManager.el).addEvent('click', this.manager.show.bind(this.manager));
+			
 		} else {
 			this.manager.show();
 		}
+		*/
 	},
 	// ============================================================
 	// = Setup mootools FileManager callback                      =
@@ -237,7 +239,7 @@ var UthandoAdmin = $H({
 					var effect = el.retrieve('tab:effect');
 					effect.options.width = size.x - 10;
 					effect.options.height = size.y - 10;
-					$((el.title)).setStyles({
+					$(el.title).setStyles({
 						width: size.x - 10 + 'px',
 						height: size.y - 10 + 'px'
 					});

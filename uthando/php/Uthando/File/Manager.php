@@ -101,8 +101,6 @@ class File_Manager
 		
 		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+1));
 		
-		//print_rr(substr(str_replace(realpath($_SERVER['DOCUMENT_ROOT'].'/../'), '', $this->path),1));
-		
 		$mime = $this->getMimeType($file);
 		$content = null;
 		

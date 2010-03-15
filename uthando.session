@@ -2,17 +2,18 @@
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
     <itemcursorpositions>
-      <item line="6" column="22" url="public_html/admin/components/media/js/filemanager.js" />
-      <item line="21" column="47" url="public_html/Common/javascript/Source/uthando/FileManager/FileManager.TinyMCE.js" />
-      <item line="0" column="0" url="public_html/admin/components/content/js/editor.js" />
+      <item line="0" column="0" url="public_html/components/ushop/html/view_cart.html" />
+      <item line="0" column="0" url="public_html/components/ushop/html/popupDetails.html" />
+      <item line="0" column="0" url="public_html/components/ushop/html/popupDetailsTemplate.html" />
+      <item line="0" column="0" url="public_html/components/ushop/html/invoice.html" />
+      <item line="0" column="0" url="public_html/components/ushop/html/cart_body.html" />
+      <item line="0" column="0" url="public_html/admin/components/ushop/products/overview.php" />
+      <item line="0" column="0" url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/ushop.ini.php" />
+      <item line="0" column="0" url="public_html/admin/components/ushop/products/new_product.php" />
       <item line="0" column="0" url="public_html/admin/index.php" />
-      <item line="0" column="0" url="uthando/php/Uthando/Uthando.php" />
-      <item line="0" column="0" url="uthando/php/Uthando/HTML/Template.php" />
-      <item line="24" column="20" url="public_html/admin/components/ushop/js/products.js" />
-      <item line="91" column="16" url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" />
-      <item line="59" column="68" url="public_html/admin/plugins/ajax_content/filemanager.php" />
-      <item line="60" column="25" url="public_html/admin/components/ushop/js/params.js" />
-      <item line="36" column="22" url="public_html/admin/components/content/js/editorConfig.js" />
+      <item line="0" column="0" url="public_html/admin/templates/admin/js/UthandoAdminConfig.js" />
+      <item line="38" column="36" url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" />
+      <item line="0" column="0" url="public_html/admin/components/ushop/js/products.js" />
     </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
@@ -20,27 +21,26 @@
     <treestatus>
       <openfolder url="public_html" />
       <openfolder url="public_html/Common" />
-      <openfolder url="public_html/Common/javascript" />
-      <openfolder url="public_html/Common/javascript/Source" />
-      <openfolder url="public_html/Common/javascript/Source/uthando" />
-      <openfolder url="public_html/Common/javascript/Source/uthando/FileManager" />
       <openfolder url="public_html/admin" />
       <openfolder url="public_html/admin/components" />
       <openfolder url="public_html/admin/components/content" />
       <openfolder url="public_html/admin/components/content/js" />
-      <openfolder url="public_html/admin/components/media" />
-      <openfolder url="public_html/admin/components/media/js" />
+      <openfolder url="public_html/admin/components/template" />
+      <openfolder url="public_html/admin/components/template/js" />
       <openfolder url="public_html/admin/components/ushop" />
-      <openfolder url="public_html/admin/components/ushop/action" />
+      <openfolder url="public_html/admin/components/ushop/css" />
       <openfolder url="public_html/admin/components/ushop/js" />
       <openfolder url="public_html/admin/components/ushop/products" />
+      <openfolder url="public_html/admin/components/ushop/products/attributes" />
       <openfolder url="public_html/admin/plugins" />
       <openfolder url="public_html/admin/plugins/ajax_content" />
       <openfolder url="public_html/admin/templates" />
       <openfolder url="public_html/admin/templates/admin" />
       <openfolder url="public_html/admin/templates/admin/js" />
+      <openfolder url="public_html/components" />
+      <openfolder url="public_html/components/ushop" />
+      <openfolder url="public_html/components/ushop/html" />
       <openfolder url="public_html/userfiles" />
-      <openfolder url="public_html/userfiles/charismabooks" />
       <openfolder url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac" />
       <openfolder url="public_html/userfiles/shaunfreeman" />
       <openfolder url="uthando" />
@@ -50,17 +50,8 @@
       <openfolder url="uthando/ini/f570b20e90ec97cb5820ad28b2f8a3ac/user" />
       <openfolder url="uthando/php" />
       <openfolder url="uthando/php/Uthando" />
-      <openfolder url="uthando/php/Uthando/AJAX" />
       <openfolder url="uthando/php/Uthando/Admin" />
-      <openfolder url="uthando/php/Uthando/DB" />
-      <openfolder url="uthando/php/Uthando/Dbug" />
       <openfolder url="uthando/php/Uthando/File" />
-      <openfolder url="uthando/php/Uthando/HTML" />
-      <openfolder url="uthando/php/Uthando/HTML/Page" />
-      <openfolder url="uthando/php/Uthando/Security" />
-      <openfolder url="uthando/php/Uthando/UShop" />
-      <openfolder url="uthando/php/Uthando/csv" />
-      <openfolder url="uthando/php/Uthando/functions" />
     </treestatus>
   </session>
   <teamdata yourself="" />

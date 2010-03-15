@@ -49,7 +49,7 @@ if ($this->authorize()):
 			$items_opts[$item['category_id']] = str_repeat(str_repeat('&nbsp;',4), ($item['depth'])).$item['category'];
 		endforeach;
 		
-		$s = $form->createElement('select', 'category_id', 'Category:');
+		$s = $form->createElement('select', 'category_id', 'Category:', null, array('id' => 'category'));
 		$errors[] = 'category_id';
 	
 		$s->loadArray($items_opts);

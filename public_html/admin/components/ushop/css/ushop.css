@@ -21,6 +21,8 @@ Buttons
 Tables
 */
 
+/*.morphtabs_panel table { width: 100%; }*/
+
 #categories table th  { text-align:left; }
 
 #categories table tr:first-child th { text-align:center; }
