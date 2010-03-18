@@ -3,8 +3,8 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class UShop_Core {
-	
+class UShop_Core
+{
 	protected $vars;
 	
 	public function __construct()
@@ -13,7 +13,7 @@ class UShop_Core {
 		$this->registry = $GLOBALS['registry'];
 		$this->setOptions();
 		
-		$this->img_dir = $this->registry->get('config.server.web_url')."/components/ushop/images/products/";
+		$this->img_dir = $this->registry->get('config.server.web_url')."/userfiles/".$this->registry->settings['resolve'].'/products/';
 		
 		$this->prefix = 'ushop_';
 		$this->db_name = $this->registry->core.$this->prefix;
@@ -144,6 +144,8 @@ class UShop_Core {
 		);
 
 		foreach ($row as $key => $value):
+			
+			if ($key == 'name') $value = HTML_Element::makeXmlSafe($value);
 			
 			if ($key == 'image'):
 				$params[strtoupper($key)] = (file_exists($base_dir.'/'.str_replace(' ', '_', $row->category).'/'.$value) && $value != null) ? '/userfiles/'.$this->registry->settings['resolve'].'/products/'. str_replace(' ', '_', $row->category) . '/' .$value : ' /components/ushop/images/noimage.png';

@@ -239,6 +239,11 @@ class Uthando
 		return $this->registry->db->getResult($values, $table, $join, $filter, $array_mode);
 	}
 	
+	public function getRow($sql, $bind=null)
+	{
+		return $this->registry->db->getRow($sql, $bind);
+	}
+	
 	public function addContent($value)
 	{
 		$this->registry->template->addContent($value);

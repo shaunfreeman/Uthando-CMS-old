@@ -84,6 +84,7 @@ class DB_Core
 				$stmt->bindParam($key,$value);
 			endforeach;
 		endif;
+		//print_rr($stmt);
 		$stmt->execute();
 		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) $obj[] = $row;
 		return $obj;

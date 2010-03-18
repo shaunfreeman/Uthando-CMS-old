@@ -180,7 +180,7 @@ var Tabs = new Class({
 		var anchor = uri.get('fragment');
 		if (anchor == this.anchor) return;
 		this.anchor = anchor;
-		uri.go('#'+this.anchor);
+		uri.go();
 		this.fireEvent('onBackground', [this.activeTitle]);
 		this.activate(this.anchor);
 	}

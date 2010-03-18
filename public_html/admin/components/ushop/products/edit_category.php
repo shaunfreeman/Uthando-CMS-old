@@ -17,17 +17,19 @@ if ($this->authorize()):
 	if ($this->registry->params['id']):
 		
 		$rows = $this->getResult('category_id, category, category_image, category_image_status', $ushop->db_name.'product_categories', null, array('where' => 'category_id = '.$this->registry->params['id']));
-	
-		$tree = new NestedTreeAdmin($ushop->db_name.'product_categories', $this->registry->params['id'], 'category');
 		
-		$tree->getCategory();
+		//$ushop->tree->getTree();
 		
-		$category = $tree->getField('category');
-		$image = $tree->getField('category_image');
-		$category_id = $tree->getField('category_id');
-		$image_status = $tree->getField('category_image_status');
+		$ushop->tree->id = $this->registry->params['id'];
 		
-		$base_dir = __SITE_PATH . "/../components/ushop/images/products/";
+		$ushop->tree->getCategory();
+		
+		$category = $ushop->tree->getField('category');
+		$image = $ushop->tree->getField('category_image');
+		$category_id = $ushop->tree->getField('category_id');
+		$image_status = $ushop->tree->getField('category_image_status');
+		
+		$base_dir = __SITE_PATH . "/../userfiles/".$this->registry->settings['resolve']."/products/";
 		
 		$form = new HTML_QuickForm('edit_category', 'post', $_SERVER['REQUEST_URI']);
 		
@@ -37,69 +39,35 @@ if ($this->authorize()):
 		$form->addElement('html', '<fieldset>');
 		$form->addElement('header','edit_category','Edit Category');
 		
-		$form->addElement('text', 'category', 'Category:', array('size' => 20, 'maxlength' => 20, 'class' => 'inputbox'));
+		$form->addElement('text', 'category', 'Category:', array('id' => 'category', 'size' => 20, 'maxlength' => 20, 'class' => 'inputbox'));
+		
+		$form->addElement('hidden', 'category_image');
 		
 		$tmpl = file_get_contents(__SITE_PATH.'/components/ushop/html/formHtml.html');
 		
-		$pathway = $tree->pathway($this->registry->params['id']);
-		unset ($pathway[$category_id]);
+		$pathway = $ushop->tree->pathway($this->registry->params['id']);
 		$parent = end($pathway);
 		
-		$parent = $this->templateParser($tmpl, array('LABEL' => 'Parent:', 'ELEMENT' => ($parent['category']) ? $parent['category'] : 'Top' ), '{', '}');
+		$parent = $this->templateParser($tmpl, array('LABEL' => 'Parent:', 'ELEMENT' => (count($pathway) > 1) ? $parent['category'] : 'None' ), '{', '}');
 	
 		$form->addElement('html', $parent);
 		
 		if ($image_status == 1):
-	
+			
 			if (file_exists($base_dir.$image) && $image != null):
 				$img_file = $ushop->img_dir.$image;
 			else:
-				$img_file = $ushop->img_dir."nopic.jpg";
+				$img_file = $ushop->img_dir."noimage.png";
 			endif;
 		else:
 			$img_file = "IMAGE OFF";
 		endif;
 		
-		$img = $this->templateParser($tmpl, array('LABEL' => 'Image:', 'ELEMENT' => '<img src="'.$img_file.'" />'), '{', '}');
+		$attrs = 'id="image" class="Tips" title="Shop Tip" rel="Click to edit this category image."';
+		
+		$img = $this->templateParser($tmpl, array('LABEL' => 'Image:', 'ELEMENT' => ($img_file != 'IMAGE OFF') ? '<img '.$attrs.' src="'.$img_file.'" />' : '<span '.$attrs.'>'.$img_file.'</span>'), '{', '}');
 		
 		$form->addElement('html', $img);
-		
-		// get all decendents
-		$nopics = true;
-		
-		foreach ($tree->getDecendants() as $row):
-			
-			$imgs = $this->getResult('category_id, image, image_status', $ushop->db_name.'products', null, array('where' => 'category_id = '.$row['category_id']));
-			
-			if ($imgs):
-				
-				$main[$row['category_id']] = $row['category'];
-				
-				foreach ($imgs as $key => $value):
-					if ($value->image_status == 1 && is_file(__SITE_PATH . '/../components/ushop/images/products/'.$value->image)):
-						$secondary[$row['category_id']][$value->image] = $value->image;
-					endif;
-				endforeach;
-				
-				if (!is_array($secondary[$row['category_id']])) $secondary[$row['category_id']][] = '--- No Pictures ---';
-				
-				$nopics = false;
-			endif;
-		endforeach;
-		
-		if ($nopics == true):
-			$img_dir = '<span style="vertical-align:middle;">There are no pictures avaliable</span>';
-			
-			$img_dirs = $this->templateParser($tmpl, array('LABEL' => 'Change Image:', 'ELEMENT' => $img_dir), '{', '}');
-	
-			$form->addElement('html', $img_dirs);
-		else:
-			
-			// display dropdown menu of images and in thier categories.
-			
-			$hs = $form->addElement('hierselect', 'category_image', 'Change Image:');
-			$hs->setOptions(array($main,$secondary)); 
-		endif;
 		
 		// Creates a radio buttons group
 		$radio[] = $form->createElement('radio', null, null, 'On', 1);
@@ -115,10 +83,6 @@ if ($this->authorize()):
 
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
-			
-			$values['category_image'] = $values['category_image'][1];
-
-			//print_rr($values);
 		
 			$menuBar['back'] = '/ushop/products/overview';
 			
@@ -134,13 +98,11 @@ if ($this->authorize()):
 			endif;
 			// done!
 		else:
-				
-			$cat_image = $this->getResult('category_id', $ushop->db_name.'products', null, array('where' => "image = '$image'"));
 			
 			$form->setDefaults(array(
 				'category' => $category,
 				'category_image_status' => $image_status,
-				'category_image' => array($cat_image[0]->category_id, $image)
+				'category_image' => $image
 			));
 				
 			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
@@ -150,6 +112,18 @@ if ($this->authorize()):
 			$renderer->setElementTemplate('element');
 		
 			$form->accept($renderer);
+			
+			$session = Utility::encodeString(session_id());
+			$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
+			
+			$this->registry->component_css = array(
+				'/templates/'.$this->get('admin_config.site.template').'/css/FileManager.css',
+				'/templates/'.$this->get('admin_config.site.template').'/css/Additions.css'
+			);
+			
+			$this->registry->component_js = array(
+				'/components/ushop/js/categories.js'
+			);
 		
 			// output the form
 			$this->content .= $renderer->toHtml();

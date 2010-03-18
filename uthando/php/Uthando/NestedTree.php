@@ -49,24 +49,15 @@ class NestedTree {
 		}
 		return $nested;
 	}
-	
-	private function format_link_query() {
-		
-		$linked_array = array(
-			'fields' => null,
-			'tables' => null,
-			'filter' => null
-		);
-		
-		foreach ($this->linked_columns as $key => $value) {
-			$linked_array['fields'] .= ', '.$key;
-			$linked_array['tables'] .= ', '.$value;
-			$linked_array['filter'][] .= 'child.'.$key.'_id = '.$value.'.'.$key.'_id';
-		}
-		
-		return $linked_array;
-		
-	}
+	/*
+
+	SELECT child.*, (COUNT(parent.category) - 1) AS depth, COUNT(product_id) AS num_product
+	FROM uthando_core.ushop_product_categories AS child, uthando_core.ushop_product_categories AS parent, uthando_core.ushop_products AS product
+	WHERE child.lft BETWEEN parent.lft AND parent.rgt
+	AND child.category_id = product.category_id
+	GROUP BY category_id
+	ORDER BY child.lft
+	*/
 	
 	// returns the tree and it's depth.
 	protected function queryTree ($limit=NULL) {
@@ -74,13 +65,10 @@ class NestedTree {
 		// reset the tree array.
 		$this->full_tree = null;
 		
-		if ($this->linked_columns) $linked_array = $this->format_link_query();
-		
-		$filter['where'] = 'child.lft BETWEEN parent.lft AND parent.rgt';
-		if ($this->linked_columns) $filter['and'] = $linked_array['filter'];
-		$filter['group by'] = $this->category_field.'_id';
-		if ($this->top_level) $filter['having'] = 'depth=0';
-		$filter['order by'] = 'child.lft';
+		$filter['WHERE'] = 'child.lft BETWEEN parent.lft AND parent.rgt';
+		$filter['GROUP BY'] = $this->category_field.'_id';
+		if ($this->top_level) $filter['HAVING'] = 'depth=0';
+		$filter['ORDER BY'] = 'child.lft';
 		if ($limit) $filter['limit'] = $limit;
 		
 		$result = $this->uthando->getResult(
@@ -126,9 +114,9 @@ class NestedTree {
 			$this->table.' AS child, '.$this->table.' AS parent',
 			null,
 			array(
-				'where' => 'child.lft BETWEEN parent.lft AND parent.rgt',
-				'and' => 'child.'.$this->category_field.'_id='.$id,
-				'order by' => 'parent.lft'
+				'WHERE' => 'child.lft BETWEEN parent.lft AND parent.rgt',
+				'AND' => 'child.'.$this->category_field.'_id='.$id,
+				'ORDER BY' => 'parent.lft'
 			)
 		);
 		
@@ -154,13 +142,10 @@ class NestedTree {
 		if ($id == NULL) $id = $this->id;
 			
 		if (is_numeric ($id)) {
-			$filter['where'] = 'child.'.$this->category_field."_id=".$id;
+			$filter['WHERE'] = 'child.'.$this->category_field."_id=".$id;
 		} else {
-			$filter['where'] = 'child.'.$this->category_field."='".$id."'";
+			$filter['WHERE'] = 'child.'.$this->category_field."='".$id."'";
 		}
-		
-		if ($this->linked_columns) $linked_array = $this->format_link_query();
-		if ($this->linked_columns) $filter['and'] = $linked_array['filter'];
 		
 		$result = $this->uthando->getResult(
 			'child.*' . $linked_array['fields'],
@@ -207,16 +192,16 @@ class NestedTree {
 		$this->decendants = array();
 		
 		$filter = array(
-			'where' => 'child.lft BETWEEN parent.lft AND parent.rgt',
-			'and' => array(
+			'WHERE' => 'child.lft BETWEEN parent.lft AND parent.rgt',
+			'AND' => array(
 				'child.lft BETWEEN sub_parent.lft AND sub_parent.rgt',
 				'sub_parent.'.$this->category_field.'= sub_tree.'.$this->category_field
 			),
-			'group by' => 'child.'.$this->category_field
+			'GROUP BY' => 'child.'.$this->category_field
 		);
 		
-		if ($immediate_sub) $filter['having'] = 'depth>=1';
-		$filter['order by'] = 'child.lft';
+		if ($immediate_sub) $filter['HAVING'] = 'depth>=1';
+		$filter['ORDER BY'] = 'child.lft';
 		
 		$result = $this->uthando->getResult(
 			'child.*, (COUNT( parent.'.$this->category_field.' ) - ( sub_tree.depth + 1 )) AS depth',

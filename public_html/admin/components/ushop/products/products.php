@@ -35,20 +35,6 @@ if ($this->authorize()):
 		$base_dir = __SITE_PATH . "/../components/ushop/images/products/";
 		
 		foreach ($products as $row) {
-		
-			//$ftp->rename($ftp->public_html.'/components/ushop/images/products/'.$row->image, $ftp->public_html.'/components/ushop/images/products/'.str_replace(' ', '_', $row->category).'/'.$row->image);
-			
-			if ($row->image_status == 1) {
-	
-				if (file_exists($base_dir.str_replace(' ', '_', $row->category).'/'.$row->image) && $row->image != null) {
-					$img_file = '<img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/OK.png" />';
-		
-				} else {
-					$img_file = '<img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/DeleteRed.png" />';
-				}
-			} else {
-				$img_file = "IMAGE OFF";
-			}
 			
 			$data[$c][] = $row->enabled ? '<a href="/ushop/products/enable-0/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/IndicatorCircleGreenOn.png" /></a>' : '<a href="/ushop/products/enable-1/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/IndicatorCircleRedOff.png" /></a>';
 			
@@ -56,7 +42,7 @@ if ($this->authorize()):
 			$data[$c][] = HTML_Element::makeXmlSafe($row->name);
 			$data[$c][] = '&pound;'.$row->price;
 			
-			$data[$c][] = $img_file;
+			$data[$c][] = $row->category;
 				
 			$data[$c][] = '<a href="/ushop/products/action-edit_product/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Product" rel="Click to edit this product." /></a>';
 			$data[$c][] = '<a href="/ushop/products/action-delete_product/id-'.$row->product_id.'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Delete.png" class="Tips" title="Delete Product" rel="Click to delete this product" /></a>';
@@ -65,7 +51,7 @@ if ($this->authorize()):
 			
 		}
 		
-		$header = array('', 'SKU', 'Title', 'Price', 'Image', '', '');
+		$header = array('', 'SKU', 'Title', 'Price', 'Category', '', '');
 		
 		$table = $this->dataTable($data, $header);
 		

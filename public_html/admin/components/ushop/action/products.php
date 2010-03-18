@@ -15,10 +15,6 @@ if ($this->authorize()) {
 	
 	if (isset($this->registry->params['attr'])) $title .= ' : ' . ucwords(str_replace('_', ' ', $this->registry->params['attr']));
 	
-	$this->registry->component_js = array(
-		'/components/ushop/js/products.js'
-	);
-	
 	require_once('ushop/products/'.$action.'.php');
 	
 } else {

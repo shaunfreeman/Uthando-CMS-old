@@ -210,9 +210,9 @@ class HTML_Menu
 				'menu_items',
 				$join,
 				array (
-					'where' => "status != '".$status."'",
-					'and' => 'item_id IN ('.$search_categories.')',
-					'order by' => 'lft ASC'
+					'WHERE' => "status != '".$status."'",
+					'AND' => 'item_id IN ('.$search_categories.')',
+					'ORDER BY' => 'lft ASC'
 				)
 			);
 		else:
@@ -225,7 +225,7 @@ class HTML_Menu
 			foreach ($menu as $key => $value):
 				$return_menu[$key] = $value;
 				if (is_numeric($value['page_id'])):
-					$page = $this->registry->db->getResult('page',$this->db_table.'pages',null, array('where' => 'page_id='.$value['page_id']),false);
+					$page = $this->registry->db->getResult('page',$this->db_table.'pages',null, array('WHERE' => 'page_id='.$value['page_id']),false);
 					$return_menu[$key]['page'] = $page->page;
 				endif;
 				$return_menu[$key]['lft'] = $decendants[$key]['lft'];

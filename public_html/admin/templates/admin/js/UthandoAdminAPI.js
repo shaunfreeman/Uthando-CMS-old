@@ -2,6 +2,8 @@
 // = Uthando Admin API                                        =
 // ============================================================
 var UthandoAdmin = $H({
+	
+	uri: new URI(window.location),
 	// ============================================================
 	// initialize Uthando Object                                  =
 	// ============================================================
@@ -58,6 +60,9 @@ var UthandoAdmin = $H({
 			el.setStyle('display', 'block');
 		}
 	},
+	// ============================================================
+	// = Setup sticky window                                      =
+	// ============================================================
 	stickyWin: function() {
 		var stickyWin = new StickyWin.Modal({
 			content: $('errors'),
@@ -90,7 +95,7 @@ var UthandoAdmin = $H({
 				session: UthandoAdmin.sid,
 				filter: UthandoAdminConfig.fileManager.filter
 			},
-			onComplete: UthandoAdmin.fileManagerCallback
+			onComplete: UthandoAdmin.fileManagerCallback.bind(this)
 		});
 		/*
 		if (UthandoAdminConfig.fileManager.el) {
@@ -215,6 +220,9 @@ var UthandoAdmin = $H({
 			}
 		},this);
 	},
+	// ============================================================
+	// = enable Tabs                                              =
+	// ============================================================
  	enableTabs: function() {
 		if ($('morphTabs')) {
 			$$('.paginate_wrap').each(function(el) {
@@ -248,8 +256,6 @@ var UthandoAdmin = $H({
 		}
 	}
 });
-
-UthandoAdmin.uri = new URI(window.location);
 
 window.addEvent('domready', function(){
 	UthandoAdmin.initialize();

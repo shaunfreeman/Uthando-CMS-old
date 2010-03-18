@@ -9,6 +9,8 @@ if ($this->authorize()):
 		'back' => '/ushop/overview'
 	);
 	
+	unset($menuBar['products']);
+	
 	$tax_codes = $this->getResult('tax_code_id', $ushop->db_name.'tax_codes');
 	
 	$tab_array = array();

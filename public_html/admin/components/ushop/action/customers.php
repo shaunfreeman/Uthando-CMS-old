@@ -13,7 +13,7 @@ if ($this->authorize()):
 	
 	$title .= " : " . ucwords(str_replace('_', ' ',$action));
 	
-	//if (isset($this->registry->params['attr'])) $title .= ' : ' . ucwords(str_replace('_', ' ', $this->registry->params['attr']));
+	if (isset($this->registry->params['attr'])) $title .= ' : ' . ucwords(str_replace('_', ' ', $this->registry->params['attr']));
 	
 	//$this->registry->component_js = array(
 	//	'/components/ushop/js/customers.js'

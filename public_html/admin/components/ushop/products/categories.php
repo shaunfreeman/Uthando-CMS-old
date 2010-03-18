@@ -7,13 +7,12 @@ if ($this->authorize()):
 
 	if (isset($params)) unset($params);
 	
-	$tree = new NestedTree($ushop->db_name.'product_categories', null, 'category');
+	$tree = $ushop->tree;
 	
 	if ($num = $tree->numTree()):
 		
 		$c = 0;
 		$data = array();
-		$base_dir = __SITE_PATH . "/../components/ushop/images/products/";
 		
 		$display = $ushop->getDisplay('category');
 		
@@ -24,25 +23,18 @@ if ($this->authorize()):
 			$this->content .= $paginate->toHTML();
 		endif;
 		
-		//$ftp = new File_FTP($this->registry);
+		$rows = $this->registry->db->query('
+			SELECT child.category_id, COUNT(product.product_id) AS num_product
+			FROM uthando_core.ushop_product_categories AS child, uthando_core.ushop_product_categories AS parent, uthando_core.ushop_products AS product
+			WHERE child.lft BETWEEN parent.lft AND parent.rgt
+			AND child.category_id = product.category_id
+			GROUP BY category_id
+			ORDER BY child.lft
+		');
 		
-		//$ftp->cd($ftp->public_html.'/components/ushop/images/products');
+		foreach($rows as $value) $num_products[$value->category_id] = $value->num_product;
 		
 		foreach ($tree->getTree("$start, $display") as $row):
-		
-			//$ftp->mkdir(str_replace(' ', '_', $row['category']));
-			
-			if ($row['category_image_status'] == 1):
-	
-				if (file_exists($base_dir.str_replace(' ', '_', $row['category']).'/'.$row['category_image']) && $row['category_image'] != null):
-					$img_file = '<img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/OK.png" />';
-		
-				else:
-					$img_file = '<img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/DeleteRed.png" />';
-				endif;
-			else:
-				$img_file = "IMAGE OFF";
-			endif;
 			
 			if ($row['depth'] > 0):
 				$r = str_repeat(str_repeat('&nbsp;', 4),($row['depth']));
@@ -52,7 +44,7 @@ if ($this->authorize()):
 				$data[$c][] = HTML_Element::makeXmlSafe($row['category']);
 			endif;
 			
-			$data[$c][] = $img_file;
+			$data[$c][] = $num_products[$row['category_id']].' [show]';
 				
 			$data[$c][] = '<a href="/ushop/products/action-edit_category/id-'.$row['category_id'].'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Category" rel="Click to edit this category." /></a>';
 			$data[$c][] = '<a href="/ushop/products/action-delete_category/id-'.$row['category_id'].'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Delete.png" class="Tips" title="Delete Category" rel="Click to delete this category" /></a>';
@@ -60,7 +52,7 @@ if ($this->authorize()):
 			$c++;
 		endforeach;
 		
-		$header = array('Category', 'image', '', '');
+		$header = array('Category', 'Products', '', '');
 		$table = $this->dataTable($data, $header);
 		$categories = $table->toHtml();
 		

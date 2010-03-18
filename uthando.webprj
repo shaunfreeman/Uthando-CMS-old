@@ -2033,7 +2033,6 @@
     <item url="public_html/components/ushop/images/closed-sign.png" uploadstatus="1" />
     <item url="public_html/components/ushop/images/headDiv.png" uploadstatus="1" />
     <item url="public_html/components/ushop/images/index.html" uploadstatus="1" />
-    <item url="public_html/components/ushop/images/noimage.png" uploadstatus="1" />
     <item url="public_html/components/ushop/images/outerHeadDiv.png" uploadstatus="1" />
     <item url="public_html/components/ushop/images/popup_btm_01.gif" uploadstatus="1" />
     <item url="public_html/components/ushop/images/popup_btm_01.png" uploadstatus="1" />
@@ -3173,5 +3172,6 @@
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/media/logo.swf" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/images/" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/images/uthandocms.png" uploadstatus="1" />
+    <item url="public_html/admin/components/ushop/js/categories.js" uploadstatus="1" />
   </project>
 </webproject>

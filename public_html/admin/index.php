@@ -40,9 +40,9 @@ $registry->setDefaults();
 $uthando = new UthandoAdmin($registry);
 $registry->template = new HTML_Template($registry, $registry->get('admin_config.site.template'));
 
-//require('Dbug/FirePHP.class.php');
+require('Dbug/FirePHP.class.php');
 
-//$registry->firephp = FirePHP::getInstance(true);
+$registry->firephp = FirePHP::getInstance(true);
 	
 try
 {

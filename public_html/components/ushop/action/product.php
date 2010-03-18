@@ -18,7 +18,7 @@ if (is_numeric($this->registry->params['id'])):
 		false
 	);
 
-	$title .= $row->name;
+	$title .= HTML_Element::makeXmlSafe($row->name);
 
 	$this->content .= ('<div id="products">');
 

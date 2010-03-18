@@ -221,6 +221,10 @@ if ($this->authorize()):
 				'/templates/'.$this->get('admin_config.site.template').'/css/Additions.css'
 			);
 			
+			$this->registry->component_js = array(
+				'/components/ushop/js/products.js'
+			);
+			
 			foreach ($errors as $value):
 				$err = $form->getElementError($value);
 				if ($err) $this->registry->Warning($err);

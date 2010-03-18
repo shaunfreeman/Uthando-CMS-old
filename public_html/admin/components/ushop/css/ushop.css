@@ -17,6 +17,8 @@ Buttons
 
 #new_group-24 { background: url(/templates/admin/images/24x24/BarcodeGroupPlus.png) no-repeat center 5px; }
 
+#new_customer-24 { background: url(/templates/admin/images/24x24/AddUser.png) no-repeat center 5px; }
+
 /*
 Tables
 */
@@ -103,6 +105,12 @@ fieldset { width:auto; }
 }
 
 #descr_textarea { width:220px; }
+
+#edit_category #image {
+	cursor:pointer;
+	font-weight:bold;
+	color:#f00;
+}
 
 /*
 tinyMCE table styles

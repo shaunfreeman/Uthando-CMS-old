@@ -261,6 +261,10 @@ if ($this->authorize()):
 				'/Common/js/tinyMCEGz.js'
 			));
 			
+			$this->registry->component_js = array(
+				'/components/ushop/js/products.js'
+			);
+			
 			$this->registry->component_css = array(
 				'/templates/'.$this->get('admin_config.site.template').'/css/FileManager.css',
 				'/templates/'.$this->get('admin_config.site.template').'/css/Additions.css'
