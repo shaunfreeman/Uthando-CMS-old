@@ -22,7 +22,7 @@ if ($this->authorize()):
 	$start = (isset($this->registry->params['pstart']) ? $this->registry->params['pstart'] : 0);
 				
 	if ($num > $display):
-		$paginate = new HTML_Paginate('products', $start, '/ushop/products/pstart-{start}#products', $num, $display, false);
+		$paginate = new HTML_Paginate('products', $start, '/ushop/products/pstart-{start}/view-products', $num, $display, false);
 		$this->content .= $paginate->toHTML();
 	endif;
 	
@@ -55,7 +55,7 @@ if ($this->authorize()):
 		
 		$table = $this->dataTable($data, $header);
 		
-		$products = $table->toHtml();
+		$data = $table->toHtml();
 		
 	else:
 		
@@ -75,6 +75,6 @@ if ($this->authorize()):
 	
 	$productsBar['new_product'] = '/ushop/products/action-new_product';
 	
-	$tab_array['products'] = $products;
+	//$tab_array['products'] = $products;
 endif;
 ?>

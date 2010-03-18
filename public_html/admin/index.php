@@ -84,8 +84,8 @@ $registry->template->AddParameter('benchmark', "Page generated in {$timer_result
 
 //$registry->firephp->log($_SESSION);
 //$registry->firephp->log($uthando);
-//$registry->firephp->log($registry);
-//$registry->firephp->log($_SERVER);
+$registry->firephp->log($registry);
+$registry->firephp->log($_SERVER);
 
 echo $registry->template;
 unset($registry);

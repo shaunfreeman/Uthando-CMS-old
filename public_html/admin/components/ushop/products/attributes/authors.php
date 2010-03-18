@@ -14,7 +14,7 @@ if ($this->authorize()):
 	$start = (isset($this->registry->params['astart']) ? $this->registry->params['astart'] : 0);
 				
 	if ($num > $display):
-		$paginate = new HTML_Paginate('authors', $start, '/ushop/products/astart-{start}#authors', $num, $display, false);
+		$paginate = new HTML_Paginate('authors', $start, '/ushop/products/astart-{start}/view-attr/authors', $num, $display, false);
 		$this->content .= $paginate->toHTML();
 	endif;
 	
@@ -37,7 +37,7 @@ if ($this->authorize()):
 		
 		$table = $this->dataTable($data, $header);
 		
-		$authors = $table->toHtml();
+		$data = $table->toHtml();
 	else:
 		
 		$params['TYPE'] = 'info';
@@ -45,7 +45,7 @@ if ($this->authorize()):
 		
 		$products = $this->message(array('MESSAGE' => '<h2>First define some authors.</h2>', 'TYPE' => 'info'));
 		
-		$tab_array['products'] = $products;
+		//$tab_array['products'] = $products;
 	endif;
 	
 	if (isset($params)) $authors = $this->message($params);

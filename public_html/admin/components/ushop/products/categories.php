@@ -19,7 +19,7 @@ if ($this->authorize()):
 		$start = (isset($this->registry->params['cstart']) ? $this->registry->params['cstart'] : 0);
 		
 		if ($num > $display):
-			$paginate = new HTML_Paginate('categories', $start, '/ushop/products/cstart-{start}#categories', $num, $display, false);
+			$paginate = new HTML_Paginate('categories', $start, '/ushop/products/cstart-{start}/view-categories', $num, $display, false);
 			$this->content .= $paginate->toHTML();
 		endif;
 		
@@ -54,7 +54,7 @@ if ($this->authorize()):
 		
 		$header = array('Category', 'Products', '', '');
 		$table = $this->dataTable($data, $header);
-		$categories = $table->toHtml();
+		$data = $table->toHtml();
 		
 	else:
 		$params['TYPE'] = 'info';
@@ -65,7 +65,7 @@ if ($this->authorize()):
 	
 	$productsBar['new_category'] = '/ushop/products/action-new_category';
 	
-	$tab_array['categories'] = $categories;
+	//$tab_array['categories'] = $categories;
 	
 else:
 	header("Location:" . $this->get('config.server.web_url'));

@@ -14,7 +14,7 @@ if ($this->authorize()):
 	$start = (isset($this->registry->params['gstart']) ? $this->registry->params['gstart'] : 0);
 				
 	if ($num > $display):
-		$paginate = new HTML_Paginate('groups', $start, '/ushop/products/gstart-{start}#groups', $num, $display, false);
+		$paginate = new HTML_Paginate('groups', $start, '/ushop/products/gstart-{start}/view-groups', $num, $display, false);
 		$this->content .= $paginate->toHTML();
 	endif;
 	
@@ -38,7 +38,7 @@ if ($this->authorize()):
 		
 		$table = $this->dataTable($data, $header);
 		
-		$groups = $table->toHtml();
+		$data = $table->toHtml();
 	else:
 		$params['TYPE'] = 'info';
 		$params['MESSAGE'] = '<h2>There are currently no records.</h2>';
@@ -48,7 +48,7 @@ if ($this->authorize()):
 	
 	$productsBar['new_group'] = '/ushop/products/action-new_group';
 	
-	$tab_array['groups'] = $groups;
+	//$tab_array['groups'] = $groups;
 	
 else:
 	header("Location:" . $this->get('config.server.web_url'));

@@ -1305,7 +1305,6 @@
     <item url="public_html/admin/components/ushop/products/attributes/index.html" uploadstatus="1" />
     <item url="public_html/admin/components/ushop/products/attributes/isbn_form.php" uploadstatus="1" />
     <item url="public_html/admin/components/ushop/products/attributes/new_author.php" uploadstatus="1" />
-    <item url="public_html/admin/components/ushop/products/attributes/overview.php" uploadstatus="1" />
     <item url="public_html/admin/components/ushop/tax/delete_tax_code.php" uploadstatus="1" />
     <item url="public_html/admin/components/ushop/tax/delete_tax_rate.php" uploadstatus="1" />
     <item url="public_html/admin/components/ushop/tax/edit_tax_code.php" uploadstatus="1" />

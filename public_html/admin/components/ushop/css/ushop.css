@@ -25,9 +25,9 @@ Tables
 
 /*.morphtabs_panel table { width: 100%; }*/
 
-#categories table th  { text-align:left; }
+#productsWrap table th  { text-align:left; }
 
-#categories table tr:first-child th { text-align:center; }
+#productsWrap table tr:first-child th { text-align:center; }
 
 /*
 Forms
@@ -110,6 +110,47 @@ fieldset { width:auto; }
 	cursor:pointer;
 	font-weight:bold;
 	color:#f00;
+}
+
+/*
+Tabs
+*/
+.product_tabs {
+	margin-left: 0;
+	padding-left: 0;
+	white-space: nowrap;
+	list-style-type: none;
+}
+
+.product_tabs li {
+	float: left;
+	margin-right:2px;
+	padding-right: 20px;
+	padding-left: 20px;
+	text-align:center;
+	background-color: rgba(225,205,0,1);
+	height:22px;
+	line-height:22px;
+	font-weight: bold;
+ 	border: 1px solid #003399;
+}
+
+.product_tabs a { text-decoration:none; }
+
+.product_tabs li.over {
+	cursor:pointer;
+	background-color: rgba(135,206,235,1);
+}
+
+.product_tabs li.active a { color: #000; }
+
+#productsWrap {
+	overflow:auto;
+	position:absolute;
+	top:125px;
+	right:10px;
+	bottom:10px;
+	left:10px;
 }
 
 /*
