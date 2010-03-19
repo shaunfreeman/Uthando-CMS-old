@@ -5,6 +5,8 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
+	referer();
+	
 	$productsBar = array(
 		'back' => '/ushop/overview'
 	);
@@ -14,13 +16,6 @@ if ($this->authorize()):
 	$tax_codes = $this->getResult('tax_code_id', $ushop->db_name.'tax_codes');
 	
 	$tab_array = array();
-	
-	if ($this->registry->params['view']):
-		
-	else:
-		require_once('ushop/products/products.php');
-	endif;
-	
 	
 	switch ($this->registry->params['view']):
 		case 'categories':
@@ -37,10 +32,6 @@ if ($this->authorize()):
 			require_once('ushop/products/products.php');
 			break;
 	endswitch;
-	//require_once('ushop/products/products.php');
-	//require_once('ushop/products/attributes/overview.php');
-	//require_once('ushop/products/categories.php');
-	//require_once('ushop/products/groups.php');
 	
 	$tab_array = array('products', 'categories', 'groups');
 	
@@ -52,18 +43,28 @@ if ($this->authorize()):
 	
 	$this->content .= $this->makeToolbar($menuBar, 24);
 	
-	$id = ($this->registry->params['view']) ? $this->registry->params['view'] : 'products';
+	if ($this->registry->params['view'] == 'attr'):
+		$id = $this->registry->params[0];
+	elseif ($this->registry->params['view']):
+		$id = $this->registry->params['view'];
+	else:
+		$id = 'products';
+	endif;
 	
 	//$tabs = new HTML_Tabs($tab_array, true);
 	$doc = new HTML_Element();
 	$tabs = $doc->createElement('ul', null, array('id' => $id, 'class' => 'product_tabs'));
+	
 	foreach ($tab_array as $tab):
-		$li = $doc->createElement('li', null, array('class' => 'gradient', 'title' => $tab));
+		$class = 'gradient';
 		$tabTitle = str_replace('attr/', '', $tab);
+		if ($tabTitle == $id) $class .= ' active';
+		$li = $doc->createElement('li', null, array('class' => $class, 'title' => $tabTitle));
 		$a = $doc->createElement('a', ucwords(str_replace('_', ' ', $tabTitle)), array('href' => '/ushop/products/view-'.$tab));
 		$li->appendChild($a);
 		$tabs->appendChild($li);
 	endforeach;
+	
 	$doc->appendChild($tabs);
 	
 	$this->content .= $doc->toHtml();

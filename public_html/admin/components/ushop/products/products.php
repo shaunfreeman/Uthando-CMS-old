@@ -27,8 +27,6 @@ if ($this->authorize()):
 	endif;
 	
 	if ($products = $this->getResult('product_id, sku, name, price, image, enabled, image_status, category', $ushop->db_name.'products', array($ushop->db_name.'product_categories'), array('ORDER BY' => 'sku ASC', 'LIMIT' => "$start, $display"))):
-	
-		//$ftp = new File_FTP($this->registry);
 		
 		$c = 0;
 		$data = array();
@@ -36,7 +34,7 @@ if ($this->authorize()):
 		
 		foreach ($products as $row) {
 			
-			$data[$c][] = $row->enabled ? '<a href="/ushop/products/enable-0/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/IndicatorCircleGreenOn.png" /></a>' : '<a href="/ushop/products/enable-1/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/IndicatorCircleRedOff.png" /></a>';
+			$data[$c][] = $row->enabled ? '<a href="'.$_SERVER['REQUEST_URI'].'/enable-0/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/IndicatorCircleGreenOn.png" /></a>' : '<a href="'.$_SERVER['REQUEST_URI'].'/enable-1/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/IndicatorCircleRedOff.png" /></a>';
 			
 			$data[$c][] = $row->sku;
 			$data[$c][] = HTML_Element::makeXmlSafe($row->name);

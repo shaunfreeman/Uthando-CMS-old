@@ -6,7 +6,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 if ($this->authorize()):
 	
 	$menuBar = array(
-		'cancel' => '/ushop/products/overview',
+		'cancel' => $_SESSION['referer_link'],
 		'save' => null
 	);
 		
@@ -43,7 +43,7 @@ if ($this->authorize()):
 			// format values.
 			$values['price_group'] = strtoupper($values['price_group']);
 			
-			$menuBar['back'] = '/ushop/products/overview';
+			$menuBar['back'] = $_SESSION['referer_link'];
 			
 			//check then enter the record.
 			$res = $this->update($values, $ushop->db_name.'price_groups', array('where' => 'price_group_id='.$this->registry->params['id']));

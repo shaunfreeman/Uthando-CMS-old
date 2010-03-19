@@ -2,20 +2,23 @@
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
     <itemcursorpositions>
-      <item line="7" column="0" url="public_html/admin/components/ushop/products/attributes/overview.php" />
-      <item line="7" column="14" url="public_html/admin/components/ushop/products/edit_attribute.php" />
-      <item line="87" column="0" url="public_html/admin/index.php" />
+      <item line="197" column="31" url="public_html/admin/components/ushop/products/edit_product.php" />
+      <item line="86" column="56" url="public_html/admin/components/ushop/products/edit_category.php" />
+      <item line="55" column="49" url="public_html/admin/components/ushop/products/delete_product.php" />
+      <item line="29" column="49" url="public_html/admin/components/ushop/products/delete_category.php" />
+      <item line="44" column="52" url="public_html/admin/components/ushop/products/attributes/new_author.php" />
+      <item line="47" column="56" url="public_html/admin/components/ushop/products/attributes/edit_author.php" />
+      <item line="65" column="52" url="public_html/admin/components/ushop/products/new_category.php" />
+      <item line="187" column="56" url="public_html/admin/components/ushop/products/new_product.php" />
+      <item line="29" column="35" url="public_html/admin/components/ushop/index.php" />
+      <item line="84" column="0" url="public_html/admin/index.php" />
       <item line="0" column="0" url="public_html/admin/templates/admin/js/UthandoAdminConfig.js" />
       <item line="0" column="0" url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/products/categories.php" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/js/categories.js" />
-      <item line="32" column="79" url="public_html/admin/components/ushop/products/overview.php" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/products/products.php" />
-      <item line="29" column="13" url="public_html/admin/components/ushop/css/ushop.css" />
-      <item line="0" column="0" url="public_html/admin/templates/admin/css/style.css" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/products/groups.php" />
-      <item line="0" column="0" url="public_html/admin/components/ushop/index.php" />
-      <item line="16" column="98" url="public_html/admin/components/ushop/products/attributes/authors.php" />
+      <item line="5" column="24" url="public_html/admin/components/ushop/products/categories.php" />
+      <item line="60" column="21" url="public_html/admin/components/ushop/products/overview.php" />
+      <item line="28" column="246" url="public_html/admin/components/ushop/products/products.php" />
+      <item line="5" column="24" url="public_html/admin/components/ushop/products/groups.php" />
+      <item line="144" column="23" url="public_html/admin/components/ushop/css/ushop.css" />
     </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
@@ -60,6 +63,7 @@
       <openfolder url="uthando/php/Uthando/DB" />
       <openfolder url="uthando/php/Uthando/HTML" />
       <openfolder url="uthando/php/Uthando/UShop" />
+      <openfolder url="uthando/php/Uthando/functions" />
     </treestatus>
   </session>
   <teamdata yourself="" />

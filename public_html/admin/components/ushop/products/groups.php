@@ -5,8 +5,6 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	if (isset($params)) unset($params);
-	
 	$display = $ushop->getDisplay('group');
 	
 	$num = count($this->getResult('price_group_id', $ushop->db_name.'price_groups'));

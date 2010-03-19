@@ -6,7 +6,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 if ($this->authorize()):
 	
 	$menuBar = array(
-		'cancel' => '/ushop/products/overview',
+		'cancel' => $_SESSION['referer_link'],
 		'save' => null
 	);
 		
@@ -63,7 +63,7 @@ if ($this->authorize()):
 		$values['category'] = ucwords($values['category']);
 			
 		$menuBar['add_category'] = '/ushop/products/action-new_category';
-		$menuBar['back'] = '/ushop/products/overview';
+		$menuBar['back'] = $_SESSION['referer_link'];
 			
 		//check then enter the record.
 		if (!$this->getResult('category_id', $ushop->db_name.'product_categories', null, array('where' => "category='".$values['category']."'"))):

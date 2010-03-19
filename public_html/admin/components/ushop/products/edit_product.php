@@ -6,7 +6,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 if ($this->authorize()):
 	
 	$menuBar = array(
-		'cancel' => '/ushop/products/overview',
+		'cancel' => $_SESSION['referer_link'],
 		'save' => null
 	);
 		
@@ -195,7 +195,7 @@ if ($this->authorize()):
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'));
 			
-			$menuBar['back'] = '/ushop/products/overview';
+			$menuBar['back'] = $_SESSION['referer_link'];
 			
 			if (!$values['enabled']) $values['enabled'] = 0;
 			

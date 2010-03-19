@@ -4,8 +4,6 @@
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
-
-	if (isset($params)) unset($params);
 	
 	$tree = $ushop->tree;
 	

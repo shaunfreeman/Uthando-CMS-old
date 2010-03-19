@@ -6,7 +6,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 if ($this->authorize()):
 	
 	$menuBar = array(
-		'cancel' => '/ushop/products/overview',
+		'cancel' => $_SESSION['referer_link'],
 		'save' => null
 	);
 		
@@ -84,7 +84,7 @@ if ($this->authorize()):
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
 		
-			$menuBar['back'] = '/ushop/products/overview';
+			$menuBar['back'] = $_SESSION['referer_link'];
 			
 			//check then enter the record.
 			$res = $this->update($values, $ushop->db_name.'product_categories', array('where' => 'category_id='.$this->registry->params['id']));

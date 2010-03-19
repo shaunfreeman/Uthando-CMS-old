@@ -6,7 +6,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 if ($this->authorize()):
 	
 	$menuBar = array(
-		'cancel' => '/ushop/products/overview',
+		'cancel' => $_SESSION['referer_link'],
 		'save' => null
 	);
 		
@@ -42,7 +42,7 @@ if ($this->authorize()):
 		foreach ($values as $key => $value) $values[$key] = ucwords($value);
 			
 		$menuBar['add_author'] = '/ushop/products/action-new_attribute/attr-author';
-		$menuBar['back'] = '/ushop/products/overview';
+		$menuBar['back'] = $_SESSION['referer_link'];
 			
 		//check then enter the record.
 		if (!$this->getResult('author_id', $ushop->db_name.'authors', null, array('where' => "forename='".$values['forename']."'", 'and' => "surname='".$values['surname']."'"))):

@@ -23,11 +23,11 @@ if ($this->authorize()):
 		endif;
 				
 		// done!
-		$menuBar = array('back' => '/ushop/products/overview');
+		$menuBar = array('back' => $_SESSION['referer_link']);
 	else:
 		
 		$menuBar = array(
-			'cancel' => '/ushop/products/overview',
+			'cancel' => $_SESSION['referer_link'],
 			'delete' => '/ushop/products/action-delete_category/id-' . $this->registry->params['id'] . '/comfirm-delete'
 		);
 		$params['TYPE'] = 'warning';

@@ -6,7 +6,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 if ($this->authorize()):
 	
 	$menuBar = array(
-		'cancel' => '/ushop/products/overview',
+		'cancel' => $_SESSION['referer_link'],
 		'save' => null
 	);
 		
@@ -185,7 +185,7 @@ if ($this->authorize()):
 			$values = $form->process(array(&$this, 'formValues'));
 			
 			$menuBar['add_product'] = '/ushop/products/action-new_product';
-			$menuBar['back'] = '/ushop/products/overview';
+			$menuBar['back'] = $_SESSION['referer_link'];
 			
 			//check then enter the record.
 			if (!$this->getResult('product_id', $ushop->db_name.'products', null, array('where' => "name='".$values['name']."'"))):
