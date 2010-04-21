@@ -8,6 +8,8 @@ By default it uses SEF urls and compresses HTML, CSS and JavaScript output.
 It enables developers to write maintainable and extensible code.
 
 Minimum Requirements
+
+<a href='http://www.pledgie.com/campaigns/10192'><img alt='Click here to lend your support to: Uthando CMS and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/10192.png?skin_name=chrome' border='0' /></a>
 ---
 
 Linux hosting. (I cannot guarantee that Uthando CMS will work on a Microsoft Windows system, you are welcome to try it, but I will not be supporting this system.)
