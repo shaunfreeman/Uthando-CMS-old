@@ -35,7 +35,7 @@ Forms
 
 #add_product {
 	position:absolute;
-	top:80px;
+	top:90px;
 	right:10px;
 	bottom:10px;
 	left:10px;
@@ -77,17 +77,24 @@ fieldset { width:auto; }
 
 #edit_params .rightcol   {
 	position:relative;
-	left:10px;
+	left:3%;
 	margin:0px;
-	margin-right:10px;
+	margin-right:3%;
 }
 
-#add_product #details, #add_product #price, #add_product #image_upload { float:left; }
+#add_product #details, #add_product #price, #add_product #image_upload, #add_product #attributes {
+	margin-left:3%;
+	float:left;
+}
 
-#add_product #description, #add_product #attributes {
+#add_product #description, #add_product #attribute_list {
 	position:relative;
-	left:10px;
-	margin-right:20px;
+	left:3%;
+	margin-right:3%;
+}
+
+#add_product fieldset {
+	width:44%;
 }
 
 .table-cell input, .table-cell label { vertical-align: middle; }
@@ -154,6 +161,51 @@ Tabs
 }
 
 /*
+UShop Manager
+*/
+
+#ushop_control_panel { min-width: 200px; max-width: 400px; }
+
+#ushop_control_panel table {
+	 top:0px;
+}
+
+#closeBox {
+	position:absolute;
+	top:5px;
+	right:10px;
+	font-weight:bold;
+	font-size:10px;
+	height:12px;
+	width:12px;
+	line-height:12px;
+	text-align:center;
+	color:#000;
+	border: 1px solid #003399;
+	background-color:#efefef;
+}
+
+#closeBox:hover {
+	border: 1px outset #003399;
+	cursor:pointer;
+}
+
+#UShopControlPanelContent {
+	padding:10px;
+	overflow:auto;
+}
+
+.sticky_win {
+	color:#000000;
+	border-bottom: 1px solid buttonshadow;
+	border-right: 1px solid buttonshadow;
+	border-top: 1px solid buttonhighlight;
+	border-left: 1px solid buttonhighlight;
+	background-color: threedface;
+	overflow:hidden;
+}
+
+/*
 tinyMCE table styles
 */
 
@@ -168,3 +220,37 @@ tinyMCE table styles
     padding:0px;
     border-spacing:0px;
 }
+
+/*
+Scroller
+*/
+/*
+div.scroller .scrollarea {
+	position:absolute;
+	top:80px;
+	bottom:10px;
+	right:0px;
+	width: 9px;
+	border-left: 1px solid #ddd;
+	cursor: pointer;
+}
+div.scroller div.scrollBarContainer {
+	position:absolute;
+	top:0px;
+	bottom:0px;
+}
+div.scroller .scrollKnob {
+	width: 5px;
+	margin: 1px;
+	border: 1px solid #999;
+	background: #ccc;
+	min-height: 10px;
+}
+div.scroller .scrollForward, div.scroller .scrollBack {
+	width: 5px;
+	margin: 1px;
+	border: 1px solid #999;
+	background: #ccc;
+	height: 5px;
+}
+*/

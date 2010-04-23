@@ -177,7 +177,7 @@ class UShop_Core
 					$message1 = $message;
 					$params['CATEGORY'] = $rows[$d]['category'];
 					$params['WIDTH'] = number_format(100 / $display, 0);
-					$params['IMAGE'] = ($rows[$d]['category_image'] ? '/userfiles/'.$this->registry->settings['resolve'].'/products/' . str_replace(' ', '_', $rows[$d]['category']) . '/' . $rows[$d]['category_image'] : '/components/ushop/images/noimage.gif');
+					$params['IMAGE'] = ($rows[$d]['category_image'] ? '/userfiles/'.$this->registry->settings['resolve'].'/products/' . $rows[$d]['category_image'] : '/components/ushop/images/noimage.gif');
 					$params['LINK'] = '/ushop/view/'.str_replace(' ', '_', $rows[$d]['category']);
 					
 					if (!$rows[$d]['category_image_status']) $message1 = UShop_Utility::removeSection($message1, 'image');
@@ -639,7 +639,7 @@ class UShop_Core
 			return new UShop_ShoppingCart($this->registry, $cart);
 		else:
 			$cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : null;
-		return new UShop_ShoppingCart($this->registry, $cart);
+			return new UShop_ShoppingCart($this->registry, $cart);
 		endif;
 	}
 }

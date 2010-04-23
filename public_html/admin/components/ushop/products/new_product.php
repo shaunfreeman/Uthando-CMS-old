@@ -33,7 +33,7 @@ if ($this->authorize()):
 	
 	if ($tax_codes && $categories && $attrs):
 			
-		$form = new HTML_QuickForm('add_product', 'post', $_SERVER['REQUEST_URI']);
+		$form = new HTML_QuickForm('add_product', 'post', $_SERVER['REQUEST_URI'], null , array('class' => 'scroll'));
 			
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
@@ -60,6 +60,10 @@ if ($this->authorize()):
 	
 		$s->loadArray($items_opts);
 		$form->addElement($s);
+		
+		foreach ($ushop->attributes as $key => $value):
+			require_once('ushop/products/attributes/'.$key.'_form.php');
+		endforeach;
 		
 		$form->addElement('html', '</fieldset>');
 		
@@ -138,19 +142,6 @@ if ($this->authorize()):
 		
 		$form->addElement('html', '</fieldset>');
 		
-		// Attributes.
-		$form->addElement('html', '<fieldset id="attributes">');
-		$form->addElement('header','attributes_header','Attributes');
-
-		$form->addElement('text', 'weight', 'Weight (grams):', array('size' => 10, 'maxlength' => 10, 'class' => 'inputbox'));
-		
-		foreach ($ushop->attributes as $key => $value):
-			require_once('ushop/products/attributes/'.$key.'_form.php');
-		endforeach;
-		
-		$form->addElement('html', '</fieldset>');
-		$form->addElement('html', '<div class="both"></div>');
-		
 		// Image.
 		$form->addElement('html', '<fieldset id="image_upload">');
 		$form->addElement('header','image_header','Image');
@@ -161,6 +152,25 @@ if ($this->authorize()):
 		$image_radio[] = $form->createElement('radio', null, null, 'Off', '0');
 		$form->addGroup($image_radio, 'image_status', 'Image Status:');
 		$errors[] = 'image_status';
+		
+		$form->addElement('html', '</fieldset>');
+		
+		$form->addElement('html', '<div class="both"></div>');
+		
+		// Attributes.
+		$form->addElement('html', '<fieldset id="attributes">');
+		$form->addElement('header','attributes_header','Attributes');
+
+		$form->addElement('text', 'weight', 'Weight (grams):', array('size' => 10, 'maxlength' => 10, 'class' => 'inputbox'));
+		
+		$form->addElement('html', '</fieldset>');
+		
+		// Attributes List.
+		$form->addElement('html', '<fieldset id="attribute_list">');
+		$form->addElement('header','attribute_list_header','Attributes List');
+		
+		$form->addElement('html', '<p><a href="#" action="addAttributeList" class="ushopShow">Add Attribute</a></p>');
+		$form->addElement('html', '<table id="attrs_table"></table>');
 		
 		$form->addElement('html', '</fieldset>');
 		

@@ -44,14 +44,14 @@ $uthando = new Uthando($registry);
 $registry->template = new HTML_Template($registry, $registry->get('config.site.template'));
 
 
-$registry->template->AddParameter ('merchant_name', $registry->get('config.server.site_name'));
+$registry->template->addParameter ('merchant_name', $registry->get('config.server.site_name'));
 
 $registry->session = new Session($registry);
 UthandoUser::setUserInfo();
 
 if (UthandoUser::authorize()):
 	$registry->loggedInUser = true;
-	$uthando->AddParameter('login_status', "<p>You are logged in as: ".$_SESSION['name']."</p>");
+	$uthando->addParameter('login_status', "<p>You are logged in as: ".$_SESSION['name']."</p>");
 else:
 	$registry->loggedInUser = false;
 endif;
@@ -72,12 +72,12 @@ catch (PDOException $e)
 	$registry->Error ($e->getMessage());
 }
 
-$registry->template->AddParameter ('date', date("Y"));
+$registry->template->addParameter ('date', date("Y"));
 
 $timer->stop();
 $timer_result = $timer->getProfiling();
 
-$registry->template->AddParameter('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
+$registry->template->addParameter('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
 
 echo $registry->template;
 unset($registry);

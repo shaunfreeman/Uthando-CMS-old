@@ -43,6 +43,7 @@ class UthandoUser
 		else:
 			$server = $_SERVER['SERVER_NAME'];
 		endif;
+		
 		$key_length = strlen($key);
 		$key = str_split($key, $key_length / 3);
 		$key = $key[0] . $server. $key[1] . $_SERVER["SERVER_ADDR"] . $key[2];

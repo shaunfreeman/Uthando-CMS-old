@@ -17,8 +17,6 @@ class HTML_Template extends HTML_Page
 		$this->settings = parse_ini_file($this->registry->ini_dir.'/templates/'.$template.'.ini.php', true);
 		$this->setTemplate();
 		
-		//$this->addParameter('SITE_FOLDER', $this->registry->settings['resolve']);
-		
 		$this->setCache(true);
 		$this->xmlProlog = $this->settings['general']['xmlProlog'];
 		$this->setDoctype($this->settings['general']['doctype']);
@@ -212,11 +210,28 @@ class HTML_Template extends HTML_Page
 		endwhile;
 	}
 	
+	private function errorCheck()
+	{
+		if ($this->registry->errors):
+			
+			if (is_file(__SITE_PATH.'/templates/' . $this->settings['general']['name'] . '/html/errors.html')):
+				
+				$message = file_get_contents(__SITE_PATH.'/templates/' . $this->settings['general']['name'] . '/html/errors.html');
+				
+				$message = $this->templateParser($message, array('ERROR' => $this->registry->errors), '<!--{', '}-->');
+				
+				$this->registry->errors = $message;
+			endif;
+			
+			$this->addParameter('error', $this->registry->errors);
+		endif;
+	}
+	
 	// This function does the bulk of the work.
 	public function __toString()
 	{
 		// check php errors.
-		//$this->ErrorCheck();
+		$this->errorCheck();
 		$this->parseElements();
 		$this->parseModules();
 		$this->parseParameters();

@@ -274,19 +274,19 @@ input, select, textarea {
     border-right:1px solid threedhighlight;
 }
 
-input[type=submit] {
+input[type=submit], button {
     border: 1px solid threedface;
     background-color: #efefef;
     background: url(/templates/admin/images/btnUp.gif) repeat-x;
-	height: 16px;
-	line-height: 12px;
+	height: 18px;
+	line-height: 18px;
 	font-size:10px;
 	font-weight:bold;
 	margin: 3px 0px;
 }
 
 
-input[type=submit]:hover {
+input[type=submit]:hover, button:hover {
     border-bottom: 1px solid buttonshadow;
     border-right: 1px solid buttonshadow;
     border-top: 1px solid buttonhighlight;
@@ -671,7 +671,7 @@ Messages
 	overflow:auto;
 }
 
-.sticky_win {
+#errors.sticky_win {
 	width:400px;
 	background-color:#efefef;
 	border: 1px solid #003399;
@@ -713,6 +713,8 @@ misc styles
 	vertical-align:super;
 	font-size:4px;
 }
+
+.valign { vertical-align: middle; }
 
 #login_status { position:absolute; right:0px; }
 

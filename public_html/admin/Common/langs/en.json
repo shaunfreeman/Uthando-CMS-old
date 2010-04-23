@@ -48,6 +48,9 @@
 	},
 
 	"ushop" : {
+		"cancel" : "Click to cancel",
+		"save" : "Click to save",
+		"back" : "Click to go back"
 	},
 	
 	"tooltips" : {

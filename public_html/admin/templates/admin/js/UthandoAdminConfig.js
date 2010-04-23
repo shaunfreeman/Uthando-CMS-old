@@ -4,7 +4,7 @@
 var UthandoAdminConfig = $H({
 	dirs: {},
 	plugins: {
-		load: ['Paginate', 'ajaxLinks', 'tips', 'tabs', 'iconMenu']
+		load: ['Paginate', 'tips', 'tabs', 'iconMenu']
 	},
 	ajaxLinks: {
 		enable: false,

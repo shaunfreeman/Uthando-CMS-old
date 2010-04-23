@@ -53,7 +53,7 @@ try
 	
 	if ($uthando->authorize()):
 		
-		$registry->template->AddParameter('login_status', 'You are logged in as: '.$_SESSION['username']);
+		$registry->template->addParameter('login_status', 'You are logged in as: '.$_SESSION['username']);
 		
 		// Load component.
 		$uthando->loadComponent();
@@ -80,7 +80,7 @@ catch (PDOException $e)
 $timer->stop();
 $timer_result = $timer->getProfiling();
 
-$registry->template->AddParameter('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
+$registry->template->addParameter('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
 
 $registry->firephp->log($_SESSION);
 //$registry->firephp->log($uthando);

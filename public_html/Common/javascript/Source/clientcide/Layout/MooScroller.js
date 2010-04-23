@@ -6,6 +6,8 @@ Recreates the standard scrollbar behavior for elements with overflow but using D
 License:
 	http://www.clientcide.com/wiki/cnet-libraries#license
 */
+$E = document.getElement.bind(document);
+
 var MooScroller = new Class({
 	Implements: [Options, Events],
 	options: {

@@ -31,7 +31,7 @@ if (UthandoUser::checkUser() && !UthandoUser::authorize()):
 		$row = $sql[0];
 		// decrypt password.
 		$decrypted = UthandoUser::decodePassword($row->password, $user_config->get('key', 'cipher'), $row->iv);
-
+		
 		// split the password for checking.
 		$decrypted = str_split($decrypted);
 

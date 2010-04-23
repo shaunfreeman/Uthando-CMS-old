@@ -142,19 +142,20 @@ if ($this->authorize()):
 					// encrypt password.
 				
 					// get group id
-					$ugid = $this->registry->db->getOne("
+					$ugid = $this->registry->db->query("
 						SELECT user_group
 						FROM ".$this->registry->user."user_groups
 						WHERE user_group_id=:group
 					", array(':group' => $update['user_group_id']));
-						
-					if ($ugid->user_group == 'registered'):
+					
+					if ($ugid[0]->user_group == 'registered'):
 						$key = array($user_config->get('key', 'cipher'), $this->get('config.server.web_url'));
 					else:
 						$key = $user_config->get('key', 'cipher');
 					endif;
-				
+					
 					$pwd = UthandoUser::encodePassword($password, $key);
+					
 					$update['password'] = $pwd[0];
 					$update['iv'] = $pwd[1];
 				endif;

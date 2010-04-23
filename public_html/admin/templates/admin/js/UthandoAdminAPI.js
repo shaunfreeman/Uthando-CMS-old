@@ -17,9 +17,7 @@ var UthandoAdmin = $H({
 		
 		if ($('errors')) this.stickyWin();
 		
-		window.addEvent('resize', function(){
-			UthandoAdmin.HeightFix();
-		});
+		window.addEvent('resize', UthandoAdmin.HeightFix());
 		
 	},
 	// ============================================================
@@ -50,15 +48,11 @@ var UthandoAdmin = $H({
 	},
 	hideElement: function (element) {
 	 	var el = $(element);
-		if (el.getStyle('display') == 'block') {
-			el.setStyle('display', 'none');
-		}
+		if (el.getStyle('display') == 'block') el.setStyle('display', 'none');
 	},
 	showElement: function (element) {
 		var el = $(element);
-		if (el.getStyle('display') == 'none') {
-			el.setStyle('display', 'block');
-		}
+		if (el.getStyle('display') == 'none') el.setStyle('display', 'block');
 	},
 	// ============================================================
 	// = Setup sticky window                                      =
@@ -77,9 +71,7 @@ var UthandoAdmin = $H({
   			}
 		});
 		
-		$('closeBox').addEvent('click', function(e){
-			stickyWin.hide();
-		});
+		$('closeBox').addEvent('click', stickyWin.hide());
 	},
 	// ============================================================
 	// = Setup mootools FileManager                               =
@@ -97,13 +89,6 @@ var UthandoAdmin = $H({
 			},
 			onComplete: UthandoAdmin.fileManagerCallback.bind(this)
 		});
-		/*
-		if (UthandoAdminConfig.fileManager.el) {
-			
-		} else {
-			this.manager.show();
-		}
-		*/
 	},
 	// ============================================================
 	// = Setup mootools FileManager callback                      =

@@ -201,23 +201,6 @@ class Uthando
 		endif;
 	}
 	
-	public function ErrorCheck()
-	{
-		if ($this->registry->errors):
-			
-			if (is_file(__SITE_PATH.'/templates/' . $this->registry->template . '/html/errors.html')):
-				
-				$message = file_get_contents(__SITE_PATH.'/templates/' . $this->registry->template . '/html/errors.html');
-				
-				$message = $this->templateParser($message, array('ERROR' => $this->registry->errors), '<!--{', '}-->');
-				
-				$this->registry->errors = $message;
-			endif;
-			
-			$this->addParameter ('ERROR', $this->registry->errors);
-		endif;
-	}
-	
 	// shortcut functions for the modules and components.
 	public function remove($table, $where)
 	{
