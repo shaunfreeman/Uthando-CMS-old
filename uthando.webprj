@@ -2367,9 +2367,6 @@
     <item url="templates/walls/images/sidebar_image.jpg" uploadstatus="1" />
     <item url="templates/walls/index.html" uploadstatus="1" />
     <item url="templates/walls/style.css" uploadstatus="1" />
-    <item url="public_html/templates/walls/ini/" uploadstatus="1" />
-    <item url="public_html/templates/walls/ini/index.html" uploadstatus="1" />
-    <item url="public_html/templates/walls/ini/template.ini.php" uploadstatus="1" />
     <item url="public_html/templates/walls/js/" uploadstatus="1" />
     <item url="public_html/templates/walls/js/index.html" uploadstatus="1" />
     <item url="public_html/templates/walls/css/" uploadstatus="1" />
@@ -3174,5 +3171,19 @@
     <item url="public_html/admin/components/ushop/js/categories.js" uploadstatus="1" />
     <item url="uthando/php/Uthando/UShop/Manager.php" uploadstatus="1" />
     <item url="public_html/admin/plugins/ajax_content/ushopmanager.php" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/template_files/" />
+    <item url="public_html/userfiles/charismabooks/template_files/html/" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/index.html" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoAPI.js" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoConfig.js" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoJsCache.js" />
+    <item url="public_html/userfiles/barnaclesfinch/template_files/" />
+    <item url="uthando/ini/charismabooks/templates/" />
+    <item url="uthando/ini/charismabooks/templates/admin.ini.php" />
+    <item url="uthando/ini/charismabooks/templates/modernviewblue.ini.php" />
+    <item url="uthando/ini/barnaclesfinch/templates/" />
+    <item url="uthando/ini/barnaclesfinch/templates/admin.ini.php" />
+    <item url="uthando/ini/barnaclesfinch/templates/walls.ini.php" />
   </project>
 </webproject>
