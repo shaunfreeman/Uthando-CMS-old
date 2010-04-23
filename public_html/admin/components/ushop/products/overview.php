@@ -69,5 +69,34 @@ if ($this->authorize()):
 	
 	$this->content .= $doc->toHtml();
 	$this->content .= '<div id="productsWrap" class="both">'.$data.'</div>';
+	
+	$products = $this->getResult(
+		'product_id, image, category',
+		$ushop->db_name.'products',
+		array($ushop->db_name.'product_categories')
+	);
+	
+	/*
+	$ftp = new File_FTP($this->registry);
+	$dir = '/userfiles/'.$this->registry->settings['resolve'].'/products/';
+	
+	print_rr(realpath($_SERVER['DOCUMENT_ROOT'].'/../'));
+	
+	foreach ($products as $row):
+		
+		$to = $ftp->public_html.$dir.str_replace(' ', '_', $row->category).'/'.$row->image;
+		$from = realpath($_SERVER['DOCUMENT_ROOT'].'/../').$dir.$row->image;
+		
+		if (!is_dir(realpath($_SERVER['DOCUMENT_ROOT'].'/../').$dir.str_replace(' ', '_', $row->category))) $ftp->mkdir($ftp->public_html.$dir.str_replace(' ', '_', $row->category));
+		
+		$res = $ftp->put($from, $to, true);
+		if ($res):
+			$ftp->rm($ftp->public_html.$dir.$row->image);
+		endif;
+		
+		//$this->update(array('image' => str_replace(' ', '_', $row->category).'/'.$row->image), $ushop->db_name.'products', array('WHERE' => 'product_id='.$row->product_id));
+	endforeach;
+	*/
+	
 endif;
 ?>

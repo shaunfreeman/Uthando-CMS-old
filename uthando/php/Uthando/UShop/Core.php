@@ -13,7 +13,7 @@ class UShop_Core
 		$this->registry = $GLOBALS['registry'];
 		$this->setOptions();
 		
-		$this->img_dir = $this->registry->get('config.server.web_url')."/userfiles/".$this->registry->settings['resolve'].'/products/';
+		$this->img_dir = "/userfiles/".$this->registry->settings['resolve'].'/products/';
 		
 		$this->prefix = 'ushop_';
 		$this->db_name = $this->registry->core.$this->prefix;
@@ -88,7 +88,7 @@ class UShop_Core
 		$display = $this->getDisplay('product_list');
 		$html = null;
 		$start = 0;
-		$base_dir = realpath(__SITE_PATH . '/userfiles/'.$this->registry->settings['resolve'].'/products/');
+		$base_dir = realpath(__SITE_PATH . $this->img_dir);
 		
 		$message = file_get_contents('ushop/html/product_list_display.html', true);
 		$popup = file_get_contents('ushop/html/popupDetails.html', true);
@@ -102,7 +102,7 @@ class UShop_Core
 					$params['NAME'] = HTML_Element::makeXmlSafe($rows[$d]->name);
 					$params['PRICE'] = $rows[$d]->price;
 					$params['WIDTH'] = number_format(100 / $display, 0);
-					$params['IMAGE'] = (file_exists($base_dir.'/'.$this->registry->params[0].'/'.$rows[$d]->image) && $rows[$d]->image != null) ? '/userfiles/'.$this->registry->settings['resolve'].'/products/'. $this->registry->params[0] . '/' .$rows[$d]->image : ' /components/ushop/images/noimage.png';
+					$params['IMAGE'] = (file_exists($base_dir.'/'.$rows[$d]->image) && $rows[$d]->image != null) ? $this->img_dir.$rows[$d]->image : $this->img_dir.'noimage.png';
 					$params['LINK'] = '/ushop/view/product/id-'.$rows[$d]->product_id;
 					$params['CART_LINK'] = '/ushop/view/cart/action-add/id-'.$rows[$d]->product_id;
 
@@ -133,7 +133,7 @@ class UShop_Core
 
 	public function productDetails($row)
 	{
-		$base_dir = realpath(__SITE_PATH . '/userfiles/'.$this->registry->settings['resolve'].'/products/');
+		$base_dir = realpath(__SITE_PATH . $this->img_dir);
 		
 		$html = file_get_contents('ushop/html/product.html', true);
 
@@ -148,7 +148,7 @@ class UShop_Core
 			if ($key == 'name') $value = HTML_Element::makeXmlSafe($value);
 			
 			if ($key == 'image'):
-				$params[strtoupper($key)] = (file_exists($base_dir.'/'.str_replace(' ', '_', $row->category).'/'.$value) && $value != null) ? '/userfiles/'.$this->registry->settings['resolve'].'/products/'. str_replace(' ', '_', $row->category) . '/' .$value : ' /components/ushop/images/noimage.png';
+				$params[strtoupper($key)] = (file_exists($base_dir.'/'.$value) && $value != null) ? $this->img_dir.$value : $this->img_dir.'noimage.png';
 			else:
 				$params[strtoupper($key)] = $value;
 			endif;
@@ -177,7 +177,7 @@ class UShop_Core
 					$message1 = $message;
 					$params['CATEGORY'] = $rows[$d]['category'];
 					$params['WIDTH'] = number_format(100 / $display, 0);
-					$params['IMAGE'] = ($rows[$d]['category_image'] ? '/userfiles/'.$this->registry->settings['resolve'].'/products/' . $rows[$d]['category_image'] : '/components/ushop/images/noimage.gif');
+					$params['IMAGE'] = ($rows[$d]['category_image'] ? $this->img_dir . $rows[$d]['category_image'] : $this->img_dir.'noimage.gif');
 					$params['LINK'] = '/ushop/view/'.str_replace(' ', '_', $rows[$d]['category']);
 					
 					if (!$rows[$d]['category_image_status']) $message1 = UShop_Utility::removeSection($message1, 'image');
@@ -355,10 +355,10 @@ class UShop_Core
 				$this->registry->Error ($e->getMessage());
 			}
 			
-			if (file_exists(__SITE_PATH.'/components/ushop/images/products/'.$row->image)):
-				$image = $this->registry->get('config.server.web_url').'/components/ushop/images/products/'.$row->image;
+			if (file_exists(__SITE_PATH.$this->img_dir.$row->image)):
+				$image = $this->registry->get('config.server.web_url').$this->img_dir.$row->image;
 			else:
-				$image = $this->registry->get('config.server.web_url').'/components/ushop/images/noimage.png';
+				$image = $this->registry->get('config.server.web_url').$this->img_dir.'noimage.png';
 			endif;
 			
 			$item = array(

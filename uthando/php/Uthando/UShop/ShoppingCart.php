@@ -12,6 +12,7 @@ class UShop_ShoppingCart
 		$this->registry = $registry;
 		if ($cart) $this->cart = $cart;
 		$this->checkUserCountry();
+		$this->img_dir = "/userfiles/".$this->registry->settings['resolve'].'/products/';
 	}
 		
 	public function addItem($item)
@@ -117,10 +118,10 @@ class UShop_ShoppingCart
 			
 			$this->cart['postWeight'] += $itemWeight;
 			
-			if (file_exists(__SITE_PATH.'/components/ushop/images/products/'.$row->image)):
-				$image = '/components/ushop/images/products/'.$row->image;
+			if (file_exists(__SITE_PATH.$this->img_dir.$row->image)):
+				$image = $this->img_dir.$row->image;
 			else:
-				$image = '/components/ushop/images/noimage.png';
+				$image = $this->img_dir.'noimage.png';
 			endif;
 			
 			$items[] = array(
