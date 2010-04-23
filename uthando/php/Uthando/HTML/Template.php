@@ -261,21 +261,25 @@ class HTML_Template extends HTML_Page
 			$js_end_files = array_merge($js_end_files, $this->registry->component_js);
 		endif;
 		
-		foreach ($js_end_files as $key => $files):
-			$js_end_files[$key] = $this->registry->host.$files;
-		endforeach;
+		if ($js_end_files):
+			foreach ($js_end_files as $key => $files):
+				$js_end_files[$key] = $this->registry->host.$files;
+			endforeach;
+		endif;
 		
 		if ($this->settings['general']['cache']):
 			$js->dbug = true;
 			$js->scripts = array($this->registry->host.$this->settings['cacheJS']);
 		else:
 			$js->scripts = $this->settings['mootools'];
-			foreach ($js->scripts as $key => $files):
-				$js->scripts[$key] = $this->registry->get('config.server.web_url').$files;
-			endforeach;
+			if ($js->scripts):
+				foreach ($js->scripts as $key => $files):
+					$js->scripts[$key] = $this->registry->get('config.server.web_url').$files;
+				endforeach;
+			endif;
 		endif;
 		
-		$js->scripts = array_merge($js->scripts,$js_end_files);
+		if ($js_end_files) $js->scripts = array_merge($js->scripts,$js_end_files);
 		
 		$this->loadJavaScript($js->load_js());
 		$this->addScriptDeclaration("if (!Uthando) var Uthando = $H({}); Uthando.server = '".$registry->server."'; Uthando.resolve = '".$this->registry->settings['resolve']."';");
