@@ -46,7 +46,7 @@ Class Registry {
 	
 	protected function registerServer()
 	{
-		$this->server = (substr($_SERVER['SERVER_NAME'], 0, 3) == 'www') ? substr($_SERVER['SERVER_NAME'], 0, 4) : $this->server = $_SERVER['SERVER_NAME'];
+		$this->server = (substr($_SERVER['SERVER_NAME'], 0, 3) == 'www') ? substr($_SERVER['SERVER_NAME'], 4) : $this->server = $_SERVER['SERVER_NAME'];
 	}
 	
 	public function setSite($file)

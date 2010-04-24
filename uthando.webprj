@@ -170,273 +170,6 @@
     <item url="uthando/php/index.html" uploadstatus="1" />
     <item url=".gitignore" uploadstatus="1" />
     <item url="README.md" uploadstatus="1" />
-    <item url="templates/" uploadstatus="1" />
-    <item url="templates/abstractportal/" uploadstatus="1" />
-    <item url="templates/abstractportal/css/" uploadstatus="1" />
-    <item url="templates/abstractportal/css/template.css" uploadstatus="1" />
-    <item url="templates/abstractportal/images/" uploadstatus="1" />
-    <item url="templates/abstractportal/images/abstract_portal.jpg" uploadstatus="1" />
-    <item url="templates/abstractportal/images/arrow.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/body_bg.jpg" uploadstatus="1" />
-    <item url="templates/abstractportal/images/c_bot_bg.jpg" uploadstatus="1" />
-    <item url="templates/abstractportal/images/checkbox.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/con_address.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/con_fax.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/con_info.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/con_tel.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/content_bg.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/emailButton.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/fcontent_bg.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/firefox.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/indent1.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/left_col_bg.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/left_col_bot_bg.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/left_col_h_bg.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/left_col_top_bg.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/pdf_button.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/printButton.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/rating_star_blank.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/rating_star.png" uploadstatus="1" />
-    <item url="templates/abstractportal/images/right_col_h_bg.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/toggler_bg.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/top_bg.jpg" uploadstatus="1" />
-    <item url="templates/abstractportal/images/uthandoLogo.gif" uploadstatus="1" />
-    <item url="templates/abstractportal/images/uthandoLogo.png" uploadstatus="1" />
-    <item url="templates/abstractportal/ajax_content.php" uploadstatus="1" />
-    <item url="templates/abstractportal/index.html" uploadstatus="1" />
-    <item url="templates/abstractportal/template_thumbnail.png" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/1_5/" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/1_5/blogger_purple.zip" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/1_x/" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/1_x/blogger_purple.zip" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/installguide/" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/installguide/images/" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/installguide/images/suckerfish.jpg" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/installguide/images/Thumbs.db" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/installguide/template_install_guide.htm" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/photoshop_files/" uploadstatus="1" />
-    <item url="templates/blogger_purple_template_package/photoshop_files/blogger_PSD_files.zip" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/1_5/" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/1_5/blogger_red.zip" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/1_x/" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/1_x/blogger_red.zip" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/installguide/" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/installguide/images/" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/installguide/images/suckerfish.jpg" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/installguide/images/Thumbs.db" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/installguide/template_install_guide.htm" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/photoshop_files/" uploadstatus="1" />
-    <item url="templates/blogger_red_template_package/photoshop_files/blogger_PSD_files.zip" uploadstatus="1" />
-    <item url="templates/capture_template_package/" uploadstatus="1" />
-    <item url="templates/capture_template_package/1_5/" uploadstatus="1" />
-    <item url="templates/capture_template_package/1_5/capture.zip" uploadstatus="1" />
-    <item url="templates/capture_template_package/1_x/" uploadstatus="1" />
-    <item url="templates/capture_template_package/1_x/capture.zip" uploadstatus="1" />
-    <item url="templates/capture_template_package/installguide/" uploadstatus="1" />
-    <item url="templates/capture_template_package/installguide/images/" uploadstatus="1" />
-    <item url="templates/capture_template_package/installguide/images/suckerfish.jpg" uploadstatus="1" />
-    <item url="templates/capture_template_package/installguide/images/Thumbs.db" uploadstatus="1" />
-    <item url="templates/capture_template_package/installguide/template_install_guide.htm" uploadstatus="1" />
-    <item url="templates/capture_template_package/photoshop_files/" uploadstatus="1" />
-    <item url="templates/capture_template_package/photoshop_files/Photoshop_PSD.zip" uploadstatus="1" />
-    <item url="templates/designsuite/" uploadstatus="1" />
-    <item url="templates/designsuite/css/" uploadstatus="1" />
-    <item url="templates/designsuite/css/index.html" uploadstatus="1" />
-    <item url="templates/designsuite/css/MooFlow.css" uploadstatus="1" />
-    <item url="templates/designsuite/css/template_css.css" uploadstatus="1" />
-    <item url="templates/designsuite/images/" uploadstatus="1" />
-    <item url="templates/designsuite/images/arrow.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/c_bot_bg.jpg" uploadstatus="1" />
-    <item url="templates/designsuite/images/con_address.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/con_fax.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/con_info.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/con_tel.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/content_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/design_studio.jpg" uploadstatus="1" />
-    <item url="templates/designsuite/images/emailButton.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/favicon.ico" uploadstatus="1" />
-    <item url="templates/designsuite/images/fcontent_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/firefox.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/indent1.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/index.html" uploadstatus="1" />
-    <item url="templates/designsuite/images/jump_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/left_col_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/left_col_bot_bg.jpg" uploadstatus="1" />
-    <item url="templates/designsuite/images/left_col_h_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/left_col_top_bg.jpg" uploadstatus="1" />
-    <item url="templates/designsuite/images/logo.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/logo.jpg" uploadstatus="1" />
-    <item url="templates/designsuite/images/logo.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/lplatebk.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/mb_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/mb_bot_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/mb_top_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/nf_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/nf_bot_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/nf_top_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/pdf_button.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/printButton.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/rating_star_blank.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/rating_star.png" uploadstatus="1" />
-    <item url="templates/designsuite/images/right_col_h_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/toggler_bg.gif" uploadstatus="1" />
-    <item url="templates/designsuite/images/top_bg.jpg" uploadstatus="1" />
-    <item url="templates/designsuite/ini/" uploadstatus="1" />
-    <item url="templates/designsuite/ini/index.html" uploadstatus="1" />
-    <item url="templates/designsuite/ini/template.ini.php" uploadstatus="1" />
-    <item url="templates/designsuite/js/" uploadstatus="1" />
-    <item url="templates/designsuite/js/index.html" uploadstatus="1" />
-    <item url="templates/designsuite/js/UthandoAPI.js" uploadstatus="1" />
-    <item url="templates/designsuite/ajax_content.php" uploadstatus="1" />
-    <item url="templates/designsuite/index.html" uploadstatus="1" />
-    <item url="templates/designsuite/index.php" uploadstatus="1" />
-    <item url="templates/designsuite/template_thumbnail.png" uploadstatus="1" />
-    <item url="templates/ghk01/" uploadstatus="1" />
-    <item url="templates/ghk01/css/" uploadstatus="1" />
-    <item url="templates/ghk01/css/template_css.css" uploadstatus="1" />
-    <item url="templates/ghk01/images/" uploadstatus="1" />
-    <item url="templates/ghk01/images/dot.gif" uploadstatus="1" />
-    <item url="templates/ghk01/images/emailButton.png" uploadstatus="1" />
-    <item url="templates/ghk01/images/flash.jpg" uploadstatus="1" />
-    <item url="templates/ghk01/images/grdnt_black.jpg" uploadstatus="1" />
-    <item url="templates/ghk01/images/indent1.png" uploadstatus="1" />
-    <item url="templates/ghk01/images/indent2.png" uploadstatus="1" />
-    <item url="templates/ghk01/images/index.html" uploadstatus="1" />
-    <item url="templates/ghk01/images/main.jpg" uploadstatus="1" />
-    <item url="templates/ghk01/images/pdf_button.png" uploadstatus="1" />
-    <item url="templates/ghk01/images/printButton.png" uploadstatus="1" />
-    <item url="templates/ghk01/images/spacer.png" uploadstatus="1" />
-    <item url="templates/ghk01/index.php" uploadstatus="1" />
-    <item url="templates/ghk01/template_thumbnail.png" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/1_5/" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/1_5/kaleidoscope.zip" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/1_x/" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/1_x/kaleidoscope.zip" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/installguide/" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/installguide/images/" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/installguide/images/suckerfish.jpg" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/installguide/images/Thumbs.db" uploadstatus="1" />
-    <item url="templates/kaleidoscope_template_package/installguide/template_install_guide.htm" uploadstatus="1" />
-    <item url="templates/modernviewblue/" uploadstatus="1" />
-    <item url="templates/modernviewblue/css/" uploadstatus="1" />
-    <item url="templates/modernviewblue/css/template_css.css" uploadstatus="1" />
-    <item url="templates/modernviewblue/html/" uploadstatus="1" />
-    <item url="templates/modernviewblue/html/mod_login/" uploadstatus="1" />
-    <item url="templates/modernviewblue/html/mod_login/default.php" uploadstatus="1" />
-    <item url="templates/modernviewblue/html/mod_login/index.html" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/arrow.gif" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/arrow.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/body_bot_bg.gif" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/body_top_bg.gif" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/checkbox.gif" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/con_address.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/con_fax.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/con_info.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/con_tel.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/emailButton.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/footer_bg.gif" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/h2_motto.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/indent1.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/indent2.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/logo.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/pdf_button.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/printButton.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/rating_star_blank.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/rating_star.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/s_arrow.gif" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/top_bg.gif" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/top_menu_bg.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/images/yourlogo.png" uploadstatus="1" />
-    <item url="templates/modernviewblue/js/" uploadstatus="1" />
-    <item url="templates/modernviewblue/js/accordion.js" uploadstatus="1" />
-    <item url="templates/modernviewblue/js/fx_styles.js" uploadstatus="1" />
-    <item url="templates/modernviewblue/utils/" uploadstatus="1" />
-    <item url="templates/modernviewblue/utils/index.html" uploadstatus="1" />
-    <item url="templates/modernviewblue/index.html" uploadstatus="1" />
-    <item url="templates/modernviewblue/params.ini" uploadstatus="1" />
-    <item url="templates/modernviewblue/template_thumbnail.png" uploadstatus="1" />
-    <item url="templates/purpleglow_template_package/" uploadstatus="1" />
-    <item url="templates/purpleglow_template_package/installguide/" uploadstatus="1" />
-    <item url="templates/purpleglow_template_package/installguide/images/" uploadstatus="1" />
-    <item url="templates/purpleglow_template_package/installguide/images/suckerfish.jpg" uploadstatus="1" />
-    <item url="templates/purpleglow_template_package/installguide/images/Thumbs.db" uploadstatus="1" />
-    <item url="templates/purpleglow_template_package/installguide/template_install_guide.htm" uploadstatus="1" />
-    <item url="templates/purpleglow_template_package/purpleglow.zip" uploadstatus="1" />
-    <item url="templates/redportal_template_package/" uploadstatus="1" />
-    <item url="templates/redportal_template_package/installguide/" uploadstatus="1" />
-    <item url="templates/redportal_template_package/installguide/images/" uploadstatus="1" />
-    <item url="templates/redportal_template_package/installguide/images/suckerfish.jpg" uploadstatus="1" />
-    <item url="templates/redportal_template_package/installguide/images/Thumbs.db" uploadstatus="1" />
-    <item url="templates/redportal_template_package/installguide/template_install_guide.htm" uploadstatus="1" />
-    <item url="templates/redportal_template_package/redportal_psd.zip" uploadstatus="1" />
-    <item url="templates/redportal_template_package/redportal.zip" uploadstatus="1" />
-    <item url="templates/smebusiness/" uploadstatus="1" />
-    <item url="templates/smebusiness/css/" uploadstatus="1" />
-    <item url="templates/smebusiness/css/geshi.css" uploadstatus="1" />
-    <item url="templates/smebusiness/css/index.html" uploadstatus="1" />
-    <item url="templates/smebusiness/css/template_css.css" uploadstatus="1" />
-    <item url="templates/smebusiness/images/" uploadstatus="1" />
-    <item url="templates/smebusiness/images/body_bg.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/con_address.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/con_fax.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/con_info.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/con_tel.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/content_bg.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/content_photo_01.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/dashed.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/dots.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/emailButton.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/favicon.ico" uploadstatus="1" />
-    <item url="templates/smebusiness/images/firefox.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/footer_bg.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/green_arrow.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/hide_panel.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/h_line.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/hsp_bg_bar.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/indent1.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/index.html" uploadstatus="1" />
-    <item url="templates/smebusiness/images/larger.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/li_a_active.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/logo.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/main_se_bg.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/mod_5_bg.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/mod_6_bg.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/mod_7_bg.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/mod_h_bg.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/newsflash_bg.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/orange_arrow.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/orange_dot.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/pdf_button.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/printButton.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/reset.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/right_h3_bg.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/right_h3_bg.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/search.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/search_input_bg.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/shaunfreeman1.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/shaunfreeman.png" uploadstatus="1" />
-    <item url="templates/smebusiness/images/show_panel.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/smaller.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/top_bg.jpg" uploadstatus="1" />
-    <item url="templates/smebusiness/images/top_line_vert_line.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/images/top_modules_bg.gif" uploadstatus="1" />
-    <item url="templates/smebusiness/ini/" uploadstatus="1" />
-    <item url="templates/smebusiness/ini/index.html" uploadstatus="1" />
-    <item url="templates/smebusiness/ini/template.ini.php" uploadstatus="1" />
-    <item url="templates/smebusiness/js/" uploadstatus="1" />
-    <item url="templates/smebusiness/js/index.html" uploadstatus="1" />
-    <item url="templates/smebusiness/js/md_stylechanger.js" uploadstatus="1" />
-    <item url="templates/smebusiness/js/showhidepanel.js" uploadstatus="1" />
-    <item url="templates/smebusiness/js/UthandoAPI.js" uploadstatus="1" />
-    <item url="templates/smebusiness/js/UthandoConfig.js" uploadstatus="1" />
-    <item url="templates/smebusiness/ajax_content.php" uploadstatus="1" />
-    <item url="templates/smebusiness/index.html" uploadstatus="1" />
-    <item url="templates/smebusiness/index.php" uploadstatus="1" />
-    <item url="templates/smebusiness/template_thumbnail.png" uploadstatus="1" />
     <item url="LICENCE" uploadstatus="1" />
     <item url="uthando/php/Uthando/HTML/" uploadstatus="1" />
     <item url="uthando/php/Uthando/HTML/index.html" uploadstatus="1" />
@@ -2297,16 +2030,6 @@
     <item url="public_html/templates/papira/images/logo.gif" uploadstatus="1" />
     <item url="public_html/templates/papira/images/main_bottom.jpg" uploadstatus="1" />
     <item url="public_html/templates/papira/index.html" uploadstatus="1" />
-    <item url="templates/papira/" uploadstatus="1" />
-    <item url="templates/papira/images/" uploadstatus="1" />
-    <item url="templates/papira/images/body_bckg.jpg" uploadstatus="1" />
-    <item url="templates/papira/images/container_bckg.jpg" uploadstatus="1" />
-    <item url="templates/papira/images/footer_bckg.jpg" uploadstatus="1" />
-    <item url="templates/papira/images/li.gif" uploadstatus="1" />
-    <item url="templates/papira/images/logo.gif" uploadstatus="1" />
-    <item url="templates/papira/images/main_bottom.jpg" uploadstatus="1" />
-    <item url="templates/papira/index.html" uploadstatus="1" />
-    <item url="templates/papira/style.css" uploadstatus="1" />
     <item url="public_html/templates/papira/css/" uploadstatus="1" />
     <item url="public_html/templates/papira/css/style.css" uploadstatus="1" />
     <item url="public_html/templates/papira/ini/" uploadstatus="1" />
@@ -2356,17 +2079,6 @@
     <item url="public_html/templates/walls/images/main_top.jpg" uploadstatus="1" />
     <item url="public_html/templates/walls/images/sidebar_image.jpg" uploadstatus="1" />
     <item url="public_html/templates/walls/index.html" uploadstatus="1" />
-    <item url="templates/walls/" uploadstatus="1" />
-    <item url="templates/walls/images/" uploadstatus="1" />
-    <item url="templates/walls/images/body_bckg.jpg" uploadstatus="1" />
-    <item url="templates/walls/images/footer_bckg.jpg" uploadstatus="1" />
-    <item url="templates/walls/images/head_bckg.jpg" uploadstatus="1" />
-    <item url="templates/walls/images/li.gif" uploadstatus="1" />
-    <item url="templates/walls/images/logo.gif" uploadstatus="1" />
-    <item url="templates/walls/images/main_top.jpg" uploadstatus="1" />
-    <item url="templates/walls/images/sidebar_image.jpg" uploadstatus="1" />
-    <item url="templates/walls/index.html" uploadstatus="1" />
-    <item url="templates/walls/style.css" uploadstatus="1" />
     <item url="public_html/templates/walls/js/" uploadstatus="1" />
     <item url="public_html/templates/walls/js/index.html" uploadstatus="1" />
     <item url="public_html/templates/walls/css/" uploadstatus="1" />
@@ -2766,19 +2478,6 @@
     <item url="public_html/Common/images/uthandocms.png" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1249.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1515.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1889.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1912.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1934.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1939.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1946.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1952.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK1972.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK2103.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK2425.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK2493.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Beading/BK5139.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0001.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0008.jpg" uploadstatus="1" />
@@ -2788,8 +2487,6 @@
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0064.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0067.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0068.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0072.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0084.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0095.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0096.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Biography/CB0177.jpg" uploadstatus="1" />
@@ -2882,22 +2579,17 @@
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Fiction/CB0121.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Fiction/CB0227.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0013.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0018.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0023.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0027.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0029.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0032.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0043.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0056.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0057.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0070.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0071.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0073.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0074.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0077.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0080.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0087.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0088.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0090.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/General/CB0094.jpg" uploadstatus="1" />
@@ -2946,7 +2638,6 @@
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/History/CB0092.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/History/CB0149.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/History/CB0191.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/History/CB0229.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/History/CB0254.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/History/CB0255.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/History/CB0256.jpg" uploadstatus="1" />
@@ -3005,14 +2696,11 @@
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0031.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0033.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0034.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0035.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0040.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0042.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0046.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0047.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0048.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0049.jpg" uploadstatus="1" />
-    <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB004.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0078.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Occupation_History/CB0079.jpg" uploadstatus="1" />
     <item url="public_html/userfiles/f570b20e90ec97cb5820ad28b2f8a3ac/products/Poetry/" uploadstatus="1" />
@@ -3171,19 +2859,19 @@
     <item url="public_html/admin/components/ushop/js/categories.js" uploadstatus="1" />
     <item url="uthando/php/Uthando/UShop/Manager.php" uploadstatus="1" />
     <item url="public_html/admin/plugins/ajax_content/ushopmanager.php" uploadstatus="1" />
-    <item url="public_html/userfiles/charismabooks/template_files/" />
-    <item url="public_html/userfiles/charismabooks/template_files/html/" />
-    <item url="public_html/userfiles/charismabooks/template_files/js/" />
-    <item url="public_html/userfiles/charismabooks/template_files/js/index.html" />
-    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoAPI.js" />
-    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoConfig.js" />
-    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoJsCache.js" />
-    <item url="public_html/userfiles/barnaclesfinch/template_files/" />
-    <item url="uthando/ini/charismabooks/templates/" />
-    <item url="uthando/ini/charismabooks/templates/admin.ini.php" />
-    <item url="uthando/ini/charismabooks/templates/modernviewblue.ini.php" />
-    <item url="uthando/ini/barnaclesfinch/templates/" />
-    <item url="uthando/ini/barnaclesfinch/templates/admin.ini.php" />
-    <item url="uthando/ini/barnaclesfinch/templates/walls.ini.php" />
+    <item url="public_html/userfiles/charismabooks/template_files/" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/template_files/html/" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/index.html" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoAPI.js" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoConfig.js" uploadstatus="1" />
+    <item url="public_html/userfiles/charismabooks/template_files/js/UthandoJsCache.js" uploadstatus="1" />
+    <item url="public_html/userfiles/barnaclesfinch/template_files/" uploadstatus="1" />
+    <item url="uthando/ini/charismabooks/templates/" uploadstatus="1" />
+    <item url="uthando/ini/charismabooks/templates/admin.ini.php" uploadstatus="1" />
+    <item url="uthando/ini/charismabooks/templates/modernviewblue.ini.php" uploadstatus="1" />
+    <item url="uthando/ini/barnaclesfinch/templates/" uploadstatus="1" />
+    <item url="uthando/ini/barnaclesfinch/templates/admin.ini.php" uploadstatus="1" />
+    <item url="uthando/ini/barnaclesfinch/templates/walls.ini.php" uploadstatus="1" />
   </project>
 </webproject>

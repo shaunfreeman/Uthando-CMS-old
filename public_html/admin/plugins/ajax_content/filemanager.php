@@ -46,7 +46,7 @@ $registry->sessionId = Utility::decodeString($pwd, $iv);
 
 try
 {
-	$registry->db = new DB_Core($registry);
+	$registry->db = new DB_Admin($registry);
 	$registry->session = new Session($registry);
 	
 	//user_agent|s:15:"Shockwave Flash";remote_addr|s:9:"127.0.0.1"	
