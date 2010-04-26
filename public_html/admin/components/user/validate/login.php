@@ -48,15 +48,8 @@ if (UthandoUser::checkUser() && !$this->authorize()):
 			$_SESSION['user_id'] = $row->user_id;
 			$_SESSION['username'] = $row->username;
 			$_SESSION['user_group'] = $row->user_group;
-
-			//if ($this->registry->config->get('enable_ssl','SERVER')) {
-			//	$url = $this->registry->config->get ('ssl_url', 'SERVER');
-			//} else {
-				$url = $this->get('admin_config.server.admin_url');
-			//}
 			
-			header ("Location: ". $url);
-			exit();
+			goto();
 		else:
 			// password didn't match.
 			$this->registry->Error('The password entered does not match that on file.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
@@ -67,5 +60,7 @@ if (UthandoUser::checkUser() && !$this->authorize()):
 		// no user found.
 		$this->registry->Error('The username entered does not match those on file.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
 	endif;
+	
+	$this->addContent('&nbsp;');
 endif;
 ?>

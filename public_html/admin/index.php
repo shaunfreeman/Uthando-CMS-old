@@ -64,12 +64,11 @@ try
 	else:
 		// set action and path.
 		if ($uthando->getPath() != "/user/login"):
-			header("Location:" . $registry->get('admin_config.server.admin_url') . "/user/login");
-			exit();
-		else:
-			// Load component.
-			$uthando->loadComponent();
+			 $registry->path = "/user/login";
+			 $registry->component = "user";
+			 $registry->action = "login";
 		endif;
+		$uthando->loadComponent();
 	endif;
 }
 catch (PDOException $e)

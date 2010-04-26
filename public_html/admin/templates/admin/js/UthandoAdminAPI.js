@@ -15,8 +15,6 @@ var UthandoAdmin = $H({
 		this.HeightFix();
 		this.saveFormButton();
 		
-		if ($('errors')) this.stickyWin();
-		
 		window.addEvent('resize', UthandoAdmin.HeightFix());
 		
 	},
@@ -55,24 +53,9 @@ var UthandoAdmin = $H({
 		if (el.getStyle('display') == 'none') el.setStyle('display', 'block');
 	},
 	// ============================================================
-	// = Setup sticky window                                      =
+	// = Setup sticky window  todo                                =
 	// ============================================================
-	stickyWin: function() {
-		var stickyWin = new StickyWin.Modal({
-			content: $('errors'),
-	  		width: 400,
-	 		className: 'sticky_win',
-  			maskOptions: {
-    			style:{
-      				'background-color':'#fff',
-      				'opacity':.6,
-		 			'cursor': 'pointer'
-    			}
-  			}
-		});
-		
-		$('closeBox').addEvent('click', stickyWin.hide());
-	},
+	
 	// ============================================================
 	// = Setup mootools FileManager                               =
 	// ============================================================

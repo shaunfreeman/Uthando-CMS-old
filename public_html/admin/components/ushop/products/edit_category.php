@@ -29,7 +29,7 @@ if ($this->authorize()):
 		$category_id = $ushop->tree->getField('category_id');
 		$image_status = $ushop->tree->getField('category_image_status');
 		
-		$base_dir = __SITE_PATH . "/../userfiles/".$this->registry->settings['resolve']."/products/";
+		$base_dir = "/userfiles/".$this->registry->settings['resolve']."/products/";
 		
 		$form = new HTML_QuickForm('edit_category', 'post', $_SERVER['REQUEST_URI']);
 		
@@ -53,12 +53,8 @@ if ($this->authorize()):
 		$form->addElement('html', $parent);
 		
 		if ($image_status == 1):
-			
-			if (file_exists($base_dir.$image) && $image != null):
-				$img_file = $ushop->img_dir.$image;
-			else:
-				$img_file = $ushop->img_dir."noimage.png";
-			endif;
+			$i = (file_exists(__SITE_PATH . "/..".$base_dir.$image) && $image != null) ? $image : "noimage.png";
+			$img_file = $this->registry->get('config.server.web_url').$ushop->img_dir.$i;
 		else:
 			$img_file = "IMAGE OFF";
 		endif;
@@ -134,9 +130,5 @@ if ($this->authorize()):
 		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
 	endif;
-	
-else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
 endif;
 ?>

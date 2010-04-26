@@ -168,21 +168,24 @@ class HTML_Template extends HTML_Page
 	private function parseModules()
 	{
 		$elements = $this->body[0]->getElementsByTagName('module');
-		$i = $elements->length - 1;
-		while ($i > -1) {
-			$element = $elements->item($i);
-			if ($this->modules[$element->getAttribute('name')]):
-				$newelement = $this->doc->createElement('div');
-				foreach ($this->modules[$element->getAttribute('name')] as $el):
-					if (!$el) continue;
-					$newelement->appendChild($el);
-				endforeach;
-				$element->parentNode->replaceChild($newelement, $element);
-			else:
-				$element->parentNode->removeChild($element);
-			endif;
-			$i--;
-		}
+		
+		if ($elements):
+			$i = $elements->length - 1;
+			while ($i > -1):
+				$element = $elements->item($i);
+				if ($this->modules[$element->getAttribute('name')]):
+					$newelement = $this->doc->createElement('div');
+					foreach ($this->modules[$element->getAttribute('name')] as $el):
+						if (!$el) continue;
+						$newelement->appendChild($el);
+					endforeach;
+					$element->parentNode->replaceChild($newelement, $element);
+				else:
+					$element->parentNode->removeChild($element);
+				endif;
+				$i--;
+			endwhile;
+		endif;
 	}
 	
 	private function parseParameters()

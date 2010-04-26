@@ -642,7 +642,7 @@ Messages
 
 .debug_message { font-variant:normal; }
 
-#errors { width:400px; }
+#errors {  }
 
 #closeBox {
 	position:absolute;
@@ -664,19 +664,12 @@ Messages
 	cursor:pointer;
 }
 
-#errorContent {
-	border-top: 1px solid #003399;
-	padding:10px;
-	height:258px;
-	overflow:auto;
-}
+#errorHeader { display:none; }
 
-#errors.sticky_win {
-	width:400px;
-	background-color:#efefef;
-	border: 1px solid #003399;
-	height:300px;
-	overflow:hidden;
+#errorContent {
+	/*border-top: 1px solid #003399;*/
+	padding:10px;
+	overflow:auto;
 }
 
 /*

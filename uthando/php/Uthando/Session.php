@@ -5,7 +5,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 class Session {
 	// session-lifetime
-	private $lifeTime = 86400; // expires in 1 day 60*60*24;
+	private $lifeTime = 1200; // expires in 20 minutes 20*60;
 	private $conn;
 	private $database;
 	private $dsn;
