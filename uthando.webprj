@@ -1221,7 +1221,6 @@
     <item url="public_html/admin/templates/admin/js/index.html" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" uploadstatus="1" />
     <item url="public_html/admin/templates/admin/js/UthandoAdminConfig.js" uploadstatus="1" />
-    <item url="public_html/admin/templates/admin/js/UthandoJsCache.js" uploadstatus="1" />
     <item url="public_html/Common/editor/" uploadstatus="1" />
     <item url="public_html/Common/images/" uploadstatus="1" />
     <item url="public_html/Common/includes/" uploadstatus="1" />

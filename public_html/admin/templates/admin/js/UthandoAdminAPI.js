@@ -15,7 +15,7 @@ var UthandoAdmin = $H({
 		this.HeightFix();
 		this.saveFormButton();
 		
-		window.addEvent('resize', UthandoAdmin.HeightFix());
+		window.addEvent('resize', function() { UthandoAdmin.HeightFix() });
 		
 	},
 	// ============================================================
