@@ -58,4 +58,4 @@ Please use the ticket system at [Assembla](https://www.assembla.com/spaces/uthan
 License
 ---
 
-See [license](master/LICENSE) file.
+See [license](http://github.com/vincentbluff/Uthando-CMS/blob/master/LICENCE) file.

@@ -17,7 +17,7 @@ if ($this->authorize()):
 		$authors_opts[0] = 'Select One';
 			
 		foreach ($authors as $value):
-			$authors_opts[$value->author_id] = HTML_Element::makeXmlSafe($value->forename) . ' ' . HTML_Element::makeXmlSafe($value->surname);
+			$authors_opts[$value->author_id] = HTML_Element::makeXmlSafe($value->forename, true) . ' ' . HTML_Element::makeXmlSafe($value->surname, true);
 		endforeach;
 		
 		$authors_s->loadArray($authors_opts);

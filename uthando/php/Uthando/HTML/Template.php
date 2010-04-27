@@ -285,7 +285,7 @@ class HTML_Template extends HTML_Page
 		if ($js_end_files) $js->scripts = array_merge($js->scripts,$js_end_files);
 		
 		$this->loadJavaScript($js->load_js());
-		$this->addScriptDeclaration("if (!Uthando) var Uthando = $H({}); Uthando.server = '".$registry->server."'; Uthando.resolve = '".$this->registry->settings['resolve']."';");
+		$this->addScriptDeclaration("if (!Uthando) var Uthando = $H({}); Uthando.server = '".$registry->server."'; Uthando.resolve = '".$this->registry->get('settings.resolve')."';");
 		
 		//adjust page columns
 		$columns = $this->body[0]->getElementsByTagName('section');

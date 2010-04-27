@@ -29,17 +29,10 @@ Class Registry {
 	{
 		$key = explode('.', $key);
 		switch(count($key)):
-			case 3:
-				$value = $this->{$key[0]}[$key[1]][$key[2]];
-				break;
-			case 2:
-				$value = $this->{$key[0]}[$key[1]];
-				break;
-			case 1:
-				$value = $this->{$key[0]};
-				break;
-			default:
-				$value = false;
+			case 3: $value = $this->{$key[0]}[$key[1]][$key[2]]; break;
+			case 2: $value = $this->{$key[0]}[$key[1]]; break;
+			case 1: $value = $this->{$key[0]}; break;
+			default: $value = false;
 		endswitch;
 		return ($value===false) ? null : $value;
 	}
@@ -54,7 +47,7 @@ Class Registry {
 		$settings = parse_ini_file($file, true);
 		$this->settings = $settings[$this->server];
 		if (!$this->settings) goto('/index3.php');
-		$this->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$this->settings['resolve']);
+		$this->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$this->get('settings.resolve'));
 	}
 	
 	public function loadIniFiles($files)
@@ -66,12 +59,12 @@ Class Registry {
 	
 	public function setDefaults()
 	{
-		$this->host = (isset($_SERVER['HTTPS'])) ? $this->config['server']['ssl_url'] : $this->config['server']['web_url'];
-		$this->db_default = $this->config['database']['core'].'.';
-		$this->core = $this->config['database']['core'].'.';
-		$this->user = $this->config['database']['user'].'.';
-		$this->sessions = $this->config['database']['session'].'.';
-		date_default_timezone_set($this->config['server']['timezone']);
+		$this->host = (isset($_SERVER['HTTPS'])) ? $this->get('config.server.ssl_url') : $this->get('config.server.web_url');
+		$this->db_default = $this->get('config.database.core').'.';
+		$this->core = $this->get('config.database.core').'.';
+		$this->user = $this->get('config.database.user').'.';
+		$this->sessions = $this->get('config.database.session').'.';
+		date_default_timezone_set($this->get('config.server.timezone'));
 	}
 	
 	public function loadIniFile($file, $section)

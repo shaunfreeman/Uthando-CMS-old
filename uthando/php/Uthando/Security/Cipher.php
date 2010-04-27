@@ -22,7 +22,8 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class Security_Cipher {
+class Security_Cipher
+{
 
     /**
 	* Algorithm to use.
@@ -77,17 +78,15 @@ class Security_Cipher {
 	* @access  public
 	* @return  void 
 	*/
-	public function __construct($algo = MCRYPT_3DES, $mode = MCRYPT_MODE_CBC, $source = MCRYPT_RAND) {
+	public function __construct($algo = MCRYPT_3DES, $mode = MCRYPT_MODE_CBC, $source = MCRYPT_RAND)
+	{
 		$this->algo = $algo;
 		$this->mode = $mode;
 		$this->source = $source;
         
-		if (is_null($this->algo) || (strlen($this->algo) == 0)) {
-			$this->algo = MCRYPT_3DES;
-		}
-		if (is_null($this->mode) || (strlen($this->mode) == 0)) {
-			$this->mode = MCRYPT_MODE_CBC;
-		}
+		if (is_null($this->algo) || (strlen($this->algo) == 0)) $this->algo = MCRYPT_3DES;
+		
+		if (is_null($this->mode) || (strlen($this->mode) == 0)) $this->mode = MCRYPT_MODE_CBC;
 	}
 
     /**
@@ -102,7 +101,8 @@ class Security_Cipher {
 	* @access  public
 	* @return  string 
 	*/
-	public function encrypt($data, $key = null, $iv = null) {
+	public function encrypt($data, $key=null, $iv=null)
+	{
 		$key = (strlen($key) == 0) ? $key = null : $key;
         
 		$this->setKey($key);
@@ -124,7 +124,8 @@ class Security_Cipher {
 	* @access  public
 	* @return  string
 	*/
-	public function decrypt($data, $key = null, $iv = null) {
+	public function decrypt($data, $key=null, $iv=null)
+	{
 		$key = (strlen($key) == 0) ? $key = null : $key;
         
 		$this->setKey($key);
@@ -144,7 +145,8 @@ class Security_Cipher {
 	* @access  public
 	* @return  string
 	*/
-	public function getIV() {
+	public function getIV()
+	{
 		return base64_encode($this->iv);
 	}
     
@@ -158,14 +160,14 @@ class Security_Cipher {
 	* @access  private
 	* @return  void
 	*/
-	private function setIV($iv) {
-		if (!is_null($iv)) {
-			$this->iv = base64_decode($iv);
-		}
-		if (is_null($this->iv)) {
+	private function setIV($iv)
+	{
+		if (!is_null($iv)) $this->iv = base64_decode($iv);
+		
+		if (is_null($this->iv)):
 			$iv_size = mcrypt_get_iv_size($this->algo, $this->mode);
 			$this->iv = mcrypt_create_iv($iv_size, $this->source);
-		}
+		endif;
 	}
 
     /**
@@ -179,15 +181,16 @@ class Security_Cipher {
 	* @access  private
 	* @return  void 
 	*/
-	private function setKey($key) {
-		if (!is_null($key)) {
+	private function setKey($key)
+	{
+		if (!is_null($key)):
 			$key_size = mcrypt_get_key_size($this->algo, $this->mode);
 			$this->key = hash("whirlpool", $key, true);
 			$this->key = substr($this->key, 0, $key_size);
-		}
-		if (is_null($this->key)) {
+		endif;
+		if (is_null($this->key)):
 			trigger_error("You must specify a key at least once in either Cipher::encrpyt() or Cipher::decrypt().", E_USER_ERROR);
-		}
+		endif;
 	}
 }
 ?> 

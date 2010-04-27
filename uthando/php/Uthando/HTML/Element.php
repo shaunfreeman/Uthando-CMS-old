@@ -90,9 +90,9 @@ class HTML_Element extends DOMDocument
 		return preg_replace(array_keys($this->html_entities), array_values($this->html_entities), $value);
 	}
 	
-	public static function makeXmlSafe($value)
+	public static function makeXmlSafe($value, $special=null)
 	{
-		return  htmlentities($value);
+		return  ($special) ? htmlentities(htmlspecialchars($value)) : htmlentities($value);
 	}
 }
 
