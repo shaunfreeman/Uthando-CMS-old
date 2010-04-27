@@ -92,7 +92,7 @@ class HTML_Element extends DOMDocument
 	
 	public static function makeXmlSafe($value)
 	{
-		return  htmlentities(htmlspecialchars($value));
+		return  htmlentities($value);
 	}
 }
 

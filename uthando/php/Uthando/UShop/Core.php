@@ -111,7 +111,7 @@ class UShop_Core
 	  					"thumbnail" => $params['IMAGE'],
 						"isbn" => $rows[$d]->isbn,
 						"author" => $rows[$d]->author,
-						"description" => HTML_Element::makeXmlSafe($rows[$d]->description)
+						"description" => $rows[$d]->description
 					);
 					
 					if (!$rows[$d]->image_status) $message1 = UShop_Utility::removeSection($message1, 'image');
