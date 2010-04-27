@@ -30,9 +30,6 @@ if ($this->authorize()):
 	
 	$form->addRule('author_id', 'Please select an author.', 'required');
 	$form->addRule('author_id', 'Please select an author.', 'nonzero');
-	
-else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
+
 endif;
 ?>
