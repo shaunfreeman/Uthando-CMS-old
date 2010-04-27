@@ -1,0 +1,52 @@
+/*********************************
+ *
+ *	CAPTCHA-Styles
+ *
+ */
+	p.captcha_1,
+	p.captcha_2,
+	p.captcha_notvalid
+	{
+		margin-left: 30px;
+		margin-right: 20px;
+		font-size: 12px;
+		font-style: normal;
+		font-weight: normal;
+		font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+		background: transparent;
+		color: #000000;
+	}
+	p.captcha_2
+	{
+		font-size: 10px;
+		font-style: italic;
+		font-weight: normal;
+	}
+	p.captcha_notvalid
+	{
+		font-weight: bold;
+		color: #FFAAAA;
+	}
+	
+	.captchapict
+	{
+		padding: 2px;
+		border:1px solid #747474;
+	}
+	
+	#captcha
+	{	
+		width:500px;
+		text-align:center;
+		margin-left: auto;
+		margin-right: auto;
+		border-style: dashed;
+		border-width: 2px;
+		border-color: #747474;
+	}
+	
+	#captcha table {
+		text-align:center;
+	}
+	
+	

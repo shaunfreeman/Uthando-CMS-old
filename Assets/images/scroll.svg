@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="8"
+   height="53"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47pre4 r22446"
+   sodipodi:docname="scroll.svg"
+   inkscape:export-filename="/home/shaun/htdocs/Uthando-CMS/Assets/images/scroll_right.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2917"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3165"
+       id="linearGradient3171"
+       x1="398.57144"
+       y1="340.93362"
+       x2="398.57144"
+       y2="626.64795"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3165">
+      <stop
+         style="stop-color:#f0fff0;stop-opacity:1;"
+         offset="0"
+         id="stop3167" />
+      <stop
+         id="stop3173"
+         offset="0.75"
+         style="stop-color:#ffcd00;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ff7800;stop-opacity:0.33333334;"
+         offset="1"
+         id="stop3169" />
+    </linearGradient>
+    <linearGradient
+       gradientTransform="matrix(0.08715285,0,0,0.02467511,-407.88191,234.84373)"
+       y2="626.64795"
+       x2="398.57144"
+       y1="340.93362"
+       x1="398.57144"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient2927"
+       xlink:href="#linearGradient3165"
+       inkscape:collect="always" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="-27.908193"
+     inkscape:cy="28.172049"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1024"
+     inkscape:window-height="694"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-242.85715,-349.505)">
+    <rect
+       style="fill:url(#linearGradient2927);fill-opacity:1;fill-rule:evenodd;stroke:#003399;stroke-width:0.93940371;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2383"
+       width="52.042706"
+       height="7.0500321"
+       x="-402.65271"
+       y="243.2563"
+       inkscape:export-filename="/home/shaun/htdocs/uthandocms/public_html/admin/templates/admin/images/outerHeadDiv.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="matrix(-2.0345208e-4,-0.99999998,0.99999678,-0.00253809,0,0)" />
+    <path
+       sodipodi:type="star"
+       style="fill:#000000"
+       id="path2820"
+       sodipodi:sides="3"
+       sodipodi:cx="50.507626"
+       sodipodi:cy="-0.5482375"
+       sodipodi:r1="8.7079897"
+       sodipodi:r2="4.4838858"
+       sodipodi:arg1="0.51554901"
+       sodipodi:arg2="1.5627465"
+       inkscape:flatsided="false"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 58.08377,3.7449109 -7.54005,0.1905921 -7.542142,-0.069181 3.604967,-6.6251709 3.830984,-6.4970958 3.935083,6.4345789 3.711158,6.5662771 z"
+       transform="matrix(4.629171e-4,-0.37200295,-0.37200295,-4.629171e-4,245.84416,394.80879)" />
+  </g>
+</svg>
