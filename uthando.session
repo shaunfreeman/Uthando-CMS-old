@@ -1,7 +1,12 @@
 <!DOCTYPE webprojectsession>
 <webprojectsession>
   <session usePreviewPrefix="0" previewPrefix="" usePersistentBookmarks="0" >
-    <itemcursorpositions/>
+    <itemcursorpositions>
+      <item line="17" column="34" url="public_html/admin/templates/admin/js/UthandoAdminAPI.js" />
+      <item line="0" column="0" url="public_html/admin/index.php" />
+      <item line="0" column="0" url="public_html/admin/components/ushop/products/edit_category.php" />
+      <item line="0" column="0" url="uthando/php/Uthando/UShop/Core.php" />
+    </itemcursorpositions>
     <uploadprofiles showtreeviews="true" defaultProfile="@" >
       <profile remote_host="" remote_port="" remote_path="" remote_protocol="ftp" user="" name="@" />
     </uploadprofiles>
