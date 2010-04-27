@@ -145,7 +145,7 @@ class UShop_Core
 
 		foreach ($row as $key => $value):
 			
-			if ($key == 'name') $value = HTML_Element::makeXmlSafe($value);
+			if ($key == ('name' || 'author')) $value = HTML_Element::makeXmlSafe($value);
 			
 			if ($key == 'image'):
 				$params[strtoupper($key)] = (file_exists($base_dir.'/'.$value) && $value != null) ? $this->img_dir.$value : $this->img_dir.'noimage.png';

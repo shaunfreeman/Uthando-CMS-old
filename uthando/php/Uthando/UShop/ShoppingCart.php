@@ -128,7 +128,7 @@ class UShop_ShoppingCart
 				'PRODUCT_ID' => $key,
 				'QUANTITY' => $value['qty'],
 				'SKU' => $row->sku,
-				'NAME' => $row->name,
+				'NAME' => HTML_Element::makeXmlSafe($row->name),
 				'PRICE' => $row->price,
 				'VAT' => $tax,
 				'TOTAL' => number_format($itemTotal,2),
