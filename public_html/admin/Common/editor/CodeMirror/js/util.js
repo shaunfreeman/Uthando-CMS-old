@@ -1,8 +1,5 @@
 /* A few useful utility functions. */
 
-var internetExplorer = document.selection && window.ActiveXObject && /MSIE/.test(navigator.userAgent);
-var webkit = /AppleWebKit/.test(navigator.userAgent);
-
 // Capture a method on an object.
 function method(obj, name) {
   return function() {obj[name].apply(obj, arguments);};
@@ -31,7 +28,8 @@ function map(iter, f) {
 }
 
 // Create a predicate function that tests a string againsts a given
-// regular expression.
+// regular expression. No longer used but might be used by 3rd party
+// parsers.
 function matcher(regexp){
   return function(value){return regexp.test(value);};
 }
@@ -110,5 +108,23 @@ function addEventHandler(node, type, handler, removeFunc) {
 }
 
 function nodeText(node) {
-  return node.innerText || node.textContent || node.nodeValue || "";
+  return node.textContent || node.innerText || node.nodeValue || "";
+}
+
+function nodeTop(node) {
+  var top = 0;
+  while (node.offsetParent) {
+    top += node.offsetTop;
+    node = node.offsetParent;
+  }
+  return top;
+}
+
+function isBR(node) {
+  var nn = node.nodeName;
+  return nn == "BR" || nn == "br";
+}
+function isSpan(node) {
+  var nn = node.nodeName;
+  return nn == "SPAN" || nn == "span";
 }

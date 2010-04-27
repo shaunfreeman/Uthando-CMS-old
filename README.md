@@ -52,7 +52,8 @@ See [wiki](http://wiki.github.com/vincentbluff/Uthando-CMS/setup-instructions) f
 Help & Support
 ---
 
-Please use the ticket system at [Assembla](https://www.assembla.com/spaces/uthandocms/tickets)
+Please use the ticket system at [Assembla](https://www.assembla.com/spaces/uthandocms/tickets) or
+[Github Issues](http://github.com/vincentbluff/Uthando-CMS/issues)
 
 License
 ---
