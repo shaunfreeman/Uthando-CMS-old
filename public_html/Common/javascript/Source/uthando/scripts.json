@@ -43,6 +43,16 @@
 		"Fx.MorphElement" : {
 			"deps":["Fx.Morph"],
 			"desc":"Creates a morph effect on any element."
+		},
+		
+		"Fx.GridScroll" : {
+			"deps":["Fx.Tween"],
+			"desc":"Creates a morph effect on any element."
+		},
+
+		"Fx.SmoothAnchors" : {
+			"deps":["Fx.Tween"],
+			"desc":"Creates a morph effect on any element."
 		}
 
 	},

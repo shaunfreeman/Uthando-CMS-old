@@ -1,11 +1,8 @@
-Docs/*
-setup/*
 public_html/Common/tmp/*
 public_html/admin/Common/tmp/*
-public_html/components/ushop/images/products/*
 public_html/components/ushop/html/terms.html
 public_html/userfiles/*
-public_html/userfiles_*
 uthando/ini/*
 uthando/logs/*
-public_html/test.php
+uthando.session
+uthando.webprj

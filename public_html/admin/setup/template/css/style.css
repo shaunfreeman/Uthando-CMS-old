@@ -1,0 +1,330 @@
+
+html, body { overflow:hidden; }
+
+
+body {
+    margin: 5px;
+    padding: 0px;
+    color: #333333;
+    cursor: default;
+  }
+
+/* 
+font settings
+*/
+
+body, form, ul, ol, p {
+    font-size:10px;
+    font-family:Verdana,Arial,Helvetica,sans-serif;
+    font-weight: normal;
+  }
+
+
+body {
+    color: #000000;
+    background-color: #efefef;
+  }
+
+
+body p {
+    line-height: 18px;
+    margin-top: 0px;
+  }
+
+/* 
+links
+*/
+
+a:link, a:visited, a:active {
+    color: #666666;
+    background-color: transparent;
+  }
+
+
+a:hover {
+    color: #000000;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+/*
+images
+*/
+
+img { border:0px; }
+
+/*
+page layout
+*/
+
+#footerDivWrap {
+    border-bottom:1px solid #003399;
+ 	position:fixed;
+ 	bottom:5px;
+ 	width:99%;
+ 	margin-left:auto;
+ 	margin-right:auto;
+}
+
+.alignRight {
+	padding:0px;
+	margin:0px;
+	position:absolute;
+	right:10px;
+	width:50%;
+	text-align:right;
+	line-height:22px;
+}
+
+div.headerDiv {
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #003399;
+    border-bottom: none;
+    line-height: 22px;
+    font-weight: bold;
+    vertical-align: middle;
+    color: #003399;
+    background: url(/templates/admin/images/outerHeadDiv.gif) repeat-x;
+}
+
+#footerDiv img { margin-left: 5px; }
+
+/*
+setup
+*/
+
+#setupWrap h1 {
+	color: #ececec;
+	font-size: 18px;
+	margin:0px;
+	text-shadow: 2px 2px 3px #000;
+  }
+
+#setupWrap {
+	width: 80%;
+	margin: auto;
+	text-align:center;
+  }
+
+#setupContentWrap {
+	padding: 0px;
+	margin:0px auto;
+	height:385px;
+	width:600px;
+	overflow:hidden;
+	text-align:center;
+}
+
+/*
+form elements
+*/
+
+form {
+	text-align:left;
+  }
+
+fieldset {
+	border: 1px solid #003399;
+  }
+
+.formFooters {
+	border-top:none;
+	background: url(/templates/admin/images/headDiv.gif) repeat-x;
+	height:22px;
+	padding:0px;
+  }
+
+.formItem {
+	margin:5px;
+  }
+
+legend {
+	border: 1px solid #003399;
+	line-height:22px;
+	background: url(/templates/admin/images/headDiv.gif) repeat-x;
+	color: #003399;
+	font-weight:bold;
+	padding: 0px 15px;
+	font-size:12px;
+  }
+
+label {
+	font-size:10px;
+	font-weight:bold;
+	float:left;
+	width: 70px;
+	text-align:right;
+  }
+
+input, select {
+    font-size:10px;
+    font-weight:bold;
+    color:#000000;
+    background-color: #efefef;
+    border-top:1px solid threedshadow;
+    border-bottom:1px solid threedhighlight;
+    border-left:1px solid threedshadow;
+    border-right:1px solid threedhighlight;
+    vertical-align:middle;
+    text-align:left;
+    margin-left:20px;
+  }
+  
+input[type=checkbox] {
+	border: 0px;
+}
+
+input[type=submit] {
+    border: 1px solid threedface;
+    background-color: #efefef;
+    background: url(/templates/admin/images/btnUp.gif) repeat-x;
+	height: 16px;
+	line-height: 12px;
+	font-size:10px;
+	font-weight:bold;
+	margin: 3px 0px;
+  }
+
+
+input[type=submit]:hover {
+    border-bottom: 1px solid buttonshadow;
+    border-right: 1px solid buttonshadow;
+    border-top: 1px solid buttonhighlight;
+    border-left: 1px solid buttonhighlight;
+    background-color: threedface;
+    background: url(/templates/admin/images/btnDown.gif) repeat-x;
+    cursor: pointer;
+  }
+
+.formSubmit {
+	position:relative;
+	top:-1px;
+  }
+  
+.next {
+	text-align:right;
+	width:28px;
+	float:right;
+	border: 1px solid threedface;
+    background-color: #efefef;
+    background: url(/templates/admin/images/btnUp.gif) repeat-x;
+	height: 14px;
+	line-height: 14px;
+	font-size:10px;
+	font-weight:bold;
+	margin: 3px 0px;
+	margin-right:5px;
+	padding:0px 2px;
+}
+
+.previous {
+	text-align:left;
+	width:50px;
+	border: 1px solid threedface;
+    background-color: #efefef;
+    background: url(/templates/admin/images/btnUp.gif) repeat-x;
+	height: 14px;
+	line-height: 14px;
+	font-size:10px;
+	font-weight:bold;
+	margin: 3px 0px;
+	margin-left:5px;
+	padding:0px 2px;
+}
+
+.next:hover, .previous:hover {
+	border-bottom: 1px solid buttonshadow;
+    border-right: 1px solid buttonshadow;
+    border-top: 1px solid buttonhighlight;
+    border-left: 1px solid buttonhighlight;
+    background-color: threedface;
+    background: url(/templates/admin/images/btnDown.gif) repeat-x;
+    cursor: pointer;
+}
+
+/*
+Stage 1
+*/
+
+#stage1 .previous, #stage1 .next {
+	display:none;
+}
+
+#stage1 .next {
+	width:120px;
+}
+  
+#licence {
+	padding:5px;
+	height:300px;
+	overflow:auto;
+}
+
+#stage1 { margin:0px; }
+
+#licence p {
+  font-size: 11px;
+  font-weight:normal;
+  text-indent:10px;
+  white-space:pre-wrap;
+}
+
+#licence a {
+	color:#000;
+	text-decoration:none;
+}
+
+#licence a:hover {
+	text-decoration:underline;
+}
+
+#licence h2 {
+  font-size: 13px;
+  font-weight: bold;
+  text-align:center;
+}
+
+#licence li {
+  font-size: 11px;
+  font-weight:bold;
+}
+
+#licence .pre {
+	width: 70%;
+	margin: 10px auto;
+	font-size: 10px;
+	text-indent:0px;
+	font-family:sans-serif;
+}
+
+#gnu .copyright {
+	margin-left:10px;
+	margin-top:0px;
+	margin-bottom:0px;
+	text-indent:0px;
+	white-space:normal;
+}
+
+#gnu h2 {
+	margin-bottom:0px;
+}
+
+#version {
+	text-align:center;
+	margin-top:0px;
+	margin-left:0px;
+}
+
+#terms li p:first-child {
+	font-weight:bold;
+	text-indent:0px;
+}
+
+#terms li li {
+	list-style-type:lower-alpha;
+}
+
+#terms li li p:first-child {
+	font-weight:normal;
+}
