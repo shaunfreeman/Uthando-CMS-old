@@ -12,13 +12,8 @@ define('FILE_FTP_NONBLOCKING', 2, true);
 
 class File_FTP
 {
-	public $public_html;
-	public $uthando_dir;
 	protected $registry;
-	private $host;
-	private $port;
-	private $username;
-	private $password;
+	public $vars;
 	private $timeout = 90;
 	private $mode = FTP_BINARY;
 	private $file_extensions = array(
@@ -43,17 +38,28 @@ class File_FTP
 		)
 	);
 	
-	public function __construct($registry)
+	public function __construct($registry, $auto=true)
 	{
 		$this->registry = $registry;
+		if ($auto):
+			$config = new Config($this->registry, array('path' => $this->registry->ini_dir . '/ftp.ini.php'));
 		
-		$config = new Config($this->registry, array('path' => $this->registry->ini_dir . '/ftp.ini.php'));
-		
-		foreach ($config->get('ftp') as $key => $value):
-			$this->$key = $value;
-		endforeach;
-		
-		$this->login();
+			foreach ($config->get('ftp') as $key => $value):
+				$this->$key = $value;
+			endforeach;
+			
+			$this->login();
+		endif;
+	}
+	
+	public function __set($index, $value)
+	{
+		$this->vars[$index] = $value;
+	}
+	
+	public function __get($index)
+	{
+		return $this->vars[$index];
 	}
 	
 	private function connect()
@@ -61,10 +67,10 @@ class File_FTP
 		$this->matcher = null;
 		try
 		{
-			if (!isset($this->host)) throw new FTPException('ftp host is not set.');
-			if (!isset($this->port)) throw new FTPException('ftp port is not set');
+			if (!$this->host) throw new FTPException('ftp host is not set.');
+			if (!$this->port) throw new FTPException('ftp port is not set');
 			
-			$handle = ftp_connect($this->host, $this->port, $this->timeout);
+			$handle = @ftp_connect($this->host, $this->port, $this->timeout);
 			if (!$handle) {
 				$this->handle = false;
 				throw new FTPException('Connection to host failed');
@@ -84,7 +90,7 @@ class File_FTP
     {
 		try
 		{
-			$res = ftp_close($this->handle);
+			$res = @ftp_close($this->handle);
 			if (!$res) throw new FTPException('Disconnect failed.');
 			$this->handle = null;
 			return true;
@@ -96,7 +102,7 @@ class File_FTP
 		}
 	}
 	
-	private function login()
+	public function login()
 	{
 		if ($this->handle === null):
 			$res = $this->connect();
@@ -105,11 +111,11 @@ class File_FTP
 		
 		try
 		{
-			if (!isset($this->username)) throw new FTPException(' ftp username is not set');
+			if (!$this->username) throw new FTPException(' ftp username is not set');
 	
-			if (!isset($this->password)) throw new FTPException('ftp password is not set');
+			if (!$this->password) throw new FTPException('ftp password is not set');
 	
-			$res = ftp_login($this->handle, $this->username, $this->password);
+			$res = @ftp_login($this->handle, $this->username, $this->password);
 	
 			if (!$res) throw new FTPException('Unable to login');
 			
@@ -142,7 +148,7 @@ class File_FTP
 	{
 		try
 		{
-			$res = ftp_pwd($this->handle);
+			$res = @ftp_pwd($this->handle);
 			if (!$res) throw new FTPException('Could not determine the actual path.');
 			return $res;
 		}
@@ -166,7 +172,7 @@ class File_FTP
 		if ($recursive === false):
 			try
 			{
-				$res = ftp_mkdir($this->handle, $dir);
+				$res = @ftp_mkdir($this->handle, $dir);
 				if (!$res) throw new FTPException("Creation of '$dir' failed");
 				return true;
 			}
@@ -201,7 +207,7 @@ class File_FTP
 		else:
 			try
 			{
-				$res = ftp_chmod($this->handle, $permissions, $target);
+				$res = @ftp_chmod($this->handle, $permissions, $target);
 				if (!$res) throw new FTPException("CHMOD " . $permissions . " " . $target . " failed");
 				return $res;
 			}
@@ -217,7 +223,7 @@ class File_FTP
 	{
 		try
 		{
-			$res = ftp_rename($this->handle, $remote_from, $remote_to);
+			$res = @ftp_rename($this->handle, $remote_from, $remote_to);
 			if (!$res) throw new FTPException("Could not rename ".$remote_from." to ". $remote_to." !");
 			return true;
 		}

@@ -1,11 +1,5 @@
 <?php
-/**
-* @desc check_settings.php - initial Setup of content management.
-* @author Shaun Freeman <shaun@shaunfreeman.co.uk>
-* @date Tue Oct  9 17:07:20 BST 2007
-* @version 0.01 - Tue Oct  9 17:07:28 BST 2007
-*     - 1st release
-*/
+
 session_start();
 ob_start('ob_gzhandler');
 //unset($_SESSION['php_path']);

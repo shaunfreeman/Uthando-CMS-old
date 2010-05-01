@@ -113,7 +113,7 @@ setup
 	height:385px;
 	width:600px;
 	overflow:hidden;
-	text-align:center;
+	text-align:left;
 }
 
 /*
@@ -175,7 +175,7 @@ input[type=checkbox] {
 	border: 0px;
 }
 
-input[type=submit] {
+input[type=submit], button {
     border: 1px solid threedface;
     background-color: #efefef;
     background: url(/templates/admin/images/btnUp.gif) repeat-x;
@@ -187,7 +187,7 @@ input[type=submit] {
   }
 
 
-input[type=submit]:hover {
+input[type=submit]:hover, button:hover {
     border-bottom: 1px solid buttonshadow;
     border-right: 1px solid buttonshadow;
     border-top: 1px solid buttonhighlight;
@@ -243,25 +243,40 @@ input[type=submit]:hover {
     cursor: pointer;
 }
 
+.fail { background: url(/Common/images/ErrorShield.png) no-repeat 0px center;}
+.pass { background: url(/Common/images/OKShield.png) no-repeat 0px center;}
+
 /*
 Stage 1
 */
 
-#stage1 .previous, #stage1 .next {
+#stage1 p {
+	padding-left: 30px;
+	height: 24px;
+	line-height: 24px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+/*
+Stage 2
+*/
+
+#stage2 .next {
 	display:none;
 }
 
-#stage1 .next {
+#stage2 .next {
 	width:120px;
 }
   
-#licence {
+#licence, #server_check {
 	padding:5px;
 	height:300px;
 	overflow:auto;
 }
 
-#stage1 { margin:0px; }
+#stage2 { margin:0px; }
 
 #licence p {
   font-size: 11px;
@@ -290,8 +305,8 @@ Stage 1
   font-weight:bold;
 }
 
-#licence .pre {
-	width: 70%;
+#licence pre {
+	width: 450px;
 	margin: 10px auto;
 	font-size: 10px;
 	text-indent:0px;
@@ -327,4 +342,85 @@ Stage 1
 
 #terms li li p:first-child {
 	font-weight:normal;
+}
+
+/*
+Stage 3
+*/
+
+#stage3 .next {
+	width:40px;
+}
+
+/*
+messageBox
+*/
+
+#messageBox {
+	position:absolute;
+	z-index: 1000;
+	margin: 0px;
+	padding:0px;
+	text-align:left;
+	max-height:400px;
+	max-width:400px;
+	background-color:#efefef;
+	border: 1px solid #003399;
+	-moz-border-radius: 5px;
+	-moz-box-shadow: 10px 10px 5px #888;
+}
+
+#messageBoxHeader {
+	border: 0px;
+	-moz-border-radius: 5px 5px 0px 0px;
+}
+
+#messageBoxContent {
+	border-top: 1px solid #003399;
+	padding:5px;
+	-moz-border-radius: 0px 0px 5px 5px;
+	overflow:auto;
+}
+
+#messageBoxContent p {
+	padding-left: 30px;
+	height: 24px;
+	line-height: 24px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+#messageBoxFooter {
+	text-align:center;
+}
+
+/*
+Spinner
+*/
+
+.spinner {
+	position: absolute;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	z-index: 999;
+	background: #fff;
+}
+.spinner-msg {
+	text-align: center;
+	font-weight: bold;
+}
+
+.spinner-img {
+	background: url(spinner.gif) no-repeat;
+	width: 24px;
+	height: 24px;
+	margin: 0 auto;
+}
+
+.mask {
+	position: absolute;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	z-index: 998;
+	background: #efefef;
 }

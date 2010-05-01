@@ -108,27 +108,27 @@ Class Registry {
 	public function Ok($error, $debug=null)
 	{
 		if (isset ($debug)):
-			$this->errors .= "<span class=\"smcap\"><p class=\"pass\"><img src=\"/Common/images/OKShield.png\" /> " . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p></span>\n";
+			$this->errors .= "<p class=\"pass\">" . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p>";
 		else:
-			$this->errors .= "<span class=\"smcap\"><p class=\"pass\"><img src=\"/Common/images/OKShield.png\" /> " . $error . "</p></span>";
+			$this->errors .= "<p class=\"pass\">" . $error . "</p>";
 		endif;
 	}
 	
 	public function Warning($error, $debug=null)
 	{
 		if (isset ($debug)):
-			$this->errors .= "<span class=\"smcap\"><p class=\"info\"><img src=\"/Common/images/WarningShield.png\" /> " . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p></span>\n";
+			$this->errors .= "<p class=\"info\">" . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p>\n";
 		else:
-			$this->errors .= "<span class=\"smcap\"><p class=\"info\"><img src=\"/Common/images/WarningShield.png\" /> " . $error . "</p></span>";
+			$this->errors .= "<p class=\"info\">" . $error . "</p>";
 		endif;
 	}
 	
 	public function Error($error, $debug=null)
 	{
 		if (isset ($debug)):
-			$this->errors .= "<span class=\"smcap\"><p class=\"fail\"><img src=\"/Common/images/ErrorShield.png\" /> " . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p></span>\n";
+			$this->errors .= "<p class=\"fail\">" . $error . "<p class=\"debug_message\">" . nl2br($debug) . "</p></p>";
 		else:
-			$this->errors .= "<span class=\"smcap\"><p class=\"fail\"><img src=\"/Common/images/ErrorShield.png\" /> " . $error . "</p></span>";
+			$this->errors .= "<p class=\"fail\">" . $error . "</p>";
 		endif;
 	}
 }

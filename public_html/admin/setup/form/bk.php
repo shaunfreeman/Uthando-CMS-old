@@ -1,17 +1,7 @@
-// stage 2 - FTP settings
-$form->addElement('html', '<div id="stage2" class="table-cell"><fieldset>');
+$form = new HTML_QuickForm('setupForm', 'post');
+$form->removeAttribute('name');
 
-$form->addElement('header',null,'Stage 2 | FTP Settings');
-	
-$form->addElement('text', 'port', 'Port:', array('size' => 4, 'value' => '21'));
-$form->addElement('text', 'host', 'Host:', array('size' => 30, 'value' => 'localhost'));
-$form->addElement('text', 'username', 'Username:', array('size' => 30, 'maxlength' => 100));
-
-$form->addElement('password', 'password', 'Password:', array('size' => 30, 'maxlength' => 20));
-		
-$form->addElement('html', '</fieldset>');
-	
-$form->addElement('html', '<fieldset class="formFooters"><p class="next">Next</p><p class="previous">Previous</p></fieldset></div>');
+$form->addElement('html', '<script>document.title = "Uthando CMS Setup | Stage 1";</script>');
 	
 //stage 3 - Database Settings
 $form->addElement('html', '<div id="stage3" class="table-cell"><fieldset>');
@@ -86,3 +76,17 @@ $form->addElement('html','<input type="hidden" name="admin_template" value="admi
 $form->addElement('html', '</fieldset>');
 	
 $form->addElement('html', '<fieldset class="formFooters"><p class="next">Next</p><p class="previous">Previous</p></fieldset></div>');
+
+
+$renderer = new UthandoForm(SETUP_PATH . '/template');
+		
+$renderer->setFormTemplate('form');
+$renderer->setHeaderTemplate('header');
+$renderer->setElementTemplate('element');
+$renderer->setElementTemplate('footer', 'submit');
+		
+$form->accept($renderer);
+
+// output the form
+
+print $renderer->toHtml();
