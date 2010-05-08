@@ -1,7 +1,6 @@
 
 html, body { overflow:hidden; }
 
-
 body {
     margin: 5px;
     padding: 0px;
@@ -19,12 +18,10 @@ body, form, ul, ol, p {
     font-weight: normal;
   }
 
-
 body {
     color: #000000;
     background-color: #efefef;
   }
-
 
 body p {
     line-height: 18px;
@@ -91,6 +88,40 @@ div.headerDiv {
 #footerDiv img { margin-left: 5px; }
 
 /*
+Buttons
+*/
+
+.button {
+	width:auto;
+	color: #000;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	border-bottom: 1px solid buttonshadow;
+    border-right: 1px solid buttonshadow;
+    border-top: 1px solid buttonhighlight;
+    border-left: 1px solid buttonhighlight;
+	background: url(/templates/admin/images/headDiv.png) repeat-x;
+	padding: 0px 5px;
+	line-height:22px;
+	height: 22px;
+	margin: 1px;
+	cursor: pointer;
+	-moz-border-radius:10px 5px;
+	-webkit-border-radius:10px 5px;
+}
+
+.button:hover, .buttonOver {
+	color: #81764F;
+	font-weight: bold;
+	border-top: 1px solid buttonshadow;
+    border-left: 1px solid buttonshadow;
+    border-bottom: 1px solid buttonhighlight;
+    border-right: 1px solid buttonhighlight;
+	background: url(/templates/admin/images/outerHeadDiv.png) repeat-x;
+}
+
+/*
 setup
 */
 
@@ -108,9 +139,11 @@ setup
   }
 
 #setupContentWrap {
+	position:relative;
+	top:10px;
 	padding: 0px;
 	margin:0px auto;
-	height:385px;
+	height:350px;
 	width:600px;
 	overflow:hidden;
 	text-align:left;
@@ -180,7 +213,7 @@ input[type=submit], button {
     background-color: #efefef;
     background: url(/templates/admin/images/btnUp.gif) repeat-x;
 	height: 16px;
-	line-height: 12px;
+	line-height: 16px;
 	font-size:10px;
 	font-weight:bold;
 	margin: 3px 0px;
@@ -272,7 +305,7 @@ Stage 2
   
 #licence, #server_check {
 	padding:5px;
-	height:300px;
+	height:260px;
 	overflow:auto;
 }
 
@@ -361,21 +394,24 @@ messageBox
 	z-index: 1000;
 	margin: 0px;
 	padding:0px;
-	text-align:left;
+	text-align:center;
 	max-height:400px;
 	max-width:400px;
 	background-color:#efefef;
 	border: 1px solid #003399;
 	-moz-border-radius: 5px;
 	-moz-box-shadow: 10px 10px 5px #888;
+	overflow: hidden;
 }
 
 #messageBoxHeader {
+	text-align:left;
 	border: 0px;
 	-moz-border-radius: 5px 5px 0px 0px;
 }
 
 #messageBoxContent {
+	text-align:left;
 	border-top: 1px solid #003399;
 	padding:5px;
 	-moz-border-radius: 0px 0px 5px 5px;
@@ -384,14 +420,14 @@ messageBox
 
 #messageBoxContent p {
 	padding-left: 30px;
-	height: 24px;
 	line-height: 24px;
 	font-weight: bold;
 	font-size: 16px;
 }
 
-#messageBoxFooter {
-	text-align:center;
+#messageBoxOK {
+	margin:5px auto;
+	width: 24px;
 }
 
 /*
@@ -401,7 +437,6 @@ Spinner
 .spinner {
 	position: absolute;
 	opacity: 0.7;
-	filter: alpha(opacity=70);
 	z-index: 999;
 	background: #fff;
 }
@@ -420,7 +455,6 @@ Spinner
 .mask {
 	position: absolute;
 	opacity: 0.7;
-	filter: alpha(opacity=70);
 	z-index: 998;
 	background: #efefef;
 }

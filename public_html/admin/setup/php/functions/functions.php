@@ -58,6 +58,31 @@ function create_username ($username) {
 	return $username;
 }
 
+// Function for setting the referer url.
+function referer() { 
+	if (isset ($_SERVER['HTTPS'])) {
+		$http = "https://";
+	} else {
+		$http = "http://";
+	}
+	
+	$_SESSION['referer_link'] = $http . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+}
+
+// Function for browser redirection.
+function go($go=null) { 
+	if (isset ($_SERVER['HTTPS'])) {
+		$http = "https://";
+	} else {
+		$http = "http://";
+	}
+	$host = $_SERVER['HTTP_HOST'];
+	
+	header ("Location: " . $http . $host . $go);
+	ob_end_clean();
+	exit;
+}
+
 function find_files($dirname, $ext, $file_list = array()) {
 	global $file_list;
     // Loop through the folder 

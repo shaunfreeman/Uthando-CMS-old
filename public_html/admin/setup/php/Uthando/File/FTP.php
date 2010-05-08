@@ -13,8 +13,10 @@ define('FILE_FTP_NONBLOCKING', 2, true);
 class File_FTP
 {
 	protected $registry;
-	public $vars;
-	private $timeout = 90;
+	public $vars = array(
+		'timeout' => 90
+	);
+	//private $timeout = 90;
 	private $mode = FTP_BINARY;
 	private $file_extensions = array(
 		FTP_ASCII => array(),
@@ -62,44 +64,34 @@ class File_FTP
 		return $this->vars[$index];
 	}
 	
+	public function __destruct()
+	{
+		$this->disconnect();
+	}
+	
 	private function connect()
 	{
 		$this->matcher = null;
-		try
-		{
-			if (!$this->host) throw new FTPException('ftp host is not set.');
-			if (!$this->port) throw new FTPException('ftp port is not set');
-			
-			$handle = @ftp_connect($this->host, $this->port, $this->timeout);
-			if (!$handle) {
-				$this->handle = false;
-				throw new FTPException('Connection to host failed');
-			} else {
-				$this->handle =& $handle;
-				return true;
-			}
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		
+		if (!$this->host) throw new FTPException('ftp host is not set.');
+		if (!$this->port) throw new FTPException('ftp port is not set');
+		
+		$handle = @ftp_connect($this->host, $this->port, $this->timeout);
+		if (!$handle):
+			$this->handle = false;
+			throw new FTPException('Connection to host failed');
+		else:
+			$this->handle =& $handle;
+			return true;
+		endif;
 	}
 	
 	public function disconnect()
     {
-		try
-		{
-			$res = @ftp_close($this->handle);
-			if (!$res) throw new FTPException('Disconnect failed.');
-			$this->handle = null;
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		$res = @ftp_close($this->handle);
+		if (!$res) throw new FTPException('Disconnect failed.');
+		$this->handle = null;
+		return true;
 	}
 	
 	public function login()
@@ -109,39 +101,24 @@ class File_FTP
 			if (!$res) return $res;
 		endif;
 		
-		try
-		{
-			if (!$this->username) throw new FTPException(' ftp username is not set');
-	
-			if (!$this->password) throw new FTPException('ftp password is not set');
-	
-			$res = @ftp_login($this->handle, $this->username, $this->password);
-	
-			if (!$res) throw new FTPException('Unable to login');
-			
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->disconnect();
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		if (!$this->username) throw new FTPException('ftp username is not set');
+		if (!$this->password) throw new FTPException('ftp password is not set');
+
+		$res = @ftp_login($this->handle, $this->username, $this->password);
+
+		if (!$res) throw new FTPException('Unable to login');
+		return true;
 	}
 	
-	public function cd($dir, $report_error=true)
+	public function cd($dir, $report=true)
 	{
-		try
-		{
-			$erg = @ftp_chdir($this->handle, $dir);
-			if (!$erg) throw new FTPException('Directory change failed');
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
+		$erg = @ftp_chdir($this->handle, $dir);
+		if (!$erg && $report):
+			throw new FTPException('Directory "'.$dir.'" does not exist or permissions are set incorrectly.');
+		elseif (!$erg):
 			return false;
-		}
+		endif;
+		return true;
 	}
 	
 	public function pwd()
@@ -159,7 +136,7 @@ class File_FTP
 		}
 	}
 	
-	public function mkdir($dir, $recursive = false)
+	public function mkdir($dir, $recursive=false)
     {
 		$dir = $this->constructPath($dir);
 		$savedir = $this->pwd();

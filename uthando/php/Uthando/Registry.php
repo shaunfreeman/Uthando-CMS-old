@@ -10,7 +10,7 @@ Class Registry {
 	
 	public function __construct()
 	{
-		$this->path = urldecode($_SERVER['REQUEST_URI']);
+		$this->path = urldecode(REQUEST_URI);
 		$this->registerPath();
 		$this->registerServer();
 	}
@@ -46,7 +46,7 @@ Class Registry {
 	{
 		$settings = parse_ini_file($file, true);
 		$this->settings = $settings[$this->server];
-		if (!$this->settings) goto('/index3.php');
+		if (!$this->settings) Uthando::go('/index3.php');
 		$this->ini_dir = realpath(__SITE_PATH.'/../uthando/ini/'.$this->get('settings.resolve'));
 	}
 	

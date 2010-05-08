@@ -7,6 +7,9 @@ define( 'PARENT_FILE', 1 );
 
 $site_path = realpath(dirname(__FILE__));
 define ('__SITE_PATH', $site_path);
+define ('SCHEME', (isset ($_SERVER['HTTPS'])) ? 'https://' : 'http://');
+define ('HOST', $_SERVER['HTTP_HOST']);
+define ('REQUEST_URI', $_SERVER['REQUEST_URI']);
 
 /*{START_PHP_INI_PATH}*/
 define ('__PHP_PATH', realpath(__SITE_PATH.'/../uthando/php'));

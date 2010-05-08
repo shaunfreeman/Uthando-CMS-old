@@ -25,20 +25,6 @@ class Uthando
 		return $this->vars[$index];
 	}
 	
-	// Function for browser redirection.
-	public static function go($go=null)
-	{
-		header ('Location: ' . SCHEME . HOST . $go);
-		ob_end_clean();
-		exit;
-	}
-	
-	// Function for setting the referer url.
-	public static function referer()
-	{
-		$_SESSION['referer_link'] = SCHEME . HOST . REQUEST_URI;
-	}
-	
 	public function loadComponent()
 	{
 		$this->file = __SITE_PATH . '/components/' . $this->registry->component;

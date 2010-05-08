@@ -88,7 +88,7 @@ Class Registry {
 				}
 			}
 			
-			if ($params) $this->params = $params;
+			if (isset($params)) $this->params = $params;
 		}
 	}
 	

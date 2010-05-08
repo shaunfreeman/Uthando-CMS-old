@@ -26,6 +26,7 @@ var setup = $H({
 	title: 'Uthando CMS Setup | ',
 	
 	error: false,
+	stage: 0,
 	
 	init: function(){
 		this.request('stage=1');
@@ -79,6 +80,9 @@ var setup = $H({
 		}.bind(this));
 	},
 	
+	stage4: function() {
+	},
+	
 	request: function(postData){
 		new Request.HTML({
 			method: 'get',
@@ -109,7 +113,7 @@ var setup = $H({
 	},
 	
 	messageBox: function(msg) {
-		$('messageBox').set('html', '<div id="messageBoxHeader" class="headerDiv"><span>MessageBox</span></div><div id="messageBoxContent">' + msg + '</div><div id="messageBoxFooter"><button id="messageBoxOK">OK</button></div>');
+		$('messageBox').set('html', '<div id="messageBoxHeader" class="headerDiv"><span>MessageBox</span></div><div id="messageBoxContent">' + msg + '</div><div id="messageBoxFooter"><p id="messageBoxOK" class="button">OK</p></div>');
 		$('messageBox').position();
 		
 		if (this.error) {
@@ -120,6 +124,14 @@ var setup = $H({
 				$('messageBox').empty();
 			}.bind(this));
 		} else {
+			$('messageBoxOK').addEvent('click', function(){
+				this.mask.hide();
+				$('messageBoxOK').removeEvents('click');
+				$('previous').removeEvents('click');
+				$('submit').removeEvents('click');
+				$('messageBox').empty();
+				this.request('stage='+this.stage);
+			}.bind(this));
 		}
 	}
 });
