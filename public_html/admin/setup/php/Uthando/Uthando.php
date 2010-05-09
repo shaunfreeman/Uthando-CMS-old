@@ -97,16 +97,16 @@ class Uthando
 		if (ini_get('magic_quotes_gpc')) $data = stripslashes($data);
 		if ($this->striptags) $data = strip_tags($data);
 		
-		return $this->registry->db->escape(trim($data));
+		return DB_Core::escape(trim($data));
 	}
 	
 	public function formValues($values)
 	{
 		foreach ($values as $key => $value):
 			if (is_array($value)):
-				$values[$key] = $this->formValues($value);
+				$values[$key] = self::formValues($value);
 			else:
-				$values[$key] = $this->escape_db_data($value);
+				$values[$key] = self::escape_db_data($value);
 			endif;
 		endforeach;
 		return $values;

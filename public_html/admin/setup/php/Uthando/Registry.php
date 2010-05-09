@@ -10,6 +10,8 @@ Class Registry {
 	
 	public function __construct()
 	{
+		$this->ini_dir = realpath(__SITE_PATH.'/../../uthando/ini');
+		
 		$this->path = urldecode($_SERVER['REQUEST_URI']);
 		$this->registerPath();
 		$this->registerServer();

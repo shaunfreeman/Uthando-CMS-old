@@ -33,9 +33,6 @@ $uthando = new Uthando($registry);
 
 class SettingsException extends Uthando_Exception {}
 
-// clean Post values and assign the to an array.
-foreach ($_POST as $key => $value) $post[$key] = escape_data($value);
-
 // error function.
 function getError($message)
 {

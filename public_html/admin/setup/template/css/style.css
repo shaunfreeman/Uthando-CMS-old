@@ -153,13 +153,11 @@ setup
 form elements
 */
 
-form {
-	text-align:left;
-  }
+form { text-align:left; }
 
-fieldset {
-	border: 1px solid #003399;
-  }
+fieldset { border: 1px solid #003399; }
+ 
+fieldset.sub { margin-bottom: 5px; }
 
 .formFooters {
 	border-top:none;
@@ -381,9 +379,13 @@ Stage 2
 Stage 3
 */
 
-#stage3 .next {
-	width:40px;
-}
+#stage3 .next, #stage4 .next { width:40px; }
+
+/*
+Stage 4
+*/
+
+#stage4 { height:325px; overflow: auto; }
 
 /*
 messageBox
@@ -415,6 +417,8 @@ messageBox
 	border-top: 1px solid #003399;
 	padding:5px;
 	-moz-border-radius: 0px 0px 5px 5px;
+	max-height:325px;
+	max-width:400px;
 	overflow:auto;
 }
 

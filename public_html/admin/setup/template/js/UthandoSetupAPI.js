@@ -81,6 +81,15 @@ var setup = $H({
 	},
 	
 	stage4: function() {
+		document.title = this.title + 'Database Settings';
+		
+		$('submit').addEvent('click', function(e) {
+			this.submitForm('submit');
+		}.bind(this));
+		
+		$('previous').addEvent('click', function(e) {
+			this.request('stage=3');
+		}.bind(this));
 	},
 	
 	request: function(postData){
@@ -125,12 +134,12 @@ var setup = $H({
 			}.bind(this));
 		} else {
 			$('messageBoxOK').addEvent('click', function(){
-				this.mask.hide();
 				$('messageBoxOK').removeEvents('click');
 				$('previous').removeEvents('click');
 				$('submit').removeEvents('click');
 				$('messageBox').empty();
 				this.request('stage='+this.stage);
+				this.mask.hide();
 			}.bind(this));
 		}
 	}

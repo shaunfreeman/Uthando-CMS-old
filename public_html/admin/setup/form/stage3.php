@@ -6,24 +6,27 @@ $form = new HTML_QuickForm('setupForm', 'post', $_SERVER['REQUEST_URI']);
 $form->removeAttribute('name');
 
 // stage 3 - FTP settings
-$form->addElement('html', '<div id="stage3" class="table-cell"><fieldset>');
+$form->addElement('html', '<div id="stage3"><fieldset>');
 
 $form->addElement('header',null,'Stage 3 | FTP Settings');
 
-$form->addElement('text', 'port', 'Port:', array('size' => 4, 'value' => '21'));
-$form->addElement('text', 'host', 'Host:', array('size' => 30, 'value' => 'localhost'));
-$form->addElement('text', 'username', 'Username:', array('size' => 30, 'maxlength' => 100));
+$form->addElement('text', 'ftp[port]', 'Port:', array('size' => 4, 'value' => '21'));
+$form->addElement('text', 'ftp[host]', 'Host:', array('size' => 30, 'value' => 'localhost'));
+$form->addElement('text', 'ftp[username]', 'Username:', array('size' => 30, 'maxlength' => 100));
 
-$form->addElement('password', 'password', 'Password:', array('size' => 30, 'maxlength' => 20));
+$form->addElement('password', 'ftp[password]', 'Password:', array('size' => 30, 'maxlength' => 20));
 
 $form->addElement('html', '</fieldset>');
 
 if ($form->validate()):
 	
+	$form->freeze();
+	$values = $form->process(array($uthando, 'formValues'));
+	
 	//Check FTP Settings.
 	try{
 		$ftp = new File_FTP($registry, false);
-		foreach ($post as $key => $value) $ftp->{$key} = $value;
+		foreach ($values['ftp'] as $key => $value) $ftp->{$key} = $value;
 		$ftp->login();
 		
 		$public_html = realpath($_SERVER['DOCUMENT_ROOT'].'/../');
@@ -41,8 +44,8 @@ if ($form->validate()):
 		}
 		
 		findPublicHtml();
-		$post['timeout'] = $ftp->timeout;
-		$post['public_html'] = $public_html;
+		$values['ftp']['timeout'] = $ftp->timeout;
+		$values['ftp']['public_html'] = $public_html;
 		$ftp->public_html = $public_html;
 		
 		$ftp->cd('../');
@@ -50,11 +53,12 @@ if ($form->validate()):
 		
 		if (!$ftp->cd($sysroot.'/uthando')) throw new SettingsException('You need to upload the uthando directory to "'.$sysroot.'".');
 		
-		$post['uthando_dir'] = $ftp->pwd();
-		$ftp->uthando_dir = $post['uthando_dir'];
+		$values['ftp']['uthando_dir'] = $ftp->pwd();
+		$ftp->uthando_dir = $values['ftp']['uthando_dir'];
 		
 		$config = new Admin_Config($registry);
-		foreach ($post as $key => $value):
+		
+		foreach ($values['ftp'] as $key => $value):
 			$config->set($key, $value, 'ftp');
 		endforeach;
 		
@@ -63,7 +67,6 @@ if ($form->validate()):
 		function getFTPPath($ftp_path, $file)
 		{
 			$matches = explode($ftp_path, $file);
-			//print_rr($matches);
 			return $ftp_path.$matches[1];
 		}
 		
@@ -76,9 +79,10 @@ if ($form->validate()):
 		$ftp->put($tmp, $ftp->uthando_dir.'/ini/ftp.ini.php', true);
 		unlink($tmp);
 		
-		$config->path = realpath(__SITE_PATH.'/../../uthando/ini').'/ftp.ini.php';
-		$config->save();
-		$message = 'All Done!';
+		$config->path = $registry->ini_dir.'/ftp.ini.php';
+		$config->save($ftp);
+		
+		$message = '<p class="pass">ftp settings are correct.</p>';
 		$message .= "<script>setup.stage = 4;</script>";
 		
 	} catch (FTPException $e) {
