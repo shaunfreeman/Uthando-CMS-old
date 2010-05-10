@@ -5,6 +5,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+
+DROP TABLE IF EXISTS `components`;
 CREATE TABLE IF NOT EXISTS `components` (
   `component_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `component` varchar(45) NOT NULL,
@@ -27,6 +29,7 @@ INSERT INTO `components` (`component_id`, `component`, `version`, `enabled`) VAL
 (10, 'plugin', '1', 1),
 (11, 'webmail', '0.1', 1);
 
+DROP TABLE IF EXISTS `menu_items`;
 CREATE TABLE IF NOT EXISTS `menu_items` (
   `item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `menu_type_id` int(10) unsigned DEFAULT NULL,
@@ -48,6 +51,7 @@ INSERT INTO `menu_items` (`item_id`, `menu_type_id`, `status_id`, `url_id`, `pag
 (5, 1, 2, NULL, NULL, NULL, 'Main Menu', 1, 12),
 (6, NULL, 2, 6, NULL, 1, 'Ushop', 8, 9);
 
+DROP TABLE IF EXISTS `menu_urls`;
 CREATE TABLE IF NOT EXISTS `menu_urls` (
   `url_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(45) NOT NULL DEFAULT '',
@@ -62,16 +66,7 @@ INSERT INTO `menu_urls` (`url_id`, `url`, `enssl`) VALUES
 (5, 'content/overview', 0),
 (6, 'ushop/overview', 0);
 
-CREATE TABLE IF NOT EXISTS `module_names` (
-  `module_name_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`module_name_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
-INSERT INTO `module_names` (`module_name_id`, `module_name`) VALUES
-(1, 'menu'),
-(2, 'custom');
-
+DROP TABLE IF EXISTS `modules`;
 CREATE TABLE IF NOT EXISTS `modules` (
   `module_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `module_name_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -90,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
 INSERT INTO `modules` (`module_id`, `module_name_id`, `position_id`, `module`, `sort_order`, `show_title`, `params`, `html`, `enabled`) VALUES
 (2, 1, 1, 'Main Menu', 2, 1, 'menu=Main Menu\r\nclass_sfx=\r\nmoduleclass_sfx=_menu brdPad\r\nlog_in=0', NULL, 1);
 
+DROP TABLE IF EXISTS `modules_position`;
 CREATE TABLE IF NOT EXISTS `modules_position` (
   `position_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `position` varchar(30) DEFAULT NULL,
@@ -98,3 +94,14 @@ CREATE TABLE IF NOT EXISTS `modules_position` (
 
 INSERT INTO `modules_position` (`position_id`, `position`) VALUES
 (1, 'left');
+
+DROP TABLE IF EXISTS `module_names`;
+CREATE TABLE IF NOT EXISTS `module_names` (
+  `module_name_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `module_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`module_name_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+INSERT INTO `module_names` (`module_name_id`, `module_name`) VALUES
+(1, 'menu'),
+(2, 'custom');

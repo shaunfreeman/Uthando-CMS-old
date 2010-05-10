@@ -33,7 +33,7 @@ var setup = $H({
 	},
 	
 	stage1: function(){
-		document.title = this.title + 'Server Check';
+		this.setTitle('Server Check');
 		if ($('next')) {
 			$('next').addEvent('click', function(e) {
 				this.request('stage=2');
@@ -42,8 +42,7 @@ var setup = $H({
 	},
 	
 	stage2: function(){
-		document.title = this.title + 'Licence';
-		
+		this.setTitle('Licence');
 		elements = $$('#licence a');
 		
 		var fx = new Fx.Scroll($('licence'));
@@ -69,7 +68,7 @@ var setup = $H({
 	},
 	
 	stage3: function() {
-		document.title = this.title + 'FTP Settings';
+		this.setTitle('FTP Settings');
 		
 		$('submit').addEvent('click', function(e) {
 			this.submitForm('submit');
@@ -81,7 +80,7 @@ var setup = $H({
 	},
 	
 	stage4: function() {
-		document.title = this.title + 'Database Settings';
+		this.setTitle('Database Settings');
 		
 		$('submit').addEvent('click', function(e) {
 			this.submitForm('submit');
@@ -90,6 +89,9 @@ var setup = $H({
 		$('previous').addEvent('click', function(e) {
 			this.request('stage=3');
 		}.bind(this));
+	},
+	
+	stage5: function() {
 	},
 	
 	request: function(postData){
@@ -123,6 +125,7 @@ var setup = $H({
 	
 	messageBox: function(msg) {
 		$('messageBox').set('html', '<div id="messageBoxHeader" class="headerDiv"><span>MessageBox</span></div><div id="messageBoxContent">' + msg + '</div><div id="messageBoxFooter"><p id="messageBoxOK" class="button">OK</p></div>');
+		$('messageBox').setStyle('display', 'block');
 		$('messageBox').position();
 		
 		if (this.error) {
@@ -131,6 +134,7 @@ var setup = $H({
 				this.error = false;
 				$('messageBoxOK').removeEvents('click');
 				$('messageBox').empty();
+				$('messageBox').setStyle('display', 'none');
 			}.bind(this));
 		} else {
 			$('messageBoxOK').addEvent('click', function(){
@@ -140,9 +144,12 @@ var setup = $H({
 				$('messageBox').empty();
 				this.request('stage='+this.stage);
 				this.mask.hide();
+				$('messageBox').setStyle('display', 'none');
 			}.bind(this));
 		}
-	}
+	},
+	
+	setTitle: function(title) { document.title = this.title+title; }
 });
 
 window.addEvent('domready', function() { setup.init(); });

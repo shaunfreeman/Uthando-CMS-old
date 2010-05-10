@@ -5,14 +5,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-CREATE TABLE IF NOT EXISTS `user_groups` (
-  `user_group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_group` varchar(50) NOT NULL,
-  PRIMARY KEY (`user_group_id`),
-  UNIQUE KEY `user_type` (`user_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_group_id` int(10) unsigned NOT NULL DEFAULT '4',
@@ -33,18 +27,16 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
-CREATE TABLE IF NOT EXISTS `ushop_order_items` (
-  `order_item_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL,
-  `order_id` int(5) unsigned NOT NULL,
-  `product_id` int(5) unsigned NOT NULL,
-  `quantity` int(5) unsigned NOT NULL,
-  `item_price` decimal(10,2) unsigned NOT NULL,
-  `tax` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
-  PRIMARY KEY (`order_item_id`)
+DROP TABLE IF EXISTS `user_groups`;
+CREATE TABLE IF NOT EXISTS `user_groups` (
+  `user_group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_group` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_group_id`),
+  UNIQUE KEY `user_type` (`user_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
+DROP TABLE IF EXISTS `ushop_orders`;
 CREATE TABLE IF NOT EXISTS `ushop_orders` (
   `order_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(5) unsigned NOT NULL,
@@ -63,6 +55,20 @@ CREATE TABLE IF NOT EXISTS `ushop_orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
+DROP TABLE IF EXISTS `ushop_order_items`;
+CREATE TABLE IF NOT EXISTS `ushop_order_items` (
+  `order_item_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `order_id` int(5) unsigned NOT NULL,
+  `product_id` int(5) unsigned NOT NULL,
+  `quantity` int(5) unsigned NOT NULL,
+  `item_price` decimal(10,2) unsigned NOT NULL,
+  `tax` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`order_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `ushop_user_cda`;
 CREATE TABLE IF NOT EXISTS `ushop_user_cda` (
   `user_cda_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
   `user_info_id` int(5) unsigned NOT NULL DEFAULT '0',
@@ -78,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `ushop_user_cda` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
+DROP TABLE IF EXISTS `ushop_user_info`;
 CREATE TABLE IF NOT EXISTS `ushop_user_info` (
   `user_info_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(255) unsigned NOT NULL,
@@ -95,6 +102,7 @@ CREATE TABLE IF NOT EXISTS `ushop_user_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
+DROP TABLE IF EXISTS `ushop_user_prefix`;
 CREATE TABLE IF NOT EXISTS `ushop_user_prefix` (
   `prefix_id` int(1) unsigned NOT NULL AUTO_INCREMENT,
   `prefix` varchar(5) NOT NULL DEFAULT '',

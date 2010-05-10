@@ -379,7 +379,7 @@ Stage 2
 Stage 3
 */
 
-#stage3 .next, #stage4 .next { width:40px; }
+#stage3 .next, #stage4 .next, #stage5 .next { width:40px; }
 
 /*
 Stage 4

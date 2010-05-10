@@ -1,7 +1,7 @@
 <?php
 /*
  * Uthando CMS - Content management system.
- * Copyright (C) 2010  Shaun Freeman
+ * Copyright (C) 2010  Shaun Freeman <shaun@shaunfreeman.co.uk>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

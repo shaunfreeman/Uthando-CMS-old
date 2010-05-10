@@ -1,7 +1,7 @@
 <?php
 /*
  * Uthando CMS - Content management system.
- * Copyright (C) 2010  Shaun Freeman
+ * Copyright (C) 2010  Shaun Freeman <shaun@shaunfreeman.co.uk>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,4 +20,45 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
+$form = new HTML_QuickForm('setupForm', 'post', $_SERVER['REQUEST_URI']);
+$form->removeAttribute('name');
+
+
+if ($form->validate()):
+	
+	$form->freeze();
+
+	$values = $form->process(array($uthando, 'formValues'));
+	
+	try{
+	} catch (PDOException $e) {
+		$message = '<p class="fail">'.$e->getMessage().'</p>';
+		$message .= "<script>setup.error = true;</script>";
+	} catch (FTPException $e) {
+		$message = '<p class="fail">'.$e->getMessage().'</p>';
+		$message .= "<script>setup.error = true;</script>";
+	} catch (SettingsException $e) {
+		$message = '<p class="fail">'.$e->getMessage().'</p>';
+		$message .= "<script>setup.error = true;</script>";
+	}
+
+	print $message;
+
+else:
+	
+	$form->addElement('html', '<fieldset class="formFooters"><p id="submit" class="next">Submit</p><p id="previous" class="previous">Previous</p></fieldset></div>');
+	
+	$renderer = new UthandoForm(SETUP_PATH . '/template');
+		
+	$renderer->setFormTemplate('form');
+	$renderer->setHeaderTemplate('header');
+	$renderer->setElementTemplate('element');
+	$renderer->setElementTemplate('footer', 'submit');
+			
+	$form->accept($renderer);
+	
+	// output the form
+	
+			print $renderer->toHtml();
+	endif;
 ?>

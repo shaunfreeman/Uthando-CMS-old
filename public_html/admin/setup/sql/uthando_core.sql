@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -5,6 +6,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+
+DROP TABLE IF EXISTS `components`;
 CREATE TABLE IF NOT EXISTS `components` (
   `component_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `component` varchar(45) NOT NULL,
@@ -19,6 +22,7 @@ INSERT INTO `components` (`component_id`, `component`, `version`, `enabled`) VAL
 (2, 'content', 1, 1),
 (4, 'ushop', 1, 1);
 
+DROP TABLE IF EXISTS `email_body`;
 CREATE TABLE IF NOT EXISTS `email_body` (
   `email_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `template` varchar(100) DEFAULT NULL,
@@ -30,6 +34,7 @@ INSERT INTO `email_body` (`email_id`, `template`, `body`) VALUES
 (1, 'password reminder', 'Dear ####USER####\r\n\r\nYou have requested to be reminded of your password at ####SITE####.\r\n\r\nYour password is: ####PASSWORD####\r\n\r\nRegards\r\n####ADMINISTRATOR####  '),
 (2, 'register user', 'Dear ####USER####\r\n\r\nYou have registered an account at ####SITE####.\r\n\r\nYour password is: ####PASSWORD####\r\n\r\nRegards\r\n####ADMINISTRATOR####  ');
 
+DROP TABLE IF EXISTS `email_type`;
 CREATE TABLE IF NOT EXISTS `email_type` (
   `email_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email_type` varchar(10) NOT NULL DEFAULT 'html',
@@ -40,18 +45,7 @@ INSERT INTO `email_type` (`email_type_id`, `email_type`) VALUES
 (1, 'html'),
 (2, 'plain');
 
-CREATE TABLE IF NOT EXISTS `menu_item_types` (
-  `item_type_id` int(255) unsigned NOT NULL AUTO_INCREMENT,
-  `item_type` varchar(255) NOT NULL,
-  PRIMARY KEY (`item_type_id`),
-  KEY `item_type` (`item_type`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
-INSERT INTO `menu_item_types` (`item_type_id`, `item_type`) VALUES
-(1, 'component'),
-(2, 'external'),
-(3, 'heading');
-
+DROP TABLE IF EXISTS `menu_items`;
 CREATE TABLE IF NOT EXISTS `menu_items` (
   `item_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `menu_type_id` int(11) unsigned DEFAULT NULL,
@@ -81,6 +75,20 @@ INSERT INTO `menu_items` (`item_id`, `menu_type_id`, `status_id`, `url_id`, `pag
 (14, NULL, 2, 9, NULL, 1, 'Change Details', 24, 25),
 (15, NULL, 2, 10, NULL, 1, 'Change Address', 26, 27);
 
+DROP TABLE IF EXISTS `menu_item_types`;
+CREATE TABLE IF NOT EXISTS `menu_item_types` (
+  `item_type_id` int(255) unsigned NOT NULL AUTO_INCREMENT,
+  `item_type` varchar(255) NOT NULL,
+  PRIMARY KEY (`item_type_id`),
+  KEY `item_type` (`item_type`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+INSERT INTO `menu_item_types` (`item_type_id`, `item_type`) VALUES
+(1, 'component'),
+(2, 'external'),
+(3, 'heading');
+
+DROP TABLE IF EXISTS `menu_link_status`;
 CREATE TABLE IF NOT EXISTS `menu_link_status` (
   `status_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `status` char(2) NOT NULL,
@@ -92,6 +100,7 @@ INSERT INTO `menu_link_status` (`status_id`, `status`) VALUES
 (2, 'LI'),
 (3, 'LO');
 
+DROP TABLE IF EXISTS `menu_types`;
 CREATE TABLE IF NOT EXISTS `menu_types` (
   `menu_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `menu_type` varchar(60) NOT NULL,
@@ -102,6 +111,7 @@ INSERT INTO `menu_types` (`menu_type_id`, `menu_type`) VALUES
 (1, 'vertical'),
 (2, 'horizontal');
 
+DROP TABLE IF EXISTS `menu_urls`;
 CREATE TABLE IF NOT EXISTS `menu_urls` (
   `url_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) DEFAULT NULL,
@@ -120,16 +130,7 @@ INSERT INTO `menu_urls` (`url_id`, `url`, `enssl`) VALUES
 (9, 'user/change_details', 1),
 (10, 'ushop/view/change_details', 0);
 
-CREATE TABLE IF NOT EXISTS `module_names` (
-  `module_name_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module_name` varchar(100) NOT NULL,
-  PRIMARY KEY (`module_name_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
-INSERT INTO `module_names` (`module_name_id`, `module_name`) VALUES
-(1, 'menu'),
-(2, 'custom');
-
+DROP TABLE IF EXISTS `modules`;
 CREATE TABLE IF NOT EXISTS `modules` (
   `module_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `module_name_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -151,6 +152,7 @@ INSERT INTO `modules` (`module_id`, `module_name_id`, `position_id`, `module`, `
 (3, 2, 1, 'Site Specs', 3, 1, 'log_in=0', '<p>\r\n	Site best viewed in a screen resolution of 1024x768 &#038; 32 bit colours or higher using the latest version of <a href="http://www.mozilla.com/en-US/firefox" target="_blank">Firefox</a>\r\n</p>\r\n<p>\r\n	<a href="http://www.mozilla.com/en-US/firefox" target="_blank">\r\n		<img src="/Common/images/firefox.png" />\r\n	</a>\r\n</p>', 1),
 (5, 1, 1, 'My Account', 3, 1, 'menu=My Account\r\nclass_sfx=\r\nmoduleclass_sfx=_menu\r\nlog_in=1', NULL, 1);
 
+DROP TABLE IF EXISTS `modules_position`;
 CREATE TABLE IF NOT EXISTS `modules_position` (
   `position_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `position` varchar(30) DEFAULT NULL,
@@ -162,6 +164,18 @@ INSERT INTO `modules_position` (`position_id`, `position`) VALUES
 (2, 'right'),
 (3, 'top menu');
 
+DROP TABLE IF EXISTS `module_names`;
+CREATE TABLE IF NOT EXISTS `module_names` (
+  `module_name_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `module_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`module_name_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+INSERT INTO `module_names` (`module_name_id`, `module_name`) VALUES
+(1, 'menu'),
+(2, 'custom');
+
+DROP TABLE IF EXISTS `pages`;
 CREATE TABLE IF NOT EXISTS `pages` (
   `page_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `page` varchar(60) NOT NULL,
@@ -176,6 +190,37 @@ CREATE TABLE IF NOT EXISTS `pages` (
 INSERT INTO `pages` (`page_id`, `page`, `content`, `params`, `cdate`, `mdate`) VALUES
 (1, 'Welcome to Charisma Books', '<h1>Site Under Construction lhk''ddd @ "'' 2;;"''</h1>\r\n<div id="mooflow">&nbsp;</div>', 'a:4:{s:10:"show_title";s:1:"1";s:10:"show_cdate";s:1:"1";s:10:"show_mdate";s:1:"1";s:8:"metadata";a:2:{s:11:"description";s:0:"";s:8:"keywords";s:0:"";}}', '2009-05-13 12:58:36', '2010-01-19 13:57:50');
 
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_group_id` int(10) unsigned NOT NULL DEFAULT '4',
+  `email_type_id` int(10) unsigned NOT NULL DEFAULT '1',
+  `first_name` varchar(60) NOT NULL,
+  `last_name` varchar(60) NOT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `iv` varchar(255) NOT NULL,
+  `cdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `mdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `activation` int(1) NOT NULL DEFAULT '1',
+  `block` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`,`email`),
+  KEY `name` (`first_name`,`last_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `user_groups`;
+CREATE TABLE IF NOT EXISTS `user_groups` (
+  `user_group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_group` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_group_id`),
+  UNIQUE KEY `user_type` (`user_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `ushop_authors`;
 CREATE TABLE IF NOT EXISTS `ushop_authors` (
   `author_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `forename` varchar(100) NOT NULL,
@@ -509,6 +554,7 @@ INSERT INTO `ushop_authors` (`author_id`, `forename`, `surname`) VALUES
 (327, 'Lynda Scott', 'Musante'),
 (328, 'Carole Rodgers, Jennifer Mayer', '& Deb Bergs');
 
+DROP TABLE IF EXISTS `ushop_counties`;
 CREATE TABLE IF NOT EXISTS `ushop_counties` (
   `county_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `country_id` int(4) unsigned NOT NULL DEFAULT '0',
@@ -517,6 +563,7 @@ CREATE TABLE IF NOT EXISTS `ushop_counties` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 
+DROP TABLE IF EXISTS `ushop_countries`;
 CREATE TABLE IF NOT EXISTS `ushop_countries` (
   `country_id` int(3) unsigned NOT NULL AUTO_INCREMENT,
   `post_zone_id` int(2) unsigned NOT NULL DEFAULT '0',
@@ -531,6 +578,39 @@ INSERT INTO `ushop_countries` (`country_id`, `post_zone_id`, `country`) VALUES
 (2, 2, 'UK'),
 (3, 3, 'Europe');
 
+DROP TABLE IF EXISTS `ushop_orders`;
+CREATE TABLE IF NOT EXISTS `ushop_orders` (
+  `order_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(5) unsigned NOT NULL,
+  `order_status_id` int(4) unsigned NOT NULL,
+  `invoice` int(10) unsigned NOT NULL,
+  `total` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
+  `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `shipping` decimal(4,2) NOT NULL DEFAULT '0.00',
+  `tax` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `payment_method` varchar(100) NOT NULL,
+  `txn_id` varchar(19) DEFAULT NULL,
+  PRIMARY KEY (`order_id`),
+  UNIQUE KEY `invoice` (`invoice`),
+  KEY `customer_id` (`user_id`),
+  KEY `order_date` (`order_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `ushop_order_items`;
+CREATE TABLE IF NOT EXISTS `ushop_order_items` (
+  `order_item_id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `order_id` int(5) unsigned NOT NULL,
+  `product_id` int(5) unsigned NOT NULL,
+  `quantity` int(5) unsigned NOT NULL,
+  `item_price` decimal(10,2) unsigned NOT NULL,
+  `tax` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
+  PRIMARY KEY (`order_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `ushop_order_status`;
 CREATE TABLE IF NOT EXISTS `ushop_order_status` (
   `order_status_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `order_status` varchar(255) NOT NULL,
@@ -548,6 +628,7 @@ INSERT INTO `ushop_order_status` (`order_status_id`, `order_status`) VALUES
 (8, 'Cheque Payment Pending'),
 (9, 'Cheque Payment Completed');
 
+DROP TABLE IF EXISTS `ushop_paypal_currency`;
 CREATE TABLE IF NOT EXISTS `ushop_paypal_currency` (
   `currency_id` int(1) unsigned NOT NULL AUTO_INCREMENT,
   `currency` varchar(45) NOT NULL DEFAULT '',
@@ -564,6 +645,7 @@ INSERT INTO `ushop_paypal_currency` (`currency_id`, `currency`, `code`, `mta`) V
 (5, 'Euros', 'EUR', '8000.00'),
 (6, 'Japanese Yen', 'JPY', '1000000.00');
 
+DROP TABLE IF EXISTS `ushop_post_costs`;
 CREATE TABLE IF NOT EXISTS `ushop_post_costs` (
   `post_cost_id` int(2) unsigned NOT NULL AUTO_INCREMENT,
   `post_level_id` int(3) unsigned NOT NULL DEFAULT '0',
@@ -613,6 +695,7 @@ INSERT INTO `ushop_post_costs` (`post_cost_id`, `post_level_id`, `post_zone_id`,
 (35, 13, 2, '18.00', 0),
 (36, 13, 3, '20.00', 0);
 
+DROP TABLE IF EXISTS `ushop_post_levels`;
 CREATE TABLE IF NOT EXISTS `ushop_post_levels` (
   `post_level_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `post_level` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
@@ -634,6 +717,7 @@ INSERT INTO `ushop_post_levels` (`post_level_id`, `post_level`) VALUES
 (12, '6000.00'),
 (13, '8000.00');
 
+DROP TABLE IF EXISTS `ushop_post_zones`;
 CREATE TABLE IF NOT EXISTS `ushop_post_zones` (
   `post_zone_id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `tax_code_id` int(2) unsigned NOT NULL DEFAULT '0',
@@ -647,6 +731,7 @@ INSERT INTO `ushop_post_zones` (`post_zone_id`, `tax_code_id`, `zone`) VALUES
 (2, 1, '2 - UK'),
 (3, 1, '3 - Europe');
 
+DROP TABLE IF EXISTS `ushop_price_groups`;
 CREATE TABLE IF NOT EXISTS `ushop_price_groups` (
   `price_group_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `price_group` varchar(5) DEFAULT '0',
@@ -658,76 +743,7 @@ CREATE TABLE IF NOT EXISTS `ushop_price_groups` (
 INSERT INTO `ushop_price_groups` (`price_group_id`, `price_group`, `price`) VALUES
 (1, 'A', '2.70');
 
-CREATE TABLE IF NOT EXISTS `ushop_product_attribute_list` (
-  `attribute_list_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `product_id` int(10) unsigned NOT NULL,
-  `attribute_id` int(10) unsigned NOT NULL,
-  `property_id` int(10) unsigned NOT NULL,
-  `price` varchar(20) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`attribute_list_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
-CREATE TABLE IF NOT EXISTS `ushop_product_attribute_properties` (
-  `property_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `property` varchar(255) NOT NULL,
-  PRIMARY KEY (`property_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
-CREATE TABLE IF NOT EXISTS `ushop_product_attributes` (
-  `attribute_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `attribute` varchar(255) NOT NULL,
-  PRIMARY KEY (`attribute_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
-INSERT INTO `ushop_product_attributes` (`attribute_id`, `attribute`) VALUES
-(1, 'Size'),
-(2, 'Colour');
-
-CREATE TABLE IF NOT EXISTS `ushop_product_categories` (
-  `category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `category` varchar(60) DEFAULT NULL,
-  `lft` int(10) unsigned NOT NULL DEFAULT '0',
-  `rgt` int(10) unsigned NOT NULL DEFAULT '0',
-  `category_image` varchar(255) DEFAULT NULL,
-  `category_image_status` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`category_id`),
-  KEY `lft` (`lft`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
-
-INSERT INTO `ushop_product_categories` (`category_id`, `category`, `lft`, `rgt`, `category_image`, `category_image_status`) VALUES
-(2, 'Recipes', 21, 22, 'Recipes/CB0053.jpg', 1),
-(3, 'Biography', 5, 6, 'Biography/CB0001.jpg', 1),
-(4, 'Occupation History', 17, 18, 'Occupation_History/CB0003.jpg', 1),
-(5, 'Children', 7, 8, 'Children/CB0002.jpg', 1),
-(6, 'General', 11, 12, 'General/CB0080.jpg', 1),
-(7, 'Religious', 23, 24, 'Religious/CB0055.jpg', 1),
-(8, 'History', 13, 14, 'History/CB0036.jpg', 1),
-(9, 'Poetry', 19, 20, 'Poetry/CB0051.jpg', 1),
-(10, 'Fiction', 9, 10, 'Fiction/CB0062.jpg', 1),
-(11, 'Music', 15, 16, 'Music/CB0189.jpg', 1),
-(13, 'Beading', 3, 4, 'Beading/BK0695.jpg', 1),
-(15, 'Antiquarian', 1, 2, 'Antiquarian/CB0311.jpg', 1);
-
-CREATE TABLE IF NOT EXISTS `ushop_product_custom_fields` (
-  `custom_field_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `product_id` int(10) unsigned NOT NULL,
-  `custom_field` varchar(60) NOT NULL,
-  `unique` int(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`custom_field_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
-CREATE TABLE IF NOT EXISTS `ushop_product_names` (
-  `name_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `description` mediumtext,
-  PRIMARY KEY (`name_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
-
+DROP TABLE IF EXISTS `ushop_products`;
 CREATE TABLE IF NOT EXISTS `ushop_products` (
   `product_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `category_id` int(10) unsigned NOT NULL,
@@ -1129,6 +1145,83 @@ INSERT INTO `ushop_products` (`product_id`, `category_id`, `tax_code_id`, `price
 (385, 13, 1, 0, 327, 'BK3292', '1574211692', 'Wire Jewelry', '45.00', '90.00', '<p>From an American company - Design Originals - this slim volume will show you all you need to know to make wire-based jewelry.</p>', '', 'Beading/BK3292.jpg', 1, 1, '2009-12-04 10:58:02', 1, 0, 1, 0, 0),
 (386, 13, 1, 0, 328, 'BK3364', '1574212419', 'Classy & Chic Bead Jewelry', '20.00', '110.00', '<p>An American book, it includes know-how tips and design suggestions for all ages and skills</p>', '', 'Beading/BK3364.jpg', 1, 1, '2009-12-04 11:00:20', 1, 0, 1, 0, 0);
 
+DROP TABLE IF EXISTS `ushop_product_attributes`;
+CREATE TABLE IF NOT EXISTS `ushop_product_attributes` (
+  `attribute_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `attribute` varchar(255) NOT NULL,
+  PRIMARY KEY (`attribute_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+INSERT INTO `ushop_product_attributes` (`attribute_id`, `attribute`) VALUES
+(1, 'Size'),
+(2, 'Colour');
+
+DROP TABLE IF EXISTS `ushop_product_attribute_list`;
+CREATE TABLE IF NOT EXISTS `ushop_product_attribute_list` (
+  `attribute_list_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` int(10) unsigned NOT NULL,
+  `attribute_id` int(10) unsigned NOT NULL,
+  `property_id` int(10) unsigned NOT NULL,
+  `price` varchar(20) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`attribute_list_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `ushop_product_attribute_properties`;
+CREATE TABLE IF NOT EXISTS `ushop_product_attribute_properties` (
+  `property_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `property` varchar(255) NOT NULL,
+  PRIMARY KEY (`property_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `ushop_product_categories`;
+CREATE TABLE IF NOT EXISTS `ushop_product_categories` (
+  `category_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `category` varchar(60) DEFAULT NULL,
+  `lft` int(10) unsigned NOT NULL DEFAULT '0',
+  `rgt` int(10) unsigned NOT NULL DEFAULT '0',
+  `category_image` varchar(255) DEFAULT NULL,
+  `category_image_status` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`category_id`),
+  KEY `lft` (`lft`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+
+INSERT INTO `ushop_product_categories` (`category_id`, `category`, `lft`, `rgt`, `category_image`, `category_image_status`) VALUES
+(2, 'Recipes', 21, 22, 'Recipes/CB0053.jpg', 1),
+(3, 'Biography', 5, 6, 'Biography/CB0001.jpg', 1),
+(4, 'Occupation History', 17, 18, 'Occupation_History/CB0003.jpg', 1),
+(5, 'Children', 7, 8, 'Children/CB0002.jpg', 1),
+(6, 'General', 11, 12, 'General/CB0080.jpg', 1),
+(7, 'Religious', 23, 24, 'Religious/CB0055.jpg', 1),
+(8, 'History', 13, 14, 'History/CB0036.jpg', 1),
+(9, 'Poetry', 19, 20, 'Poetry/CB0051.jpg', 1),
+(10, 'Fiction', 9, 10, 'Fiction/CB0062.jpg', 1),
+(11, 'Music', 15, 16, 'Music/CB0189.jpg', 1),
+(13, 'Beading', 3, 4, 'Beading/BK0695.jpg', 1),
+(15, 'Antiquarian', 1, 2, 'Antiquarian/CB0311.jpg', 1);
+
+DROP TABLE IF EXISTS `ushop_product_custom_fields`;
+CREATE TABLE IF NOT EXISTS `ushop_product_custom_fields` (
+  `custom_field_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `product_id` int(10) unsigned NOT NULL,
+  `custom_field` varchar(60) NOT NULL,
+  `unique` int(1) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`custom_field_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `ushop_product_names`;
+CREATE TABLE IF NOT EXISTS `ushop_product_names` (
+  `name_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` mediumtext,
+  PRIMARY KEY (`name_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+DROP TABLE IF EXISTS `ushop_tax_codes`;
 CREATE TABLE IF NOT EXISTS `ushop_tax_codes` (
   `tax_code_id` int(1) unsigned NOT NULL AUTO_INCREMENT,
   `tax_rate_id` int(1) unsigned NOT NULL DEFAULT '0',
@@ -1141,6 +1234,7 @@ CREATE TABLE IF NOT EXISTS `ushop_tax_codes` (
 INSERT INTO `ushop_tax_codes` (`tax_code_id`, `tax_rate_id`, `tax_code`, `description`) VALUES
 (1, 1, 'N', 'Not Registered');
 
+DROP TABLE IF EXISTS `ushop_tax_rates`;
 CREATE TABLE IF NOT EXISTS `ushop_tax_rates` (
   `tax_rate_id` int(1) unsigned NOT NULL AUTO_INCREMENT,
   `tax_rate` decimal(4,3) NOT NULL DEFAULT '0.000',
@@ -1150,15 +1244,4 @@ CREATE TABLE IF NOT EXISTS `ushop_tax_rates` (
 INSERT INTO `ushop_tax_rates` (`tax_rate_id`, `tax_rate`) VALUES
 (1, '0.000');
 
-ALTER TABLE `ushop_countries`
-  ADD CONSTRAINT `ushop_countries_ibfk_1` FOREIGN KEY (`post_zone_id`) REFERENCES `ushop_post_zones` (`post_zone_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE `ushop_post_costs`
-  ADD CONSTRAINT `ushop_post_costs_ibfk_1` FOREIGN KEY (`post_level_id`) REFERENCES `ushop_post_levels` (`post_level_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `ushop_post_costs_ibfk_2` FOREIGN KEY (`post_zone_id`) REFERENCES `ushop_post_zones` (`post_zone_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE `ushop_post_zones`
-  ADD CONSTRAINT `ushop_post_zones_ibfk_1` FOREIGN KEY (`tax_code_id`) REFERENCES `ushop_tax_codes` (`tax_code_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-ALTER TABLE `ushop_tax_codes`
-  ADD CONSTRAINT `ushop_tax_codes_ibfk_1` FOREIGN KEY (`tax_rate_id`) REFERENCES `ushop_tax_rates` (`tax_rate_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+SET FOREIGN_KEY_CHECKS=1;
