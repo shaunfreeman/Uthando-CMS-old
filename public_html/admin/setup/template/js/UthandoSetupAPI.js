@@ -89,6 +89,11 @@ var setup = $H({
 		$('previous').addEvent('click', function(e) {
 			this.request('stage=3');
 		}.bind(this));
+		
+		$('stage4').getElement('select').addEvent('change', function(e){
+			v = this.get('value');
+			setup.request('stage=4&general[type]='+v);
+		});
 	},
 	
 	stage5: function() {
@@ -104,7 +109,8 @@ var setup = $H({
 			onRequest: function(){
 			}.bind(this),
 			onSuccess: function(){
-				this[postData.replace('=', '')]();
+				d = postData.split('&')[0].replace('=', '');
+				this[d]();
 			}.bind(this),
 			onFailure: function(){
 			}.bind(this)

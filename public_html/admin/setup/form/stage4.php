@@ -23,17 +23,29 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 $form = new HTML_QuickForm('setupForm', 'post', $_SERVER['REQUEST_URI']);
 $form->removeAttribute('name');
 
+$drivers['mysql'] = 'mysql';
+$drivers['sqlite'] = 'sqlite';
+
+$display = (isset($_GET['general']['type']) && $_GET['general']['type'] == 'sqlite') ? true : false;
+
+$class = ($display) ? null: ' class="sub"';
+
 $form_names = array (
-	'general' => array('html'=>'<fieldset class="sub">','header'=>'Stage 4 | Database Settings','text'=> array('type','host')),
-	'databases' => array('html'=>'<fieldset class="sub">','header'=>'Databases','text'=> array('admin','core','session','user')),
-	'admin' => array('html'=>'<fieldset class="sub">','header'=>'Admin Settings','text'=>'username','password'=>'password'),
-	'user' => array('html'=>'<fieldset class="sub">','header'=>'User Settings','text'=>'username','password'=>'password'),
-	'guest' => array('html'=>'<fieldset>','header'=>'Guest Settings','text'=>'username','password'=>'password')
+	'general' => array('html'=>'<fieldset class="sub">','header'=>'Stage 4 | Database Settings', 'select' => array('type'=>$drivers), 'text'=>'host'),
+	'databases' => array('html'=>'<fieldset'.$class.'>','header'=>'Databases','text'=> array('admin','core','session','user'))
 );
+
+if(!$display):
+	$form_names = $form_names + array(
+		'admin' => array('html'=>'<fieldset class="sub">','header'=>'Admin Settings','text'=>'username','password'=>'password'),
+		'user' => array('html'=>'<fieldset class="sub">','header'=>'User Settings','text'=>'username','password'=>'password'),
+		'guest' => array('html'=>'<fieldset>','header'=>'Guest Settings','text'=>'username','password'=>'password')
+	);
+endif;
 
 $form->setDefaults(array(
 	'general[host]' => 'localhost',
-	'general[type]' => 'mysql',
+	'general[type]' => (isset($_GET['general']['type'])) ? $_GET['general']['type'] : 'mysql',
 	'databases[admin]' => 'uthando_admin',
 	'databases[core]' => 'uthando_core',
 	'databases[session]' => 'uthando_sessions',
@@ -54,6 +66,13 @@ foreach ($form_names as $key => $value):
 		switch ($k):
 			case 'html': $form->addElement($k, $v); break;
 			case 'header': $form->addElement($k,null,$v); break;
+			case 'select':
+				foreach ($v as $el => $opts):
+					$s = $form->createElement($k, $key.'['.$el.']', ucwords($el).':');
+					$s->loadArray($drivers);
+					$form->addElement($s);
+				endforeach;
+				break;
 			default:
 				if (is_array($v)):
 					foreach ($v as $el) $form->addElement($k, $key.'['.$el.']', ucwords($el).':', array('size' => 30));
@@ -75,63 +94,14 @@ if ($form->validate()):
 	//Check Database Settings.
 	try {
 		
-		$dsn = $values['general']['type'] . ":host=" . $values['general']['host'] . ";dbname=";
-		
-		function testDBConnection($user, $db)
-		{
-			global $dsn;
-			foreach ($db as $value):
-				$conStr = $dsn .$value;
-				$instance = new PDO("$conStr", $user['username'], $user['password']);
-				$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$instance = null;
-			endforeach;
-			$user=null;
-		}
-		
-		$databases = $values['databases'];
-		testDBConnection($values['admin'],$databases);
-		unset($databases['admin']);
-		testDBConnection($values['user'],$databases);
-		testDBConnection($values['guest'],$databases);
-		
-		$tmp = realpath(__SITE_PATH.'/../Common/tmp').'/database.ini.php';
-		file_put_contents($tmp, '');
-		
-		$ftp = new File_FTP($registry);
-		$config = new Admin_Config($registry);
-		
-		foreach ($values as $section => $values):
-			foreach($values as $key => $value):
-				$config->set($key, $value, $section);
-			endforeach;
-		endforeach;
-		
-		$ftp->put($tmp, $ftp->uthando_dir.'/ini/database.ini.php', true);
-		unlink($tmp);
-		
-		$config->path = $registry->ini_dir.'/database.ini.php';
-		$config->save();
-		
-		// load in sql data.
-		$conStr = $dsn.$config->get('admin','databases');
-		$db = new PDO("$conStr", $config->get('username','admin'), $config->get('password','admin'));
-		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		
-		foreach ($config->get('databases') as $key => $value):
-			$data = "USE ".$value.";\n" . file_get_contents('./sql/uthando_'.$key.'.sql');
-			$res = $db->exec($data);
-			if (file_exists('./sql/constraints/uthando_'.$key.'.sql')):
-				$data = split(';',file_get_contents('./sql/constraints/uthando_'.$key.'.sql'));
-				foreach ($data as $v):
-					$res = $db->exec("USE ".$value.";\n".$v);
-				endforeach;
-			endif;
-		endforeach;
-		$db = null;
+		switch($values['general']['type']):
+			case 'mysql': require_once('./form/db/mysql.php'); break;
+			case 'sqlite':
+			case 'sqlite2': require_once('./form/db/sqlite.php'); break;
+		endswitch;
 		
 		$message = '<p class="pass">database settings are correct.</p>';
-		$message .= "<script>setup.stage = 5;</script>";
+		//$message .= "<script>setup.stage = 5;</script>";
 		
 	} catch (PDOException $e) {
 		$message = '<p class="fail">'.$e->getMessage().'</p>';

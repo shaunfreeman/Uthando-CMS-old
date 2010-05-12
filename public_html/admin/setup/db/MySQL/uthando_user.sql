@@ -1,10 +1,29 @@
+-- phpMyAdmin SQL Dump
+-- version 3.3.2deb1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: May 11, 2010 at 08:10 PM
+-- Server version: 5.1.41
+-- PHP Version: 5.3.2-1ubuntu4
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+--
+-- Database: `uthando_users`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
@@ -26,6 +45,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   KEY `name` (`first_name`,`last_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `users`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_groups`
+--
 
 DROP TABLE IF EXISTS `user_groups`;
 CREATE TABLE IF NOT EXISTS `user_groups` (
@@ -35,6 +64,16 @@ CREATE TABLE IF NOT EXISTS `user_groups` (
   UNIQUE KEY `user_type` (`user_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `user_groups`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ushop_orders`
+--
 
 DROP TABLE IF EXISTS `ushop_orders`;
 CREATE TABLE IF NOT EXISTS `ushop_orders` (
@@ -54,6 +93,16 @@ CREATE TABLE IF NOT EXISTS `ushop_orders` (
   KEY `order_date` (`order_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `ushop_orders`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ushop_order_items`
+--
 
 DROP TABLE IF EXISTS `ushop_order_items`;
 CREATE TABLE IF NOT EXISTS `ushop_order_items` (
@@ -67,6 +116,16 @@ CREATE TABLE IF NOT EXISTS `ushop_order_items` (
   PRIMARY KEY (`order_item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `ushop_order_items`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ushop_user_cda`
+--
 
 DROP TABLE IF EXISTS `ushop_user_cda`;
 CREATE TABLE IF NOT EXISTS `ushop_user_cda` (
@@ -83,6 +142,16 @@ CREATE TABLE IF NOT EXISTS `ushop_user_cda` (
   PRIMARY KEY (`user_cda_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `ushop_user_cda`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ushop_user_info`
+--
 
 DROP TABLE IF EXISTS `ushop_user_info`;
 CREATE TABLE IF NOT EXISTS `ushop_user_info` (
@@ -101,6 +170,16 @@ CREATE TABLE IF NOT EXISTS `ushop_user_info` (
   PRIMARY KEY (`user_info_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `ushop_user_info`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ushop_user_prefix`
+--
 
 DROP TABLE IF EXISTS `ushop_user_prefix`;
 CREATE TABLE IF NOT EXISTS `ushop_user_prefix` (
@@ -109,3 +188,12 @@ CREATE TABLE IF NOT EXISTS `ushop_user_prefix` (
   PRIMARY KEY (`prefix_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+--
+-- Dumping data for table `ushop_user_prefix`
+--
+
+INSERT INTO `ushop_user_prefix` (`prefix_id`, `prefix`) VALUES(1, 'Mr.');
+INSERT INTO `ushop_user_prefix` (`prefix_id`, `prefix`) VALUES(2, 'Mrs.');
+INSERT INTO `ushop_user_prefix` (`prefix_id`, `prefix`) VALUES(3, 'Ms.');
+INSERT INTO `ushop_user_prefix` (`prefix_id`, `prefix`) VALUES(4, 'Miss.');
+INSERT INTO `ushop_user_prefix` (`prefix_id`, `prefix`) VALUES(5, 'Dr.');
