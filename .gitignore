@@ -6,6 +6,7 @@ public_html/components/ushop/html/terms.html
 public_html/userfiles/*
 !index.html
 uthando/ini/*
+uthando/.database/*
 uthando/logs/*
 uthando.session
 uthando.webprj

@@ -47,27 +47,27 @@ class Admin_Config extends Config
 		{
 			// check if section was passed and it's valid
 			if ( $section!=null):
-					if (in_array($section, array_keys($this->vars))==false) throw new ConfigException("Config::removeKey() - Could not find section('$section'), nothing was removed.");
+				if (in_array($section, array_keys($this->vars))==false) throw new ConfigException("Config::removeKey() - Could not find section('$section'), nothing was removed.");
 				
 				// look if given key exists in given section
-						if (in_array( $key, array_keys($this->vars[$section]))===false) throw new ConfigException("Config::removeKey() - Could not find key('$key'), nothing was removed.");
+				if (in_array( $key, array_keys($this->vars[$section]))===false) throw new ConfigException("Config::removeKey() - Could not find key('$key'), nothing was removed.");
 				
 				// remove key from section
-						$pos = array_search($key, array_keys($this->vars[$section]), true);
+				$pos = array_search($key, array_keys($this->vars[$section]), true);
 				array_splice( $this->vars[$section], $pos, 1);
 				return true;
 			else:
 				// look if given key exists
-						if (in_array($key, array_keys($this->vars))===false) throw new ConfigException("Config::removeKey() - Could not find key('$key'), nothing was removed.");
+				if (in_array($key, array_keys($this->vars))===false) throw new ConfigException("Config::removeKey() - Could not find key('$key'), nothing was removed.");
 				
 				// remove key (sections disabled)
-						$pos = array_search($key, array_keys($this->vars), true);
+				$pos = array_search($key, array_keys($this->vars), true);
 				array_splice( $this->vars, $pos, 1);
 				// synchronisation-stuff
-						if ($this->sync) $this->save();
+				if ($this->sync) $this->save();
 				// return
-						return true;
-				endif;
+				return true;
+			endif;
 		}
 		catch (ConfigException $e)
 		{

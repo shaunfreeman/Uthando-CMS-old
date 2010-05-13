@@ -147,17 +147,9 @@ class File_FTP
 		endif;
 		$this->cd($savedir);
 		if ($recursive === false):
-			try
-			{
-				$res = @ftp_mkdir($this->handle, $dir);
-				if (!$res) throw new FTPException("Creation of '$dir' failed");
-				return true;
-			}
-			catch (FTPException $e)
-			{
-				$this->registry->Error($e->getMessage());
-				return false;
-			}
+			$res = ftp_mkdir($this->handle, $dir);
+			if (!$res) throw new FTPException("Creation of '$dir' failed");
+			return true;
 		else:
 			 // do not look at the first character, as $dir is absolute,
 			// it will always be a /

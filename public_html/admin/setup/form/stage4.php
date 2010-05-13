@@ -20,6 +20,10 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
+$resolve = parse_ini_file($registry->ini_dir.'/.UthandoSites.ini.php', true);
+$resolve = $resolve[$registry->server]['resolve'];
+$registry->ini_dir = $registry->ini_dir . '/' . $resolve;
+
 $form = new HTML_QuickForm('setupForm', 'post', $_SERVER['REQUEST_URI']);
 $form->removeAttribute('name');
 

@@ -20,19 +20,25 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-$dsn = $values['general']['type'] . ':' . realpath(__SITE_PATH.'/../../uthando/ini/');
+$ftp = new File_FTP($registry);
+
+$ftp->mkdir($ftp->uthando_dir.'/.database/'.$resolve, true);
+$ftp->chmod($ftp->uthando_dir.'/.database/'.$resolve, 0757);
+
+$db_path = realpath(__SITE_PATH.'/../../uthando/.database/'.$resolve);
+$dsn = $values['general']['type'] . ':' . $db_path . '/';
 
 foreach ($values['databases'] as $value):
-	$conStr = $dsn .'/'.$value.'.sqlite';
+	$conStr = $dsn.$value.'.sqlite';
 	$instance = new PDO("$conStr");
 	$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$instance = null;
 endforeach;
- 
+
 $tmp = realpath(__SITE_PATH.'/../Common/tmp').'/database.ini.php';
 file_put_contents($tmp, '');
 
-$ftp = new File_FTP($registry);
+
 $config = new Admin_Config($registry);
  
 foreach ($values as $section => $values):
@@ -41,24 +47,20 @@ foreach ($values as $section => $values):
 	endforeach;
 endforeach;
  
- $ftp->put($tmp, $ftp->uthando_dir.'/ini/database.ini.php', true);
+ $ftp->put($tmp, $ftp->uthando_dir.'/ini/'.$resolve.'/database.ini.php', true);
  unlink($tmp);
  
  $config->path = $registry->ini_dir.'/database.ini.php';
  $config->save();
  
  // load in sql data.
-$conStr = $dsn.$config->get('admin','databases');
-$db = new PDO("$conStr");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 foreach ($config->get('databases') as $key => $value):
-	$conStr = $dsn .'/'.$value.'.sqlite';
+	$conStr = $dsn .$value.'.sqlite';
 	$instance = new PDO("$conStr");
 	$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$res = $instance->exec(file_get_contents('./db/SQLite/uthando_'.$key.'.sql'));
 	$instance = null;
 endforeach;
-
 
 ?>

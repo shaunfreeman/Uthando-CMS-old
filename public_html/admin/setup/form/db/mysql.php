@@ -52,7 +52,7 @@ foreach ($values as $section => $values):
 	endforeach;
 endforeach;
 
-$ftp->put($tmp, $ftp->uthando_dir.'/ini/database.ini.php', true);
+$ftp->put($tmp, $ftp->uthando_dir.'/ini/'.$resolve.'/database.ini.php', true);
 unlink($tmp);
 
 $config->path = $registry->ini_dir.'/database.ini.php';

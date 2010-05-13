@@ -76,12 +76,9 @@ if ($form->validate()):
 		
 		$config = new Admin_Config($registry);
 		
-		foreach ($values['ftp'] as $key => $value):
-			$config->set($key, $value, 'ftp');
-		endforeach;
-		
+		// setup site ini folder.
 		$ftp->mkdir($ftp->uthando_dir.'/ini');
-		
+		$registry->ini_dir = realpath(__SITE_PATH.'/../../uthando/ini');
 		function getFTPPath($ftp_path, $file)
 		{
 			$matches = explode($ftp_path, $file);
@@ -91,13 +88,39 @@ if ($form->validate()):
 		$ftp->chmod(getFTPPath($ftp->public_html,realpath(__SITE_PATH.'/Common/tmp')), 0757);
 		$ftp->chmod(getFTPPath($ftp->public_html,realpath(__SITE_PATH.'/../Common/tmp')), 0757);
 		
+		// install UthandoSites.
+		$tmp = realpath(__SITE_PATH.'/../Common/tmp').'/UthandoSites.ini.php';
+		file_put_contents($tmp, '');
+		$ftp->put($tmp, $ftp->uthando_dir.'/ini/.UthandoSites.ini.php', true);
+		unlink($tmp);
+		
+		$algos = hash_algos();
+		$algo = array_rand($algos, 1);
+		
+		$config->set('pages', -1, $registry->server);
+		$config->set('resolve', md5(hash($algos[$algo], $registry->server)), $registry->server);
+		
+		$config->path = $registry->ini_dir.'/.UthandoSites.ini.php';
+		$config->save($ftp);
+		
+		// setup site ini dir.
+		$resolve = $config->get('resolve', $registry->server);
+		$ftp->mkdir($ftp->uthando_dir.'/ini/'.$resolve);
+		
+		$config->removeSection($registry->server);
+		
 		$tmp = realpath(__SITE_PATH.'/../Common/tmp').'/ftp.ini.php';
 		file_put_contents($tmp, '');
 		
-		$ftp->put($tmp, $ftp->uthando_dir.'/ini/ftp.ini.php', true);
+		$ftp->put($tmp, $ftp->uthando_dir.'/ini/'.$resolve.'/ftp.ini.php', true);
 		unlink($tmp);
 		
-		$config->path = $registry->ini_dir.'/ftp.ini.php';
+		
+		foreach ($values['ftp'] as $key => $value):
+			$config->set($key, $value, 'ftp');
+		endforeach;
+		
+		$config->path = $registry->ini_dir.'/'.$resolve.'/ftp.ini.php';
 		$config->save($ftp);
 		
 		$message = '<p class="pass">ftp settings are correct.</p>';
