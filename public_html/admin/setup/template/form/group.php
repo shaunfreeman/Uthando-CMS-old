@@ -1,3 +1,0 @@
-	<fieldset>
-		{content}
-	</fieldset>

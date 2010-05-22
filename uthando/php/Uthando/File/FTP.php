@@ -65,41 +65,25 @@ class File_FTP
 	private function connect()
 	{
 		$this->matcher = null;
-		try
-		{
-			if (!$this->host) throw new FTPException('ftp host is not set.');
-			if (!$this->port) throw new FTPException('ftp port is not set');
-			
-			$handle = @ftp_connect($this->host, $this->port, $this->timeout);
-			if (!$handle) {
-				$this->handle = false;
-				throw new FTPException('Connection to host failed');
-			} else {
-				$this->handle =& $handle;
-				return true;
-			}
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
+		if (!$this->host) throw new FTPException('ftp host is not set.');
+		if (!$this->port) throw new FTPException('ftp port is not set');
+		
+		$handle = @ftp_connect($this->host, $this->port, $this->timeout);
+		if (!$handle) {
+			$this->handle = false;
+			throw new FTPException('Connection to host failed');
+		} else {
+			$this->handle =& $handle;
+			return true;
 		}
 	}
 	
 	public function disconnect()
     {
-		try
-		{
-			$res = @ftp_close($this->handle);
-			if (!$res) throw new FTPException('Disconnect failed.');
-			$this->handle = null;
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		$res = @ftp_close($this->handle);
+		if (!$res) throw new FTPException('Disconnect failed.');
+		$this->handle = null;
+		return true;
 	}
 	
 	public function login()
@@ -109,54 +93,30 @@ class File_FTP
 			if (!$res) return $res;
 		endif;
 		
-		try
-		{
-			if (!$this->username) throw new FTPException(' ftp username is not set');
-	
-			if (!$this->password) throw new FTPException('ftp password is not set');
-	
-			$res = @ftp_login($this->handle, $this->username, $this->password);
-	
-			if (!$res) throw new FTPException('Unable to login');
-			
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->disconnect();
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		
+		if (!$this->username) throw new FTPException(' ftp username is not set');
+
+		if (!$this->password) throw new FTPException('ftp password is not set');
+
+		$res = @ftp_login($this->handle, $this->username, $this->password);
+
+		if (!$res) throw new FTPException('Unable to login');
+		
+		return true;
 	}
 	
 	public function cd($dir, $report_error=true)
 	{
-		try
-		{
-			$erg = @ftp_chdir($this->handle, $dir);
-			if (!$erg) throw new FTPException('Directory change failed');
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		$erg = @ftp_chdir($this->handle, $dir);
+		if (!$erg) throw new FTPException('Directory change failed');
+		return true;
 	}
 	
 	public function pwd()
 	{
-		try
-		{
-			$res = @ftp_pwd($this->handle);
-			if (!$res) throw new FTPException('Could not determine the actual path.');
-			return $res;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		$res = @ftp_pwd($this->handle);
+		if (!$res) throw new FTPException('Could not determine the actual path.');
+		return $res;
 	}
 	
 	public function mkdir($dir, $recursive = false)
@@ -170,17 +130,9 @@ class File_FTP
 		endif;
 		$this->cd($savedir);
 		if ($recursive === false):
-			try
-			{
-				$res = @ftp_mkdir($this->handle, $dir);
-				if (!$res) throw new FTPException("Creation of '$dir' failed");
-				return true;
-			}
-			catch (FTPException $e)
-			{
-				$this->registry->Error($e->getMessage());
-				return false;
-			}
+			$res = @ftp_mkdir($this->handle, $dir);
+			if (!$res) throw new FTPException("Creation of '$dir' failed");
+			return true;
 		else:
 			 // do not look at the first character, as $dir is absolute,
 			// it will always be a /
@@ -205,48 +157,24 @@ class File_FTP
 				 // end if isError
 			endfor; // end for i < count($target)
 		else:
-			try
-			{
-				$res = @ftp_chmod($this->handle, $permissions, $target);
-				if (!$res) throw new FTPException("CHMOD " . $permissions . " " . $target . " failed");
-				return $res;
-			}
-			catch (FTPException $e)
-			{
-				$this->registry->Error($e->getMessage());
-				return false;
-			}
+			$res = @ftp_chmod($this->handle, $permissions, $target);
+			if (!$res) throw new FTPException("CHMOD " . $permissions . " " . $target . " failed");
+			return $res;
 		endif; // end if is_array
 	} // end method chmod
 	
 	public function rename($remote_from, $remote_to)
 	{
-		try
-		{
-			$res = @ftp_rename($this->handle, $remote_from, $remote_to);
-			if (!$res) throw new FTPException("Could not rename ".$remote_from." to ". $remote_to." !");
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		$res = @ftp_rename($this->handle, $remote_from, $remote_to);
+		if (!$res) throw new FTPException("Could not rename ".$remote_from." to ". $remote_to." !");
+		return true;
 	}
 	
 	public function ls($dir = null, $mode = FILE_FTP_DIRS_FILES)
 	{
 		if (!isset($dir)):
-			try
-			{
-				$dir = $this->pwd();
-				if (!$dir) throw new FTPException("Could not retrieve current directory");
-			}
-			catch (FTPException $e)
-			{
-				$this->registry->Error($e->getMessage());
-				return false;
-			}
+			$dir = $this->pwd();
+			if (!$dir) throw new FTPException("Could not retrieve current directory");
 		endif;
 		
 		if (($mode != FILE_FTP_FILES_ONLY) && ($mode != FILE_FTP_DIRS_ONLY) && ($mode != FILE_FTP_RAWLIST)) $mode = FILE_FTP_DIRS_FILES;
@@ -271,38 +199,30 @@ class File_FTP
 	
 	public function put($local_file, $remote_file, $overwrite = false, $mode = null, $options = 0)
 	{
-		try
-		{
-			if ($options & (FILE_FTP_BLOCKING | FILE_FTP_NONBLOCKING) === (FILE_FTP_BLOCKING | FILE_FTP_NONBLOCKING)) throw new FTPException("Bad options given: FILE_FTP_NONBLOCKING and '. 'FILE_FTP_BLOCKING can't both be set");
+		if ($options & (FILE_FTP_BLOCKING | FILE_FTP_NONBLOCKING) === (FILE_FTP_BLOCKING | FILE_FTP_NONBLOCKING)) throw new FTPException("Bad options given: FILE_FTP_NONBLOCKING and '. 'FILE_FTP_BLOCKING can't both be set");
+		
+		$usenb = ! ($options & (FILE_FTP_BLOCKING == FILE_FTP_BLOCKING));
+		if (!isset($mode)) $mode = $this->checkFileExtension($local_file);
+		$remote_file = $this->constructPath($remote_file);
+		
+		if (!file_exists($local_file)) throw new FTPException("Local file '$local_file' does not exist.");
+		
+		if ((ftp_size($this->handle, $remote_file) != -1) && !$overwrite) throw new FTPException("Remote file '".$remote_file. "' exists and may not be overwriten.");
+		
+		if (function_exists('ftp_alloc')) ftp_alloc($this->handle, filesize($local_file));
+		
+		if ($usenb && function_exists('ftp_nb_put')):
+			$res = ftp_nb_put($this->handle, $remote_file, $local_file, $mode);
+			while ($res == FTP_MOREDATA):
+				$res = ftp_nb_continue($this->handle);
+			endwhile;
+		else:
+			$res = ftp_put($this->handle, $remote_file, $local_file, $mode);
+		endif;
+		
+		if (!$res) throw new FTPException("File '$local_file' could not be uploaded to '" .$remote_file."'.");
 			
-			$usenb = ! ($options & (FILE_FTP_BLOCKING == FILE_FTP_BLOCKING));
-			if (!isset($mode)) $mode = $this->checkFileExtension($local_file);
-			$remote_file = $this->constructPath($remote_file);
-			
-			if (!file_exists($local_file)) throw new FTPException("Local file '$local_file' does not exist.");
-			
-			if ((ftp_size($this->handle, $remote_file) != -1) && !$overwrite) throw new FTPException("Remote file '".$remote_file. "' exists and may not be overwriten.");
-			
-			if (function_exists('ftp_alloc')) ftp_alloc($this->handle, filesize($local_file));
-			
-			if ($usenb && function_exists('ftp_nb_put')):
-				$res = ftp_nb_put($this->handle, $remote_file, $local_file, $mode);
-				while ($res == FTP_MOREDATA):
-					$res = ftp_nb_continue($this->handle);
-				endwhile;
-			else:
-				$res = ftp_put($this->handle, $remote_file, $local_file, $mode);
-			endif;
-			
-			if (!$res) throw new FTPException("File '$local_file' could not be uploaded to '" .$remote_file."'.");
-			
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		return true;
 	}
 	
 	public function rm($path, $recursive = false, $filesonly = false)
@@ -330,52 +250,29 @@ class File_FTP
 	
 	private function rmFile($file)
 	{
-		try
-		{
-			if (substr($file, 0, 1) != "/"):
-				$actual_dir = $this->pwd();
-				if (substr($actual_dir, (strlen($actual_dir) - 2), 1) != "/") $actual_dir .= "/";
-				$file = $actual_dir.$file;
-			endif;
-			$res = @ftp_delete($this->handle, $file);
-			if (!$res) throw new FTPException("Could not delete file '$file'.");
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		if (substr($file, 0, 1) != "/"):
+			$actual_dir = $this->pwd();
+			if (substr($actual_dir, (strlen($actual_dir) - 2), 1) != "/") $actual_dir .= "/";
+			$file = $actual_dir.$file;
+		endif;
+		$res = @ftp_delete($this->handle, $file);
+		if (!$res) throw new FTPException("Could not delete file '$file'.");
+		return true;
 	}
 	
 	private function rmDir($dir)
 	{
-		try
-		{
-			if (substr($dir, (strlen($dir) - 1), 1) != "/") throw new FTPException("Directory name '$dir' is invalid, has to end with '/'");
-			
-			$res = @ftp_rmdir($this->handle, $dir);
-			if (!$res) throw new FTPException("Could not delete directory '$dir'.");
-			return true;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		if (substr($dir, (strlen($dir) - 1), 1) != "/") throw new FTPException("Directory name '$dir' is invalid, has to end with '/'");
+		
+		$res = @ftp_rmdir($this->handle, $dir);
+		if (!$res) throw new FTPException("Could not delete directory '$dir'.");
+		return true;
 	}
 	
 	private function rmDirRecursive($dir, $filesonly = false)
 	{
-		try
-		{
-			if (substr($dir, (strlen($dir) - 1), 1) != "/")  throw new FTPException("Directory name '$dir' is invalid, has to end with '/'");
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		if (substr($dir, (strlen($dir) - 1), 1) != "/")  throw new FTPException("Directory name '$dir' is invalid, has to end with '/'");
+		
 		
 		$file_list = $this->lsFiles($dir);
 		foreach ($file_list as $file):
@@ -434,16 +331,9 @@ class File_FTP
 	{
 		$dirs_list  = array();
 		$files_list = array();
-		try
-		{
-			$dir_list = $this->ls($dir, FILE_FTP_RAWLIST);
-			if (!is_array($dir_list)) throw new FTPException('Could not get raw directory listing.');
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		
+		$dir_list = $this->ls($dir, FILE_FTP_RAWLIST);
+		if (!is_array($dir_list)) throw new FTPException('Could not get raw directory listing.');
 		
 		foreach ($dir_list AS $key => $value):
 			if (strncmp($value, 'total: ', 7) == 0 && preg_match('/total: \d+/', $value)):
@@ -509,20 +399,12 @@ class File_FTP
 	
 	private function determineOSMatch(&$dir_list)
 	{
-		try
-		{
-			foreach ($dir_list as $entry):
-				foreach ($this->ls_match as $os => $match):
-					if (preg_match($match['pattern'], $entry)) return $match;
-				endforeach;
+		foreach ($dir_list as $entry):
+			foreach ($this->ls_match as $os => $match):
+				if (preg_match($match['pattern'], $entry)) return $match;
 			endforeach;
-			throw new FTPException( 'The list style of your server seems not to be supported. Please email a "$ftp->ls(NET_FTP_RAWLIST);" output plus info on the server to the maintainer of this package to get it supported! Thanks for your help!');
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		endforeach;
+		throw new FTPException( 'The list style of your server seems not to be supported. Please email a "$ftp->ls(NET_FTP_RAWLIST);" output plus info on the server to the maintainer of this package to get it supported! Thanks for your help!');
 	}
 	
 	private function natSort($item_1, $item_2)
@@ -549,17 +431,10 @@ class File_FTP
             // 09-10-04 => 09/10/04
 			$date = str_replace('-', '/', $date);
 		endif;
-		try
-		{
-			$res = strtotime($date);
-			if (!$res) throw new FTPException('Dateconversion failed.');
-			return $res;
-		}
-		catch (FTPException $e)
-		{
-			$this->registry->Error($e->getMessage());
-			return false;
-		}
+		
+		$res = strtotime($date);
+		if (!$res) throw new FTPException('Dateconversion failed.');
+		return $res;
 	}
 }
 
