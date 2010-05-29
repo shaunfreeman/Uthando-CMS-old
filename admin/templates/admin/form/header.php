@@ -1,1 +1,0 @@
-<legend class="gradient" rel="gradient[2]"><span>{header}</span></legend>

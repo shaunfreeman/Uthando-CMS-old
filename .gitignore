@@ -1,8 +1,8 @@
+Maildir/*
 public_html/Common/tmp/*
 !index.html
 public_html/admin/Common/tmp/
 !index.html
-public_html/components/ushop/html/terms.html
 public_html/userfiles/*
 !index.html
 uthando/ini/*
