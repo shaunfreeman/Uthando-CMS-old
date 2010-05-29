@@ -1,0 +1,27 @@
+<tr>
+	<td class="itemRow">
+		<p>{SKU}</p>
+		<img src="{IMAGE}" class="{IMAGE_STATUS}" />
+	</td>
+	<td class="itemRow">{NAME}</td>
+	<td class="itemRow">&pound;{PRICE}</td>
+	<!--vat_start-->
+	<td class="itemRow">&pound;{VAT}</td>
+	<!--vat_end-->
+	<td class="itemRow">
+		<!--item_quantity_input_start-->
+		<input class="inputbox" type="text" size="3" name="items[{PRODUCT_ID}]" value="{QUANTITY}" />
+		<!--item_quantity_input_end-->
+		<!--item_quantity_start-->
+		{QUANTITY}
+		<!--item_quantity_end-->
+	</td>
+	<td class="itemRow">&pound;{TOTAL}</td>
+	<!--delete_item_start-->
+	<td>
+		<a href="/ushop/view/cart/action-remove/id-{PRODUCT_ID}">
+			<img src="/Common/images/Delete.png" class="Tips" title="Shop Tip" rel="Click to remove product from cart" />
+		</a>
+	</td>
+	<!--delete_item_end-->
+</tr>

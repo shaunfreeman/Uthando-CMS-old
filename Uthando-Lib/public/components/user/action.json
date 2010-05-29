@@ -1,0 +1,7 @@
+{
+	"user" : {
+		"url" : "user/",
+		"params" : "",
+		"links" : ["login","logout","register","reminder","overview", "change details"]
+	}
+}

@@ -1,12 +1,8 @@
 Maildir/*
-public_html/Common/tmp/*
+Public/tmp/*
 !index.html
-public_html/admin/Common/tmp/
+Uthando-Admin/Common/tmp/
 !index.html
-public_html/userfiles/*
-!index.html
-uthando/ini/*
-uthando/.database/*
-uthando/logs/*
+Uthando-ini/*
 uthando.session
 uthando.webprj

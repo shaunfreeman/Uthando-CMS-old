@@ -1,0 +1,44 @@
+<table border="0" cellspacing="3" cellpadding="3">
+	<tr>
+		<th class="cartTop">Product</th>
+		<th class="cartTop">Description</th>
+		<th class="cartTop">Price</th>
+		<!--vat_start-->
+		<th class="cartTop">Vat</th>
+		<!--vat_end-->
+		<th class="cartTop" >Qty</th>
+		<th class="cartTop">Total</th>
+		<!--delete_item_start-->
+		<th>&nbsp;</th>
+		<!--delete_item_end-->
+	</tr>
+	{CART_ITEMS}
+	<!--postage_start-->
+	<tr>
+		<td colspan="{COLSPAN}">&nbsp;</td>
+		<th colspan="2" class="cartBottom">Postage:</th>
+		<td id="cart_postage" class="itemRow">&pound;{POST_COST}</td>
+		<!--delete_item_start-->
+		<td>&nbsp;</td>
+		<!--delete_item_end-->
+	</tr>
+	<!--postage_end-->
+	<!--vat_start-->
+	<tr>
+		<td colspan="3">&nbsp;</td>
+		<th colspan="2" class="cartBottom">Vat Total:</th>
+		<td class="itemRow">&pound;{VAT_TOTAL}</td>
+		<!--delete_item_start-->
+		<td>&nbsp;</td>
+		<!--delete_item_end-->
+	</tr>
+	<!--vat_end-->
+	<tr>
+		<td colspan="{COLSPAN}">&nbsp;</td>
+		<th colspan="2" class="cartBottom">Total:</th>
+		<td id="cart_total" class="itemRow">&pound;{CART_TOTAL}</td>
+		<!--delete_item_start-->
+		<td>&nbsp;</td>
+		<!--delete_item_end-->
+	</tr>
+</table>

@@ -1,0 +1,38 @@
+<div class="product">
+	<!--image_start-->
+	<div class="product_display_image">
+		<p>
+			<a href="{LINK}">
+				<img src="{IMAGE}" />
+			</a>
+		</p>
+	</div>
+	<!--image_end-->
+	<div class="product_details">
+		<h3>{NAME}</h3>
+		<h3>by <a href="{SEARCH_LINK}">{AUTHOR}</a></h3>
+		<p></p>
+		<p>{SHORT_DESCRIPTION}</p>
+		<p></p>
+		<h4>&pound;{PRICE}</h4>
+		<!--add_cart_start-->
+		<a href="{CART_LINK}" class="button">Add To Cart</a>
+		<!--add_cart_end-->
+	</div>
+	<p></p>
+	<div id="morphTabs">
+		<ul class="morphtabs_title">
+			<li title="details"><a href="#details">Details</a></li>
+			<li title="description"><a href="#description">Description</a></li>
+		</ul>
+		<div id="morphtabs_panelwrap">
+			<div id="details" class="morphtabs_panel">
+				<p class="bold">ISBN: {ISBN}</p>
+			</div>
+	
+			<div id="description" class="morphtabs_panel">
+				{DESCRIPTION}
+			</div>
+		</div>
+	</div>
+</div>

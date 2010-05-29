@@ -1,0 +1,274 @@
+{
+
+	"Element":{
+		
+		"Element.Dimensions.Extras":{
+			"deps":["Element.Dimensions"],
+			"desc":"Contains methods to work without where scroll is or if it's at the bottom of Elements and the window object."
+		},
+		
+		"Element.Reflect":{
+			"deps":["Element.Dimensions"],
+			"desc":"Contains methods to work with reflections"
+		}
+
+	},
+	
+	"Browser":{
+	
+		"HistoryManager":{
+			"deps":["Element", "DomReady", "Class.Extras", "Hash"],
+			"desc":"Observes back/forward button usage and saves states for registered modules into the hash. This allows to bookmark specific states for an application."
+		},
+		
+		"pngfix":{
+			"deps":["Element.Dimensions", "DomReady", "Class.Extras", "Element.Style"],
+			"desc":"Fixes transparent png files and dom elements with transparent png backgrounds for IE6"
+		}
+		
+	},
+
+	"Fx":{
+		
+		"Fx.ScrollExtras":{
+			"deps":["Fx.Scroll"],
+			"desc":"Effect to smoothly scroll any element, including the window."
+		},
+		
+		"Fx.Value": {
+			"deps":["Fx"],
+			"desc":"Image gallery uses MooTools."
+		},
+
+		"Fx.MorphElement" : {
+			"deps":["Fx.Morph"],
+			"desc":"Creates a morph effect on any element."
+		},
+		
+		"Fx.GridScroll" : {
+			"deps":["Fx.Tween"],
+			"desc":"Creates a morph effect on any element."
+		},
+
+		"Fx.SmoothAnchors" : {
+			"deps":["Fx.Tween"],
+			"desc":"Creates a morph effect on any element."
+		}
+
+	},
+
+	"FileManager" : {
+		"FileManager" : {
+			"deps": ["Drag", "Drag.Move", "Tips", "Assets", "Additions"],
+			"desc":""
+		},
+
+		"FileManager.cs" : {
+			"deps": ["FileManager"],
+			"desc":""
+		},
+
+		"FileManager.da" : {
+			"deps": ["FileManager"],
+			"desc":""
+		},
+
+		"FileManager.de" : {
+			"deps": ["FileManager"],
+			"desc":""
+		},
+
+		"FileManager.en" : {
+			"deps": ["FileManager"],
+			"desc":""
+		},
+
+		"FileManager.es" : {
+			"deps": ["FileManager"],
+			"desc":""
+		},
+
+		"FileManager.fi" : {
+			"deps": ["FileManager"],
+			"desc":""
+		},
+
+		"FileManager.fr" : {
+			"deps": ["FileManager"],
+			"desc":""
+		},
+
+		"Additions" : {
+			"deps": ["FileManager", "Request.JSON"],
+			"desc":""
+		},
+		
+		"Fx.ProgressBar" : {
+			"deps":["Fx"],
+			"desc":""
+		},
+
+		"Swiff.Uploader" : {
+			"deps":["Swiff"],
+			"desc":""
+		},
+
+		"Uploader" : {
+			"deps":["FileManager", "Swiff.Uploader", "Fx.ProgressBar"],
+			"desc":""
+		},
+
+		"FileManager.TinyMCE" : {
+			"deps":["FileManager", "Uploader"],
+			"desc":""
+		}
+	},
+
+	"MooEditable": {
+	
+		"MooEditable": {
+			"deps": ["Class.Extras", "Element.Event", "Element.Style", "Element.Dimensions", "Selectors", "Request.HTML"],
+			"desc": "Class for creating a WYSIWYG editor, for contentEditable-capable browsers."
+		},
+	
+		"MooEditable.UI.MenuList": {
+			"deps": ["MooEditable"],
+			"desc": "UI Class to create a menu list (select) element."
+		},
+	
+		"MooEditable.UI.ButtonOverlay": {
+			"deps": ["MooEditable"],
+			"desc": "UI Class to create a button element with a popup overlay."
+		},
+	
+		"MooEditable.Extras": {
+			"deps": ["MooEditable"],
+			"desc": "Extends MooEditable to include more (simple) toolbar buttons."
+		},
+	
+		"MooEditable.Group": {
+			"deps": ["MooEditable"],
+			"desc": "A MooEditable extension for having multiple MooEditable instances on a page controlled by one toolbar."
+		}
+		
+	},
+	
+	"Interface":{
+		
+		"SliderEx":{
+			"deps":["Slider"],
+			"desc":"Class for creating horizontal and vertical slider controls."
+		},
+		
+		"MooFlow":{
+			"deps":["Class.Extras", "Element.Event", "Request.HTML", "Assets", "Fx.Elements", "Fx.Morph", "Fx.Tween", "Fx.Transitions", "Fx.Value", "Element.Reflect"],
+			"desc":"Image gallery uses MooTools."
+		}
+		
+	},
+
+	"Layout":{
+	
+		"BySlideMenu":{
+			"deps":["Element.Dimensions", "Element.Event", "Fx.Tween", "Fx.Transitions"],
+			"desc": "BySlideMenu allows you to easily create a beautiful accordion menu (sliding menu) on any element you want (ul/li, div, p ...) using images and/or text."
+		},
+		
+		"ByZoomer":{
+			"deps":["Element.Dimensions", "Element.Event", "Fx.Tween", "Fx.Transitions"],
+			"desc": "ByZoomer allows you to easily create a picture gallery which will be nicely zoomed when clicked."
+		},
+		
+		"AjaxLinks":{
+			"deps":["Request.HTML", "Fx.Morph", "Spinner", "Fx.Scroll", "URI", "HistoryManager"],
+			"desc":"makes links on a page load content via Request method."
+		},
+
+		"SlideShow":{
+			"deps":["Class"],
+			"desc":"Slide show interface for classes."
+		},
+		
+		"ElementSwapper":{
+			"deps":["Fx.Tween", "SlideShow"],
+			"desc":"Fades a collection of elements without tabs"
+		},
+
+		"Tabs":{
+			"deps":["SlideShow"],
+			"desc":"Handles the scripting for a common UI layout; the tabbed box."
+		},
+		
+		"MorphTabs":{
+			"deps":["Tabs", "Fx.MorphElement"],
+			"desc":"Handles the scripting for a common UI layout; the tabbed box."
+		},
+		
+		"Pagination":{
+			"deps":["Slider"],
+			"desc": "A little script that can turn your ugly looking numbers into a nice looking Slider."
+		}
+	},
+	
+	"Forms":{
+		
+		"mooForms":{
+			"deps":["Fx.Morph"],
+			"desc":"turns the radio and checkboxes into custom images."
+		}
+		
+	},
+	
+	"Canvas":{
+		"Canvas":{
+			"deps":["Element"],
+			"desc":"Adds canvas element with the getContext, if browser is IE"
+		},
+		
+		"Path":{
+			"deps":["Canvas"],
+			"desc":"Functionality for Paths as described by WHATWG"
+		},
+		
+		"Rects":{
+			"deps":["Path"],
+			"desc":"Uses Paths to create rectangular shapes"
+		},
+		
+		"Transform":{
+			"deps":["Canvas"],
+			"desc":"Transform current paths"
+		},
+		
+		"Image":{
+			"deps":["Canvas"],
+			"desc":"Adds the functionality of placing images in the canvas element"
+		},
+		
+		"State":{
+			"deps":["Canvas"],
+			"desc":"Need to save states? You get the idea."
+		},
+		
+		"Gradient":{
+			"order":"430",
+			"deps":["Canvas"],
+			"desc":"Adds support for Gradients (minimally supported)"
+		},
+		
+		"Pattern":{
+			"deps":["Canvas"],
+			"desc":"Adds support for Patterns (minimally supported)"
+		}
+	},
+	
+	"UI":{
+		
+		"CanvasCandy":{
+			"deps":["Element.Position", "Canvas"],
+			"desc":""
+		}
+		
+	}
+	
+}

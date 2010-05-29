@@ -1,0 +1,62 @@
+{
+
+	"admin" : {
+		"content_manager" : "Use the Content Manager to add articles and pages.",
+		"menu_manager" : "Goto the Menu Manager",
+		"user_manager" : "Goto the User Manager",
+		"ushop_manager" : "Goto the UShop Manager",
+		"media_manager" : "Use the Media Manager to upload new files to add to you pages.",
+		"template_manager" : "Use the Template Manager to add or remove JavaScript plugins, edit CSS and HTML for the site."
+	},
+	
+	"components" : {
+	},
+
+	"content" : {
+		"new_page" : "Create a new page.",
+		"cancel" : "Cancel and go back to overview.",
+		"delete" : "Delete page permently.",
+		"save" : "Save page.",
+		"params" : "Edit the page options.",
+		"edit" : "Edit the page content."
+	},
+
+	"filemanager" : {
+		"back" : "Return to Admin Overview."
+	},
+	
+	"menu" : {
+		"new_menu" : "Create a new menu",
+		"cancel" : "Cancel and go back to overview.",
+		"menus" :  "Go to menu overview.",
+		"new_link" : "Create a new link",
+		"save" : "Click to save"
+	},
+
+	"template" : {
+		"cancel" : "Cancel and return to Template Overview.",
+		"back" : "Return to Template Overview.",
+		"save" : "Save this MooTools configuration."
+	},
+
+	"user" : {
+		"new_user" : "Create a new user.",
+		"save" : "Save this user.",
+		"cancel" : "Cancel and return to user overview.",
+		"back" : "Go back to user overview.",
+		"delete" : "Delete this user."
+	},
+
+	"ushop" : {
+		"cancel" : "Click to cancel",
+		"save" : "Click to save",
+		"back" : "Click to go back"
+	},
+	
+	"tooltips" : {
+		"cancel" : "Click to cancel",
+		"delete" : "Click to delete",
+		"save" : "Click to save",
+		"back" : "Click to go back"
+	}
+}
