@@ -7,7 +7,7 @@ class NestedTree {
 	
 	protected $vars = array();
 	
-	public function __construct ($table, $id=NULL, $field) {
+	public function __construct ($table, $id=null, $field) {
 		$this->uthando = $GLOBALS['uthando'];
 		$this->registry = $GLOBALS['registry'];
 		$this->table = $table;
@@ -15,18 +15,20 @@ class NestedTree {
 		$this->category_field = $field;
 	}
 	
-	public function __set($index, $value) {
+	public function __set($index, $value)
+	{
 		$this->vars[$index] = $value;
 	}
 	
-	public function __get($index) {
-		return $this->vars[$index];
+	public function __get($index)
+	{
+		if (array_key_exists($index, $this->vars)) return $this->vars[$index];
+        return null;
 	}
 	
-	protected function objectToArray($obj) {
-		foreach ($obj as $key => $value) {
-			$return_array[$key] = $value;
-		}
+	protected function objectToArray($obj)
+	{
+		foreach ($obj as $key => $value) $return_array[$key] = $value;
 		return $return_array;
 	}
 	
@@ -35,18 +37,16 @@ class NestedTree {
 		$nested = array();
 		$depths = array();
 		
-		foreach( $arrs as $key => $arr ) {
-			if( $arr[$depth_key] == 0 ) {
+		foreach( $arrs as $key => $arr ):
+			if( $arr[$depth_key] == 0 ):
 				$nested[$key] = $arr;
-			} else {
+			else:
 				$parent =& $nested;
-				for( $i = 1; $i <= ( $arr[$depth_key] ); $i++ ) {
-					$parent =& $parent[$depths[$i]];
-				}
+				for ( $i = 1; $i <= ( $arr[$depth_key] ); $i++ ) $parent =& $parent[$depths[$i]];
 				$parent[$key] = $arr;
-			}
+			endif;
 			$depths[$arr[$depth_key] + 1] = $key;
-		}
+		endforeach;
 		return $nested;
 	}
 	/*
@@ -60,8 +60,8 @@ class NestedTree {
 	*/
 	
 	// returns the tree and it's depth.
-	protected function queryTree ($limit=NULL) {
-		
+	protected function queryTree ($limit=null)
+	{
 		// reset the tree array.
 		$this->full_tree = null;
 		
@@ -72,43 +72,44 @@ class NestedTree {
 		if ($limit) $filter['limit'] = $limit;
 		
 		$result = $this->uthando->getResult(
-			'child.*, (COUNT(parent.'.$this->category_field.') - 1) AS depth' . $linked_array['fields'],
-			$this->table.' AS child, '.$this->table.' AS parent' . $linked_array['tables'],
+			'child.*, (COUNT(parent.'.$this->category_field.') - 1) AS depth',
+			$this->table.' AS child, '.$this->table.' AS parent',
 			null,
 			$filter
 		);
 		
-		if ($result) {
-			foreach ($result as $row) {
-				$full_tree[] = $this->objectToArray($row);
-			}
+		if ($result):
+			foreach ($result as $row) $full_tree[] = $this->objectToArray($row);
 			$this->full_tree = $full_tree;
-		}
+		endif;
 	}
 	
-	public function getTopLevelTree($limit=NULL) {
+	public function getTopLevelTree($limit=null)
+	{
 		$this->top_level = true;
-		if (!$this->full_tree || $limit != NULL) $this->queryTree($limit);
+		if (!$this->full_tree || $limit != null) $this->queryTree($limit);
 		$this->top_level = false;
 		return $this->full_tree;
 	}
 	
 	// returns the tree as an array and it's depth.
-	public function getTree ($limit=NULL) {
-		if (!$this->full_tree || $limit != NULL) $this->queryTree($limit);
+	public function getTree ($limit=null)
+	{
+		if (!$this->full_tree || $limit != null) $this->queryTree($limit);
 		return $this->full_tree;
 	}
 	
 	// returns number of rows returned by tree query.
-	public function numTree ($limit=NULL) {
-		if (!$this->full_tree || $limit != NULL) $this->queryTree($limit);
+	public function numTree ($limit=null)
+	{
+		if (!$this->full_tree || $limit != null) $this->queryTree($limit);
 		$c = count ($this->full_tree);
 		return $c;
 	}
 	
 	// find pathway of a category.
-	public function pathway ($id) {
-		
+	public function pathway ($id)
+	{
 		$result = $this->uthando->getResult(
 			'parent.'.$this->category_field.'_id, parent.' . $this->category_field,
 			$this->table.' AS child, '.$this->table.' AS parent',
@@ -120,74 +121,73 @@ class NestedTree {
 			)
 		);
 		
-		if ($result) {
-			foreach ($result as $row) {
-				$pathway[] = $this->objectToArray($row);
-			}
+		if ($result):
+			foreach ($result as $row) $pathway[] = $this->objectToArray($row);
 			return $pathway;
-		} else {
+		else:
 			return false;
-		}
+		endif;
 
 	}
 	
 	// set field id.
-	public function setId ($id) {
+	public function setId ($id)
+	{
 		$this->id = $id;
 	}
 	
 	// makes a query on the category database.
-	public function getCategory ($id=NULL) {
-		
-		if ($id == NULL) $id = $this->id;
+	public function getCategory ($id=null)
+	{
+		if ($id == null) $id = $this->id;
 			
-		if (is_numeric ($id)) {
+		if (is_numeric ($id)):
 			$filter['WHERE'] = 'child.'.$this->category_field."_id=".$id;
-		} else {
+		else:
 			$filter['WHERE'] = 'child.'.$this->category_field."='".$id."'";
-		}
+		endif;
 		
 		$result = $this->uthando->getResult(
 			'child.*' . $linked_array['fields'],
-			$this->table . ' AS child' . $linked_array['tables'],
+			$this->table . ' AS child',
 			null,
 			$filter
 		);
 		
-		if ($result) {
-			foreach ($result as $row) {
-				$this->category = $this->objectToArray($row);
-			}
-			
+		if ($result):
+			foreach ($result as $row) $this->category = $this->objectToArray($row);
 			return $this->category;
-		} else {
+		else:
 			return false;
-		}
+		endif;
 		
 	}
 	
 	// returns a category field.
-	public function getField ($field) {
+	public function getField ($field)
+	{
 		if (!$this->category) $this->getCategory();
 		return $this->category[$field];
 	}
 	
 	// returns the tree as an array and it's depth.
-	public function getDecendants ($immediate_sub=FALSE) {
+	public function getDecendants ($immediate_sub=false)
+	{
 		$this->queryDecendants ($immediate_sub);
 		return $this->decendants;
 	}
 	
 	// returns number of rows returned by decendant query.
-	public function numDecendants ($immediate_sub=FALSE) {
+	public function numDecendants ($immediate_sub=false)
+	{
 		$this->queryDecendants ($immediate_sub);
 		$c = count ($this->decendants);
 		return $c;
 	}
 	
 	// returns all decendants and thier depth.
-	protected function queryDecendants ($immediate_sub) {
-		
+	protected function queryDecendants ($immediate_sub)
+	{
 		// reset the decendants array.
 		$this->decendants = array();
 		
@@ -217,12 +217,10 @@ class NestedTree {
 			$filter
 		);
 		
-		if ($result) {
-			foreach ($result as $row) {
-				$decendants[] = $this->objectToArray($row);
-			}
+		if ($result):
+			foreach ($result as $row) $decendants[] = $this->objectToArray($row);
 			$this->decendants = $decendants;
-		}
+		endif;
 	}
 }
 ?>

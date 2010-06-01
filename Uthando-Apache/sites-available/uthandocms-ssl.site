@@ -1,0 +1,28 @@
+<VirtualHost *:443>
+	ServerAdmin webmaster@localhost
+	ServerName uthandocms
+	LogLevel warn
+	ErrorLog /home/shaun/WebSiteFiles/logs/uthando-error
+	CustomLog /home/shaun/WebSiteFiles/logs/uthando-access combined
+
+	DocumentRoot /home/uthando-cms/Public
+	
+	RewriteEngine On
+	# stop hotlinking images
+	RewriteCond %{HTTP_REFERER} !^https://(.+\.)?uthandocms
+	RewriteCond %{HTTP_REFERER} !^$
+	RewriteRule .*\.(jpe?g|gif|bmp|png)$ http://altlab.com/hotlink.gif [L]
+
+	Alias /userfiles/ /home/shaun/Public/
+	<Directory /home/shaun/Public/>
+		AllowOverride None
+		Options FollowSymLinks
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	SSLEngine On
+	SSLCertificateFile /etc/apache2/ssl/server.crt
+	SSLCertificateKeyFile /etc/apache2/ssl/server.key
+	SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+</VirtualHost>

@@ -15,6 +15,7 @@ class HTML_Menu
 	protected $registry;
 	protected $status;
 	protected $admin = false;
+	//protected $vars = array();
 	
 	public function __construct ($registry, $params)
 	{
@@ -22,14 +23,25 @@ class HTML_Menu
 		
 		$this->class_sfx = $params['class_sfx'];
 		$this->moduleclass_sfx = $params['moduleclass_sfx'];
-		$this->menu_id = $params['item_id'];
+		$this->menu_id = (isset($params['item_id'])) ? $params['item_id'] : null;
 		
 		$this->db_table = $this->registry->core;
 		
 		$this->status = $this->getStatus();
 		$this->doc = $this->registry->template->doc;
 	}
+	/*
+	public function __set($index, $value)
+	{
+		$this->vars[$index] = $value;
+	}
 	
+	public function __get($index)
+	{
+		if (array_key_exists($index, $this->vars)) return $this->vars[$index];
+        return null;
+	}
+	*/
 	private function getStatus()
 	{
 		if (isset($_SESSION['user_id'])):
@@ -189,7 +201,7 @@ class HTML_Menu
 		
 		$decendants = $tree->getDecendants(true);
 		
-		//print_rr($tree->getTree());
+		$search_categories = null;
 		
 		if ($decendants):
 		

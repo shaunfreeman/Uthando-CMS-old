@@ -14,13 +14,13 @@ class HTML_Template extends HTML_Page
 	{
 		parent::__construct();
 		$this->registry = $registry;
-		$this->settings = parse_ini_file($this->registry->ini_dir.'/templates/'.$template.'.ini.php', true);
+		$this->settings = parse_ini_file($this->registry->ini_dir.DS.'templates'.DS.$template.'.ini'.EXT, true);
 		$this->setTemplate();
 		$this->setCache(true);
 		$this->xmlProlog = $this->settings['general']['xmlProlog'];
 		$this->setDoctype($this->settings['general']['doctype']);
 		
-		if (is_file(SITE_PATH.'/userfiles/'.$this->registry->settings['resolve'].'/image/favicon.ico')):
+		if (is_file(DS.'home'.DS.$this->registry->settings['resolve'].DS.'Public/image/favicon.ico')):
 			$this->addFavicon('/userfiles/'.$this->registry->settings['resolve'].'/image/favicon.ico');
 		else:
 			$this->addFavicon('/images/favicon.ico');
@@ -34,7 +34,8 @@ class HTML_Template extends HTML_Page
 	
 	public function __get($index)
 	{
-		return $this->vars[$index];
+		if (array_key_exists($index, $this->vars)) return $this->vars[$index];
+        return null;
 	}
 	
 	private function loadScript($script)
@@ -172,7 +173,7 @@ class HTML_Template extends HTML_Page
 			$i = $elements->length - 1;
 			while ($i > -1):
 				$element = $elements->item($i);
-				if ($this->modules[$element->getAttribute('name')]):
+				if (isset($this->modules[$element->getAttribute('name')])):
 					$newelement = $this->doc->createElement('div');
 					foreach ($this->modules[$element->getAttribute('name')] as $el):
 						if (!$el) continue;
@@ -194,7 +195,7 @@ class HTML_Template extends HTML_Page
 		while ($i > -1):
 			$newelement = null;
 			$element = $elements->item($i);
-			if ($this->parameters[$element->getAttribute('name')]):
+			if (isset($this->parameters[$element->getAttribute('name')])):
 				foreach ($this->parameters[$element->getAttribute('name')] as $key => $content):
 					if (!$content) continue;
 					if (is_string($content)) {
@@ -284,7 +285,7 @@ class HTML_Template extends HTML_Page
 		if ($js_end_files) $js->scripts = array_merge($js->scripts,$js_end_files);
 		
 		$this->loadJavaScript($js->load_js());
-		$this->addScriptDeclaration('if (!Uthando) var Uthando = $H({}); Uthando.server = "'.$registry->server.'"; Uthando.resolve = "'.$this->registry->get('settings.resolve').'";');
+		$this->addScriptDeclaration('if (!Uthando) var Uthando = $H({}); Uthando.server = "'.$this->registry->server.'"; Uthando.resolve = "'.$this->registry->get('settings.resolve').'";');
 		
 		//adjust page columns
 		$columns = $this->body[0]->getElementsByTagName('section');

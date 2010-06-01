@@ -22,7 +22,8 @@ class Uthando
 	
 	public function __get($index)
 	{
-		return $this->vars[$index];
+		if (array_key_exists($index, $this->vars)) return $this->vars[$index];
+        return null;
 	}
 	
 	// Function for browser redirection.
@@ -41,16 +42,16 @@ class Uthando
 	
 	public function loadComponent()
 	{
-		$this->file = COMPONENTS . $this->registry->component;
+		$this->file = COMPONENTS.$this->registry->component;
 		
-		if (is_readable($this->file . "/index.php") == false):
+		if (is_file($this->file.DS.'index'.EXT) == false):
 			$this->registry->Error('404 Page NOT Found', $this->registry->path);
 		else:
 			$load = $this->getResult('enabled', $this->registry->core.'components', null, array('where' => "component='".$this->registry->component."'"), false);
 		endif;
 		
 		if ($load->enabled):
-			include ($this->file. "/index.php");
+			include ($this->file.DS.'index'.EXT);
 			$this->registry->template->addContent($this->content);
 		else:
 			$this->registry->template->addContent('<p>Component is not enabled.</p>');

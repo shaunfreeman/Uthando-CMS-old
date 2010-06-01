@@ -49,14 +49,15 @@ class HTML_Paginate extends HTML_Element
 		$this->make();
 	}
 	
-	private function __set($index, $value)
+	public function __set($index, $value)
 	{
 		$this->vars[$index] = $value;
 	}
 	
-	private function __get($index)
+	public function __get($index)
 	{
-		return $this->vars[$index];
+		if (array_key_exists($index, $this->vars)) return $this->vars[$index];
+        return null;
 	}
 	
 	private function make()
@@ -132,6 +133,6 @@ class HTML_Paginate extends HTML_Element
 	}
 }
 
-class PaginateException extends Uthando_Exception {}
+class PaginateException extends UthandoException {}
 
 ?>

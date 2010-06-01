@@ -4,7 +4,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 class UShop_ShoppingCart
 {
-	public $cart;
+	public $cart = array('items' => null);
 	protected $registry;
 
 	public function __construct($registry, $cart=null)

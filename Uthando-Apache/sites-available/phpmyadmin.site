@@ -1,0 +1,14 @@
+<VirtualHost *:80>
+	ServerAdmin webmaster@dummy-host.example.com
+	DocumentRoot /home/uthando-cms/MySQL-DataBase
+	ServerName phpmyadmin
+	ErrorLog /home/shaun/WebSiteFiles/logs/phpmyadmin-error
+	CustomLog /home/shaun/WebSiteFiles/logs/phpmyadmin-access combined
+	
+	<Directory /home/uthando-cms/MySQL-DataBase>
+		AllowOverride None
+		Options FollowSymLinks
+		Order allow,deny
+		Allow from localhost
+	</Directory>
+</VirtualHost>

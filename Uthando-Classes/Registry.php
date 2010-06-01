@@ -11,7 +11,6 @@ Class Registry {
 	public function __construct()
 	{
 		$this->path = urldecode(REQUEST_URI);
-		$this->registerPath();
 		$this->registerServer();
 	}
 	
@@ -22,7 +21,8 @@ Class Registry {
 	
 	public function __get($index)
 	{
-		return $this->vars[$index];
+		if (array_key_exists($index, $this->vars)) return $this->vars[$index];
+        return null;
 	}
 	
 	public function get($key=null)
@@ -47,7 +47,7 @@ Class Registry {
 		$settings = parse_ini_file($file, true);
 		$this->settings = $settings[$this->server];
 		if (!$this->settings) Uthando::go('/index3.php');
-		$this->ini_dir = realpath(ROOT_PATH.'Uthando-ini/'.$this->get('settings.resolve'));
+		$this->ini_dir = BASE.DS.'Uthando-ini'.DS.$this->get('settings.resolve');
 	}
 	
 	public function loadIniFiles($files)
@@ -59,32 +59,32 @@ Class Registry {
 	
 	public function setDefaults()
 	{
-		$this->host = (isset($_SERVER['HTTPS'])) ? $this->get('config.server.ssl_url') : $this->get('config.server.web_url');
+		$this->host = $this->get('config.server.web_url');
 		$this->core = $this->get('config.database.core').'.';
 		$this->user = $this->get('config.database.user').'.';
 		$this->sessions = $this->get('config.database.session').'.';
 		date_default_timezone_set($this->get('config.server.timezone'));
+		$this->registerPath();
 	}
 	
 	public function loadIniFile($file, $section)
 	{
-		$this->$section = parse_ini_file($this->ini_dir.'/'.$file.'.ini.php', true);
+		$this->$section = parse_ini_file($this->ini_dir.DS.$file.'.ini'.EXT, true);
 	}
 	
 	public function registerPath()
 	{
 		if ($this->path == '/index.php' || $this->path == '/') {
-			$this->component = 'content';
-			$this->action = 'default';
+			$this->path = $this->get('config.site.default_page');
+			$this->registerPath();
+			
 		} else {
-			$path = split("/",substr($this->path,1));
-			$path[1] = split("\.", $path[1]);
+			$path = explode('/',substr($this->path,1));
+			$path[1] = explode("\.", $path[1]);
 			
 			$this->component = $path[0];
-			$this->action = split('#', $path[1][0]);
+			$this->action = explode('#', $path[1][0]);
 			$this->action = $this->action[0];
-			
-			if (!$this->action) $this->action = "default";
 			
 			unset($path[0],$path[1]);
 			
@@ -100,7 +100,7 @@ Class Registry {
 				}
 			}
 			
-			if ($params) $this->params = $params;
+			$this->params = (isset($params)) ? $params : null;
 		}
 	}
 	

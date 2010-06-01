@@ -4,6 +4,9 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 class Utility
 {
+	private function __construct() {}
+	private dunction __clone() {}
+	
 	public static function removeSection($message, $type)
 	{
 		return preg_replace("/<!--".$type."_start-->(.*?)<!--".$type."_end-->/s", "", $message);

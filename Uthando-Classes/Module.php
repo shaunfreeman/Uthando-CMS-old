@@ -22,6 +22,8 @@ class Module
 		$this->params = $params;
 		$log_in = $this->getParams($params->params);
 		
+		$return_mod = false;
+		
 		switch($log_in['log_in']):
 			case 1:
 				if (UthandoUser::authorize()) $return_mod = true;
@@ -54,15 +56,7 @@ class Module
 	
 	function getParams($params)
 	{
-		
-		$params = explode("\r\n", $params);
-		
-		foreach ($params as $value):
-			$value = explode("=", $value);	
-			$new_params[$value[0]] = $value[1];
-		endforeach;
-		
-		return $new_params;
+		return parse_ini_string($params);
 	}
 	
 	function getModule($mod, $params)

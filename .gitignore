@@ -1,4 +1,3 @@
-Maildir/*
 Public/tmp/*
 !index.html
 Uthando-Admin/Common/tmp/

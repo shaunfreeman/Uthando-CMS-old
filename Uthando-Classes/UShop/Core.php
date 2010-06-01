@@ -15,8 +15,8 @@ class UShop_Core
 		
 		$this->img_dir = "/userfiles/".$this->registry->settings['resolve'].'/products/';
 		
-		$this->prefix = 'ushop_';
-		$this->db_name = $this->registry->core.$this->prefix;
+		//$this->prefix = 'ushop_';
+		$this->db_name = 'uthando_ushop.';
 		$this->tree = $tree = new NestedTree($this->db_name.'product_categories', null, 'category');
 	}
 	
@@ -27,7 +27,8 @@ class UShop_Core
 	
 	public function __get($index)
 	{
-		return $this->vars[$index];
+		if (array_key_exists($index, $this->vars)) return $this->vars[$index];
+        return null;
 	}
 	
 	public function getDisplay($key)
@@ -47,14 +48,14 @@ class UShop_Core
 	{
 		if (!$cid) $cid = $this->category_id;
 		
-		$pathway = '<span style="text-align:left;"><a href="/ushop/view/shopfront" class="Tips pathway" title="Shop Tip" rel="Click here to go to the shop front">Shop Front</a></span>';
+		$pathway = '<span style="text-align:left;"><a href="/ushop/shopfront" class="Tips pathway" title="Shop Tip" rel="Click here to go to the shop front">Shop Front</a></span>';
 		
 		foreach ($this->tree->pathway($cid) as $id => $path):
 		
 			$pathway .= '<span style="text-align:left;">&nbsp;::&nbsp;';
 			
 			if (str_replace('_', ' ', stripslashes($this->registry->params[0])) != $path['category']):
-				$pathway .= '<a href="/ushop/view/'.str_replace(' ', '_', $path['category']).'" class="Tips pathway" title="Shop Tip" rel="Click here to go to the '.$path['category'].' category">'.$path['category'].'</a>';
+				$pathway .= '<a href="/ushop/browse/'.str_replace(' ', '_', $path['category']).'" class="Tips pathway" title="Shop Tip" rel="Click here to go to the '.$path['category'].' category">'.$path['category'].'</a>';
 			else:
 				$pathway .= $path['category'];
 			endif;
@@ -88,7 +89,7 @@ class UShop_Core
 		$display = $this->getDisplay('product_list');
 		$html = null;
 		$start = 0;
-		$base_dir = realpath(__SITE_PATH . $this->img_dir);
+		$base_dir =  DS.'home'.DS.$this->registry->settings['dir'].DS.'Public'.DS.$this->registry->settings['resolve'].DS.'products'.DS;
 		
 		$message = file_get_contents('ushop/html/product_list_display.html', true);
 		$popup = file_get_contents('ushop/html/popupDetails.html', true);
@@ -102,9 +103,9 @@ class UShop_Core
 					$params['NAME'] = HTML_Element::makeXmlSafe($rows[$d]->name);
 					$params['PRICE'] = $rows[$d]->price;
 					$params['WIDTH'] = number_format(100 / $display, 0);
-					$params['IMAGE'] = (file_exists($base_dir.'/'.$rows[$d]->image) && $rows[$d]->image != null) ? $this->img_dir.$rows[$d]->image : $this->img_dir.'noimage.png';
-					$params['LINK'] = '/ushop/view/product/id-'.$rows[$d]->product_id;
-					$params['CART_LINK'] = '/ushop/view/cart/action-add/id-'.$rows[$d]->product_id;
+					$params['IMAGE'] = (file_exists($base_dir.$rows[$d]->image) && $rows[$d]->image != null) ? $this->img_dir.$rows[$d]->image : $this->img_dir.'noimage.png';
+					$params['LINK'] = '/ushop/product/id-'.$rows[$d]->product_id;
+					$params['CART_LINK'] = '/ushop/cart/action-add/id-'.$rows[$d]->product_id;
 
 					$json_array[] = array(
 						"name" => $rows[$d]->name,
@@ -133,13 +134,13 @@ class UShop_Core
 
 	public function productDetails($row)
 	{
-		$base_dir = realpath(__SITE_PATH . $this->img_dir);
+		$base_dir =  DS.'home'.DS.$this->registry->settings['dir'].DS.'Public'.DS.$this->registry->settings['resolve'].DS.'products'.DS;
 		
 		$html = file_get_contents('ushop/html/product.html', true);
 
 		$params = array(
-			'LINK' => '/ushop/view/product/id-'.$row->product_id,
-			'CART_LINK' => '/ushop/view/cart/action-add/id-'.$row->product_id,
+			'LINK' => '/ushop/product/id-'.$row->product_id,
+			'CART_LINK' => '/ushop/cart/action-add/id-'.$row->product_id,
 			'SEARCH_LINK' => '#'
 		);
 
@@ -148,7 +149,7 @@ class UShop_Core
 			if ($key == ('name' || 'author')) $value = HTML_Element::makeXmlSafe($value);
 			
 			if ($key == 'image'):
-				$params[strtoupper($key)] = (file_exists($base_dir.'/'.$value) && $value != null) ? $this->img_dir.$value : $this->img_dir.'noimage.png';
+				$params[strtoupper($key)] = (file_exists($base_dir.$value) && $value != null) ? $this->img_dir.$value : $this->img_dir.'noimage.png';
 			else:
 				$params[strtoupper($key)] = $value;
 			endif;
@@ -178,7 +179,7 @@ class UShop_Core
 					$params['CATEGORY'] = $rows[$d]['category'];
 					$params['WIDTH'] = number_format(100 / $display, 0);
 					$params['IMAGE'] = ($rows[$d]['category_image'] ? $this->img_dir . $rows[$d]['category_image'] : $this->img_dir.'noimage.gif');
-					$params['LINK'] = '/ushop/view/'.str_replace(' ', '_', $rows[$d]['category']);
+					$params['LINK'] = '/ushop/browse/'.str_replace(' ', '_', $rows[$d]['category']);
 					
 					if (!$rows[$d]['category_image_status']) $message1 = UShop_Utility::removeSection($message1, 'image');
 					
@@ -546,7 +547,7 @@ class UShop_Core
 		elseif (UthandoUser::authorize()):
 			$cart = $this->getCart();
 		endif;
-		
+		if (!array_key_exists('items', $cart)) $cart['items'] = null;
 		if (count($cart['items']) > 0):
 			$buttons = '
 				<div class="checkout_buttons">

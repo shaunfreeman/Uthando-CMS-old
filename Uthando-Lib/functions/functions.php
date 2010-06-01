@@ -3,7 +3,7 @@
 // Auto load classes.
 function __autoload($class_name)
 {
-	$class_name = split("_", $class_name);
+	$class_name = explode("_", $class_name);
 	$class_path = null;
 	foreach ($class_name as $key => $value) {
 		$class_path .= '/'.$value;
@@ -11,7 +11,6 @@ function __autoload($class_name)
 	$class_path = substr($class_path, 1);
 	require ($class_path . '.php');
 }
-
 
 //class UthandoError extends  UthandoException {};
 
@@ -25,6 +24,32 @@ function print_rr($value) {
 	print "<pre style=\"background-color:white;color:black;\">";
 	print_r($value);
 	print "</pre>";
+}
+
+if(!function_exists('parse_ini_string')){
+	function parse_ini_string($str, $ProcessSections=false){
+		$lines  = explode("\n", $str);
+		$return = Array();
+		$inSect = false;
+		foreach($lines as $line){
+			$line = trim($line);
+			if(!$line || $line[0] == "#" || $line[0] == ";")
+				continue;
+			if($line[0] == "[" && $endIdx = strpos($line, "]")){
+				$inSect = substr($line, 1, $endIdx-1);
+				continue;
+			}
+			if(!strpos($line, '=')) // (We don't use "=== false" because value 0 is not valid as well)
+				continue;
+		
+			$tmp = explode("=", $line, 2);
+			if($ProcessSections && $inSect)
+				$return[$inSect][trim($tmp[0])] = ltrim($tmp[1]);
+			else
+				$return[trim($tmp[0])] = ltrim($tmp[1]);
+		}
+		return $return;
+	}
 }
 
 // Function for escaping and trimming form data.
@@ -69,12 +94,12 @@ function find_files($dirname, $ext, $file_list = array()) {
 		}
 		
         // Deep find directories
-		if (is_dir($dirname . DIRECTORY_SEPARATOR . $entry)) {
-			find_files($dirname . DIRECTORY_SEPARATOR . $entry, $ext, $file_list);
+		if (is_dir($dirname . DS . $entry)) {
+			find_files($dirname . DS . $entry, $ext, $file_list);
 		} else {
 			foreach ($ext as $key => $value) {
 				if (substr($entry,-$value) == $key) {
-					$file_list[] = $dirname . DIRECTORY_SEPARATOR . $entry;
+					$file_list[] = $dirname . DS . $entry;
 				}
 			}
 		}

@@ -10,7 +10,7 @@ class DB_Core
 	public function __construct($registry)
 	{
 		$dsn = array(
-			'hostspec' => $registry->get('config.datase.hostspec'),
+			'hostspec' => $registry->get('config.database.hostspec'),
 			'phptype' => $registry->get('config.database.phptype'),
 			'database' => $registry->get('config.database.core')
 		);
@@ -87,7 +87,7 @@ class DB_Core
 		//print_rr($stmt);
 		$stmt->execute();
 		while ($row = $stmt->fetch(PDO::FETCH_OBJ)) $obj[] = $row;
-		return $obj;
+		return (isset($obj)) ? $obj : null;
 	}
 
 	public function exec($sql)

@@ -5,14 +5,17 @@ ob_start();
 // Set flag that this is a parent file.
 define( 'PARENT_FILE', 1 );
 
-$site_path = realpath(dirname(__FILE__));
-define ('SITE_PATH', $site_path);
-define ('ROOT_PATH', realpath(SITE_PATH.'/../').'/');
-define ('PHP_PATH', ROOT_PATH.'Uthando-Classes/');
-define ('MODULES', ROOT_PATH.'Uthando-Lib/public/modules/');
-define ('COMPONENTS', ROOT_PATH.'Uthando-Lib/public/components/');
-define ('FUNCS', ROOT_PATH.'Uthando-Lib/functions/');
-define ('TEMPLATES', ROOT_PATH.'Uthando-Templates/');
+define ('PS', PATH_SEPARATOR);
+define ('DS', DIRECTORY_SEPARATOR);
+define ('EXT', '.php');
+
+define ('BASE', dirname(dirname(__FILE__)));
+define ('PUB', BASE.DS.'Public'.DS);
+define ('CLASSES', BASE.DS.'Uthando-Classes'.DS);
+define ('MODULES', BASE.DS.'Uthando-Lib'.DS.'modules'.DS);
+define ('COMPONENTS', BASE.DS.'Uthando-Lib'.DS.'public_components'.DS);
+define ('FUNCS', BASE.DS.'Uthando-Lib'.DS.'functions'.DS);
+define ('TEMPLATES', BASE.DS.'Uthando-Templates'.DS);
 
 define ('SCHEME', (isset ($_SERVER['HTTPS'])) ? 'https://' : 'http://');
 define ('HOST', $_SERVER['HTTP_HOST']);
@@ -20,10 +23,10 @@ define ('REQUEST_URI', $_SERVER['REQUEST_URI']);
 
 // Set include paths.
 $ini_path = get_include_path() .
-	PATH_SEPARATOR . PHP_PATH .
-	PATH_SEPARATOR . FUNCS .
-	PATH_SEPARATOR . MODULES .
-	PATH_SEPARATOR . COMPONENTS;
+	PS . CLASSES .
+	PS . FUNCS .
+	PS . MODULES .
+	PS . COMPONENTS;
 
 set_include_path($ini_path);
 
@@ -38,7 +41,7 @@ $registry = new Registry();
 
 // $registry->firephp = FirePHP::getInstance(true);
 
-$registry->setSite(realpath(ROOT_PATH.'Uthando-ini/.UthandoSites.ini.php'));
+$registry->setSite(realpath(BASE.DS.'Uthando-ini'.DS.'.UthandoSites.ini'.EXT));
 $registry->loadIniFile('uthando', 'config');
 $registry->setDefaults();
 
@@ -82,7 +85,7 @@ $timer->stop();
 $timer_result = $timer->getProfiling();
 
 $registry->template->addParameter('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
-
+//print_rr($registry);
 echo $registry->template;
 unset($registry);
 
