@@ -551,9 +551,9 @@ class UShop_Core
 		if (count($cart['items']) > 0):
 			$buttons = '
 				<div class="checkout_buttons">
-				<a class="button" href="'.$this->registry->get('config.server.ssl_url').'/ushop/view/checkout">Check Out</a>
-				<a class="button" href="/ushop/view/cart">View Cart</a>
-				<a class="button" href="/ushop/view/cart/action-empty">Empty Cart</a>
+				<a class="button" href="'.$this->registry->get('config.server.ssl_url').'/ushop/checkout">Check Out</a>
+				<a class="button" href="/ushop/cart">View Cart</a>
+				<a class="button" href="/ushop/cart/action-empty">Empty Cart</a>
 				</div>
 			';
 			return $buttons;

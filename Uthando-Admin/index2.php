@@ -21,7 +21,7 @@
 	<body>
 		<center>
 			<h1>
-				<img src="/Common/images/uthandocms.jpg" />
+				<img src="/images/uthandocms.jpg" />
 				<h2>You are using an incompatible browser.<br />Browsers that are supported are listed below with the links to download them.</h2>
 			</h1>
 			<div>
@@ -31,9 +31,9 @@
 					<li><a href="http://www.opera.com/">Opera</a> version 9 or later</li>
 				</ul>
 			</div>
-			<a href="http://www.mozilla.com/firefox"><img src="/Common/images/firefox.jpg" /></a>
-			<a href="http://www.apple.com/safari/"><img src="/Common/images/safari.jpg" /></a>
-			<a href="http://www.opera.com/"><img src="/Common/images/opera.jpeg" /></a>
+			<a href="http://www.mozilla.com/firefox"><img src="/images/firefox.jpg" /></a>
+			<a href="http://www.apple.com/safari/"><img src="/images/safari.jpg" /></a>
+			<a href="http://www.opera.com/"><img src="/images/opera.jpeg" /></a>
 		</center>
 	</body>
 </html>

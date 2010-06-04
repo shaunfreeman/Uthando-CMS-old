@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="template">
+  <name>Kaleidoscope</name>
+  <creationDate>16062007</creationDate>
+  <author>www.joomladesigns.co.uk</author>
+  <copyright>(c) www.joomladesigns.co.uk 2006</copyright>
+  <authorEmail>team@joomladesigns.co.uk</authorEmail>
+  <authorUrl>http://www.joomladesigns.co.uk</authorUrl>
+  <version>3.0.0</version>
+  <description>Joomla template developed and released by www.joomladesigns.co.uk. This Joomla template is not free or public and can not be resold or redistributed. By downloading and using this template you have agreed to use the template in accordance with the terms of service outlined at http://www.joomladesigns.co.uk</description>
+  <files>
+    <filename>index.php</filename>
+    <filename>templateDetails.xml</filename>
+    <filename>favicon.ico</filename>
+<filename>params.ini</filename>
+<filename>html/index.html</filename>
+    <filename>template_thumbnail.png</filename>
+    <filename>images/dotted.gif</filename>
+    <filename>images/left.gif</filename>
+    <filename>images/right.gif</filename>
+    <filename>css/template_css.css</filename>
+  </files>
+  <positions>
+    <position>left</position>
+    <position>right</position>
+    <position>top</position>
+    <position>banner</position>
+    <position>user1</position>
+    <position>user2</position>
+    <position>user3</position>
+    <position>user4</position>
+    <position>user5</position>
+    <position>user6</position>
+    <position>user7</position>
+    <position>user8</position>
+    <position>user9</position>
+    <position>debug</position>
+    <position>syndicate</position>
+  </positions>
+</install>

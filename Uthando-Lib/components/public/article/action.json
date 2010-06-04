@@ -1,0 +1,12 @@
+{
+	"article": {
+		"links" : "database",
+		"url" : "article/",
+		"params" : "",
+		"database_name" : "pages",
+		"fields" : "page_id, page",
+		"filter" : {
+			"order by" : "page_id"
+		}
+	}
+}

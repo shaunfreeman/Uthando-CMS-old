@@ -77,7 +77,6 @@ Class Registry {
 		if ($this->path == '/index.php' || $this->path == '/') {
 			$this->path = $this->get('config.site.default_page');
 			$this->registerPath();
-			
 		} else {
 			$path = explode('/',substr($this->path,1));
 			$path[1] = explode("\.", $path[1]);
@@ -89,7 +88,7 @@ Class Registry {
 			unset($path[0],$path[1]);
 			
 			foreach ($path as $value) {
-				$value = split("-",$value);
+				$value = explode("-",$value);
 				
 				if (!is_numeric($value[0]) && count($value) == 2) {
 					$params[$value[0]] = $value[1];

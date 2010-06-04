@@ -25,9 +25,8 @@ Class Admin_Registry extends Registry
 	{
 		$settings = parse_ini_file($file, true);
 		$this->settings = $settings[$this->server];
-		if (!$this->settings) goto('/index3.php');
-		
-		$this->ini_dir = dirname($file).'/'.$this->settings['resolve'];
+		if (!$this->settings) Uthando::go('/index3.php');
+		$this->ini_dir = BASE.DS.'Uthando-ini'.DS.$this->get('settings.resolve');
 	}
 	
 	public function setDefaults()
@@ -37,10 +36,10 @@ Class Admin_Registry extends Registry
 		$this->core = $this->config['database']['core'].'.';
 		$this->user = $this->config['database']['user'].'.';
 		$this->sessions = $this->config['database']['session'].'.';
-		if ($_SERVER['DOCUMENT_ROOT'] == __SITE_PATH):
+		if ($_SERVER['DOCUMENT_ROOT'] == ADMIN):
 			$this->admin_dir = null;
 		else:
-			$admin_path = split("/", __SITE_PATH);
+			$admin_path = split("/", ADMIN);
 			$this->admin_dir = '/'.$admin_path[count($admin_path) - 1];
 		endif;
 	}
@@ -61,14 +60,14 @@ Class Admin_Registry extends Registry
 				break;
 		endswitch;
 		
-		if (!$browser) goto('/index2.php');
+		if (!$browser) Uthando::go('/index2.php');
 		
 		if ($this->path == '/index.php' || $this->path == '/'):
 			$this->component = 'admin';
 			$this->action = 'default';
 		else:
-			$path = split("/",substr($this->path,1));
-			$path[1] = split("\.", $path[1]);
+			$path = explode("/",substr($this->path,1));
+			$path[1] = explode("\.", $path[1]);
 			
 			$this->component = $path[0];
 			$this->action = $path[1][0];
@@ -78,7 +77,7 @@ Class Admin_Registry extends Registry
 			unset($path[0],$path[1]);
 			
 			foreach ($path as $value):
-				$value = split("-",$value);
+				$value = explode("-",$value);
 				
 				if (!is_numeric($value[0]) && count($value) == 2):
 					$params[$value[0]] = $value[1];

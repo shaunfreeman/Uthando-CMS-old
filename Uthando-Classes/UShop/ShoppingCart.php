@@ -4,7 +4,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 class UShop_ShoppingCart
 {
-	public $cart = array('items' => null);
+	public $cart = array('items' => array());
 	protected $registry;
 
 	public function __construct($registry, $cart=null)
@@ -118,7 +118,7 @@ class UShop_ShoppingCart
 			
 			$this->cart['postWeight'] += $itemWeight;
 			
-			if (file_exists(__SITE_PATH.$this->img_dir.$row->image)):
+			if (file_exists(DS.'home'.DS.$this->registry->settings['dir'].DS.'Public'.DS.$this->registry->settings['resolve'].DS.'products'.DS.$row->image)):
 				$image = $this->img_dir.$row->image;
 			else:
 				$image = $this->img_dir.'noimage.png';
@@ -147,7 +147,7 @@ class UShop_ShoppingCart
 
 		$cart_body = $this->displayCart();
 		
-		$html = Uthando::templateParser($vc, array('CART_BODY' => $cart_body, 'SSL_URL' => $this->registry->get('config.server.ssl_url')), '{', '}');
+		$html = Uthando::templateParser($vc, array('CART_BODY' => $cart_body, 'URL' => $this->registry->get('config.server.ssl_url')), '{', '}');
 		
 		return UShop_Utility::removeSection($html, 'item_quantity');
 	}

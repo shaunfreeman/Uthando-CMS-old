@@ -266,18 +266,18 @@ class HTML_Template extends HTML_Page
 		
 		if ($js_end_files):
 			foreach ($js_end_files as $key => $files):
-				$js_end_files[$key] = $this->registry->host.$files;
+				$js_end_files[$key] = $files;
 			endforeach;
 		endif;
 		
 		if ($this->settings['general']['cache']):
 			$js->dbug = true;
-			$js->scripts = array($this->registry->host.$this->settings['cacheJS']);
+			$js->scripts = array($this->settings['cacheJS']);
 		else:
 			$js->scripts = $this->settings['mootools'];
 			if ($js->scripts):
 				foreach ($js->scripts as $key => $files):
-					$js->scripts[$key] = $this->registry->get('config.server.web_url').$files;
+					$js->scripts[$key] = $files;
 				endforeach;
 			endif;
 		endif;

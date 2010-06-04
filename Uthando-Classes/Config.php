@@ -14,7 +14,7 @@ class Config
 	{
 		$this->registry = $registry;
 		if ($options['path'] && is_string($options['path'])) $this->path = $options['path'];
-		if ($options['process_sections'] && is_bool($options['process_sections'])) $this->process_sections = $options['process_sections'];
+		if (isset($options['process_sections']) && is_bool($options['process_sections'])) $this->process_sections = $options['process_sections'];
 		
 		if ($this->path) $this->load();
 	}
