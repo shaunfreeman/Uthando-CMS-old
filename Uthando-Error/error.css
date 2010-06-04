@@ -1,0 +1,21 @@
+#uthandoLogo {
+	background: url(/images/uthandocms.png) no-repeat center top;
+	padding-top: 90px;
+}
+
+img {
+	border: 0px;
+	vertical-align:middle;
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover { text-decoration: underline; }
+
+.center { text-align: center; }
