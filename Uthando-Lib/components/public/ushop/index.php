@@ -9,7 +9,7 @@ set_include_path(get_include_path() . PS . COMPONENTS.'ushop'.DS.'action'.DS . P
 
 $title = ucwords($this->registry->component) . " " . ucwords($this->registry->action);
 
-$this->registry->component_css = array('ushop_css' => '/uthando-css/ushop/public/ushop.css');
+$this->registry->component_css = array('ushop_css' => '/uthando-css/public/ushop/ushop.css');
 
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );

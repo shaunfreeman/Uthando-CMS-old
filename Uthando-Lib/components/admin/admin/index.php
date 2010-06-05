@@ -20,7 +20,7 @@ if ($this->authorize()):
 		require_once('action/'.$this->registry->action.'.php');
 		
 		$this->addParameter ('page',  $title);
-		$this->registry->component_css = array('/components/admin/css/admin.css');
+		$this->registry->component_css = array('/uthando-css/admin/admin/admin.css');
 	endif;
 endif;
 

@@ -46,6 +46,9 @@ Class Registry {
 	{
 		$settings = parse_ini_file($file, true);
 		$this->settings = $settings[$this->server];
+		foreach ($settings['general'] as $key => $value):
+			$this->$key = $value;
+		endforeach;
 		if (!$this->settings) Uthando::go('/index3.php');
 		$this->ini_dir = BASE.DS.'Uthando-ini'.DS.$this->get('settings.resolve');
 	}
@@ -60,6 +63,7 @@ Class Registry {
 	public function setDefaults()
 	{
 		$this->host = $this->get('config.server.web_url');
+		$this->db_default = $this->get('config.database.core').'.';
 		$this->core = $this->get('config.database.core').'.';
 		$this->user = $this->get('config.database.user').'.';
 		$this->sessions = $this->get('config.database.session').'.';

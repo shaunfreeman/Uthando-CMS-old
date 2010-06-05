@@ -47,7 +47,7 @@ class Uthando
 		if (is_file($this->file.DS.'index'.EXT) == false):
 			$this->registry->Error('404 Page NOT Found', $this->registry->path);
 		else:
-			$load = $this->getResult('enabled', $this->registry->core.'components', null, array('where' => "component='".$this->registry->component."'"), false);
+			$load = $this->getResult('enabled', $this->registry->db_default.'components', null, array('where' => "component='".$this->registry->component."'"), false);
 		endif;
 		
 		if ($load->enabled):

@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class MenuAdmin extends HTML_Menu
+class Admin_Menu extends HTML_Menu
 {
 	
 	protected function returnLink ($row, $class, $children) {
@@ -58,7 +58,7 @@ class MenuAdmin extends HTML_Menu
 					$a_attrs['class'] = 'mainlevel'.$this->class_sfx;
 				endif;
 				
-				$curr = $row[$key]['item'];
+				$curr = $item[$key]['item'];
 				
 				$li_attrs = ($curr == $this->registry->page_title && $this->type == 'vertical') ? array('id' => 'current', 'class' => 'active') : null;
 				

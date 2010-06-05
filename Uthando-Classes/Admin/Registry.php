@@ -25,6 +25,11 @@ Class Admin_Registry extends Registry
 	{
 		$settings = parse_ini_file($file, true);
 		$this->settings = $settings[$this->server];
+		
+		foreach ($settings['general'] as $key => $value):
+			$this->$key = $value;
+		endforeach;
+		
 		if (!$this->settings) Uthando::go('/index3.php');
 		$this->ini_dir = BASE.DS.'Uthando-ini'.DS.$this->get('settings.resolve');
 	}
@@ -36,12 +41,9 @@ Class Admin_Registry extends Registry
 		$this->core = $this->config['database']['core'].'.';
 		$this->user = $this->config['database']['user'].'.';
 		$this->sessions = $this->config['database']['session'].'.';
-		if ($_SERVER['DOCUMENT_ROOT'] == ADMIN):
-			$this->admin_dir = null;
-		else:
-			$admin_path = split("/", ADMIN);
-			$this->admin_dir = '/'.$admin_path[count($admin_path) - 1];
-		endif;
+		
+		$this->admin_dir = $_SERVER['DOCUMENT_ROOT'];
+		$this->registerPath();
 	}
 	
 	public function registerPath()
@@ -63,33 +65,10 @@ Class Admin_Registry extends Registry
 		if (!$browser) Uthando::go('/index2.php');
 		
 		if ($this->path == '/index.php' || $this->path == '/'):
-			$this->component = 'admin';
-			$this->action = 'default';
+			$this->path = $this->get('admin_config.site.default_page');
+			parent::registerPath();
 		else:
-			$path = explode("/",substr($this->path,1));
-			$path[1] = explode("\.", $path[1]);
-			
-			$this->component = $path[0];
-			$this->action = $path[1][0];
-			
-			if (!$this->action) $this->action = "default";
-			
-			unset($path[0],$path[1]);
-			
-			foreach ($path as $value):
-				$value = explode("-",$value);
-				
-				if (!is_numeric($value[0]) && count($value) == 2):
-					$params[$value[0]] = $value[1];
-				elseif (count($value) == 1):
-					$params[] = $value[0];
-				else:
-					$this->Error("Too many page parameters", $this->path);
-				endif;
-			endforeach;
-			
-			if (isset($params)) $this->params = $params;
-			
+			parent::registerPath();
 		endif;
 	}
 	

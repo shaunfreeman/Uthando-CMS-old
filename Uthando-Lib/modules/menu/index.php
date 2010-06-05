@@ -17,10 +17,10 @@ if ($menu) {
 	
 	$params['menu_category_id'] = $menu->item_id;
 	// Start Navibar class.
-	$navibar = (defined('UTHANDO_ADMIN')) ? new MenuAdmin($this->registry, $params) : new HTML_Menu($this->registry, $params);
+	$navibar = ($this->registry->get('admin_dir')) ? new Admin_Menu($this->registry, $params) : new HTML_Menu($this->registry, $params);
 		
 	$module = $navibar->getMenu($menu->item_id, $menu->item, $menu->menu_type);
-
+	
 	$this->module_wrap->appendChild($module);
 	
 	unset($navibar);

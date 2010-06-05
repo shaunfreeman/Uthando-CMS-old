@@ -25,7 +25,7 @@ class HTML_Menu
 		$this->moduleclass_sfx = $params['moduleclass_sfx'];
 		$this->menu_id = (isset($params['item_id'])) ? $params['item_id'] : null;
 		
-		$this->db_table = $this->registry->core;
+		$this->db_table = $this->registry->db_default;
 		
 		$this->status = $this->getStatus();
 		$this->doc = $this->registry->template->doc;

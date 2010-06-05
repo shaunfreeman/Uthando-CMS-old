@@ -49,7 +49,7 @@ if (UthandoUser::checkUser() && !$this->authorize()):
 			$_SESSION['username'] = $row->username;
 			$_SESSION['user_group'] = $row->user_group;
 			
-			goto();
+			Uthando::go();
 		else:
 			// password didn't match.
 			$this->registry->Error('The password entered does not match that on file.', '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
