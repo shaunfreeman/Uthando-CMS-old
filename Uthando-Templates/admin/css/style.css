@@ -127,16 +127,16 @@ h3 { margin: 0px; }
 
 /* headers */
 
-.gradient { background-image: url(/templates/admin/images/headDiv.png); }
+.gradient { background-image: url(/images/headDiv.png); }
 
 .headerDiv {
 	background-color: rgba(225,205,0,1);
-	background-image: url(/templates/admin/images/headDiv.png);
+	background-image: url(/images/headDiv.png);
 }
 
 #headingDiv, #footerDiv {
 	background-color: rgba(135,206,235,1);
-	background-image: url(/templates/admin/images/outerHeadDiv.png);
+	background-image: url(/images/outerHeadDiv.png);
 }
 
 #outerDivWrap .headerDiv, #footerDiv .headerDiv { color: #003399; }
@@ -155,7 +155,7 @@ h3 { margin: 0px; }
 
 .moduletable h3 {
 	background-color: rgba(225,205,0,1);
-	background-image: url(/templates/admin/images/headDiv.png);
+	background-image: url(/images/headDiv.png);
 }
 
 .headerDiv span, .moduletable h3  {
@@ -277,7 +277,7 @@ input, select, textarea {
 input[type=submit], button {
     border: 1px solid threedface;
     background-color: #efefef;
-    background: url(/templates/admin/images/btnUp.gif) repeat-x;
+    background: url(/images/btnUp.gif) repeat-x;
 	height: 18px;
 	line-height: 18px;
 	font-size:10px;
@@ -292,7 +292,7 @@ input[type=submit]:hover, button:hover {
     border-top: 1px solid buttonhighlight;
     border-left: 1px solid buttonhighlight;
     background-color: threedface;
-    background: url(/templates/admin/images/btnDown.gif) repeat-x;
+    background: url(/images/btnDown.gif) repeat-x;
     cursor: pointer;
 }
 
@@ -318,13 +318,13 @@ input[type=submit]:hover, button:hover {
 .checkbox {
 	height: 14px;
     width : 16px;
-	background : url(/templates/admin/images/checkbox.gif) no-repeat 0px 0px;
+	background : url(/images/checkbox.gif) no-repeat 0px 0px;
 }
 
 .radio {
 	height: 14px;
     width : 16px;
-    background: url(/templates/admin/images/radio.gif) no-repeat 0px 0px;
+    background: url(/images/radio.gif) no-repeat 0px 0px;
 }
 
 .selected { background-position: 0px -28px; }
@@ -359,7 +359,7 @@ menu buttons
 .menu li, li.btnUp {
     border: 1px solid threedface;
     background-color: #efefef;
-    background: url(/templates/admin/images/btnUp.gif) repeat-x;
+    background: url(/images/btnUp.gif) repeat-x;
 }
 
 .menu li:hover, li.btnOver {
@@ -368,7 +368,7 @@ menu buttons
     border-top: 1px solid buttonhighlight;
     border-left: 1px solid buttonhighlight;
     background-color: threedface;
-    background: url(/templates/admin/images/btnDown.gif) repeat-x;
+    background: url(/images/btnDown.gif) repeat-x;
 }
 
 .menu li.active, li.btnDown {
@@ -377,7 +377,7 @@ menu buttons
     border-bottom: 1px solid buttonhighlight;
     border-right: 1px solid buttonhighlight;
     background-color: #efefef;
-    background: url(/templates/admin/images/btnDown.gif) repeat-x;
+    background: url(/images/btnDown.gif) repeat-x;
 }
 
 /*
@@ -465,17 +465,17 @@ Buttons
 	background-color: #e0e0e0;
 }
 
-#cancel-24 { background-image: url(/templates/admin/images/24x24/Cancel.png); }
+#cancel-24 { background-image: url(/images/24x24/Cancel.png); }
 
-#preview-24 { background-image: url(/templates/admin/images/24x24/Preview.png); }
+#preview-24 { background-image: url(/images/24x24/Preview.png); }
 
-#save-24 { background-image: url(/templates/admin/images/24x24/Save.png); }
+#save-24 { background-image: url(/images/24x24/Save.png); }
 
-#delete-24 { background-image: url(/templates/admin/images/24x24/Delete.png); }
+#delete-24 { background-image: url(/images/24x24/Delete.png); }
 
-#back-24 { background-image: url(/templates/admin/images/24x24/ArrowLeft.png); }
+#back-24 { background-image: url(/images/24x24/ArrowLeft.png); }
 
-#params-24 { background-image: url(/templates/admin/images/24x24/Config.png); }
+#params-24 { background-image: url(/images/24x24/Config.png); }
 
 #delete {
 	width:200px;
@@ -610,13 +610,13 @@ Messages
 	font-weight:bold;
 }
 
-#warning .message { background: url(/templates/admin/images/48x48/Warning.png) no-repeat center 5px; }
+#warning .message { background: url(/images/48x48/Warning.png) no-repeat center 5px; }
 
-#pass .message { background: url(/templates/admin/images/48x48/OK.png) no-repeat center 5px; }
+#pass .message { background: url(/images/48x48/OK.png) no-repeat center 5px; }
 
-#error .message { background: url(/templates/admin/images/48x48/ErrorCircle.png) no-repeat center 5px; }
+#error .message { background: url(/images/48x48/ErrorCircle.png) no-repeat center 5px; }
 
-#info .message { background: url(/templates/admin/images/48x48/InfoCircle.png) no-repeat center 5px; }
+#info .message { background: url(/images/48x48/InfoCircle.png) no-repeat center 5px; }
 
 .action #messageBarWrap {
 	width:134px;
@@ -687,13 +687,13 @@ Tool Tips
     margin: 0;
     color: #9FD4FF;
     padding: 8px 8px 4px;
-    background: url(/templates/admin/images/bubble.png) top left;
+    background: url(/images/bubble.png) top left;
 }
 
 .tip-text {
     font-size: 11px;
     padding: 4px 8px 8px;
-    background: url(/templates/admin/images/bubble.png) bottom right;
+    background: url(/images/bubble.png) bottom right;
 }
 
 /*

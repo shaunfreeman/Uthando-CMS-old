@@ -29,9 +29,9 @@ if ($this->authorize()):
 			$data[$c] = array(
 				$row->page,
 				$row->mdate,
-				'<a href="/content/edit/id-'.$row->page_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Page" rel="Click to edit the '.$row->page.' page contents" /></a>',
+				'<a href="/content/edit/id-'.$row->page_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Page" rel="Click to edit the '.$row->page.' page contents" /></a>',
 				
-				'<a href="/content/delete/id-'.$row->page_id.'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/DeleteRed.png" class="Tips" title="Delete Page" rel="Click to delete the '.$row->page.' page" /></a>'
+				'<a href="/content/delete/id-'.$row->page_id.'" ><img src="/images/24x24/DeleteRed.png" class="Tips" title="Delete Page" rel="Click to delete the '.$row->page.' page" /></a>'
 			);
 			
 			$c++;

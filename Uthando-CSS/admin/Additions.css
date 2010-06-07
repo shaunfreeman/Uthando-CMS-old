@@ -54,7 +54,7 @@ div.dialog {
 	color: #bebebe;
 	font-family: Tahoma, sans-serif;
 	font-size: 12px;
-	background: url(/templates/admin/images/FileManager/dialog.png) no-repeat;
+	background: url(/images/FileManager/dialog.png) no-repeat;
 }
 div.dialog a {
 	color: #aaa;
@@ -102,7 +102,7 @@ div.dialog button {
 	font-size: 12px;
 	font-weight: normal;
 	margin: 0;
-	background: url(/templates/admin/images/FileManager/button.png) repeat-x;
+	background: url(/images/FileManager/button.png) repeat-x;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;

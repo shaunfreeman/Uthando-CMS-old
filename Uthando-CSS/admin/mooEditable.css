@@ -80,7 +80,7 @@ Text Editor styles
 	height: 16px;
 	vertical-align: middle;
 	color: inherit;
-	background: transparent url(/templates/admin/images/mooEditable/mooeditable-toolbarbuttons-tango.png) no-repeat 0 -8px;
+	background: transparent url(/images/mooEditable/mooeditable-toolbarbuttons-tango.png) no-repeat 0 -8px;
 }
 
 .mooeditable-ui-toolbar .mooeditable-ui-button .button-text{
@@ -186,7 +186,7 @@ Text Editor styles
 .mooeditable-ui-toolbar .justifyright-item .button-icon,
 .mooeditable-ui-toolbar .justifyfull-item .button-icon,
 .mooeditable-ui-toolbar .justifyleft-item .button-icon{
-	background-image: url(/templates/admin/images/mooEditable/mooeditable-extras-toolbarbuttons-tango.png);
+	background-image: url(/images/mooEditable/mooeditable-extras-toolbarbuttons-tango.png);
 }
 
 .mooeditable-ui-toolbar .justifycenter-item .button-icon{ background-position: 0 0; } 

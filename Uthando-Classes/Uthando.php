@@ -58,6 +58,16 @@ class Uthando
 		endif;
 	}
 	
+	public function addComponentCSS($file=null)
+	{
+		$type = (defined('ADMIN')) ? 'admin' : 'public';
+		$path = '/uthando-css/'.$type.'/';
+		if ($file):
+		else:
+			$this->registry->component_css = array($path.$this->registry->component.'.css');
+		endif;
+	}
+	
 	public function addModules()
 	{
 		// Get Modules and add them.

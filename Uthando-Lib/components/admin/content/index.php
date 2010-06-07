@@ -18,11 +18,7 @@ if ($this->authorize()):
 		
 		$this->addParameter ('page',  $title);
 
-		if (is_array($this->registry->component_css)):
-			$this->registry->component_css = array_merge(array('/components/content/css/content.css'), $this->registry->component_css);
-		else:
-			$this->registry->component_css = array('/components/content/css/content.css');
-		endif;
+		$this->addComponentCSS();
 	endif;
 endif;
 ?>

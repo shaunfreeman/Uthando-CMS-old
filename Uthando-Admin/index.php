@@ -4,6 +4,7 @@ ob_start();
 
 // Set flag that this is a parent file
 define( 'PARENT_FILE', 1 );
+define('ADMIN', 1);
 
 define ('PS', PATH_SEPARATOR);
 define ('DS', DIRECTORY_SEPARATOR);
@@ -15,6 +16,7 @@ define ('ADMIN', BASE.DS.'Uthando-Admin'.DS);
 define ('CLASSES', BASE.DS.'Uthando-Classes'.DS);
 define ('MODULES', BASE.DS.'Uthando-Lib'.DS.'modules'.DS);
 define ('COMPONENTS', BASE.DS.'Uthando-Lib'.DS.'components'.DS.'admin'.DS);
+define ('LANG', BASE.DS.'Uthando-Lib'.DS.'langs'.DS);
 define ('FUNCS', BASE.DS.'Uthando-Lib'.DS.'functions'.DS);
 define ('TEMPLATES', BASE.DS.'Uthando-Templates'.DS);
 

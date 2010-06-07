@@ -32,7 +32,7 @@ div.filemanager div.filemanager-menu {
 	line-height: 30px;
 	
 	border-top: 1px solid #bebebe;
-	background: url(/templates/admin/images/FileManager/menu.png) repeat-x;
+	background: url(/images/FileManager/menu.png) repeat-x;
 }
 
 div.filemanager button {
@@ -46,7 +46,7 @@ div.filemanager button {
 	text-shadow: #eee 1px 1px 1px;
 	
 	clear: none;
-	background: url(/templates/admin/images/FileManager/button.png) repeat-x;
+	background: url(/images/FileManager/button.png) repeat-x;
 	border: 1px solid #a1aeb9;
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -69,7 +69,7 @@ div.filemanager button.disabled, div.filemanager button.disabled:hover, div.file
 	cursor: default;
 	color: #666;
 	text-shadow: none;
-	background: url(/templates/admin/images/FileManager/button_disabled.png) repeat-x;
+	background: url(/images/FileManager/button_disabled.png) repeat-x;
 	border-color: #bababa;
 }
 
@@ -89,7 +89,7 @@ div.filemanager-menu div.loader {
 	width: 16px;
 	height: 16px;
 	margin: 8px 0;
-	background: url(/templates/admin/images/FileManager/loader.gif) no-repeat;
+	background: url(/images/FileManager/loader.gif) no-repeat;
 }
 
 div.filemanager ul {
@@ -122,7 +122,7 @@ div.filemanager ul.filemanager-browser {
 	
 	border: 0;
 	border-right: 1px solid #bebebe;
-	background: url(/templates/admin/images/FileManager/filelist.png) repeat-x #c1c7cf;
+	background: url(/images/FileManager/filelist.png) repeat-x #c1c7cf;
 }
 
 div.filemanager ul li span.fi {
@@ -160,7 +160,7 @@ ul.filemanager-browser a, ul.filemanager-browser span {
 }
 
 div.filemanager ul li a.selected, div.filemanager ul li span.selected {
-	background: url(/templates/admin/images/FileManager/filelist_selected.png) repeat-x;
+	background: url(/images/FileManager/filelist_selected.png) repeat-x;
 	color: #eee;
 	outline: none;
 }
@@ -189,7 +189,7 @@ div.filemanager div.filemanager-close {
 	width: 20px;
 	
 	cursor: pointer;
-	background: url(/templates/admin/images/FileManager/button.png) repeat-x;
+	background: url(/images/FileManager/button.png) repeat-x;
 	border: 1px solid #a1aeb9;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
@@ -276,7 +276,7 @@ div.filemanager dd.filemanager-dir a.icon {
 	border: 1px solid #bebebe;
 	padding: 2px 5px 2px 20px;
 	text-decoration: none;
-	background: #eee url(/templates/admin/images/FileManager/Icons/dir.png) 2px 0 no-repeat;
+	background: #eee url(/images/FileManager/Icons/dir.png) 2px 0 no-repeat;
 	color: #000;
 
 	-moz-border-radius: 3px;
@@ -360,7 +360,7 @@ div.filemanager-container .file .file-progress {
 	float: right;
 	width: 125px;
 	height: 12px;
-	background-image: url(/templates/admin/images/FileManager/progress.gif);
+	background-image: url(/images/FileManager/progress.gif);
 }
 
 div.filemanager div.checkbox {
@@ -368,7 +368,7 @@ div.filemanager div.checkbox {
 	height: 12px;
 	width: 16px;
 	margin: 10px 3px 0;
-	background: url(/templates/admin/images/FileManager/checkbox.png) no-repeat;
+	background: url(/images/FileManager/checkbox.png) no-repeat;
 }
 
 div.filemanager div.checkboxChecked {

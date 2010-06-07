@@ -21,17 +21,17 @@ Buttons
 */
 #content-24 {
 	width: 50px;
-	background: url(/templates/admin/images/24x24/File.png) no-repeat center 5px;
+	background: url(/images/24x24/File.png) no-repeat center 5px;
 }
 
 #new_page-24 {
 	width: 60px;
-	background: url(/templates/admin/images/24x24/NewPage.png) no-repeat center 5px;
+	background: url(/images/24x24/NewPage.png) no-repeat center 5px;
 }
 
 #edit-24 {
 	width: 60px;
-	background: url(/templates/admin/images/24x24/Html.png) no-repeat center 5px;
+	background: url(/images/24x24/Html.png) no-repeat center 5px;
 }
 
 textarea {width:100%}

@@ -112,6 +112,8 @@ if ($this->authorize()):
 				'/components/content/js/editor.js',
 				'/components/content/js/editorConfig.js'
 			);
+			
+			$this->addComponentCSS();
 
 			$this->registry->component_css = array(
 				'/templates/'.$this->get ('admin_config.site.template').'/css/FileManager.css',
