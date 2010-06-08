@@ -1,0 +1,19 @@
+<VirtualHost _default_:80>
+    ServerAdmin hostmaster@shaunfreeman.co.uk
+    
+    DocumentRoot /var/www
+    
+    <Directory /var/www/>
+	Options FollowSymLinks
+	AllowOverride None
+	Order allow,deny
+	allow from all
+    </Directory>
+    
+     ErrorLog /var/log/apache2/error.log
+    
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+    CustomLog /var/log/apache2/access.log combined
+</VirtualHost>
