@@ -7,29 +7,16 @@ class Session {
 	// session-lifetime
 	private $lifeTime = 1200; // expires in 20 minutes 20*60;
 	private $conn;
-	private $database;
-	private $dsn;
-	private $password;
-	private $username;
-	private $db;
+	private $table;
 	
 	function __construct($registry)
-	{
-		$dsn = array(
-			'hostspec' => $registry->get('config.database.hostspec'),
-			'phptype' => $registry->get('config.database.phptype'),
-			'database' => $registry->get('config.database.session')
-		);
+	{	
+		$dsn =  $registry->get('config.database.phptype') . ":host=" . $registry->get('config.database.hostspec') . ";dbname=" . $registry->get('config.database.session');
 		
-		$dsn = array_merge($dsn,$registry->get('config.database_guest'));
-		
-		$this->dsn = $dsn['phptype'] . ":host=" . $dsn['hostspec'] . ";dbname=" .$dsn['database'];
-		
-		$this->username = $dsn['username'];
-		$this->password = $dsn['password'];
-		
-		$this->conn = new PDO($this->dsn, $this->username, $this->password);
+		$this->conn = new PDO($dsn, $registry->get('config.database_guest.username'), $registry->get('config.database_guest.password'));
 		$this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+		$this->table = $registry->get('settings.dir');
 		
 		ini_set ('session.session_cookie', $this->lifeTime);
 		ini_set ('session.gc_maxlifetime', $this->lifeTime);
@@ -72,7 +59,7 @@ class Session {
 		// fetch session-data
 		$sql = "
 			SELECT session_data
-			FROM sessions
+			FROM ".$this->table."
 			WHERE session = :id
 			AND session_expires > :time
 		";
@@ -91,7 +78,7 @@ class Session {
 		// is a session with this id in the database?
 		
 		$sql = "
-			REPLACE INTO ".$this->database.".sessions (
+			REPLACE INTO ".$this->table." (
 				session,
 				session_expires,
 				session_data)
@@ -116,7 +103,7 @@ class Session {
 	{
 		// delete session-data
 		$query = "
-			DELETE FROM ".$this->database.".sessions
+			DELETE FROM ".$this->table."
 			WHERE session = '$sessID'
 		";
 		$result = $this->conn->exec($query);
@@ -133,7 +120,7 @@ class Session {
 	{
 		// delete old sessions
 		$query = "
-			DELETE FROM ".$this->database.".sessions
+			DELETE FROM ".$this->table."
 			WHERE session_expires <
 		".time();
 		$result = $this->conn->exec($query);
