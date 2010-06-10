@@ -5,7 +5,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 class Utility
 {
 	private function __construct() {}
-	private dunction __clone() {}
+	private function __clone() {}
 	
 	public static function removeSection($message, $type)
 	{

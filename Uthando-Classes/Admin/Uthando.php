@@ -71,7 +71,7 @@ class Admin_Uthando extends Uthando {
 	
 	public function getLangMessage($key)
 	{
-		return $this->messages[$this->registry->component][$key];
+		return (isset($this->messages[$this->registry->component][$key])) ? $this->messages[$this->registry->component][$key] : null;
 	}
 	
 	private function loadLang()
@@ -130,7 +130,7 @@ class Admin_Uthando extends Uthando {
 	
 	public function message($params)
 	{
-		$message = file_get_contents(__SITE_PATH.'/templates/' . $this->get('admin_config.site.template') . '/html/message.html');
+		$message = file_get_contents(TEMPLATES . $this->get('admin_config.site.template') . '/html/message.html');
 		return $this->templateParser($message, $params, '<!--{', '}-->');
 	}
 	

@@ -17,7 +17,7 @@ if ($menu) {
 	
 	$params['menu_category_id'] = $menu->item_id;
 	// Start Navibar class.
-	$navibar = ($this->registry->get('admin_dir')) ? new Admin_Menu($this->registry, $params) : new HTML_Menu($this->registry, $params);
+	$navibar = (defined('ADMIN')) ? new Admin_Menu($this->registry, $params) : new HTML_Menu($this->registry, $params);
 		
 	$module = $navibar->getMenu($menu->item_id, $menu->item, $menu->menu_type);
 	

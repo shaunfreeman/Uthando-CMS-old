@@ -90,7 +90,7 @@ if ($this->authorize()):
 		
 			$form->setDefaults(Uthando::objectToArray($row));
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
+			$renderer = new UthandoForm(TEMPLATES . $this->get ('admin_config.site.template'));
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -113,12 +113,9 @@ if ($this->authorize()):
 				'/components/content/js/editorConfig.js'
 			);
 			
-			$this->addComponentCSS();
+			//$this->addComponentCSS();
 
-			$this->registry->component_css = array(
-				'/templates/'.$this->get ('admin_config.site.template').'/css/FileManager.css',
-				'/templates/'.$this->get ('admin_config.site.template').'/css/Additions.css'
-			);
+			$this->addComponentCSS(array('FileManager','Additions'));
 			
 			$session = Utility::encodeString(session_id());
 			$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
@@ -131,7 +128,7 @@ if ($this->authorize()):
 		endif;
 		
 	else:
-		goto('/content/overview');
+		Uthando::go('/content/overview');
 	endif;
 endif;
 ?>

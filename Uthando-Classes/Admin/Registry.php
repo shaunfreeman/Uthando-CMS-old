@@ -25,11 +25,11 @@ Class Admin_Registry extends Registry
 	{
 		$settings = parse_ini_file($file, true);
 		$this->settings = $settings[$this->server];
-		
+		/*
 		foreach ($settings['general'] as $key => $value):
 			$this->$key = $value;
 		endforeach;
-		
+		*/
 		if (!$this->settings) Uthando::go('/index3.php');
 		$this->ini_dir = BASE.DS.'Uthando-ini'.DS.$this->get('settings.resolve');
 	}

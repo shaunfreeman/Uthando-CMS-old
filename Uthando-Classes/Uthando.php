@@ -62,10 +62,19 @@ class Uthando
 	{
 		$type = (defined('ADMIN')) ? 'admin' : 'public';
 		$path = '/uthando-css/'.$type.'/';
+		$css = $this->registry->get('component_css');
 		if ($file):
+			if (is_array($file)):
+				foreach ($file as $value):
+					$add_css[] = $path.$value.'.css';
+				endforeach;
+			else:
+				$add_css[] = $path.$file.'.css';
+			endif;
 		else:
-			$this->registry->component_css = array($path.$this->registry->component.'.css');
+			$add_css[] = $path.$this->registry->component.'.css';
 		endif;
+		$this->registry->component_css = ($css) ? array_merge($css, $add_css) : $add_css;
 	}
 	
 	public function addModules()

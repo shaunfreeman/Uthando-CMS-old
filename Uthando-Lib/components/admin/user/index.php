@@ -14,8 +14,7 @@ if (is_readable($this->file."/action/".$this->registry->action.".php") == false 
 		
 	require_once('action/'.$this->registry->action.'.php');
 	
-	$this->registry->component_css = array('/uthando-css/admin/user/user.css');
-	
+	$this->addComponentCSS();
 	$this->addParameter ('page',  $title);
 }
 

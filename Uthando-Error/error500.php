@@ -9,8 +9,7 @@
 	</head>
 	<body>
 		<div id="uthandoLogo" class="center">
-			<img src="/images/404.png" />
-			<a href="http://<?php echo $_SERVER['SERVER_NAME'];?>">Click here to return to home page</a>
+			<a href="http://<?php echo $_SERVER['SERVER_NAME'];?>"><img src="/images/error500.jpg" /></a>
 		</div>
 	</body>
 </html>

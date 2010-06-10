@@ -4,7 +4,6 @@ ob_start();
 
 // Set flag that this is a parent file
 define( 'PARENT_FILE', 1 );
-define('ADMIN', 1);
 
 define ('PS', PATH_SEPARATOR);
 define ('DS', DIRECTORY_SEPARATOR);

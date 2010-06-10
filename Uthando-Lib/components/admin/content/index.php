@@ -14,11 +14,11 @@ if ($this->authorize()):
 		$this->registry->page_title = ucwords($this->registry->component);
 		$this->setTitle($title . ' | ' . $this->get('config.server.site_name'));
 		
+		$this->addComponentCSS();
+		
 		require_once('action/'.$this->registry->action.'.php');
 		
 		$this->addParameter ('page',  $title);
-
-		$this->addComponentCSS();
 	endif;
 endif;
 ?>
