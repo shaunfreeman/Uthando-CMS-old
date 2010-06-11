@@ -37,24 +37,9 @@ if ($this->authorize()):
 			$c++;
 		endforeach;
 		
-		$table = new HTML_Table();
-		$table->setAutoGrow(true);
-		$table->setAutoFill('');
-	
-		$hrAttrs = array('class' => 'highlight');
-	
-		for ($nr = 0; $nr < count($data); $nr++):
-			$table->setHeaderContents($nr+1, 0, (string)$data[$nr][0]);
-			for ($i = 1; $i < 5; $i++):
-				if ('' != $data[$nr][$i]) $table->setCellContents($nr+1, $i, $data[$nr][$i]);
-				$table->setRowAttributes($nr+1, $hrAttrs, true);
-			endfor;
-		endfor;
-	
-		$table->setHeaderContents(0, 0, 'Page Name');
-		$table->setHeaderContents(0, 1, 'Last Modified');
-		$table->setHeaderContents(0, 2, '');
-		$table->setHeaderContents(0, 3, '');
+		$header = array('Page Name', 'Last Modified', '', '');
+		
+		$table = $this->dataTable($data, $header);
 		
 		$this->content .= '<div id="tableWrap">';
 	

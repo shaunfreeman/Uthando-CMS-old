@@ -58,9 +58,7 @@ class Admin_Menu extends HTML_Menu
 					$a_attrs['class'] = 'mainlevel'.$this->class_sfx;
 				endif;
 				
-				$curr = $item[$key]['item'];
-				
-				$li_attrs = ($curr == $this->registry->page_title && $this->type == 'vertical') ? array('id' => 'current', 'class' => 'active') : null;
+				$li_attrs = ($item['item'] == $this->registry->page_title && $this->type == 'vertical') ? array('id' => 'current', 'class' => 'active') : null;
 				
 				$a = $this->returnLink($list_items[$key], $a_attrs, $children);
 				$li = $this->doc->createElement('li',null, $li_attrs);

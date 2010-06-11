@@ -11,7 +11,7 @@ class UthandoUser
 
 	public static function setUserInfo()
 	{
-		if (!$_SESSION['user_agent'] && !$_SESSION['remote_addr']):
+		if (!isset($_SESSION['user_agent']) && !isset($_SESSION['remote_addr'])):
 			$_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
 			$_SESSION['remote_addr'] = $_SERVER['REMOTE_ADDR'];
 		endif;

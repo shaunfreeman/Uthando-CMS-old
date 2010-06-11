@@ -143,7 +143,7 @@ class HTML_Menu
 				endif;
 				
 				$curr = ($item['page_id']) ? $item['page'] : $item['url'];
-				
+				print_rr($this->registry);
 				$li_attrs = ($curr == $this->registry->page_title && $this->type == 'vertical') ? array('id' => 'current', 'class' => 'active') : null;
 				
 				$a = $this->returnLink($list_items[$key], $a_attrs, $children);
