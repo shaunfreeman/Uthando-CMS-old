@@ -20,7 +20,7 @@ class HTML_Template extends HTML_Page
 		$this->xmlProlog = $this->settings['general']['xmlProlog'];
 		$this->setDoctype($this->settings['general']['doctype']);
 		
-		if (is_file(DS.'home'.DS.$this->registry->settings['resolve'].DS.'Public/image/favicon.ico')):
+		if (is_file(DS.'home/'.$this->registry->settings['dir'].'/Public/image/favicon.ico')):
 			$this->addFavicon('/userfiles/'.$this->registry->settings['resolve'].'/image/favicon.ico');
 		else:
 			$this->addFavicon('/images/favicon.ico');
