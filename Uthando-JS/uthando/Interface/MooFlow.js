@@ -207,7 +207,7 @@ var MooFlow = new Class({
 	
 	showUI: function(){
 		if(this.cap) this.cap.fade(1);
-		this.nav.tween('bottom', 20);
+		this.nav.tween('bottom', 0);
 		this.fireEvent('start');
 		this.update();
 	},

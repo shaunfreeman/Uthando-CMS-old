@@ -1,6 +1,6 @@
 <?php
 
-ob_start('ob_gzhandler');
+ob_start();
 	
 // Set flag that this is a parent file.
 define( 'PARENT_FILE', 1 );

@@ -13,7 +13,7 @@ $default['html']['4.01'][0] = 'HTML 4.01 Strict';
 // XHTML 1.0 Strict
 $doctype['xhtml']['1.0']['strict'][] = 'html';
 $doctype['xhtml']['1.0']['strict'][] = '-//W3C//DTD XHTML 1.0 Strict//EN';
-$doctype['xhtml']['1.0']['strict'][] = 'http://www.w3c.org/TR/xhtml1/DTD/xhtml1-strict.dtd';
+$doctype['xhtml']['1.0']['strict'][] = 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd';
 
 // XHTML 1.0 Transitional
 $doctype['xhtml']['1.0']['transitional'][] = 'html';

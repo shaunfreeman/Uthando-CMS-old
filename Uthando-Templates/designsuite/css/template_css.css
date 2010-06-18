@@ -677,7 +677,7 @@ a.contentpagetitle:hover { color: #ffffff; text-decoration: none;}
 }
 
 .contentpaneopen h1 {
-	background-image: url(/templates/designsuite/images/lplatebk.png);
+	background-image: url(/userfiles/image/lplatebk.png);
 	background-repeat: no-repeat;
 	background-position: 0px 5px;
 	height: 30px;
@@ -1070,13 +1070,18 @@ img { border: 0 none; }
 	overflow: hidden;
 }
 
-.element_swap {
-	position:relative;
+.element_swap {
+
+	position:relative;
+
 	height: 180px;
 	width: 240px;
-	margin-left:auto;
-	margin-right:auto;
-	overflow:hidden;
+	margin-left:auto;
+
+	margin-right:auto;
+
+	overflow:hidden;
+
 }
 
 #carousel .slides div {

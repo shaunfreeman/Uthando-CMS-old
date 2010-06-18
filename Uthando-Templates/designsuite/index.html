@@ -3,14 +3,14 @@
 	<div id="c_top">
 		<div id="c_bot">
 			<div id="top">
-				<img src="/templates/designsuite/images/logo.png" id="logo" alt="Logo" title="Logo" />
+				<img src="/userfiles/image/logo.png" id="logo" alt="Logo" title="Logo" />
 				<h1><!--Kris3man Driving Tuition -->
-					<img src="/templates/designsuite/images/logo.gif" alt="Kris3man Driving Tuition" title="Kris3man Driving Tuition" />
+					<img src="/userfiles/image/logo.gif" alt="Kris3man Driving Tuition" title="Kris3man Driving Tuition" />
 				</h1>
 				<h2>&nbsp;&nbsp;Teaching Safe Driving for Life</h2>
 				<div id="menu">
 					<div id="uls">
-						<!--{MODULE[top menu]}-->
+						<module name="top menu"></module>
 					</div>
 				</div>
 			</div>
@@ -18,29 +18,33 @@
 				<div id="left_col">
 					<div id="left_col_top">
 						<div id="left_col_bot">
-							<!--{MODULE[left]}-->
+							<module name="left"></module>
 						</div>
 					</div>
 				</div>
 				<div id="right_col">
 					<div id="wrapper2">
-						<!--{MODULE[right]}-->
+						<module name="right"></module>
 					</div>
 				</div>
 				
 				<div id="main_content">
-					
+					<div id="newsflash">
+						<div id="nf_top">
+							<div id="nf_bot">
+								<!--News flash-->
+							</div>
+						</div>
+					</div>
 					<div id="main_body">
 						<div id="mb_top">
 							<div id="mb_bot">
 								<div id="ajax_content">
-								<!-- content starts here -->
-				
-								<!--{LOGIN_STATUS}-->
-								<!--{ERROR}-->
-								<!--{CONTENT}-->
-					
-								<!-- content ends here -->
+									<!-- content starts here -->
+									<param name="login" />
+									<param name="error" />
+									<param name="content" />
+									<!-- content ends here -->
 								</div>
 								<div id="jump_top">
 									<a class="smoothAnchors" href="#ttop">Jump to top</a>
@@ -51,14 +55,14 @@
 				</div>
 				<div class="both">
 					<!-- -->
-				</div>	
+				</div>
 			</div>
 			<div id="footer">
-				<p>&copy; Copyright <!--{DATE}--> <!--{MERCHANT_NAME}-->. All Rights Reserved. Designed and Maintained by <a href="http://www.shaunfreeman.co.uk">Shaun Freeman</a>
+				<p>&copy; Copyright <param name="date" />&nbsp;<param name="merchant_name" />. All Rights Reserved. Designed and Maintained by <a href="http://www.shaunfreeman.co.uk">Shaun Freeman</a>
 				<br />
 				:: <a href="http://www.shaunfreeman.co.uk" valign="middle">Powered By Uthando</a>
 				<br />
-				<span id="benchmark"><!--{BENCHMARK}--></span>
+				<span id="benchmark"><param name="benchmark" /></span>
 				</p>
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 
-.mf{visibility: hidden; z-index:1; color:#fff; font-size:14px}
+.mf{visibility: hidden; z-index:1; color:#fff; font-size:14px;}
 #testimonials img {
 	float:left;
 }
@@ -9,8 +9,8 @@
 .mf * {
 	outline:none;
 	border:none;
-	padding:0;
-	margin:0;
+	padding:0px;
+	margin:0px;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	/*user-select:none;*/
@@ -23,15 +23,15 @@
 	margin:0 auto;
 	top:45%;
 	width:100%;
-	background:url(/Common/images/skin/ajax_loader.gif) no-repeat 50% 0;
+	background:url(/images/skin/ajax_loader.gif) no-repeat 50% 0;
 	padding:50px 0;
 }
 .mf div.caption {
 	position:absolute;
 	text-align:center;
 	z-index:98;
-	margin:1em auto;
-	top:75%;
+	margin:.2em auto;
+	bottom:35px;
 	width:100%;
 }
 .mf div.mfNav{
@@ -40,10 +40,9 @@
 	margin:0 auto;
 	text-align:center;
 	width:100%;
-	bottom:20px;
+	bottom:0px;
 	font-size:1px;
 	line-height:1px;
-	width:100%;
 }
 .mf div.autoPlayCon{
 	float:left;
@@ -58,21 +57,24 @@
 	cursor:pointer;
 }
 .mf a.play{
-	background:url(/Common/images/skin/play.gif) no-repeat;
+	background:url(/images/skin/play.gif) no-repeat;
 }
 .mf a.stop{
-	background:url(/Common/images/skin/stop.gif) no-repeat;
+	background:url(/images/skin/stop.gif) no-repeat;
 }
 .mf div.sliderCon{
 	margin-top:5px;
 	float:left;
-	width:74%;
+	width:400px;
 }
 .mf a.sliderNext{
-	background:url(/Common/images/skin/left.gif) no-repeat;
+	background:url(/images/skin/left.gif) no-repeat;
 }
 .mf a.sliderPrev{
-	background:url(/Common/images/skin/right.gif) no-repeat;
+	position:relative;
+	top:-20px;
+	right:-374px;
+	background:url(/images/skin/right.gif) no-repeat;
 }
 .mf a.sliderNext, a.sliderPrev{
 	text-decoration:none;
@@ -92,21 +94,23 @@
 	height:24px;
 	float:right;
 	cursor:pointer;
-	background:url(/Common/images/skin/resize.gif) no-repeat;
+	background:url(/images/skin/resize.gif) no-repeat;
 }
 .mf div.slider{
-	background:url(/Common/images/skin/middle.gif) repeat-x;
+	background:url(/images/skin/middle.gif) repeat-x;
 	height:16px;
 	position:relative;
 	text-align:left;
+	top:-2px;
+	left:-5px;
 	float:left;
 }
 .mf div.knob{
 	height:16px;
-	background:url(/Common/images/skin/middle-slider.gif) repeat-x right center;
+	background:url(/images/skin/middle-slider.gif) repeat-x right center;
 }
 .mf div.knobleft{
-	background:url(/Common/images/skin/left-slider.gif) repeat-x center;
+	background:url(/images/skin/left-slider.gif) repeat-x center;
 	width:8px;
 	height:16px;
 }

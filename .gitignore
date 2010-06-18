@@ -7,6 +7,8 @@ Public/tmp/*
 !index.html
 Uthando-Admin/Common/tmp/
 !index.html
+Uthando-Stats/*
+Uthando-Webmail/*
 Uthando-ini/*
 uthando.session
 uthando.webprj
