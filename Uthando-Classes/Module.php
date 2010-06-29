@@ -20,11 +20,11 @@ class Module
 	function makeModule($params)
 	{
 		$this->params = $params;
-		$log_in = $this->getParams($params->params);
+		$login = $this->getParams($params->params['params']);
 		
 		$return_mod = false;
 		
-		switch($log_in['log_in']):
+		switch($login['login']):
 			case 1:
 				if (UthandoUser::authorize()) $return_mod = true;
 				break;
