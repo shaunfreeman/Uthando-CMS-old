@@ -32,8 +32,8 @@ UthandoAdminConfig.extend({
 			file_browser_callback: FileManager.TinyMCE(function(type){
 				//type=='image' ?
 				return {
-					url: '/plugins/ajax_content/filemanager.php',
-					assetBasePath: '/templates/admin/images/FileManager',
+					url: '/ajax/filemanager.php',
+					assetBasePath: '/images/FileManager/',
 					//directory: Uthando.resolve,
 					language: 'en',
 					selectable: true,

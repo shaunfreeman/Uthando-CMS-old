@@ -5,8 +5,9 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 class HTML_Template extends HTML_Page
 {
+	public $settings;
 	private $vars;
-	protected $parameters = array('content' => array('&nbsp;'));
+	protected $parameters = array('content' => array(null));
 	protected $modules = array();
 	protected $registry;
 	

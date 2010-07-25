@@ -1,27 +1,34 @@
 <?php
 
-ob_start('ob_gzhandler');
-	
-// Set flag that this is a parent file.
+ob_start();
+
+// Set flag that this is a parent file
 define( 'PARENT_FILE', 1 );
 
-$site_path = realpath('../../');
-define ('__SITE_PATH', $site_path);
+define ('PS', PATH_SEPARATOR);
+define ('DS', DIRECTORY_SEPARATOR);
+define ('EXT', '.php');
 
-/*{START_PHP_INI_PATH}*/
-define ('__PHP_PATH', realpath(__SITE_PATH.'/../../uthando/php'));
-/*{END_PHP_INI_PATH}*/
+define ('BASE', dirname(dirname(dirname(__FILE__))));
+define ('PUB', BASE.DS.'Public'.DS);
+define ('ADMIN', BASE.DS.'Uthando-Admin'.DS);
+define ('CLASSES', BASE.DS.'Uthando-Classes'.DS);
+define ('MODULES', BASE.DS.'Uthando-Lib'.DS.'modules'.DS);
+define ('COMPONENTS', BASE.DS.'Uthando-Lib'.DS.'components'.DS.'admin'.DS);
+define ('LANG', BASE.DS.'Uthando-Lib'.DS.'langs'.DS);
+define ('FUNCS', BASE.DS.'Uthando-Lib'.DS.'functions'.DS);
+define ('TEMPLATES', BASE.DS.'Uthando-Templates'.DS);
+
+define ('SCHEME', (isset ($_SERVER['HTTPS'])) ? 'https://' : 'http://');
+define ('HOST', $_SERVER['HTTP_HOST']);
+define ('REQUEST_URI', $_SERVER['REQUEST_URI']);
 
 // Set include paths.
-$ini_path = ini_get('include_path') .
-	PATH_SEPARATOR . __PHP_PATH .
-	PATH_SEPARATOR . __PHP_PATH . '/PEAR' .
-	PATH_SEPARATOR . __PHP_PATH . '/Uthando' .
-	PATH_SEPARATOR . __PHP_PATH . '/Uthando/Admin' .
-	PATH_SEPARATOR . __PHP_PATH . '/Uthando/Admin/FileManager' .
-	PATH_SEPARATOR . __PHP_PATH . '/Uthando/functions' .
-	PATH_SEPARATOR . __SITE_PATH . '/modules' .
-	PATH_SEPARATOR . __SITE_PATH . '/components';
+$ini_path = get_include_path() .
+	PS . CLASSES .
+	PS . FUNCS .
+	PS . MODULES .
+	PS . COMPONENTS;
 
 set_include_path($ini_path);
 
@@ -30,7 +37,7 @@ require_once('functions.php');
 
 $registry = new Admin_Registry(true);
 
-$registry->setSite(realpath(__SITE_PATH.'/../../uthando/ini/uthandoSites.ini.php'));
+$registry->setSite(BASE.DS.'Uthando-ini'.DS.'.UthandoSites.ini'.EXT);
 $registry->loadIniFiles(array('admin_config' => 'uthandoAdmin', 'config' => 'uthando'));
 $registry->setDefaults();
 
@@ -76,8 +83,8 @@ try
 
 	$browser = new File_Manager($registry, array(
 		'baseURL' => $registry->get('config.server.web_url').'/',
-		'directory' => $_SERVER['DOCUMENT_ROOT'].'/../userfiles/'.$registry->settings['resolve'],
-		'assetBasePath' => $_SERVER['DOCUMENT_ROOT'].'/templates/admin/images/FileManager',
+		'directory' => DS.'home'.DS.$registry->settings['dir'].DS.'Public'.DS.$registry->settings['resolve'],
+		'assetBasePath' => BASE.'/Uthando-Images/FileManager',
 		'move' => true,
 		'create' => true,
 		'upload' => true,

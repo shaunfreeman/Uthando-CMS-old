@@ -27,15 +27,12 @@ if ($this->registry->action):
 		$page = ($row->params['show_title'] == 0) ? null : $row->page;
 		$cdate = ($row->params['show_cdate'] == 0) ? null : $row->cdate;
 		$mdate = ($row->params['show_mdate'] == 0) ? null : $row->mdate;
-
-		if ($this->registry->template->meta_tags):
-			if (isset($row->params['metadata'])):
-				foreach ($row->params['metadata'] as $key => $value):
-					if (empty($value)) unset ($row->params['metadata'][$key]);
-				endforeach;
-				$this->registry->template->meta_tags = array_merge($this->registry->template->meta_tags, $row->params['metadata']);
+		
+		foreach ($row->params['metadata'] as $key => $value):
+			if ($value):
+				$this->registry->template->settings['metadata'][$key] = $row->params['metadata'][$key];
 			endif;
-		endif;
+		endforeach;
 		
 		$this->setTitle($row->page . ' | ' . $this->get('config.server.site_name'));
 		$this->registry->page_title = $row->page;

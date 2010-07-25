@@ -106,6 +106,6 @@ class File_Upload
 	}
 }
 
-class UploadException extends Uthando_Exception {}
+class UploadException extends UthandoException {}
 
 ?>

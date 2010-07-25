@@ -152,7 +152,7 @@ class HTML_Page
 		try
 		{
 			if ($strDoctype):
-				$strDoctype = split("\n", $strDoctype);
+				$strDoctype = explode("\n", $strDoctype);
 				return DOMImplementation::createDocumentType($strDoctype[0], $strDoctype[1], $strDoctype[2]);
 			else:
 				throw new UthandoHTMLException('Error: "'.$this->getDoctypeString().'" is an unsupported or illegal document type.');

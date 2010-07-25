@@ -358,6 +358,6 @@ class File_Manager
 	}
 }
 
-class FileManagerException extends Uthando_Exception {}
+class FileManagerException extends UthandoException {}
 
 ?>

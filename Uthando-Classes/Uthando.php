@@ -77,6 +77,25 @@ class Uthando
 		$this->registry->component_css = ($css) ? array_merge($css, $add_css) : $add_css;
 	}
 	
+	public function addComponentJS($file=null)
+	{
+		$type = (defined('ADMIN')) ? 'admin' : 'public';
+		$path = '/uthando-js/uthando/'.$type.'/';
+		$js = $this->registry->get('component_js');
+		if ($file):
+			if (is_array($file)):
+				foreach ($file as $value):
+					$add_js[] = $path.$value.'.js';
+				endforeach;
+			else:
+				$add_js[] = $path.$file.'.js';
+			endif;
+		else:
+			$add_js[] = $path.$this->registry->component.'.js';
+		endif;
+		$this->registry->component_js = ($js) ? array_merge($js, $add_js) : $add_js;
+	}
+	
 	public function addModules()
 	{
 		// Get Modules and add them.

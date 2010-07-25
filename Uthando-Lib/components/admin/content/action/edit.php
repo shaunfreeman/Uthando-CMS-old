@@ -12,19 +12,6 @@ if ($this->authorize()):
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
 		
-		$menuBar = array(
-			'html' => '',
-			'edit' => '',
-			'params' => '',
-			'cancel' => '/content/overview',
-			//'preview' => '/content/preview',
-   			'save' => ''
-		);
-		
-		$this->content .= $this->makeToolbar($menuBar, 24);
-		
-		$menuBar = array();
-		
 		$form->addElement('html', '<div id="edit_params">');
 		
 		$form->addElement('text', 'page', 'Page Title:', array('size' => 50, 'maxlength' => 255, 'class' => 'inputbox'));
@@ -68,25 +55,38 @@ if ($this->authorize()):
 			// Apply form element filters.
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'));
-
-			$values['params'] = serialize($values['params']);
+			
+			//$values['params'] = serialize($values['params']);
+			$p = null;
+			foreach ($values['params'] as $key => $value):
+				if (is_array($value)):
+					$p .= "[".$key."]\n";
+					foreach ($value as $key2 => $value2):
+						$p .= $key2." = \"".$value2."\"\n";
+					endforeach;
+				else:
+					$p .= $key." = \"".$value."\"\n";
+				endif;
+			endforeach;
+			
+			$values['params'] = $p;
 			
 			$res = $this->update($values, $this->registry->core.'pages', array('where' => 'page_id='.$this->registry->params['id']));
 		
 			$menuBar['back'] = '/content/overview';
 			
 			if ($res):
-				$params['TYPE'] = 'pass';
-				$params['MESSAGE'] = '<h2>Page was successfully edited.</h2>';
+				$ed_message['TYPE'] = 'pass';
+				$ed_message['MESSAGE'] = '<h2>Page was successfully edited.</h2>';
 			else:
-				$params['TYPE'] = 'error';
-				$params['MESSAGE'] = '<h2>Page could not be edited.</h2>';
+				$ed_message['TYPE'] = 'error';
+				$ed_message['MESSAGE'] = '<h2>Page could not be edited.</h2>';
 			endif;
 		else:
 		
 			$row = $this->getResult('page, content, params', $this->registry->core.'pages', null, array('where'=> 'page_id='.$this->registry->params['id']),false);
 
-			$row->params = unserialize($row->params);
+			$row->params = parse_ini_string($row->params,true);
 		
 			$form->setDefaults(Uthando::objectToArray($row));
 			
@@ -99,22 +99,25 @@ if ($this->authorize()):
 			$form->accept($renderer);
 			
 			// output the form
+			$menuBar = array(
+				'html' => '',
+				'edit' => '',
+				'params' => '',
+				'cancel' => '/content/overview',
+				//'preview' => '/content/preview',
+				'save' => ''
+			);
+		
+			$this->content .= $this->makeToolbar($menuBar, 24);
 			$this->content .= $renderer->toHtml();
 			
 			$this->loadJavaScript(array(
-				'/Common/editor/tiny_mce/tiny_mce_gzip.js',
-				'/components/content/js/tinyMCEGz.js',
-				'/Common/editor/CodeMirror/js/codemirror.js'
+				'/editors/tiny_mce/tiny_mce_gzip.js',
+				'/uthando-js/uthando/admin/tinyMCEGz.js',
+				'/editors/CodeMirror/js/codemirror.js'
 			));
-
-			$this->registry->component_js = array(
-				'/components/content/js/content.js',
-				'/components/content/js/editor.js',
-				'/components/content/js/editorConfig.js'
-			);
 			
-			//$this->addComponentCSS();
-
+			$this->addComponentJS(array('content','editor', 'editorConfig'));
 			$this->addComponentCSS(array('FileManager','Additions'));
 			
 			$session = Utility::encodeString(session_id());
@@ -122,9 +125,9 @@ if ($this->authorize()):
 			
 		endif;
 		
-		if (isset($params)):
-			$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
-			$this->content .= $this->message($params);
+		if (isset($ed_message)):
+			$ed_message['CONTENT'] = $this->makeMessageBar($menuBar, 24);
+			$this->content .= $this->message($ed_message);
 		endif;
 		
 	else:
