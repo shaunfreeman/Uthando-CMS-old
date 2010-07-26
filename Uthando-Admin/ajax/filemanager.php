@@ -82,7 +82,7 @@ try
 	}
 
 	$browser = new File_Manager($registry, array(
-		'baseURL' => $registry->get('config.server.web_url').'/',
+		'baseURL' => $registry->get('config.server.web_url').'/userfiles/',
 		'directory' => DS.'home'.DS.$registry->settings['dir'].DS.'Public'.DS.$registry->settings['resolve'],
 		'assetBasePath' => BASE.'/Uthando-Images/FileManager',
 		'move' => true,

@@ -34,7 +34,6 @@ UthandoAdminConfig.extend({
 				return {
 					url: '/ajax/filemanager.php',
 					assetBasePath: '/images/FileManager/',
-					//directory: Uthando.resolve,
 					language: 'en',
 					selectable: true,
 					uploadAuthData: {
