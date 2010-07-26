@@ -19,19 +19,7 @@ if ($this->authorize()):
 			
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
-			
-		$menuBar = array(
-			'html' => '',
-			'edit' => '',
-			'params' => '',
-			'cancel' => '/content/overview',
-			'save' => ''
-		);
-			
-		$this->content .= $this->makeToolbar($menuBar, 24);
 		
-		$menuBar = array();
-	
 		$form->addElement('html', '<div id="edit_params">');
 		
 		$form->addElement('text', 'page', 'Page Title:', array('size' => 50, 'maxlength' => 255, 'class' => 'inputbox'));
@@ -64,7 +52,7 @@ if ($this->authorize()):
 		$form->addElement('html', '</div>');
 	
 		$form->addElement('html', '<div id="edit_html">');
-	
+
 		$form->addElement('textarea', 'content', null, array('id' => 'content_textarea', 'class' => 'mceEditor'));
 		
 		$form->addElement('html', '</div>');
@@ -78,7 +66,20 @@ if ($this->authorize()):
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'));
 			
-			$values['params'] = serialize($values['params']);
+			//$values['params'] = serialize($values['params']);
+			$p = null;
+			foreach ($values['params'] as $key => $value):
+				if (is_array($value)):
+					$p .= "[".$key."]\n";
+					foreach ($value as $key2 => $value2):
+						$p .= $key2." = \"".$value2."\"\n";
+					endforeach;
+				else:
+					$p .= $key." = \"".$value."\"\n";
+				endif;
+			endforeach;
+			
+			$values['params'] = $p;
 			
 			foreach ($values as $key => $value) $values[$key] = "'$value'";
 			
@@ -89,14 +90,24 @@ if ($this->authorize()):
 			$menuBar['back'] = '/content/overview';
 			
 			if ($res):
-				$params['TYPE'] = 'pass';
-				$params['MESSAGE'] = '<h2>Page was successfully created.</h2>';
+				$ed_message['TYPE'] = 'pass';
+				$ed_message['MESSAGE'] = '<h2>Page was successfully created.</h2>';
 			else:
-				$params['TYPE'] = 'error';
-				$params['MESSAGE'] = '<h2>Page could not be created.</h2>';
+				$ed_message['TYPE'] = 'error';
+				$ed_message['MESSAGE'] = '<h2>Page could not be created.</h2>';
 			endif;
 		else:
-	
+			
+			$menuBar = array(
+				'html' => '',
+				'edit' => '',
+				'params' => '',
+				'cancel' => '/content/overview',
+				'save' => ''
+			);
+				
+			$this->content .= $this->makeToolbar($menuBar, 24);
+		
 			$form->setDefaults(array(
 				'params' => array(
 					'show_title' => 1,
@@ -105,7 +116,7 @@ if ($this->authorize()):
 				)
 			));
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
+			$renderer = new UthandoForm(TEMPLATES . $this->get ('admin_config.site.template'));
 					
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -117,34 +128,26 @@ if ($this->authorize()):
 			$this->content .= $renderer->toHtml();
 	
 			$this->loadJavaScript(array(
-				'/Common/editor/tiny_mce/tiny_mce_gzip.js',
-				'/components/content/js/tinyMCEGz.js',
-				'/Common/editor/CodeMirror/js/codemirror.js'
+				'/editors/tiny_mce/tiny_mce_gzip.js',
+				'/uthando-js/uthando/admin/tinyMCEGz.js',
+				'/editors/CodeMirror/js/codemirror.js'
 			));
-	
-			$this->registry->component_js = array(
-				'/components/content/js/content.js',
-				'/components/content/js/editor.js',
-				'/components/content/js/editorConfig.js'
-			);
-	
-			$this->registry->component_css = array(
-				'/templates/'.$this->get ('admin_config.site.template').'/css/FileManager.css',
-				'/templates/'.$this->get ('admin_config.site.template').'/css/Additions.css'
-			);
+			
+			$this->addComponentJS(array('content','editor', 'editorConfig'));
+			$this->addComponentCSS(array('FileManager','Additions'));
 			
 			$session = Utility::encodeString(session_id());
 			$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
 		endif;
 	else:
-		$params['TYPE'] = 'info';
-		$params['MESSAGE'] = '<h2>You have reach your page limit. To add more pages please contact your administrator.</h2>';
+		$ed_message['TYPE'] = 'info';
+		$ed_message['MESSAGE'] = '<h2>You have reach your page limit. To add more pages please contact your administrator.</h2>';
 		$menuBar['back'] = '/content/overview';
 	endif;
 	
-	if (isset($params)):
-		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
-		$this->content .= $this->message($params);
+	if (isset($ed_message)):
+		$ed_message['CONTENT'] = $this->makeMessageBar($menuBar, 24);
+		$this->content .= $this->message($ed_message);
 	endif;
 endif;
 ?>
