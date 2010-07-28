@@ -12,11 +12,14 @@ function __autoload($class_name)
 	require ($class_path . '.php');
 }
 
-//class UthandoError extends  UthandoException {};
+//ini_set('display_errors', 1);
 
+//class UthandoError extends  UthandoException {};
+/*
 function exception_error_handler($errno, $errstr, $errfile, $errline ) {
 	throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 }
+*/
 //set_error_handler("exception_error_handler");
 
 

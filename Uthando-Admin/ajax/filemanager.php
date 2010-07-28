@@ -39,7 +39,7 @@ $registry = new Admin_Registry(true);
 
 $registry->setSite(BASE.DS.'Uthando-ini'.DS.'.UthandoSites.ini'.EXT);
 $registry->loadIniFiles(array('admin_config' => 'uthandoAdmin', 'config' => 'uthando'));
-$registry->setDefaults();
+$registry->setDefaults(true);
 
 if (isset($_GET['session'])):
 	$pwd = $_GET['session'][0];
@@ -56,7 +56,8 @@ try
 	$registry->db = new DB_Admin($registry);
 	$registry->session = new Session($registry);
 	
-	//user_agent|s:15:"Shockwave Flash";remote_addr|s:9:"127.0.0.1"	
+	//user_agent|s:15:"Shockwave Flash";remote_addr|s:9:"127.0.0.1"
+	
 	function UploadIsAuthenticated($get)
 	{
 		global $registry;
@@ -89,7 +90,7 @@ try
 		'create' => true,
 		'upload' => true,
 		'destroy' => true,
-		'filter' => (is_string($_POST['filter'])) ? $_POST['filter'].'/' : null
+		'filter' => (isset($_POST['filter']) && is_string($_POST['filter']) && !empty($_POST['filter'])) ? $_POST['filter'].'/' : null
 	));
 
 	$browser->fireEvent(!empty($_GET['event']) ? $_GET['event'] : null);

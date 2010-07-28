@@ -20,7 +20,7 @@ class Module
 	function makeModule($params)
 	{
 		$this->params = $params;
-		$login = $this->getParams($params->params['params']);
+		$login = $this->getParams($this->params->params);
 		
 		$return_mod = false;
 		

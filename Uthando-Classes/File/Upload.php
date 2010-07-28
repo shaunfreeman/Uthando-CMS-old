@@ -42,10 +42,9 @@ class File_Upload
 		$file['base'] = basename($pathinfo['basename'], '.'.$pathinfo['extension']);
 		
 		$real = realpath($to);
-		//print_rr($real);
 		
 		if(!$real) throw new UploadException('path');
-		if(is_dir($real)) $to = $_SERVER['DOCUMENT_ROOT'].'/../Common/tmp/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext'];
+		if(is_dir($real)) $to = $_SERVER['DOCUMENT_ROOT'].'/tmp/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext'];
 		
 		if(!$options['overwrite'] && file_exists($to))
 			throw new UploadException('exists');
@@ -53,13 +52,9 @@ class File_Upload
 		if(!move_uploaded_file($file['tmp_name'], $to))
 			throw new UploadException(strtolower($_FILES[$file]['error']<=2 ? 'size' : ($_FILES[$file]['error']==3 ? 'partial' : 'nofile')));
 		
-		$dir_path = pathinfo(File_Manager::getFTPPath($real, $_GET['directory']));
+		$dir_path = pathinfo($real);
 		
 		$ftp_filepath = File_Manager::getFTPPath($ftp->public_html, $dir_path['dirname'].'/'.$dir_path['basename']);
-		
-		//print_rr($ftp_filepath);
-		
-		//print_rr(pathinfo(File_Manager::getFTPPath($real.'/'.$_GET['folder'], $_GET['directory'])));
 		
 		$ftp->put($to, $ftp_filepath.'/'.($options['name'] ? $options['name'] : $file['base']).'.'.$file['ext']);
 		

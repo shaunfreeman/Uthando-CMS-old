@@ -100,6 +100,7 @@ FileManager.implement({
 						resize: self.options.resizeImages && resizer.hasClass('checkboxChecked') ? 1 : 0
 					}))
 				});
+				
 			},
 			
 			render: function(){
@@ -147,7 +148,7 @@ FileManager.implement({
 				tips = new FileManager.Tips(this.ui.cancel);
 				
 				var progress = new Element('img', {'class': 'file-progress', src: self.options.assetBasePath+'bar.gif'});
-
+				
 				this.ui.element.adopt(
 					this.ui.cancel,
 					progress,
@@ -184,7 +185,7 @@ FileManager.implement({
 				this.ui.cancel = this.ui.cancel.destroy();
 				
 				var response = JSON.decode(this.response.text);
-				console.log(response);
+				//console.log(response);
 				if(!response.status)
 					new Dialog((''+response.error).substitute(self.language, /\\?\$\{([^{}]+)\}/g) , {language: {confirm: self.language.ok}, buttons: ['confirm']});
 				

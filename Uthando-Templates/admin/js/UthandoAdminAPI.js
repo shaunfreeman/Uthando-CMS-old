@@ -61,8 +61,8 @@ var UthandoAdmin = $H({
 	// ============================================================
 	fileManagerInit: function() {
 		this.manager = new FileManager({
-			url: '/plugins/ajax_content/filemanager.php',
-			assetBasePath: '/templates/admin/images/FileManager',
+			url: '/ajax/filemanager.php',
+			assetBasePath: '/images/FileManager/',
 			directory: Uthando.resolve+UthandoAdminConfig.fileManager.directory,
 			language: 'en',
 			selectable: UthandoAdminConfig.fileManager.selectable,

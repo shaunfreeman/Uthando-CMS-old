@@ -24,7 +24,7 @@ Fx.ProgressBar = new Class({
 	initialize: function(element, options) {
 		this.element = $(element);
 		this.parent(options);
-				
+		
 		var url = this.options.url;
 		if (url) {
 			this.element.setStyles({
@@ -35,6 +35,7 @@ Fx.ProgressBar = new Class({
 		
 		if (this.options.fit) {
 			url = url || this.element.getStyle('background-image').replace(/^url\(["']?|["']?\)$/g, '');
+			
 			if (url) {
 				var fill = new Image();
 				fill.onload = function() {

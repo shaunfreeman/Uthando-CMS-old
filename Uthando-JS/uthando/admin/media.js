@@ -8,6 +8,10 @@ UthandoAdminConfig.extend({
 		pathPrefix: '/userfiles/',
 		file: false,
 		selectable: false,
-		filter: null
+		filter: ''
 	}
+});
+
+window.addEvent('domready', function(){
+	UthandoAdmin.manager.show();
 });

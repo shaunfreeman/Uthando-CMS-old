@@ -51,6 +51,7 @@ var FileManager = new Class({
 		onShow: $empty,
 		onHide: $empty,*/
 		directory: '',
+		pathPrefix: '/userfiles/',
 		url: null,
 		assetBasePath: null,
 		selectable: false,
@@ -243,7 +244,7 @@ var FileManager = new Class({
 								break;
 						}
 						
-						self.fill(j).bind(self);
+						self.fill(j);
 					},
 					data: $merge(self.options.uploadAuthData,{
 						file: this.el.getElement('input').get('value'),
@@ -386,7 +387,7 @@ var FileManager = new Class({
 			if(file.mime!='text/directory')
 				icons.push(new Asset.image(this.options.assetBasePath+'disk.png', {title: this.language.download}).addClass('browser-icon').addEvent('click', (function(e){
 					e.stop();
-					window.open(this.normalize(this.Directory+'/'+file.name));
+					window.open(this.normalize(this.options.pathPrefix+this.Directory+'/'+file.name));
 				}).bind(this)).inject(el, 'top'));
 
 			if(file.name!='..')

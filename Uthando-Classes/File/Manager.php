@@ -37,11 +37,12 @@ class File_Manager
 		$this->basedir = realpath($this->options['directory']);
 		$this->basename = pathinfo($this->basedir, PATHINFO_BASENAME) . '/';
 		$this->path = realpath($this->options['directory'] . '/../');
+		
 		$this->length = strlen($this->path);
 		
 		header('Expires: Fri, 01 Jan 1990 00:00:00 GMT');
 		header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
-		//print_rr($this->basedir);
+		//print_rr($this->path);
 		
 		$this->get = $_GET;
 		$this->post = $_POST;
@@ -183,6 +184,7 @@ class File_Manager
 			if (!$file) return;
 			
 			$file = $this->getFTPPath($ftp->public_html, $file);
+			
 			$ftp->mkdir($file);
 			
 			$this->onView();
@@ -202,6 +204,8 @@ class File_Manager
 			$name = pathinfo((File_Upload::exists('Filedata')) ? $this->getName($_FILES['Filedata']['name'], $dir) : null, PATHINFO_FILENAME);
 			
 			$ftp = new File_FTP($this->registry);
+			
+			$file = $this->get['directory'];
 			
 			$file = File_Upload::move('Filedata', $dir.'/', array(
 				'name' => $name,
@@ -282,9 +286,17 @@ class File_Manager
 		
 		$file_to_delete = $this->getFTPPath($ftp->public_html, $file);
 		
-		if (is_dir($file)) $file_to_delete .= '/';
+		$dir = false;
+		if (is_dir($file)):
+			$file_to_delete .= '/';
+			$dir = true;
+		endif;
 		
-		try{ if ($this->checkFile($file)) $ftp->rm($file_to_delete,true); }catch(Exception $e){}
+		try{
+			if ($this->checkFile($file)) $ftp->rm($file_to_delete, ($dir) ? true : false);
+		}catch(FTPException $e){
+			echo $e->getMessage();
+		}
 	}
 	
 	protected function getName($file, $dir) {

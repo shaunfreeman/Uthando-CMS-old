@@ -34,7 +34,7 @@ Class Admin_Registry extends Registry
 		$this->ini_dir = BASE.DS.'Uthando-ini'.DS.$this->get('settings.resolve');
 	}
 	
-	public function setDefaults()
+	public function setDefaults($ajax=false)
 	{
 		$this->host = $this->admin_config['server']['admin_url'];
 		$this->db_default = $this->admin_config['database']['admin'].'.';
@@ -43,7 +43,7 @@ Class Admin_Registry extends Registry
 		$this->sessions = $this->config['database']['session'].'.';
 		
 		$this->admin_dir = $_SERVER['DOCUMENT_ROOT'];
-		$this->registerPath();
+		if (!$ajax) $this->registerPath();
 	}
 	
 	public function registerPath()

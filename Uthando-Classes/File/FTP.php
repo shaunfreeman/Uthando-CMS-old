@@ -108,7 +108,10 @@ class File_FTP
 	public function cd($dir, $report_error=true)
 	{
 		$erg = @ftp_chdir($this->handle, $dir);
-		if (!$erg) throw new FTPException('Directory change failed');
+		if (!$erg):
+			if ($report_error) throw new FTPException('Directory change failed');
+			return false;
+		endif;
 		return true;
 	}
 	
@@ -123,14 +126,16 @@ class File_FTP
     {
 		$dir = $this->constructPath($dir);
 		$savedir = $this->pwd();
+		
 		$e = $this->cd($dir, false);
 		if ($e === true):
 			$this->cd($savedir);
 			return true;
 		endif;
 		$this->cd($savedir);
+		
 		if ($recursive === false):
-			$res = @ftp_mkdir($this->handle, $dir);
+			$res = ftp_mkdir($this->handle, $dir);
 			if (!$res) throw new FTPException("Creation of '$dir' failed");
 			return true;
 		else:
@@ -243,7 +248,7 @@ class File_FTP
 	{
 		$pwd = $this->pwd();
 		if (!$pwd) return $pwd;
-		$res = $this->cd($path);
+		$res = $this->cd($path,false);
 		$this->cd($pwd);
 		return $res;
 	}
@@ -438,6 +443,6 @@ class File_FTP
 	}
 }
 
-class FTPException extends Uthando_Exception {}
+class FTPException extends UthandoException {}
 
 ?>
