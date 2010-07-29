@@ -165,7 +165,7 @@ if ($this->authorize()):
 				if (!$result):
 					$this->registry->Error ('record not updated.');
 				else:
-					goto('/user/overview');
+					Uthando::go('/user/overview');
 				endif;
 			else:
 				
@@ -177,7 +177,7 @@ if ($this->authorize()):
 				));
 				
 				// Output the form
-				$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
+				$renderer = new UthandoForm(TEMPLATES . $this->get ('admin_config.site.template'));
 		
 				$renderer->setFormTemplate('form');
 				$renderer->setHeaderTemplate('header');

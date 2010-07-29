@@ -35,9 +35,9 @@ if ($this->authorize()):
 					$data[$c][] = $row['item'];
 				endif;
 			
-				$data[$c][] = '<a href="/menu/view/id-'.$this->registry->params['id'].'/action-edit/item-'.$row['item_id'].'"><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Item" rel="Click to edit the '.$row['item'].' menu" /></a>';
+				$data[$c][] = '<a href="/menu/view/id-'.$this->registry->params['id'].'/action-edit/item-'.$row['item_id'].'"><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Item" rel="Click to edit the '.$row['item'].' menu" /></a>';
 	
-				$data[$c][] = '<a href="/menu/view/id-'.$this->registry->params['id'].'/action-delete/item-'.$row['item_id'].'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/DeleteRed.png" class="Tips" title="Delete item" rel="Click to delete the '.$row['category'].' item" /></a>';
+				$data[$c][] = '<a href="/menu/view/id-'.$this->registry->params['id'].'/action-delete/item-'.$row['item_id'].'" ><img src="/images/24x24/DeleteRed.png" class="Tips" title="Delete item" rel="Click to delete the '.$row['category'].' item" /></a>';
 			
 				$c++;
 			endif;

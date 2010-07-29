@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-class NestedTreeAdmin extends NestedTree {
+class Admin_NestedTree extends NestedTree {
 	
 	private function updateLeft ($lft, $option, $offset) {
 		

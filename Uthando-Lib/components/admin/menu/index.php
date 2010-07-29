@@ -18,7 +18,7 @@ if ($this->authorize()):
 		
 		$this->addParameter ('page',  $title);
 		
-		$this->registry->component_css = array('/components/menu/css/menu.css');
+		$this->addComponentCSS();
 	endif;
 endif;
 ?>

@@ -148,7 +148,7 @@ if ($this->authorize()):
 				));
 				
 				if($conn->commit()):
-					goto('/user/overview');
+					Uthando::go('/user/overview');
 				else:
 					$this->registry->Error ("Sorry I could not register you due to a system error. Please try again later.", '<a href="'.$_SERVER['REQUEST_URI'].'">Try Again</a>');
 				endif;
@@ -163,7 +163,7 @@ if ($this->authorize()):
 	else:
 		
 		// Output the form
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get('admin_config.site.template'));
+		$renderer = new UthandoForm(TEMPLATES . $this->get ('admin_config.site.template'));
 		
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');

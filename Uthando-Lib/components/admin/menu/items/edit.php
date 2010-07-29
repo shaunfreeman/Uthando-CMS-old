@@ -10,7 +10,7 @@ if ($this->authorize()):
 		$form = new HTML_QuickForm('menuitemEdit', 'post', $_SERVER['REQUEST_URI']);
 		
 		// start tree class
-		$tree = new NestedTreeAdmin($this->registry->core.'menu_items', $this->registry->params['id'], 'item', $this->registry);
+		$tree = new Admin_NestedTree($this->registry->core.'menu_items', $this->registry->params['id'], 'item', $this->registry);
 		
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
@@ -61,7 +61,7 @@ if ($this->authorize()):
 		
 		foreach ($components as $component):
 			
-			$dir = realpath($_SERVER['DOCUMENT_ROOT']."/../components/".$component->component);
+			$dir = realpath($_SERVER['DOCUMENT_ROOT']."/../Uthando-Lib/components/public/".$component->component);
 			
 			$json = file_get_contents($dir.'/action.json');
 			$json = json_decode($json, true);
@@ -273,7 +273,7 @@ if ($this->authorize()):
 			
 			$form->setDefaults($defaults);
 			 
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
+			$renderer = new UthandoForm(TEMPLATES . $this->get ('admin_config.site.template'));
 		
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -285,9 +285,7 @@ if ($this->authorize()):
 			// output the form
 			$this->content .= $renderer->toHtml();
 		
-			$this->registry->component_js = array(
-				'/components/menu/js/menu.js'
-			);
+			$this->addComponentJS();
 		
 		endif;
 		
@@ -297,7 +295,7 @@ if ($this->authorize()):
 		endif;
 		
 	else:
-		goto('/menu/overview');
+		Uthando::go('/menu/overview');
 	endif;
 endif;
 ?>

@@ -107,7 +107,7 @@ if ($this->authorize()):
 				'status_id' => $row->status_id
 			));
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
+			$renderer = new UthandoForm(TEMPLATES . $this->get ('admin_config.site.template'));
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -125,7 +125,7 @@ if ($this->authorize()):
 		endif;
 		
 	else:
-		goto('/menu/overview');
+		Uthando::go('/menu/overview');
 	endif;
 endif;
 ?>

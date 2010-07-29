@@ -25,13 +25,13 @@ if ($this->authorize()):
 			$data[$c][] = '<a href="mailto:'.$row->email.'">'.$row->email.'</a>';
 			
 			if ($row->block):
-				$data[$c][] = '<a href="/user/block/id-'.$row->user_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/CheckUnCheked.png" class="Tips" title="Unblock User" rel="Click to unblock '.$row->username.'" /></a>';
+				$data[$c][] = '<a href="/user/block/id-'.$row->user_id.'"  style="text-decoration:none;" ><img src="/images/16x16/CheckUnCheked.png" class="Tips" title="Unblock User" rel="Click to unblock '.$row->username.'" /></a>';
 			else:
-				$data[$c][] = '<a href="/user/block/id-'.$row->user_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/CheckChecked.png" class="Tips" title="Block User" rel="Click to block '.$row->username.'" /></a>';
+				$data[$c][] = '<a href="/user/block/id-'.$row->user_id.'"  style="text-decoration:none;" ><img src="/images/16x16/CheckChecked.png" class="Tips" title="Block User" rel="Click to block '.$row->username.'" /></a>';
 			endif;
 				
-			$data[$c][] = '<a href="/user/edit/id-'.$row->user_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit User" rel="Click to edit the '.$row->username.' user" /></a>';
-			$data[$c][] = '<a href="/user/delete/id-'.$row->user_id.'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/DeleteRed.png" class="Tips" title="Delete User" rel="Click to delete the '.$row->username.' user" /></a>';
+			$data[$c][] = '<a href="/user/edit/id-'.$row->user_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit User" rel="Click to edit the '.$row->username.' user" /></a>';
+			$data[$c][] = '<a href="/user/delete/id-'.$row->user_id.'" ><img src="/images/24x24/DeleteRed.png" class="Tips" title="Delete User" rel="Click to delete the '.$row->username.' user" /></a>';
 			
 			$c++;
 		endforeach;

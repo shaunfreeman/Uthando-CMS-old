@@ -93,7 +93,7 @@ if ($this->authorize()):
 		endif;
 	else:
 			
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
+		$renderer = new UthandoForm(TEMPLATES . $this->get ('admin_config.site.template'));
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');

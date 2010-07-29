@@ -69,15 +69,15 @@ th {
 Buttons
 */
 #menus-24 {
-	background: url(/templates/admin/images/24x24/alacarte.png) no-repeat center 5px;
+	background: url(/images/24x24/alacarte.png) no-repeat center 5px;
 }
 
 #new_menu-24 {
 	width:60px;
-	background: url(/templates/admin/images/24x24/addAlacarte.png) no-repeat center 5px;
+	background: url(/images/24x24/addAlacarte.png) no-repeat center 5px;
 }
 
 #new_link-24 {
 	width:60px;
-	background: url(/templates/admin/images/24x24/addAlacarte.png) no-repeat center 5px;
+	background: url(/images/24x24/addAlacarte.png) no-repeat center 5px;
 }

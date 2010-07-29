@@ -27,11 +27,11 @@ if ($this->authorize()):
 				$row['item'],
 				$row['menu_type'],
 				''.$num_items.'',
-				'<a href="/menu/edit/id-'.$row['item_id'].'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Menu" rel="Click to edit the '.$row['item'].' menu" /></a>',
+				'<a href="/menu/edit/id-'.$row['item_id'].'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Menu" rel="Click to edit the '.$row['item'].' menu" /></a>',
 			
-				'<a href="/menu/view/id-'.$row['item_id'].'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Preview.png" class="Tips" title="View Menu" rel="Click to view the '.$row['item'].' items" /></a>',
+				'<a href="/menu/view/id-'.$row['item_id'].'"  style="text-decoration:none;" ><img src="/images/24x24/Preview.png" class="Tips" title="View Menu" rel="Click to view the '.$row['item'].' items" /></a>',
 			
-				'<a href="/menu/delete/id-'.$row['item_id'].'"><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/DeleteRed.png" class="Tips" title="Delete Menu" rel="Click to delete the '.$row['item'].' menu" /></a>'
+				'<a href="/menu/delete/id-'.$row['item_id'].'"><img src="/images/24x24/DeleteRed.png" class="Tips" title="Delete Menu" rel="Click to delete the '.$row['item'].' menu" /></a>'
 			);
 		
 			$c++;

@@ -49,7 +49,7 @@ if ($this->authorize()):
 			if (!$result):
 				$this->registry->Error ("Could not delete user.");
 			else:
-				goto('/user/overview');
+				Uthando::go('/user/overview');
 			endif;
 		elseif ($pass):
 			
