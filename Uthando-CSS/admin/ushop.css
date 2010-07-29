@@ -1,23 +1,23 @@
 /*
 Buttons
 */
-#customers-24 { background: url(/templates/admin/images/24x24/UserGroup2.png) no-repeat center 5px; }
+#customers-24 { background: url(/images/24x24/UserGroup2.png) no-repeat center 5px; }
 
-#products-24 { background: url(/templates/admin/images/24x24/Barcode.png) no-repeat center 5px; }
+#products-24 { background: url(/images/24x24/Barcode.png) no-repeat center 5px; }
 
-#postage-24 { background: url(/templates/admin/images/24x24/Post.png) no-repeat center 5px; }
+#postage-24 { background: url(/images/24x24/Post.png) no-repeat center 5px; }
 
-#tax-24 { background: url(/templates/admin/images/24x24/Tax.png) no-repeat center 5px; }
+#tax-24 { background: url(/images/24x24/Tax.png) no-repeat center 5px; }
 
-#new_product-24 { background: url(/templates/admin/images/24x24/BarcodePlus.png) no-repeat center 0px; }
+#new_product-24 { background: url(/images/24x24/BarcodePlus.png) no-repeat center 0px; }
 
-#orders-24 { background: url(/templates/admin/images/24x24/Invoice.png) no-repeat center 5px; }
+#orders-24 { background: url(/images/24x24/Invoice.png) no-repeat center 5px; }
 
-#new_author-24 { background: url(/templates/admin/images/24x24/AuthorPlus.png) no-repeat center 5px; }
+#new_author-24 { background: url(/images/24x24/AuthorPlus.png) no-repeat center 5px; }
 
-#new_group-24 { background: url(/templates/admin/images/24x24/BarcodeGroupPlus.png) no-repeat center 5px; }
+#new_group-24 { background: url(/images/24x24/BarcodeGroupPlus.png) no-repeat center 5px; }
 
-#new_customer-24 { background: url(/templates/admin/images/24x24/AddUser.png) no-repeat center 5px; }
+#new_customer-24 { background: url(/images/24x24/AddUser.png) no-repeat center 5px; }
 
 /*
 Tables

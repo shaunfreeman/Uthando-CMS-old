@@ -57,6 +57,6 @@ class HTML_Tabs extends HTML_Element
 	}
 }
 
-class TabsException extends Uthando_Exception {}
+class TabsException extends UthandoException {}
 
 ?>

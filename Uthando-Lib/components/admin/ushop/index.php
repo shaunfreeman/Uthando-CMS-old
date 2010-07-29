@@ -32,11 +32,8 @@ if ($this->authorize()):
 		require_once('action/'.$this->registry->action.'.php');
 		
 		$this->addParameter ('page',  $title);
-		if (is_array($this->registry->component_css)):
-			$this->registry->component_css = array_merge($this->registry->component_css, array('/components/ushop/css/ushop.css'));
-		else:
-			$this->registry->component_css = array('/components/ushop/css/ushop.css');
-		endif;
+		
+		$this->addComponentCSS();
 	endif;
 endif;
 ?>

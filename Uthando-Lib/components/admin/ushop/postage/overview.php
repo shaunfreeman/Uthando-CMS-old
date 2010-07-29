@@ -26,8 +26,5 @@ if ($this->authorize()):
 	
 	$tabs = new HTML_Tabs($tab_array);
 	$this->content .= $tabs->toHtml();
-else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
 endif;
 ?>

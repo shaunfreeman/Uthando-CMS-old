@@ -22,16 +22,16 @@ if ($this->authorize()):
 		DATE_FORMAT(order_date, '%D %M %Y') AS date,
 		order_id,
 		user_id",
-		$this->registry->user.'ushop_orders',
+		$ushop->db_name.'orders',
 		array(
-			$this->registry->core.'ushop_order_status',
-			$this->registry->user.'users'
+			$ushop->db_name.'order_status',
+			$this->registry->core.'users'
 		),
 		array(
 			'WHERE' => 'order_status_id',
 			'IN' => "(
 				SELECT order_status_id
-				FROM ".$this->registry->user."ushop_orders
+				FROM ".$ushop->db_name."orders
 				WHERE order_status != 'Cancelled'
 				AND order_status != 'Dispatched'
 			)",
@@ -45,7 +45,7 @@ if ($this->authorize()):
 		$data = array();
 		$tab_array = array();
 		
-		$orderRow = $this->getResult('order_status_id, order_status', $this->registry->core.'ushop_order_status');
+		$orderRow = $this->getResult('order_status_id, order_status', $ushop->db_name.'order_status');
 		
 		foreach ($orders as $row):
 			

@@ -15,8 +15,8 @@ if ($this->authorize()):
 			$data[$c][] = $row->country;
 			$data[$c][] = $row->zone;
 				
-			$data[$c][] = '<a href="/ushop/postage/action-edit_country/id-'.$row->country_id.'"  style="text-decoration:none;" ><img src="/templates/'.$template.'/images/24x24/Edit3.png" class="Tips" title="Edit Country" rel="Click to edit this country." /></a>';
-			$data[$c][] = '<a href="/ushop/postage/action-delete_country/id-'.$row->country_id.'" ><img src="/templates/'.$template.'/images/24x24/Delete.png" class="Tips" title="Delete Country" rel="Click to delete this country" /></a>';
+			$data[$c][] = '<a href="/ushop/postage/action-edit_country/id-'.$row->country_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Country" rel="Click to edit this country." /></a>';
+			$data[$c][] = '<a href="/ushop/postage/action-delete_country/id-'.$row->country_id.'" ><img src="/images/24x24/Delete.png" class="Tips" title="Delete Country" rel="Click to delete this country" /></a>';
 			
 			$c++;
 		endforeach;
@@ -37,7 +37,6 @@ if ($this->authorize()):
 		$countries = $this->message($params);
 	endif;
 else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
+	Uthando::go();
 endif;
 ?>

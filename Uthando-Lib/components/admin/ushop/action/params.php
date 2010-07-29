@@ -82,17 +82,16 @@ if ($this->authorize()):
 	else:
 		
 		$tab_array = array('information' => null, 'configuration' => null, 'display' => null);
-		
+		/*
 		$info = array(
 			'terms' => file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../components/ushop/html/terms.html'),
 			'offline_message' => file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../components/ushop/html/offline_message.html')
 		);
-		
+		*/
 		$ushop->information = $info;
 			
 		$form->setDefaults($ushop->getSettings());
-		
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
+		$renderer = new UthandoForm(TEMPLATES . $template);
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');
@@ -109,18 +108,13 @@ if ($this->authorize()):
 		$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
 		
 		$this->loadJavaScript(array(
-			'/Common/editor/tiny_mce/tiny_mce_gzip.js',
-			'/Common/js/tinyMCEGz.js'
+			'/editors/tiny_mce/tiny_mce_gzip.js',
+			'/uthando-js/uthando/admin/tinyMCEGz.js'
 		));
 
-		$this->registry->component_js = array(
-			'/components/ushop/js/params.js'
-		);
+		$this->addComponentJS('params');
 		
-		$this->registry->component_css = array(
-			'/templates/'.$template.'/css/FileManager.css',
-			'/templates/'.$template.'/css/Additions.css'
-		);
+		$this->addComponentCSS(array('FileManager','Additions'));
 	endif;
 	
 	if (isset($params)):
@@ -128,7 +122,6 @@ if ($this->authorize()):
 		$this->content .= $this->message($params);
 	endif;
 else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
+	Uthando::go();
 endif;
 ?>

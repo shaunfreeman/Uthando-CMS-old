@@ -14,8 +14,5 @@ if ($this->authorize()):
 	$title .= " : " . ucwords(str_replace('_', ' ',$action));
 	
 	require_once('ushop/postage/'.$action.'.php');
-else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
 endif;
 ?>

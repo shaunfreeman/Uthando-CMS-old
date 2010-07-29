@@ -15,8 +15,8 @@ if ($this->authorize()):
 			$data[$c][] = $row->zone;
 			$data[$c][] = $row->tax_code;
 				
-			$data[$c][] = '<a href="/ushop/postage/action-edit_zone/id-'.$row->post_zone_id.'"  style="text-decoration:none;" ><img src="/templates/'.$template.'/images/24x24/Edit3.png" class="Tips" title="Edit Post Zone" rel="Click to edit this zone." /></a>';
-			$data[$c][] = '<a href="/ushop/postage/action-delete_zone/id-'.$row->post_zone_id.'" ><img src="/templates/'.$template.'/images/24x24/Delete.png" class="Tips" title="Delete Post Zone" rel="Click to delete this zone" /></a>';
+			$data[$c][] = '<a href="/ushop/postage/action-edit_zone/id-'.$row->post_zone_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Post Zone" rel="Click to edit this zone." /></a>';
+			$data[$c][] = '<a href="/ushop/postage/action-delete_zone/id-'.$row->post_zone_id.'" ><img src="/images/24x24/Delete.png" class="Tips" title="Delete Post Zone" rel="Click to delete this zone" /></a>';
 			
 			$c++;
 		endforeach;
@@ -37,7 +37,6 @@ if ($this->authorize()):
 		$zones = $this->message($params);
 	endif;
 else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
+	Uthando::go();
 endif;
 ?>

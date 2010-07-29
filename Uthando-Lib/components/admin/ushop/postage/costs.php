@@ -16,8 +16,8 @@ if ($this->authorize()):
 			$data[$c][] = $row->post_level;
 			$data[$c][] = $row->zone;
 				
-			$data[$c][] = '<a href="/ushop/postage/action-edit_cost/id-'.$row->post_cost_id.'"  style="text-decoration:none;" ><img src="/templates/'.$template.'/images/24x24/Edit3.png" class="Tips" title="Edit Post Cost" rel="Click to edit this post cost." /></a>';
-			$data[$c][] = '<a href="/ushop/postage/action-delete_cost/id-'.$row->post_cost_id.'" ><img src="/templates/'.$template.'/images/24x24/Delete.png" class="Tips" title="Delete Post Cost" rel="Click to delete this post cost" /></a>';
+			$data[$c][] = '<a href="/ushop/postage/action-edit_cost/id-'.$row->post_cost_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Post Cost" rel="Click to edit this post cost." /></a>';
+			$data[$c][] = '<a href="/ushop/postage/action-delete_cost/id-'.$row->post_cost_id.'" ><img src="/images/24x24/Delete.png" class="Tips" title="Delete Post Cost" rel="Click to delete this post cost" /></a>';
 			
 			$c++;
 		endforeach;
@@ -44,7 +44,6 @@ if ($this->authorize()):
 		$costs = $this->message($params);
 	endif;
 else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
+	Uthando::go();
 endif;
 ?>
