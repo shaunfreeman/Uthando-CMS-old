@@ -44,7 +44,7 @@ Forms
 
 .table-cell { width:130px; }
 
-#edit_params .table-cell { width:125px; }
+#edit_params .table-cell { width:100px; }
 
 #edit_product .panel_content {
 	position: relative;

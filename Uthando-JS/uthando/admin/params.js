@@ -8,6 +8,11 @@ UthandoAdmin.extend({
 		
 		UthandoAdmin.hideElement(vat);
 		
+		$('pp_merchant_logo').addEvent('click', function(){
+			UthandoAdmin.manager.show();
+			console.log(UthandoAdmin.manager.options)
+		});
+		
 		$('paypal_y').addEvent('click', function(){
 			UthandoAdmin.showElement('paypal');
 		});
@@ -58,7 +63,7 @@ UthandoAdminConfig.extend({
 	fileManager: {
 		enable: UthandoAdmin.fileManagerInit,
 		el: 'pp_merchant_logo',
-		directory: 'image',
+		directory: '/images',
 		pathPrefix: '/userfiles/',
 		file: false,
 		selectable: true,

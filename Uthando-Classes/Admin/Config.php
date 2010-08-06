@@ -141,15 +141,17 @@ class Admin_Config extends Config
 			// add PROTECTED_MODE-ending
 			if ($this->protected_mode) $content .= "\n; -- END PROTECTED_MODE\n; */\n?>\n";
 			
-			$ftp = new File_FTP($this->registry);
+			$ftp = new File_FTP($this->registry, false);
 			
-			$dir = preg_replace("/(.*?)".str_replace("/", "\/", $ftp->public_html)."|(.*?)".str_replace("/", "\/", $ftp->uthando_dir)."/", "", $this->path);
+			foreach (parse_ini_file(BASE.DS.'Uthando-ini'.DS.'ftp.ini.php') as $key => $value):
+				$ftp->$key = $value;
+			endforeach;
 			
-			if ($this->public_html):
-				$path = $ftp->public_html.$dir;
-			else:
-				$path = $ftp->uthando_dir.$dir;
-			endif;
+			$ftp->login();
+			
+			$matches = explode($ftp->uthando_dir, $this->path);
+			
+			$path = $ftp->uthando_dir.$matches[1];
 			
 			$ftp->chmod($path, 0646);
 			if (!file_put_contents($this->path, $content)) throw new ConfigException("Config::save() - Could not write to file('".$this->path."'), error.");

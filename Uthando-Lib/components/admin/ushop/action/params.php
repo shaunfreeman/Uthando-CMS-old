@@ -5,6 +5,9 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
+	$offline_message = '/home/'.$this->registry->get('settings.dir').'/Public/'.$this->registry->get('settings.resolve').'/template_files/html/offline_message.html';
+	$terms = '/home/'.$this->registry->get('settings.dir').'/Public/'.$this->registry->get('settings.resolve').'/template_files/html/terms.html';
+	
 	$paramsBar = array(
 		'back' => '/ushop/overview',
 		'cancel' => '/ushop/overview',
@@ -51,9 +54,9 @@ if ($this->authorize()):
 		if ($values['information']):
 			$ftp = new File_FTP($this->registry);
 			foreach ($values['information'] as $key => $value):
-				$message = file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$key.'.html',stripslashes(str_replace('\r\n', '', $value)));
-				$ftp->put($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$key.'.html', $login['public_html'].'/components/ushop/html/'.$key.'.html', true);
-				unlink($_SERVER['DOCUMENT_ROOT'] . '/Common/tmp/'.$key.'.html');
+				$message = file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/tmp/'.$key.'.html',stripslashes(str_replace('\r\n', '', $value)));
+				$ftp->put($_SERVER['DOCUMENT_ROOT'] . '/tmp/'.$key.'.html', $ftp->public_html.'/'.$this->registry->get('settings.resolve').'/template_files/html/'.$key.'.html', true);
+				unlink($_SERVER['DOCUMENT_ROOT'] . '/tmp/'.$key.'.html');
 			endforeach;
 			unset($values['information']);
 			$ftp->disconnect();
@@ -82,12 +85,12 @@ if ($this->authorize()):
 	else:
 		
 		$tab_array = array('information' => null, 'configuration' => null, 'display' => null);
-		/*
+		
 		$info = array(
-			'terms' => file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../components/ushop/html/terms.html'),
-			'offline_message' => file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/../components/ushop/html/offline_message.html')
+			'terms' => (file_exists($terms)) ? file_get_contents($terms) : '',
+			'offline_message' => (file_exists($offline_message)) ? file_get_contents($offline_message) : ''
 		);
-		*/
+		
 		$ushop->information = $info;
 			
 		$form->setDefaults($ushop->getSettings());

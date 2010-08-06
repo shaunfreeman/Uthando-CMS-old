@@ -61,7 +61,7 @@ $rcmail_config['smtp_debug'] = false;
 // leave blank to show a textbox at login, give a list of hosts
 // to display a pulldown menu or set one host as string.
 // To use SSL/TLS connection, enter hostname with prefix ssl:// or tls://
-$rcmail_config['default_host'] = array('localhost', 'ssl://mail.uthando-cms.net');
+$rcmail_config['default_host'] = array('localhost');
 
 // TCP port used for IMAP connections
 $rcmail_config['default_port'] = 143;
