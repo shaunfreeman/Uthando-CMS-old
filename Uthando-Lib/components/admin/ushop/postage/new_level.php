@@ -4,15 +4,6 @@
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
-	
-	$menuBar = array(
-		'cancel' => '/ushop/postage/overview',
-		'save' => null
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
-	
-	$menuBar = array();
 			
 	$form = new HTML_QuickForm('add_level', 'post', $_SERVER['REQUEST_URI']);
 			
@@ -30,6 +21,8 @@ if ($this->authorize()):
 	$form->addRule('post_level', 'Post Levels have to be a number.', 'numeric');
 			
 	if ($form->validate()):
+		
+		$menuBar = array();
 			
 		$form->freeze();
 		$values = $form->process(array(&$this, 'formValues'), false);
@@ -55,8 +48,15 @@ if ($this->authorize()):
 		endif;	
 		// done!
 	else:
+		
+		$menuBar = array(
+			'cancel' => '/ushop/postage/overview',
+			'save' => null
+		);
+			
+		$this->content .= $this->makeToolbar($menuBar, 24);
 				
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
+		$renderer = new UthandoForm(TEMPLATES . $template);
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');

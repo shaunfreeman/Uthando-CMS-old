@@ -5,15 +5,6 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	$menuBar = array(
-		'cancel' => '/ushop/postage/overview',
-		'save' => null
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
-	
-	$menuBar = array();
-	
 	if ($post_zones = $this->getResult('post_zone_id, zone', $ushop->db_name.'post_zones')):
 			
 		$form = new HTML_QuickForm('add_country', 'post', $_SERVER['REQUEST_URI']);
@@ -41,6 +32,8 @@ if ($this->authorize()):
 			
 		if ($form->validate()):
 			
+			$menuBar = array();
+			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
 			
@@ -65,8 +58,15 @@ if ($this->authorize()):
 			endif;
 			// done!
 		else:
+			
+			$menuBar = array(
+				'cancel' => '/ushop/postage/overview',
+				'save' => null
+			);
 				
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
+			$this->content .= $this->makeToolbar($menuBar, 24);
+				
+			$renderer = new UthandoForm(TEMPLATES . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');

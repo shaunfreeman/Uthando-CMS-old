@@ -8,16 +8,6 @@ if ($this->authorize()):
 	$offline_message = '/home/'.$this->registry->get('settings.dir').'/Public/'.$this->registry->get('settings.resolve').'/template_files/html/offline_message.html';
 	$terms = '/home/'.$this->registry->get('settings.dir').'/Public/'.$this->registry->get('settings.resolve').'/template_files/html/terms.html';
 	
-	$paramsBar = array(
-		'back' => '/ushop/overview',
-		'cancel' => '/ushop/overview',
-		'save' => ''
-	);
-		
-	$this->content .= $this->makeToolbar(array_merge($paramsBar,$menuBar), 24);
-	
-	$menuBar = array();
-	
 	$form = new HTML_QuickForm('edit_params', 'post', $_SERVER['REQUEST_URI']);
 			
 	// Remove name attribute for xhtml strict compliance.
@@ -44,6 +34,8 @@ if ($this->authorize()):
 	$form->addElement('html', '</div></div>');
 	
 	if ($form->validate()):
+		
+		$menuBar = array();
 			
 		// Apply form element filters.
 		$form->freeze();
@@ -83,6 +75,14 @@ if ($this->authorize()):
 		endif;
 		// done!
 	else:
+		
+		$paramsBar = array(
+			'back' => '/ushop/overview',
+			'cancel' => '/ushop/overview',
+			'save' => ''
+		);
+			
+		$this->content .= $this->makeToolbar(array_merge($paramsBar,$menuBar), 24);
 		
 		$tab_array = array('information' => null, 'configuration' => null, 'display' => null);
 		

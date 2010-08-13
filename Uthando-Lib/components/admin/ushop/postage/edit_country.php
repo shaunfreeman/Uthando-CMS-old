@@ -5,15 +5,6 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	$menuBar = array(
-		'cancel' => '/ushop/postage/overview',
-		'save' => null
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
-	
-	$menuBar = array();
-	
 	if ($this->registry->params['id']):
 		
 		$rows = $this->getResult('post_zone_id, country_id, country', $ushop->db_name.'countries',null, array('where' => 'country_id = '.$this->registry->params['id']));
@@ -45,6 +36,8 @@ if ($this->authorize()):
 			
 		if ($form->validate()):
 			
+			$menuBar = array();
+			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
 			
@@ -62,13 +55,20 @@ if ($this->authorize()):
 			endif;
 			// done!
 		else:
+			
+			$menuBar = array(
+				'cancel' => '/ushop/postage/overview',
+				'save' => null
+			);
+				
+			$this->content .= $this->makeToolbar($menuBar, 24);
 				
 			$form->setDefaults(array(
 			'country' => $rows[0]->country,
    			'post_zone_id' => $rows[0]->post_zone_id,
 			));
 				
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
+			$renderer = new UthandoForm(TEMPLATES . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
@@ -82,7 +82,7 @@ if ($this->authorize()):
 	endif;
 	
 	if (isset($params)):
-		$params['CONTENT'] = $this->makeToolbar($menuBar, 24);
+		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
 	endif;
 else:

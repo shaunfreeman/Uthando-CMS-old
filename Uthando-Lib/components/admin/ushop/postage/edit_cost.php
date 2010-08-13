@@ -5,15 +5,6 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	$menuBar = array(
-		'cancel' => '/ushop/postage/overview',
-		'save' => null
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
-	
-	$menuBar = array();
-	
 	if ($this->registry->params['id']):
 		
 		$rows = $this->getResult('post_zone_id, post_level_id, cost, vat_inc', $ushop->db_name.'post_costs',null, array('where' => 'post_cost_id = '.$this->registry->params['id']));
@@ -61,6 +52,8 @@ if ($this->authorize()):
 			
 		if ($form->validate()):
 			
+			$menuBar = array();
+			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
 			
@@ -78,6 +71,13 @@ if ($this->authorize()):
 			endif;
 			// done!
 		else:
+			
+			$menuBar = array(
+				'cancel' => '/ushop/postage/overview',
+				'save' => null
+			);
+				
+			$this->content .= $this->makeToolbar($menuBar, 24);
 				
 			$form->setDefaults(array(
 				'cost' => $rows[0]->cost,
@@ -86,7 +86,7 @@ if ($this->authorize()):
 				'vat_inc' => $rows[0]->vat_inc
 			));
 				
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
+			$renderer = new UthandoForm(TEMPLATES . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
