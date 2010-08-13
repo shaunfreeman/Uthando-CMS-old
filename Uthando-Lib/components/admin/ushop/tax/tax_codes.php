@@ -18,8 +18,8 @@ if ($this->authorize()):
 			$data[$c][] = $row->tax_rate;
 			$data[$c][] = $row->description;
 				
-			$data[$c][] = '<a href="/ushop/tax/action-edit_tax_code/id-'.$row->tax_code_id.'"  style="text-decoration:none;" ><img src="/templates/'.$template.'/images/24x24/Edit3.png" class="Tips" title="Edit Tax Code" rel="Click to edit this tax code." /></a>';
-			$data[$c][] = '<a href="/ushop/tax/action-delete_tax_code/id-'.$row->tax_code_id.'" ><img src="/templates/'.$template.'/images/24x24/Delete.png" class="Tips" title="Delete Tax Code" rel="Click to delete this tax code" /></a>';
+			$data[$c][] = '<a href="/ushop/tax/action-edit_tax_code/id-'.$row->tax_code_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Tax Code" rel="Click to edit this tax code." /></a>';
+			$data[$c][] = '<a href="/ushop/tax/action-delete_tax_code/id-'.$row->tax_code_id.'" ><img src="/images/24x24/Delete.png" class="Tips" title="Delete Tax Code" rel="Click to delete this tax code" /></a>';
 			
 			$c++;
 		endforeach;
