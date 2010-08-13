@@ -11,7 +11,7 @@ class HTML_Template extends HTML_Page
 	protected $modules = array();
 	protected $registry;
 	
-	public function __construct($registry, $template)
+	public function __construct($registry, $template=null)
 	{
 		parent::__construct();
 		$this->registry = $registry;

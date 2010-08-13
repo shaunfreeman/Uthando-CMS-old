@@ -8,9 +8,9 @@ Class Registry {
 	protected $vars = array();
 	public  $errors = null;
 	
-	public function __construct()
+	public function __construct($path=null)
 	{
-		$this->path = urldecode(REQUEST_URI);
+		$this->path = ($path) ? urldecode($path) : urldecode(REQUEST_URI);
 		$this->registerServer();
 	}
 	

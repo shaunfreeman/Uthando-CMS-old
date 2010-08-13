@@ -8,7 +8,7 @@ Public/tmp/*
 Uthando-Admin/tmp/
 !index.html
 Uthando-Stats/*
-Uthando-Webmail/config/db.ini.php
+Uthando-Webmail/config/*
 Uthando-Webmail/logs/*
 Uthando-Webmail/temp/*
 Uthando-Webmail/skins/default/templates/login.html
