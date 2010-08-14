@@ -1225,7 +1225,7 @@ img { border: 0 none; }
 }
 
 .spinner-img {
-	background: url(/Common/images/1_loading.gif) no-repeat;
+	background: url(/images/1_loading.gif) no-repeat;
 	width: 30px;
 	height: 30px;
 	margin: 0 auto;
