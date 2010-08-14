@@ -5,15 +5,6 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	$menuBar = array(
-		'cancel' => '/ushop/tax/overview',
-		'save' => null
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
-	
-	$menuBar = array();
-	
 	if ($tax_rates = $ushop->getTaxRates(true)):
 			
 		$form = new HTML_QuickForm('add_tax_code', 'post', $_SERVER['REQUEST_URI']);
@@ -46,6 +37,8 @@ if ($this->authorize()):
 			
 		if ($form->validate()):
 			
+			$menuBar = array();
+			
 			$form->freeze();
 			$values = $form->process(array(&$this, 'formValues'), false);
 			
@@ -70,8 +63,15 @@ if ($this->authorize()):
 			endif;
 			// done!
 		else:
+		
+			$menuBar = array(
+				'cancel' => '/ushop/tax/overview',
+				'save' => null
+			);
 				
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
+			$this->content .= $this->makeToolbar($menuBar, 24);
+				
+			$renderer = new UthandoForm(TEMPLATES . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');

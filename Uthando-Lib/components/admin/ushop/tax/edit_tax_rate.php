@@ -5,15 +5,6 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	$menuBar = array(
-		'cancel' => '/ushop/tax/overview',
-		'save' => null
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
-	
-	$menuBar = array();
-	
 	$rate = $this->getResult('tax_rate', $ushop->db_name.'tax_rates', null, array('where' =>'tax_rate_id = '.$this->registry->params['id']));
 			
 	$form = new HTML_QuickForm('edit_tax_rate', 'post', $_SERVER['REQUEST_URI']);
@@ -32,6 +23,8 @@ if ($this->authorize()):
 		
 			
 	if ($form->validate()):
+		
+		$menuBar = array();
 			
 		$form->freeze();
 		$values = $form->process(array(&$this, 'formValues'), false);
@@ -50,12 +43,19 @@ if ($this->authorize()):
 		endif;	
 		// done!
 	else:
+		
+		$menuBar = array(
+			'cancel' => '/ushop/tax/overview',
+			'save' => null
+		);
+			
+		$this->content .= $this->makeToolbar($menuBar, 24);
 			
 		$form->setDefaults(array(
 			'tax_rate' => $rate[0]->tax_rate,
 		));
 				
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
+		$renderer = new UthandoForm(TEMPLATES . $template);
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');

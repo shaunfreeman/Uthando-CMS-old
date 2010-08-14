@@ -5,15 +5,6 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	$menuBar = array(
-		'cancel' => '/ushop/tax/overview',
-		'save' => null
-	);
-		
-	$this->content .= $this->makeToolbar($menuBar, 24);
-	
-	$menuBar = array();
-	
 	$rows = $this->getResult('tax_code_id, tax_rate_id, tax_code, description', $ushop->db_name.'tax_codes',null, array('where' => 'tax_code_id = '.$this->registry->params['id']));
 			
 	$form = new HTML_QuickForm('edit_tax_code', 'post', $_SERVER['REQUEST_URI']);
@@ -47,6 +38,8 @@ if ($this->authorize()):
 			
 	if ($form->validate()):
 		
+		$menuBar = array();
+		
 		$form->freeze();
 		$values = $form->process(array(&$this, 'formValues'), false);
 		
@@ -66,6 +59,13 @@ if ($this->authorize()):
 		endif;	
 		// done!
 	else:
+		
+		$menuBar = array(
+			'cancel' => '/ushop/tax/overview',
+			'save' => null
+		);
+			
+		$this->content .= $this->makeToolbar($menuBar, 24);
 			
 		$form->setDefaults(array(
 			'tax_code' => $rows[0]->tax_code,
@@ -73,7 +73,7 @@ if ($this->authorize()):
    			'description' => $rows[0]->description,
 		));
 				
-		$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $template);
+		$renderer = new UthandoForm(TEMPLATES . $template);
 			
 		$renderer->setFormTemplate('form');
 		$renderer->setHeaderTemplate('header');
