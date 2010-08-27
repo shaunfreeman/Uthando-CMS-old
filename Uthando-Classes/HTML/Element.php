@@ -53,6 +53,12 @@ class HTML_Element extends DOMDocument
 		return $node;
 	}
 	
+	public function appendChild($child)
+	{
+		parent::appendChild($child);
+		return $this;
+	}
+	
 	public function saveXML($xmlProlog=false)
 	{
 		$xml = null;

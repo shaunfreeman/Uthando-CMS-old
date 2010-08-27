@@ -194,7 +194,7 @@ class Uthando
 		$table = new HTML_Table();
 		$table->setAutoGrow(true);
 		$table->setAutoFill('');
-	
+		
 		$hrAttrs = ($class) ? array('class' => $class) : null;
 		
 		for ($nr = 0; $nr < count($data); $nr++):

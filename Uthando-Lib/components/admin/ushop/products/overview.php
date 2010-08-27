@@ -5,7 +5,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	referer();
+	//referer();
 	
 	$productsBar = array(
 		'back' => '/ushop/overview'
@@ -69,14 +69,13 @@ if ($this->authorize()):
 	
 	$this->content .= $doc->toHtml();
 	$this->content .= '<div id="productsWrap" class="both">'.$data.'</div>';
-	
+	/*
 	$products = $this->getResult(
 		'product_id, image, category',
 		$ushop->db_name.'products',
 		array($ushop->db_name.'product_categories')
 	);
 	
-	/*
 	$ftp = new File_FTP($this->registry);
 	$dir = '/userfiles/'.$this->registry->settings['resolve'].'/products/';
 	

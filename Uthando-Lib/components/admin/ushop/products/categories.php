@@ -23,7 +23,7 @@ if ($this->authorize()):
 		
 		$rows = $this->registry->db->query('
 			SELECT child.category_id, COUNT(product.product_id) AS num_product
-			FROM uthando_core.ushop_product_categories AS child, uthando_core.ushop_product_categories AS parent, uthando_core.ushop_products AS product
+			FROM '.$ushop->db_name.'product_categories AS child, '.$ushop->db_name.'product_categories AS parent, '.$ushop->db_name.'products AS product
 			WHERE child.lft BETWEEN parent.lft AND parent.rgt
 			AND child.category_id = product.category_id
 			GROUP BY category_id
@@ -44,8 +44,8 @@ if ($this->authorize()):
 			
 			$data[$c][] = $num_products[$row['category_id']].' [show]';
 				
-			$data[$c][] = '<a href="/ushop/products/action-edit_category/id-'.$row['category_id'].'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Category" rel="Click to edit this category." /></a>';
-			$data[$c][] = '<a href="/ushop/products/action-delete_category/id-'.$row['category_id'].'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Delete.png" class="Tips" title="Delete Category" rel="Click to delete this category" /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-edit_category/id-'.$row['category_id'].'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Category" rel="Click to edit this category." /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-delete_category/id-'.$row['category_id'].'" ><img src="/images/24x24/Delete.png" class="Tips" title="Delete Category" rel="Click to delete this category" /></a>';
 			
 			$c++;
 		endforeach;

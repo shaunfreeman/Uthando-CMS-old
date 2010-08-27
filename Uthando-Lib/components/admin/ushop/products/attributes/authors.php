@@ -25,8 +25,8 @@ if ($this->authorize()):
 			
 			$data[$c][] = HTML_Element::makeXmlSafe($row->forename). ' ' . HTML_Element::makeXmlSafe($row->surname);
 				
-			$data[$c][] = '<a href="/ushop/products/action-edit_attribute/attr-author/id-'.$row->author_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Author" rel="Click to edit this author." /></a>';
-			$data[$c][] = '<a href="/ushop/products/action-delete_attribute/attr-author/id-'.$row->author_id.'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Delete.png" class="Tips" title="Delete Author" rel="Click to delete this author" /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-edit_attribute/attr-author/id-'.$row->author_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Author" rel="Click to edit this author." /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-delete_attribute/attr-author/id-'.$row->author_id.'" ><img src="/images/24x24/Delete.png" class="Tips" title="Delete Author" rel="Click to delete this author" /></a>';
 			
 			$c++;
 		endforeach;

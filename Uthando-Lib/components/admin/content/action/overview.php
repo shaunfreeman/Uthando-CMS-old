@@ -4,6 +4,8 @@
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
+
+	$doc = new HTML_Element();
 	
 	$sql = "
 		SELECT page_id, page, mdate
@@ -18,7 +20,7 @@ if ($this->authorize()):
 	);
 	
 	$this->content .= ($num_pages <= $this->registry->settings['pages'] || $this->registry->settings['pages'] == -1) ? $this->makeToolbar($menuBar, 24) : $this->message(array('TYPE' => 'info', 'MESSAGE' => '<h2>You have reach your page limit. To add more pages please contact your administrator.</h2>'));
-
+	
 	if ($num_pages > 0):
 		
 		$c = 0;
@@ -41,13 +43,10 @@ if ($this->authorize()):
 		
 		$table = $this->dataTable($data, $header);
 		
-		$this->content .= '<div id="tableWrap">';
-	
-		$this->content .= $table->toHtml();
-		$this->content .= '</div>';
+		$this->content .= $doc->appendChild($doc->createElement('div', $table->toHtml(), array('id' => 'tableWrap')))->toHTML();
 		
 	else:
-		$this->content .= '<h3>No Content Yet</h3>';
+		$this->content .= $doc->appendChild($doc->createElement('h3', 'No Content Yet'))->toHTML();
 	endif;
 	
 	//if (isset($params)) $this->content .= $this->message($params);

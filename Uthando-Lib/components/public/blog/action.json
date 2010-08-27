@@ -1,12 +1,12 @@
 {
-	"article": {
+	"blog": {
 		"links" : "database",
 		"url" : "blog/",
 		"params" : "",
-		"database_name" : "pages",
-		"fields" : "page_id, page",
+		"database_name" : "blog_categories",
+		"fields" : "category_id, category",
 		"filter" : {
-			"order by" : "page_id"
+			"order by" : "category_id"
 		}
 	}
 }

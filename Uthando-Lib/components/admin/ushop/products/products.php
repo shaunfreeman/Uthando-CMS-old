@@ -34,7 +34,7 @@ if ($this->authorize()):
 		
 		foreach ($products as $row) {
 			
-			$data[$c][] = $row->enabled ? '<a href="'.$_SERVER['REQUEST_URI'].'/enable-0/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/IndicatorCircleGreenOn.png" /></a>' : '<a href="'.$_SERVER['REQUEST_URI'].'/enable-1/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/16x16/IndicatorCircleRedOff.png" /></a>';
+			$data[$c][] = $row->enabled ? '<a href="'.$_SERVER['REQUEST_URI'].'/enable-0/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/images/16x16/IndicatorCircleGreenOn.png" /></a>' : '<a href="'.$_SERVER['REQUEST_URI'].'/enable-1/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/images/16x16/IndicatorCircleRedOff.png" /></a>';
 			
 			$data[$c][] = $row->sku;
 			$data[$c][] = HTML_Element::makeXmlSafe($row->name);
@@ -42,8 +42,8 @@ if ($this->authorize()):
 			
 			$data[$c][] = $row->category;
 				
-			$data[$c][] = '<a href="/ushop/products/action-edit_product/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Product" rel="Click to edit this product." /></a>';
-			$data[$c][] = '<a href="/ushop/products/action-delete_product/id-'.$row->product_id.'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Delete.png" class="Tips" title="Delete Product" rel="Click to delete this product" /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-edit_product/id-'.$row->product_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Product" rel="Click to edit this product." /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-delete_product/id-'.$row->product_id.'" ><img src="/images/24x24/Delete.png" class="Tips" title="Delete Product" rel="Click to delete this product" /></a>';
 			
 			$c++;
 			

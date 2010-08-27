@@ -26,8 +26,8 @@ if ($this->authorize()):
 			$data[$c][] = $row->price_group;
 			$data[$c][] = $row->price;
 				
-			$data[$c][] = '<a href="/ushop/products/action-edit_group/id-'.$row->price_group_id.'"  style="text-decoration:none;" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Edit3.png" class="Tips" title="Edit Price Group" rel="Click to edit this price group." /></a>';
-			$data[$c][] = '<a href="/ushop/products/action-delete_group/id-'.$row->price_group_id.'" ><img src="/templates/'.$this->get('admin_config.site.template').'/images/24x24/Delete.png" class="Tips" title="Delete Price Group" rel="Click to delete this price group" /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-edit_group/id-'.$row->price_group_id.'"  style="text-decoration:none;" ><img src="/images/24x24/Edit3.png" class="Tips" title="Edit Price Group" rel="Click to edit this price group." /></a>';
+			$data[$c][] = '<a href="/ushop/products/action-delete_group/id-'.$row->price_group_id.'" ><img src="/images/24x24/Delete.png" class="Tips" title="Delete Price Group" rel="Click to delete this price group" /></a>';
 			
 			$c++;
 		endforeach;
