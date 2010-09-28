@@ -237,7 +237,7 @@ if ($this->authorize()):
 			
 			if ($pass):
 				
-				$tree = new NestedTreeAdmin($this->registry->core.'menu_items', null, 'item');
+				$tree = new Admin_NestedTree($this->registry->core.'menu_items', null, 'item');
 			
 				$ip = $values['item_position'];
 				$it = $values['insert_type'];

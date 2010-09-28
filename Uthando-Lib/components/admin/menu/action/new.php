@@ -75,7 +75,7 @@ if ($this->authorize()):
 		$form->freeze();
 		$values = $form->process(array(&$this, 'formValues'), false);
 		
-		$tree = new NestedTreeAdmin($this->registry->core.'menu_items', null, 'item');
+		$tree = new Admin_NestedTree($this->registry->core.'menu_items', null, 'item');
 			
 		$ip = end($tree->getTopLevelTree());
 			

@@ -9,7 +9,7 @@ if ($this->authorize()):
 		
 		if (isset($this->registry->params['action']) == 'delete'):
 			
-			$tree = new NestedTreeAdmin($this->registry->core.'menu_items', $this->registry->params['id'], 'item');
+			$tree = new Admin_NestedTree($this->registry->core.'menu_items', $this->registry->params['id'], 'item');
 			
 			$res = $tree->remove($this->registry->params['id']);
 			
