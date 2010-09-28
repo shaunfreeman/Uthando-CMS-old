@@ -10,7 +10,7 @@ if ($this->authorize()):
 		if (isset($this->registry->params['itemAction']) == 'delete'):
 			
 			// start tree class
-			$tree = new NestedTreeAdmin($this->registry->core.'menu_items', $this->registry->params['item'], 'item');
+			$tree = new Admin_NestedTree($this->registry->core.'menu_items', $this->registry->params['item'], 'item');
 			
 			// Update menu item table.
 			$item = $tree->getCategory();
