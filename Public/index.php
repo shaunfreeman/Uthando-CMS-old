@@ -16,6 +16,9 @@ define ('MODULES', BASE.DS.'Uthando-Lib'.DS.'modules'.DS);
 define ('COMPONENTS', BASE.DS.'Uthando-Lib'.DS.'components'.DS.'public'.DS);
 define ('FUNCS', BASE.DS.'Uthando-Lib'.DS.'functions'.DS);
 define ('TEMPLATES', BASE.DS.'Uthando-Templates'.DS);
+define ('JS', BASE.DS.'Uthando-JS'.DS);
+define ('CSS', BASE.DS.'Uthando-CSS'.DS);
+define ('IMAGE', BASE.DS.'Uthando-Images'.DS);
 
 define ('SCHEME', (isset ($_SERVER['HTTPS'])) ? 'https://' : 'http://');
 define ('HOST', $_SERVER['HTTP_HOST']);
