@@ -81,11 +81,11 @@ if ($this->authorize()):
 					);
 				
 					foreach ($links as $page):
-						$select2[$url][str_replace(' ', '_', $page->page).'|'.$page->page_id] = ucwords($page->page);
+						$select2[$url][str_replace(' ', '-', $page->page).'|'.$page->page_id] = ucwords($page->page);
 					endforeach;
 				else:
 					foreach ($value['links'] as $value):
-						$select2[$url][str_replace(' ', '_',$value)] = ucwords($value);
+						$select2[$url][str_replace(' ', '-',$value)] = ucwords($value);
 					endforeach;
 				endif;
 			endforeach;
