@@ -87,7 +87,7 @@ if ($this->authorize()):
 			
 			$res = $this->insert($values, $this->registry->core.'pages', false);
 			
-			$menuBar['back'] = '/content/overview';
+			$menuBar['back'] = '/'.$this->registry->component.'/overview';
 			
 			if ($res):
 				$ed_message['TYPE'] = 'pass';

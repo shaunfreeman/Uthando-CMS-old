@@ -73,7 +73,7 @@ if ($this->authorize()):
 			
 			$res = $this->update($values, $this->registry->core.'pages', array('where' => 'page_id='.$this->registry->params['id']));
 		
-			$menuBar['back'] = '/content/overview';
+			$menuBar['back'] = '/'.$this->registry->component.'/overview';
 			
 			if ($res):
 				$ed_message['TYPE'] = 'pass';
