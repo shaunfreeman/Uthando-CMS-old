@@ -20,19 +20,19 @@ if ($this->authorize()):
 				$params['MESSAGE'] = '<h2>Page could not be deleted due to an error.</h2>';
 			endif;
 			
-			$menuBar = array('back' => '/content/overview');
+			$menuBar = array('back' => '/'.$this->registry->component.'/overview');
 			
 		else:
 			
 			$menuBar = array(
-				'cancel' => '/content/overview',
-				'delete' => '/content/delete/id-' . $this->registry->params['id'] . '/action-delete'
+				'cancel' => '/'.$this->registry->component.'/overview',
+				'delete' => '/'.$this->registry->component.'/delete/id-' . $this->registry->params['id'] . '/action-delete'
 			);
 			$params['TYPE'] = 'warning';
 			$params['MESSAGE'] = 'Are you sure you want to delete this page';
 		endif;
 	else:
-		$menuBar['back']= '/content/overview';
+		$menuBar['back']= '/'.$this->registry->component.'/overview';
 		$params['TYPE'] = 'warning';
 		$params['MESSAGE'] = 'You do not have permission to delete this page';
 	endif;
