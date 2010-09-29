@@ -33,6 +33,8 @@ if ($this->authorize()):
 			break;
 	endswitch;
 	
+	$_SESSION['referer_link'] = REQUEST_URI;
+	
 	$tab_array = array('products', 'categories', 'groups');
 	
 	foreach ($ushop->attributes as $key => $value):

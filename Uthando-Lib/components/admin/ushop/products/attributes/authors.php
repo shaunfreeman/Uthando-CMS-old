@@ -41,19 +41,13 @@ if ($this->authorize()):
 		$params['TYPE'] = 'info';
 		$params['MESSAGE'] = '<h2>There are currently no records.</h2>';
 		
-		$products = $this->message(array('MESSAGE' => '<h2>First define some authors.</h2>', 'TYPE' => 'info'));
-		
 		//$tab_array['products'] = $products;
 	endif;
 	
-	if (isset($params)) $authors = $this->message($params);
+	if (isset($params)) $data = $this->message($params);
 	
 	$productsBar['new_author'] = '/ushop/products/action-new_attribute/attr-author';
 	
-	$tab_array['authors'] = $authors;
-	
-else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
+	//$tab_array['authors'] = $authors;
 endif;
 ?>

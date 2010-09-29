@@ -42,14 +42,10 @@ if ($this->authorize()):
 		$params['MESSAGE'] = '<h2>There are currently no records.</h2>';
 	endif;
 	
-	if (isset($params)) $groups = $this->message($params);
+	if (isset($params)) $data = $this->message($params);
 	
 	$productsBar['new_group'] = '/ushop/products/action-new_group';
 	
 	//$tab_array['groups'] = $groups;
-	
-else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
 endif;
 ?>

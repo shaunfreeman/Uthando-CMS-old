@@ -14,7 +14,7 @@ if ($this->authorize()):
 	
 	$menuBar = array();
 	
-	$tree = new NestedTreeAdmin($ushop->db_name.'product_categories', null, 'category', $this->registry);
+	$tree = new Admin_NestedTree($ushop->db_name.'product_categories', null, 'category', $this->registry);
 	
 	if ($this->registry->params['id']):
 		
@@ -239,14 +239,14 @@ if ($this->authorize()):
 				if ($err) $this->registry->Warning($err);
 			endforeach;
 			
-			$renderer = new UthandoForm(__SITE_PATH . '/templates/' . $this->get ('admin_config.site.template'));
+			$renderer = new UthandoForm(TEMPLATES . $template);
 			
 			$renderer->setFormTemplate('form');
 			$renderer->setHeaderTemplate('header');
 			$renderer->setElementTemplate('element');
 		
 			$form->accept($renderer);
-		
+			
 			// output the form
 			$tabs = new HTML_Tabs($tab_array, true);
 			$tabs->addPanels($renderer->toHtml());
@@ -257,18 +257,12 @@ if ($this->authorize()):
 			$this->addScriptDeclaration("UthandoAdmin.sid = ['" . $session[0] . "','" . $session[1] . "'];");
 			
 			$this->loadJavaScript(array(
-				'/Common/editor/tiny_mce/tiny_mce_gzip.js',
-				'/Common/js/tinyMCEGz.js'
+				'/editors/tiny_mce/tiny_mce_gzip.js',
+				'/uthando-js/uthando/admin/tinyMCEGz.js'
 			));
 			
-			$this->registry->component_js = array(
-				'/components/ushop/js/products.js'
-			);
-			
-			$this->registry->component_css = array(
-				'/templates/'.$this->get('admin_config.site.template').'/css/FileManager.css',
-				'/templates/'.$this->get('admin_config.site.template').'/css/Additions.css'
-			);
+			$this->addComponentJS('products');
+			$this->addComponentCSS(array('FileManager','Additions'));
 		endif;
 	else:
 		$params['TYPE'] = 'info';
@@ -286,8 +280,5 @@ if ($this->authorize()):
 		$params['CONTENT'] = $this->makeMessageBar($menuBar, 24);
 		$this->content .= $this->message($params);
 	endif;
-else:
-	header("Location:" . $this->get('config.server.web_url'));
-	exit();
 endif;
 ?>

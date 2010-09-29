@@ -30,7 +30,6 @@ if ($this->authorize()):
 		
 		$c = 0;
 		$data = array();
-		$base_dir = __SITE_PATH . "/../components/ushop/images/products/";
 		
 		foreach ($products as $row) {
 			
@@ -69,7 +68,7 @@ if ($this->authorize()):
 		
 	endif;
 	
-	if (isset($params)) $products = $this->message($params);
+	if (isset($params)) $data = $this->message($params);
 	
 	$productsBar['new_product'] = '/ushop/products/action-new_product';
 	
