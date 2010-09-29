@@ -141,7 +141,9 @@ h3 { margin: 0px; }
 
 #outerDivWrap .headerDiv, #footerDiv .headerDiv { color: #003399; }
 
-#headingDiv, #headingDiv p { height:22px; }
+#headingDiv span { height:22px; }
+
+#headingDiv img { /*position:absolute;*/ float:left; }
 
 #footerDiv img, #footerDiv span {
 	vertical-align:middle;
