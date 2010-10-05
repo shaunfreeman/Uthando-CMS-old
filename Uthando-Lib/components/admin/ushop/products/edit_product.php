@@ -43,16 +43,16 @@ if ($this->authorize()):
 		$form->addElement('text', 'sku', 'SKU:', array('size' => 20, 'maxlength' => 60, 'class' => 'inputbox'));
 		$errors[] = 'sku';
 		
-		$items_opts[0] = 'Select One';
+		$cat_opts[0] = 'Select One';
 		
 		foreach ($items = $tree->getTree() as $item):
-			$items_opts[$item['category_id']] = str_repeat(str_repeat('&nbsp;',4), ($item['depth'])).$item['category'];
+			$cat_opts[$item['category_id']] = str_repeat(str_repeat('&nbsp;',4), ($item['depth'])).$item['category'];
 		endforeach;
 		
 		$s = $form->createElement('select', 'category_id', 'Category:', null, array('id' => 'category'));
 		$errors[] = 'category_id';
 	
-		$s->loadArray($items_opts);
+		$s->loadArray($cat_opts);
 		$form->addElement($s);
 		
 		$form->addElement('html', '</div></div>');
@@ -198,6 +198,7 @@ if ($this->authorize()):
 			$menuBar['back'] = $_SESSION['referer_link'];
 			
 			if (!$values['enabled']) $values['enabled'] = 0;
+			$values['image'] = trim($cat_opts[$values['category_id']]).'/'.$values['image'];
 			
 			//check then enter the record.
 			$res = $this->update($values, $ushop->db_name.'products', array('where' => 'product_id='.$this->registry->params['id']));
