@@ -629,7 +629,7 @@ class UShop_Core
 			$_SESSION['cart'] = $cart->cart;
 		endif;
 	}
-
+	
 	public function retrieveCart()
 	{
 		if (UthandoUser::authorize()):

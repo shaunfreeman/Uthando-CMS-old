@@ -49,16 +49,16 @@ if ($this->authorize()):
 		$form->addElement('text', 'sku', 'SKU:', array('size' => 20, 'maxlength' => 60, 'class' => 'inputbox'));
 		$errors[] = 'sku';
 		
-		$items_opts[0] = 'Select One';
+		$cat_opts[0] = 'Select One';
 		
 		foreach ($items = $tree->getTree() as $item):
-			$items_opts[$item['category_id']] = str_repeat(str_repeat('&nbsp;',4), ($item['depth'])).$item['category'];
+			$cat_opts[$item['category_id']] = str_repeat(str_repeat('&nbsp;',4), ($item['depth'])).$item['category'];
 		endforeach;
 		
 		$s = $form->createElement('select', 'category_id', 'Category:', null, array('id' => 'category'));
 		$errors[] = 'category_id';
 	
-		$s->loadArray($items_opts);
+		$s->loadArray($cat_opts);
 		$form->addElement($s);
 		
 		foreach ($ushop->attributes as $key => $value):
@@ -196,6 +196,8 @@ if ($this->authorize()):
 			
 			$menuBar['add_product'] = '/ushop/products/action-new_product';
 			$menuBar['back'] = $_SESSION['referer_link'];
+			
+			$values['image'] = trim($cat_opts[$values['category_id']]).'/'.$values['image'];
 			
 			//check then enter the record.
 			if (!$this->getResult('product_id', $ushop->db_name.'products', null, array('where' => "name='".$values['name']."'"))):
