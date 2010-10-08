@@ -27,7 +27,7 @@ window.addEvent('domready', function() {
 			$('edit_params').fade('toggle');
 		}
 	});
-
+    
 	$('edit-24').addEvent('click', function(event){
 		event.stop();
 		

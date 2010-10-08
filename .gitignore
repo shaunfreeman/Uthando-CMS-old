@@ -13,7 +13,8 @@ Uthando-Admin/tmp/
 !index.html
 Uthando-Stats/config/*
 Uthando-Stats/data/*
-Uthando-Webmail/config/*
+Uthando-Webmail/config/db.config
+Uthando-Webmail/config/db.main
 Uthando-Webmail/logs/*
 Uthando-Webmail/temp/*
 Uthando-Webmail/skins/default/templates/login.html

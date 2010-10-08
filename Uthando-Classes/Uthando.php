@@ -5,7 +5,7 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 class Uthando
 {
-	// Set the attributes.
+    // Set the attributes.
 	protected $vars = array(); 
 	protected $registry; // registry
 	public $striptags = false;
