@@ -37,7 +37,6 @@ class UShop_ShoppingCart
 		else:
 			$this->cart['items'][$item]['qty'] = $qty;
 		endif;
-		if (empty($this->cart['items'])) $this->cart = null;
 	}
 
 	private function checkUserCountry()
@@ -73,7 +72,7 @@ class UShop_ShoppingCart
 		$this->cart['taxTotal'] = 0;
 		$this->cart['postWeight'] = 0;
 		$this->cart['noPostage'] = 0;
-		$this->cart['postTax'] = 0;;
+		$this->cart['postTax'] = 0;
 		$this->cart['postCost'] = 0;
 		
 		foreach ($this->cart['items'] as $key => $value):

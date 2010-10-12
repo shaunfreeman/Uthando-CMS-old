@@ -1,5 +1,5 @@
 <?php
-
+/* @var $this Uthando */
 // no direct access
 defined( 'SHOP_PARENT_FILE' ) or die( 'Restricted access' );
 
