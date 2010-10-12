@@ -92,7 +92,7 @@ $timer_result = $timer->getProfiling();
 
 $registry->template->addParameter('benchmark', "Page generated in {$timer_result[1]['total']} seconds.");
 
-if (($_SERVER['REMOTE_ADDR'] && $_SERVER['SERVER_ADDR']) == '127.0.0.1'):
+if (($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']) == '127.0.0.1'):
 	$registry->firephp->log($_SESSION);
 	//$registry->firephp->log($uthando);
 	$registry->firephp->log($registry);
