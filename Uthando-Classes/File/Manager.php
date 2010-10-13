@@ -19,9 +19,9 @@ class File_Manager
 		$this->registry = $registry;
 		
 		$this->options = array_merge(array(
-			'directory' => '../Demos/Files',
+			'directory' => '',
 			'baseURL' => '',
-			'assetBasePath' => '../Assets',
+			'assetBasePath' => '',
 			'id3Path' => $path . '/getid3/getid3.php',
 			'mimeTypesPath' => $path . '/MimeTypes.ini',
 			'dateFormat' => 'j M Y - H:i',
@@ -100,7 +100,7 @@ class File_Manager
 		
 		require_once($this->options['id3Path']);
 		
-		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+1));
+		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+4));
 		
 		$mime = $this->getMimeType($file);
 		$content = null;
