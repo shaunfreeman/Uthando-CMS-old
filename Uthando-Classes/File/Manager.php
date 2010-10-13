@@ -99,8 +99,11 @@ class File_Manager
 		if (!$this->checkFile($file)) return;
 		
 		require_once($this->options['id3Path']);
+
+        print_r($file);
+        print_r(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+1));
 		
-		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+4));
+		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+1));
 		
 		$mime = $this->getMimeType($file);
 		$content = null;
