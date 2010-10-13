@@ -3,6 +3,9 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
+/**
+ * @property Registry $registry
+ */
 class File_Manager
 {
 	protected $path = null;
@@ -12,6 +15,7 @@ class File_Manager
 	protected $options;
 	protected $post;
 	protected $get;
+    protected $registry;
 	
 	public function __construct($registry, $options) {
 		$path = File_Utility::getPath();
@@ -99,11 +103,8 @@ class File_Manager
 		if (!$this->checkFile($file)) return;
 		
 		require_once($this->options['id3Path']);
-
-        print_r($file);
-        print_r(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+1));
 		
-		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen(realpath($_SERVER['DOCUMENT_ROOT'].'/../'))+1));
+		$url = $this->options['baseURL'] . $this->normalize(substr($file, strlen(realpath('/home/'.$this->registry->get('settings.dir').'/Public/'))+1));
 		
 		$mime = $this->getMimeType($file);
 		$content = null;
