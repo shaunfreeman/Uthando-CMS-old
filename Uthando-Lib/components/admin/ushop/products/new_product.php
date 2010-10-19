@@ -197,7 +197,7 @@ if ($this->authorize()):
 			$menuBar['add_product'] = '/ushop/products/action-new_product';
 			$menuBar['back'] = $_SESSION['referer_link'];
 			
-			$values['image'] = trim($cat_opts[$values['category_id']]).'/'.$values['image'];
+			$values['image'] = trim(str_replace(' ', '_', $cat_opts[$values['category_id']])).'/'.$values['image'];
 			
 			//check then enter the record.
 			if (!$this->getResult('product_id', $ushop->db_name.'products', null, array('where' => "name='".$values['name']."'"))):

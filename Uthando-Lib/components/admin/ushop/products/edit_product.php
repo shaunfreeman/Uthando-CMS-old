@@ -198,7 +198,7 @@ if ($this->authorize()):
 			$menuBar['back'] = $_SESSION['referer_link'];
 			
 			if (!$values['enabled']) $values['enabled'] = 0;
-			$values['image'] = trim($cat_opts[$values['category_id']]).'/'.$values['image'];
+			$values['image'] = trim(str_replace(' ', '_', $cat_opts[$values['category_id']])).'/'.$values['image'];
 			
 			//check then enter the record.
 			$res = $this->update($values, $ushop->db_name.'products', array('where' => 'product_id='.$this->registry->params['id']));
