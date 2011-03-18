@@ -31,7 +31,7 @@ if (!UthandoUser::authorize()):
 	endforeach;
 	
 	// add links for register and reset user account.
-	$form->addElement('link',null,'Forgot Password:',$this->get('config.server.ssl_url').'/'.$this->registry->component.'/reminder', 'Click Here', 'id="reset_password" class="category"'); 
+	$form->addElement('link',null,'Forgot Password:',$this->get('config.server.ssl_url').'/user/reminder', 'Click Here', 'id="reset_password" class="category"');
 		
 	// Add form element rules.
 	// email rules.

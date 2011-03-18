@@ -212,6 +212,7 @@ tinyMCE table styles
 .mceEditor table {
     position:relative;
     top:0px;
+    bottom:0px;
 }
 
 .mceEditor tr { background: none; }
@@ -254,3 +255,58 @@ div.scroller .scrollForward, div.scroller .scrollBack {
 	height: 5px;
 }
 */
+
+.cartTop {
+	text-align:left;
+	background-color:#88CEEB;
+}
+
+.cartBottom {
+	text-align:right;
+	background-color:#88CEEB;
+}
+
+.itemRow {
+	text-align:left;
+	border-bottom:1px solid black;
+}
+
+#invoice {
+    position:absolute;
+    top:100px;
+    right:10px;
+    bottom:10px;
+    left:10px;
+    overflow:auto;
+}
+
+#invoice table {
+    top:0px;
+    margin: 0px;
+    background:#eee;
+}
+
+#invoice td {
+    background:#eee;
+}
+
+#user_info {
+	float:left;
+}
+
+#cart table, #merchant_info {
+	width: 100%;
+}
+
+#user_info tr:first-child, #user_cda tr:first-child, #merchant_info tr:first-child {
+	background-color: skyblue;
+}
+
+#contentPage {
+	position: absolute;
+	top:110px;
+	right:10px;
+	bottom:10px;
+	left:10px;
+	overflow:auto;
+}

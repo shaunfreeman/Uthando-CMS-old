@@ -3,7 +3,7 @@
 // no direct access
 defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
-if (is_file($this->file.DS.'action'.DS.$this->registry->action.EXT) == false) $this->registry->action = 'browse';
+if (is_file($this->file.DS.'action'.DS.$this->registry->action.EXT) == false) $this->registry->action = 'shopfront';
 
 set_include_path(get_include_path() . PS . COMPONENTS.'ushop'.DS.'action'.DS . PS . COMPONENTS.'ushop'.DS.'user'.DS);
 
@@ -18,7 +18,7 @@ define( 'SHOP_PARENT_FILE', 1 );
 $title .= " : ";
 
 $this->ushop = new UShop_Core();
-	
+
 require_once($this->registry->action.EXT);
 
 $this->setTitle($title . ' | ' . $this->get('config.server.site_name'));

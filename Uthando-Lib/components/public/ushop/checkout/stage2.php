@@ -13,7 +13,7 @@ else:
 
 		$this->addContent('<div id="products">');
 		
-		$form = new HTML_QuickForm('order_confirm', 'post', $this->get('config.server.ssl_url').'/ushop/view/checkout/stage-2');
+		$form = new HTML_QuickForm('order_confirm', 'post', $this->get('config.server.ssl_url').'/ushop/checkout/stage-2');
 
 		// Remove name attribute for xhtml strict compliance.
 		$form->removeAttribute('name');
@@ -120,7 +120,7 @@ else:
 				require_once('ushop/checkout/payment/'.$values['payment_method'].'.php');
 				
 			else:
-				Uthando::go();
+				//Uthando::go();
 			endif;
 			
 		else:

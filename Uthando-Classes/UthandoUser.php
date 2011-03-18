@@ -12,14 +12,14 @@ class UthandoUser
 	public static function setUserInfo()
 	{
 		if (!isset($_SESSION['user_agent']) && !isset($_SESSION['remote_addr'])):
-			$_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+			//$_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
 			$_SESSION['remote_addr'] = $_SERVER['REMOTE_ADDR'];
 		endif;
 	}
 	
 	public static function checkUser()
 	{
-		if ($_SESSION['user_agent'] == $_SERVER['HTTP_USER_AGENT'] && $_SESSION['remote_addr'] == $_SERVER['REMOTE_ADDR']):
+		if ($_SESSION['remote_addr'] == $_SERVER['REMOTE_ADDR']):
 			return true;
 		else:
 			return false;

@@ -276,7 +276,7 @@ if ($this->authorize()):
 			$form->accept($renderer);
 		
 			// output the form
-			$this->content .= $renderer->toHtml();
+			$this->content .= HTML_Element::makeXmlSafe($renderer->toHtml());
 			
 			$this->addComponentJS();
 		
