@@ -15,7 +15,7 @@ else:
 	$content = '<div id="products">';
 
 	$content .= $this->ushop->displayCartButtons();
-
+    
 	$content .= $this->displayContentpane($this->ushop->getCategories(true), 'Shop Front');
 	
 	$content .= '</div>';

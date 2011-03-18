@@ -46,7 +46,7 @@ class UShop_ShoppingCart
 		if (UthandoUser::authorize()):
 			$row = $uthando->getResult(
 				'country_id',
-				$registry->user.$uthando->ushop->prefix.'user_info',
+				$uthando->ushop->db_name.'user_info',
 				null,
 				array('WHERE' => 'user_id='.$_SESSION['user_id']),
 				false

@@ -12,7 +12,7 @@ if (UthandoUser::authorize()):
 
 	$prefix = $this->registry->db->query("
 		SELECT prefix_id, prefix
-		FROM ".$this->registry->user."ushop_user_prefix
+		FROM ".$this->ushop->db_name."user_prefix
 	");
 	
 	foreach ($prefix as $value):
@@ -39,7 +39,7 @@ if (UthandoUser::authorize()):
 
 	$country = $this->registry->db->query("
 		SELECT country_id, country
-		FROM ".$this->registry->core."ushop_countries
+		FROM ".$this->ushop->db_name."countries
 	");
 	
 	foreach ($country as $value):
@@ -70,14 +70,14 @@ if (UthandoUser::authorize()):
 		
 		try
 		{
-			$res = $this->registry->db->insert($values,$this->registry->user.'ushop_user_info');
+			$res = $this->registry->db->insert($values,$this->ushop->db_name.'user_info');
 		}
 		catch (PDOException $e)
 		{
 			$this->registry->Error ($e->getMessage());
 		}
 
-		goto($_SERVER['REQUEST_URI']);
+		Uthando::go($_SERVER['REQUEST_URI']);
 		
 	else:
 			

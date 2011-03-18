@@ -30,7 +30,7 @@ if (UthandoUser::authorize()):
 				// get order
 				$order = $this->registry->db->getRow("
 					SELECT *
-					FROM ".$this->registry->user."ushop_orders
+					FROM ".$this->ushop->db_name."orders
 					WHERE invoice = :invoice_no
 				", array(':invoice_no' => $invoice));
 			}
@@ -44,7 +44,7 @@ if (UthandoUser::authorize()):
 			$paypal->addField('upload','1');
 			if ($this->ushop->paypal['pp_auto_return']) $paypal->addField('return', $this_script.'/callback-return/oid-'.$order->order_id);
 			if ($this->ushop->paypal['pp_cancel_return']) $paypal->addField('cancel_return', $this_script.'/callback-cancel/oid-'.$order->order_id);
-			if ($this->ushop->paypal['pp_ipn']) $paypal->addField('notify_url', $site.'/components/ushop/paypal/ipn.php');
+			if ($this->ushop->paypal['pp_ipn']) $paypal->addField('notify_url', $site.'/ushop/paypal/ipn.php');
 			if ($this->ushop->paypal['pp_merchant_logo']) $paypal->addField('image_url', $site.$this->ushop->paypal['pp_merchant_logo']);
 			$paypal->addField('custom', $order->order_id);
 			$paypal->addField('invoice', $invoice);
@@ -56,7 +56,7 @@ if (UthandoUser::authorize()):
 				// get order
 				$order_lines = $this->registry->db->query("
 					SELECT *
-					FROM ".$this->registry->user."ushop_order_items
+					FROM ".$this->ushop->db_name."order_items
 					WHERE order_id = :order_no
 				", array(':order_no' => $order->order_id));
 				
@@ -64,7 +64,7 @@ if (UthandoUser::authorize()):
 				foreach ($order_lines as $key => $value):
 					$row = $this->registry->db->getRow("
 						SELECT sku, name
-						FROM ".$this->registry->core."ushop_products
+						FROM ".$this->ushop->db_name."products
 						WHERE product_id = :item_id
 							
 					", array(':item_id' => $value->product_id));

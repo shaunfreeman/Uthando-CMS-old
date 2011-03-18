@@ -55,9 +55,10 @@ if ($this->authorize()):
 	endif;
 	
 	if ($rows > 0):
+       
 		$this->content .= '<div id="tableWrap">';
 	
-		$this->content .= $table->toHtml();
+		$this->content .= HTML_Element::makeXmlSafe($table->toHtml());
 		$this->content .= '</div>';
 	else:
 		$this->content .= $this->message($params);

@@ -10,16 +10,16 @@ else:
 	if (UthandoUser::authorize()):
 		switch ($this->registry->params['stage']):
 			case 3:
-				require_once('checkout/stage3.php');
+				require_once('ushop/checkout/stage3.php');
 				break;
 			case 2:
-				require_once('checkout/stage2.php');
+				require_once('ushop/checkout/stage2.php');
 				break;
 			case 1:
 			default:
 				$cart = $this->ushop->retrieveCart();
 				if ($cart->cart == null) Uthando::go();
-				require_once('checkout/stage1.php');
+				require_once('ushop/checkout/stage1.php');
 				break;
 		endswitch;
 	else:

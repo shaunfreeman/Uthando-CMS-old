@@ -16,8 +16,9 @@ class UShop_Core
 		$this->img_dir = "/userfiles/".$this->registry->settings['resolve'].'/products/';
 		
 		//$this->prefix = 'ushop_';
-		$this->db_name = 'uthando_ushop.';
-		$this->tree = $tree = new NestedTree($this->db_name.'product_categories', null, 'category');
+		$this->db_name = $this->database['name'].'.';
+        
+		$this->tree = new NestedTree($this->db_name.'product_categories', null, 'category');
 	}
 	
 	public function __set($index, $value)
@@ -80,8 +81,7 @@ class UShop_Core
 		$rows = ($top_level) ? $this->tree->getTopLevelTree() : $this->getSubcategories();
 		$display = $this->getDisplay('category');
 		$num_rows = ceil(count($rows)/$display);
-		return $this->categoryDisplay($rows, $display, $num_rows);
-		
+		return $this->categoryDisplay($rows, $display, $num_rows);	
 	}
 	
 	public function productList($rows, $num_rows)
@@ -200,9 +200,9 @@ class UShop_Core
 		$user_info = $this->registry->db->query("
 			SELECT CONCAT(prefix, ' ', first_name, ' ', last_name) AS name, address1, address2, address3, city, county, post_code, country, phone, email, user_cda_id
 			FROM ".$this->registry->user."users
-			NATURAL JOIN ".$this->registry->user."ushop_user_info
-			NATURAL JOIN ".$this->registry->user."ushop_user_prefix
-			NATURAL JOIN ".$this->registry->core."ushop_countries
+			NATURAL JOIN ".$this->db_name."user_info
+			NATURAL JOIN ".$this->db_name."user_prefix
+			NATURAL JOIN ".$this->db_name."countries
 			WHERE user_id = :userid
 		", array(':userid' => $user));
 		
@@ -240,10 +240,10 @@ class UShop_Core
 				$user_info = $this->registry->db->query("
 					SELECT CONCAT(prefix, ' ', first_name, ' ', last_name) AS name, user_cda.address1, user_cda.address2, user_cda.address3, user_cda.city, user_cda.county, user_cda.post_code, user_cda.country, user_cda.phone
 					FROM ".$this->registry->user."users
-					NATURAL JOIN ".$this->registry->user."ushop_user_cda AS user_cda
-					NATURAL JOIN ".$this->registry->user."ushop_user_info AS user_info
-					NATURAL JOIN ".$this->registry->user."ushop_user_prefix
-					NATURAL JOIN ".$this->registry->core."ushop_countries
+					NATURAL JOIN ".$this->db_name."user_cda AS user_cda
+					NATURAL JOIN ".$this->db_name."user_info AS user_info
+					NATURAL JOIN ".$this->db_name."user_prefix
+					NATURAL JOIN ".$this->db_name."countries
 					WHERE user_id = :user_cda_id
 				", array(':user_cda_id' => $cda_id));
 			else:
@@ -296,8 +296,8 @@ class UShop_Core
 	public function displayInvoice($user, $invoice)
 	{
 
-		$cb = file_get_contents('ushop/html/cart_body.html', true);
-		$ci = file_get_contents('ushop/html/cart_items.html', true);
+		$cb = file_get_contents(BASE.'/Uthando-Lib/components/public/ushop/html/cart_body.html', true);
+		$ci = file_get_contents(BASE.'/Uthando-Lib/components/public/ushop/html/cart_items.html', true);
 		
 		if (!$uthando->ushop->checkout['vat_state']) $ci = UShop_Utility::removeSection($ci, 'vat');
 		if (!$uthando->ushop->checkout['vat_state']) $cb = UShop_Utility::removeSection($cb, 'vat');
@@ -313,18 +313,18 @@ class UShop_Core
 			// get invoice
 			$sth = $conn->prepare("
 				SELECT *
-				FROM ".$this->registry->user."ushop_orders
+				FROM ".$this->db_name."orders
 				WHERE invoice = ".$invoice."
 				AND user_id = ".$user."
 			");
-
+            
 			$sth->execute();
 			$order = $sth->fetch(PDO::FETCH_OBJ);
 
 			// now get the order lines.
 			$sth = $conn->prepare("
 				SELECT *
-				FROM ".$this->registry->user."ushop_order_items
+				FROM ".$this->db_name."order_items
 				WHERE order_id = ".$order->order_id."
 			");
 
@@ -343,7 +343,7 @@ class UShop_Core
 			try {
 				$row = $this->registry->db->getResult(
 					'sku, name, image, image_status',
-					$this->registry->core.'ushop_products',
+					$this->db_name.'products',
 					null,
 					array(
 						'WHERE' => 'product_id='.$value['product_id']
@@ -397,7 +397,7 @@ class UShop_Core
 			'MERCHANT_DETAILS' => $this->getMerchantInfo()
 		);
 
-		$html = file_get_contents('ushop/html/invoice.html', true);
+		$html = file_get_contents(BASE.'/Uthando-Lib/components/public/ushop/html/invoice.html', true);
 		
 		$html = Uthando::templateParser($html, $params, '{', '}');
 
@@ -460,10 +460,10 @@ class UShop_Core
 			$sth = $conn->prepare("
 				SELECT MAX(invoice) as invoice, (
 					SELECT order_status_id
-					FROM ".$this->registry->core."ushop_order_status
+					FROM ".$this->db_name."order_status
 					WHERE order_status = 'Waiting for Payment'
 				) as order_status_id
-				FROM ".$this->registry->user."ushop_orders
+				FROM ".$this->db_name."orders
 			");
 			$sth->execute();
 			$result = $sth->fetch(PDO::FETCH_OBJ);
@@ -471,7 +471,7 @@ class UShop_Core
 			$invoice_no = $result->invoice + 1;
 
 			$query = "
-				INSERT INTO ".$this->registry->user."ushop_orders (user_id, order_status_id, invoice, total, shipping, tax, payment_method)
+				INSERT INTO ".$this->db_name."orders (user_id, order_status_id, invoice, total, shipping, tax, payment_method)
 				VALUES (".$_SESSION['user_id'].", ".$result->order_status_id.", ".$invoice_no.", ".$cart_totals['CART_TOTAL'].", ".$cart_totals['POST_COST'].", ".$cart_totals['VAT_TOTAL'].", '".$pay_method."')
 			";
 			
@@ -481,7 +481,7 @@ class UShop_Core
 				$id = $conn->lastInsertId();
 				
 				$sth = $conn->prepare("
-					INSERT INTO ".$this->registry->user."ushop_order_items
+					INSERT INTO ".$this->db_name."order_items
 					(user_id, order_id, product_id, quantity, item_price, tax)
 					VALUES (:user, :order, :product, :qty, :price, :tax)
 				");
@@ -489,7 +489,7 @@ class UShop_Core
 				if ($this->checkout['stock_control']):
 					$admin_conn = $this->getAdminConn();
 					$qty_update = $admin_conn->prepare("
-						UPDATE ".$this->registry->core."ushop_products
+						UPDATE ".$this->db_name."products
 						SET quantity = quantity - :qty
 						WHERE product_id = :pid
 					");
@@ -569,7 +569,7 @@ class UShop_Core
 				'user_id' => $_SESSION['user_id'],
 				'cart' => serialize($cart)
 			),
-			$this->registry->sessions.$this->prefix.'shoppingcart'
+			$this->db_name.'shoppingcart'
 		);
 		unset($_SESSION['cart']);
 	}
@@ -580,7 +580,7 @@ class UShop_Core
 			array(
 				'cart' => serialize($cart)
 			),
-			$this->registry->sessions.$this->prefix.'shoppingcart',
+			$this->db_name.'shoppingcart',
 			array(
 				'WHERE' => 'user_id='.$_SESSION['user_id']
 			)
@@ -592,7 +592,7 @@ class UShop_Core
 		if (isset($_SESSION['cart'])):
 			unset($_SESSION['cart']);
 		else:
-			$sql = $this->uthando->remove($this->registry->sessions.$this->prefix.'shoppingcart', 'user_id='.$_SESSION['user_id']);
+			$sql = $this->uthando->remove($this->db_name.'shoppingcart', 'user_id='.$_SESSION['user_id']);
 		endif;
 	}
 
@@ -600,7 +600,7 @@ class UShop_Core
 	{
 		$sql = $this->uthando->getResult(
 			'cart',
-			$this->registry->sessions.$this->prefix.'shoppingcart',
+			$this->db_name.'shoppingcart',
 			null,
 			array(
 				'WHERE' => 'user_id='.$_SESSION['user_id']

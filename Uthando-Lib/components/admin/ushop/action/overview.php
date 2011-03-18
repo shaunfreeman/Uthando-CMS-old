@@ -25,7 +25,7 @@ if ($this->authorize()):
 		$ushop->db_name.'orders',
 		array(
 			$ushop->db_name.'order_status',
-			$this->registry->core.'users'
+			$this->registry->user.'users'
 		),
 		array(
 			'WHERE' => 'order_status_id',

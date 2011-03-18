@@ -86,6 +86,21 @@ class HTML_Page
 				$head->appendChild($style);
 			endforeach;
 		endforeach;
+
+		// Generate script file links
+		foreach ($this->scripts as $script) $head->appendChild($script);
+		
+		// Generate script declarations
+		foreach ($this->script as $script):
+			foreach ($script as $type => $content):
+				$cm = $this->doc->createTextNode("\n//");
+				$ct = $this->doc->createCDATASection("\n" . $content . "\n//");
+				$script = $this->doc->createElement('script', null, array('type' => $type));
+				$script->appendChild($cm);
+				$script->appendChild($ct);
+				$head->appendChild($script);
+			endforeach;
+		endforeach;
 		
 		return $head;
 	}
@@ -96,21 +111,6 @@ class HTML_Page
 		foreach ($this->body as $value):
 			if (is_string($value)) $value = $this->doc->createDocumentFragment($value, null, true);
 			$body->appendChild($value);
-		endforeach;
-		
-		// Generate script file links
-		foreach ($this->scripts as $script) $body->appendChild($script);
-		
-		// Generate script declarations
-		foreach ($this->script as $script):
-			foreach ($script as $type => $content):
-				$cm = $this->doc->createTextNode("\n//");
-				$ct = $this->doc->createCDATASection("\n" . $content . "\n//");
-				$script = $this->doc->createElement('script', null, array('type' => $type));
-				$script->appendChild($cm);
-				$script->appendChild($ct);
-				$body->appendChild($script);
-			endforeach;
 		endforeach;
 		
 		return $body;

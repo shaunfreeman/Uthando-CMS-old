@@ -111,6 +111,6 @@ if (UthandoUser::authorize()):
 		$this->addContent($form->toHtml());
 	endif;
 else:
-	goto ('../../index.php');
+	Uthando::go ();
 endif;
 ?>

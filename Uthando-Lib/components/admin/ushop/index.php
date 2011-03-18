@@ -26,6 +26,8 @@ if ($this->authorize()):
 			'tax' => '/ushop/tax',
 			'params' => '/ushop/params'
 		);
+
+        $this->addComponentCSS();
 		
 		$ushop = new UShop_Admin();
 		
@@ -33,7 +35,6 @@ if ($this->authorize()):
 		
 		$this->addParameter ('page',  $title);
 		
-		$this->addComponentCSS();
 	endif;
 endif;
 ?>
