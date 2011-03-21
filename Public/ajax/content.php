@@ -35,7 +35,7 @@ require_once('functions.php');
 
 $registry = new Registry($_GET['path']);
 
-$registry->setSite(BASE.DS.'Uthando-ini'.DS.'.UthandoSites.ini'.EXT);
+$registry->setSite(BASE.DS.'Uthando-ini'.DS.'UthandoSites.ini'.EXT);
 $registry->loadIniFile('uthando', 'config');
 $registry->setDefaults();
 
