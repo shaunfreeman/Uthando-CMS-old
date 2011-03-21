@@ -44,7 +44,7 @@ $timer->start();
 
 $registry = new Admin_Registry();
 
-$registry->setSite(BASE.DS.'Uthando-ini'.DS.'.UthandoSites.ini'.EXT);
+$registry->setSite(BASE.DS.'Uthando-ini'.DS.'UthandoSites.ini'.EXT);
 $registry->loadIniFiles(array('admin_config' => 'uthandoAdmin', 'config' => 'uthando'));
 $registry->setDefaults();
 

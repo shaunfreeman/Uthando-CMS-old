@@ -5,8 +5,8 @@ defined( 'PARENT_FILE' ) or die( 'Restricted access' );
 
 if ($this->authorize()):
 	
-	$offline_message = '/home/'.$this->registry->get('settings.dir').'/Public/'.$this->registry->get('settings.resolve').'/template_files/html/offline_message.html';
-	$terms = '/home/'.$this->registry->get('settings.dir').'/Public/'.$this->registry->get('settings.resolve').'/template_files/html/terms.html';
+	$offline_message = '/home/'.$this->registry->get('settings.dir').'/Public/'.$this->registry->get('settings.resolve').'/file/offline_message.html';
+	$terms = '/home/'.$this->registry->get('settings.dir').'/Public/'.$this->registry->get('settings.resolve').'/file/terms.html';
 	
 	$form = new HTML_QuickForm('edit_params', 'post', $_SERVER['REQUEST_URI']);
 			
@@ -47,7 +47,7 @@ if ($this->authorize()):
 			$ftp = new File_FTP($this->registry);
 			foreach ($values['information'] as $key => $value):
 				$message = file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/tmp/'.$key.'.html',stripslashes(str_replace('\r\n', '', $value)));
-				$ftp->put($_SERVER['DOCUMENT_ROOT'] . '/tmp/'.$key.'.html', $ftp->public_html.'/'.$this->registry->get('settings.resolve').'/template_files/html/'.$key.'.html', true);
+				$ftp->put($_SERVER['DOCUMENT_ROOT'] . '/tmp/'.$key.'.html', $ftp->public_html.'/'.$this->registry->get('settings.resolve').'/file/'.$key.'.html', true);
 				unlink($_SERVER['DOCUMENT_ROOT'] . '/tmp/'.$key.'.html');
 			endforeach;
 			unset($values['information']);

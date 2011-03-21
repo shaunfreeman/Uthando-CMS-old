@@ -44,7 +44,7 @@ $registry = new Registry();
 
 // $registry->firephp = FirePHP::getInstance(true);
 
-$registry->setSite(BASE.DS.'Uthando-ini'.DS.'.UthandoSites.ini'.EXT);
+$registry->setSite(BASE.DS.'Uthando-ini'.DS.'UthandoSites.ini'.EXT);
 $registry->loadIniFile('uthando', 'config');
 $registry->setDefaults();
 

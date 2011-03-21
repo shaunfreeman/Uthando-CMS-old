@@ -20,7 +20,7 @@ else:
 			$this->addContent($user_info['info']);
 			$this->addContent($user_info['cda']);
 			$this->addContent('<div class="both"></div>');
-			$this->addContent('<div id="products"><a href="'.$this->get('config.server.ssl_url').'/ushop/user/change_details" class="button">Update Details</a><p>Please click confirm address to continue to check out.</p><a href="'.$this->get('config.server.ssl_url').'/ushop/checkout/stage-2" class="button">Confirm Address</a></div>');
+			$this->addContent('<div id="products"><a href="'.$this->get('config.server.ssl_url').'/ushop/change_details" class="button">Update Details</a><p>Please click confirm address to continue to check out.</p><a href="'.$this->get('config.server.ssl_url').'/ushop/checkout/stage-2" class="button">Confirm Address</a></div>');
 			
 		else:
 			// no address, create one.

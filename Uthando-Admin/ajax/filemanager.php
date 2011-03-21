@@ -37,7 +37,7 @@ require_once('functions.php');
 
 $registry = new Admin_Registry(true);
 
-$registry->setSite(BASE.DS.'Uthando-ini'.DS.'.UthandoSites.ini'.EXT);
+$registry->setSite(BASE.DS.'Uthando-ini'.DS.'UthandoSites.ini'.EXT);
 $registry->loadIniFiles(array('admin_config' => 'uthandoAdmin', 'config' => 'uthando'));
 $registry->setDefaults(true);
 
