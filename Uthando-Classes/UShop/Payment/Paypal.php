@@ -8,11 +8,13 @@ class UShop_Payment_Paypal extends HTML_Element
 	private $fields = array(); // array holds the fields to submit to paypal
 	protected $paypal_url = 'https://www.paypal.com/cgi-bin/webscr';
 	protected $registry;
+    protected $ushop;
 	protected $uthando_dir;
 	
 	public function __construct($registry)
 	{
 		$this->registry = $registry;
+
 		parent::__construct();
 	}
 
