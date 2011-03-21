@@ -90,7 +90,7 @@ if (UthandoUser::authorize()):
 			$this->addContent($paypal->submitPaypalPost());
 			
 			$this->registry->component_js = array(
-				'/components/ushop/js/paypal.js'
+				'/uthando-js/uthando/public/paypal.js'
 			);
 			
 			break;
