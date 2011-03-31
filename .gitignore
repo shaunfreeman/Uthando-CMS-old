@@ -19,7 +19,3 @@ Uthando-Webmail/logs/*
 Uthando-Webmail/temp/*
 Uthando-Webmail/skins/default/templates/login.html
 Uthando-ini/*
-uthando.session
-uthando.webprj
-.bzr
-.bzrignore
