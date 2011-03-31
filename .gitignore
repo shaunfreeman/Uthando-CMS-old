@@ -1,12 +1,3 @@
-bin/*
-logs/*
-setup/*
-Uthando-Apache/conf/*
-!uthando-cms.conf
-Uthando-Apache/sites-available/*
-!default
-Uthando-Apache/sites-enabled/*
-!000-default
 Public/tmp/*
 !index.html
 Uthando-Admin/tmp/
