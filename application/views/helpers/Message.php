@@ -21,19 +21,21 @@
  */
 
 /**
- * Description of Message
+ * Displays an html message block with links.
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Zend_View_Helper_Message extends Zend_View_Helper_Url
+class Zend_View_Helper_Message extends Zend_View_Helper_Abstract
 {
     /**
-     *
+     * Constructs the message and adds the links if any.
+     * 
      * @param string $text
+     * @param array $links
      * @return string
      * @access public
      */
-    public function message($text)
+    public function message($text, $links = array())
     {
         
     }

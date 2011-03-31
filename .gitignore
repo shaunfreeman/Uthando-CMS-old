@@ -1,1 +1,3 @@
+public/tmp/*
+!public/tmp/index.html
 Uthando-ini/*

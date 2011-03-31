@@ -21,23 +21,54 @@
  */
 
 /**
- * Description of Widget
+ * Constructs and outputs widgets
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 class Zend_View_Helper_Widget extends Zend_View_Helper_Abstract
 {
+    /**
+     *
+     * @var mixed
+     */
     private $_widget;
+
+    /**
+     *
+     * @var Core_Model_Mapper_Widget
+     */
     private $_DbTable;
-    
-    public function widget()
+
+    /**
+     * Constructer can take two arguments, name of widget and widget group name.
+     *
+     * @param string $name Widget name
+     * @param bool $group Group name
+     * @return Zend_View_Helper_Widget
+     * @access public
+     */
+    public function widget($name = null, $group = false)
     {
         $this->_widget = null;
         $this->_DbTable = new Core_Model_Mapper_Widget();
-        return $this;
+
+        if (is_string($name) && $group === false) {
+            return $this->getWidgetByName($name);
+        } elseif (is_string($name) && $group === true) {
+            return $this->getWidgetsByGroup($name);
+        } else {
+            return $this;
+        }
     }
 
-    public function get($name)
+    /**
+     * Method to get a single widget.
+     *
+     * @param string $name name of widget
+     * @return Zend_View_Helper_Widget
+     * @access public
+     */
+    public function getWidgetByName($name)
     {
         $widget = $this->_DbTable->getWidgetByName($name);
 
@@ -51,6 +82,13 @@ class Zend_View_Helper_Widget extends Zend_View_Helper_Abstract
         return $this;
     }
 
+    /**
+     * Method to get all widgets from a group.
+     *
+     * @param string $group name of group
+     * @return Zend_View_Helper_Widget
+     * @access public
+     */
     public function getWidgetsByGroup($group)
     {
         $this->_widget = array();
@@ -60,10 +98,16 @@ class Zend_View_Helper_Widget extends Zend_View_Helper_Abstract
            $widgetClass = $this->_getInflected($widget->widget);
            $this->_widget[] = new $widgetClass($widget);
         }
-        
+
         return $this;
     }
 
+    /**
+     * Magic method to output widget to a string.
+     * 
+     * @return string
+     * @access public
+     */
     public function __toString()
     {
         try {
@@ -75,6 +119,12 @@ class Zend_View_Helper_Widget extends Zend_View_Helper_Abstract
         }
     }
 
+    /**
+     * Renders the widget.
+     * 
+     * @return string
+     * @access public
+     */
     public function render()
     {   
         if ($this->_widget instanceof Uthando_Widget_Abstract) {
@@ -93,12 +143,12 @@ class Zend_View_Helper_Widget extends Zend_View_Helper_Abstract
     }
 
     /**
-     * Inflect the name using the inflector filter
-     *
+     * Inflect the name using the inflector filter.
      * Changes camelCaseWord to Camel_Case_Word
      *
      * @param string $name The name to inflect
      * @return string The inflected string
+     * @access private
      */
     private function _getInflected($name)
     {

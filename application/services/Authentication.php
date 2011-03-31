@@ -33,7 +33,7 @@ class Core_Service_Authentication
 
     public function __construct(Core_Model_Mapper_User $userModel = null)
     {
-        $this->_userModel = null === $userModel ?
+        $this->_userModel = (null === $userModel) ?
                 new Core_Model_Mapper_User() : $userModel;
     }
 
