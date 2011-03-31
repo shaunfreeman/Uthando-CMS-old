@@ -1,0 +1,16 @@
+<!-- 2 columns -->
+<div id="mcontent2">
+    <div class="padding">
+        <div id="ajax_content">
+            <!-- content starts here -->
+            <div class="pathway">
+                <?= $this->navigation()
+                        ->breadcrumbs()
+                        ->setMinDepth(0);
+                ?>
+            </div>
+            <?= $this->layout()->content; ?>
+            <!-- content ends here -->
+        </div>
+    </div>
+</div>

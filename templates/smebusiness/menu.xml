@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : top_navi.xml
+    Created on : 09 December 2010, 14:50
+    Author     : shaun
+    Description:
+        Purpose of the document follows.
+-->
+<config>
+    <top_menu>
+        <home>
+            <label>Home</label>
+            <class>mainlevel-nav</class>
+            <module>default</module>
+            <controller>index</controller>
+            <action>index</action>
+        </home>
+        <admin>
+            <label>Admin</label>
+            <class>mainlevel-nav</class>
+            <module>core</module>
+            <controller>admin</controller>
+            <action>index</action>
+            <route>admin</route>
+            <reset_params>true</reset_params>
+            <resource>Admin</resource>
+        </admin>
+        <login>
+            <label>Login</label>
+            <class>mainlevel-nav</class>
+            <module>default</module>
+            <controller>user</controller>
+            <action>login</action>
+            <resource>Guest</resource>
+        </login>
+        <register>
+            <label>Register</label>
+            <class>mainlevel-nav</class>
+            <module>default</module>
+            <controller>user</controller>
+            <action>register</action>
+            <resource>Guest</resource>
+        </register>
+        <logout>
+            <label>Logout</label>
+            <class>mainlevel-nav</class>
+            <module>default</module>
+            <controller>user</controller>
+            <action>logout</action>
+            <resource>User</resource>
+        </logout>
+    </top_menu>
+    <main_menu>
+        <home>
+            <label>Home</label>
+            <class>mainlevel</class>
+            <module>default</module>
+            <controller>index</controller>
+            <action>index</action>
+        </home>
+        <user>
+            <label>My Account</label>
+            <class>mainlevel</class>
+            <module>default</module>
+            <controller>user</controller>
+            <action>index</action>
+            <resource>User</resource>
+            <pages>
+                <edit>
+                    <label>Edit Details</label>
+                    <class>sublevel</class>
+                    <module>default</module>
+                    <controller>user</controller>
+                    <action>edit</action>
+                    <resource>User</resource>
+                </edit>
+            </pages>
+        </user>
+        <register>
+            <label>Register</label>
+            <class>mainlevel</class>
+            <module>default</module>
+            <controller>user</controller>
+            <action>register</action>
+            <resource>Guest</resource>
+        </register>
+         <login>
+            <label>Login</label>
+            <class>mainlevel</class>
+            <module>default</module>
+            <controller>user</controller>
+            <action>login</action>
+            <resource>Guest</resource>
+        </login>
+        <logout>
+            <label>Logout</label>
+            <class>mainlevel</class>
+            <module>default</module>
+            <controller>user</controller>
+            <action>logout</action>
+            <resource>User</resource>
+        </logout>
+    </main_menu>
+</config>

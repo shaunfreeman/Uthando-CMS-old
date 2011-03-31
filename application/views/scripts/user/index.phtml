@@ -1,0 +1,32 @@
+<?php if ($this->admin): ?>
+<div id="menuToolbarWrap">
+<!--<img width="8" height="53" id="scrollLeft" alt="scroll left" src="/images/left_scroll.png" />-->
+<div id="menuToolbar">
+
+  <ul id="iconMenuStrip">
+    <li>
+      <a id="new_user-24" class="Tips button iconImgs" href="<?= $this->url(array(
+        'module'    => 'core',
+        'controller'    => 'user',
+        'action'        => 'new'
+    ), 'admin', true) ?>" title="New User" rel="Create a new user.">
+        <span class="iconCaptions">New User</span>
+      </a>
+    </li>
+    <li>
+      <a id="users-24" class="Tips button iconImgs" href="<?= $this->url(array(
+        'module'    => 'core',
+        'controller'    => 'user',
+        'action'        => 'list'
+    ), 'admin', true) ?>" title="List Users" rel="List users.">
+        <span class="iconCaptions">List Users</span>
+      </a>
+    </li>
+  </ul>
+  <div class="both"></div>
+
+</div>
+<!--<img width="8" height="53" id="scrollRight" alt="scroll right" src="/images/right_scroll.png" />-->
+</div>
+<?php endif; ?>
+

@@ -1,0 +1,617 @@
+# English (Canada) translation for uthando-cms
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the uthando-cms package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: uthando-cms\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-01-03 12:36+0100\n"
+"PO-Revision-Date: 2011-01-04 17:39+0000\n"
+"Last-Translator: vincentbluff <shaun@shaunfreeman.co.uk>\n"
+"Language-Team: English (Canada) <en_CA@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2011-03-19 07:05+0000\n"
+"X-Generator: Launchpad (build 12559)\n"
+
+#: application/forms/User/Login.php:35
+#: application/forms/User/Register.php:67
+msgid "Email"
+msgstr "E-mail Address"
+
+#: application/forms/User/Login.php:43
+#: application/forms/User/Register.php:77
+msgid "Password"
+msgstr "Password"
+
+#: application/forms/User/Login.php:50
+msgid "Login"
+msgstr "Login"
+
+#: application/forms/User/Register.php:39
+msgid "First Name"
+msgstr "Forename"
+
+#: application/forms/User/Register.php:50
+msgid "Last Name"
+msgstr "Surname"
+
+#: application/forms/User/Register.php:87
+msgid "Confirm Password"
+msgstr "Confirm Password"
+
+#: application/forms/User/Register.php:102
+msgid "Please enter the 6 letters displayed below:"
+msgstr "Please enter the 6 letters displayed below:"
+
+#: application/forms/User/Register.php:112
+msgid "User Details"
+msgstr "User Details"
+
+#: application/forms/User/Register.php:127
+msgid "Site Password"
+msgstr "Site Password"
+
+#: application/forms/User/Register.php:140
+msgid "Captcha Image"
+msgstr "Captcha Image"
+
+#: application/forms/User/Register.php:145
+msgid "Register"
+msgstr "Register"
+
+#: application/controllers/ErrorController.php:11
+msgid "You have reached the error page"
+msgstr "You have reached the error page"
+
+#: application/controllers/ErrorController.php:22
+msgid "Page not found"
+msgstr "Page not found"
+
+#: application/controllers/ErrorController.php:27
+msgid "Application error"
+msgstr "Application error"
+
+#: application/controllers/UserController.php:74
+msgid "Login failed, Please try again."
+msgstr "Login failed, Please try again."
+
+#: resources/Zend_Validate.php:28
+#: resources/Zend_Validate.php:74
+#: resources/Zend_Validate.php:182
+#: resources/Zend_Validate.php:240
+msgid "Invalid type given. String, integer or float expected"
+msgstr "Invalid type given. String, integer or float expected"
+
+#: resources/Zend_Validate.php:29
+msgid "'%value%' contains characters which are non alphabetic and no digits"
+msgstr "'%value%' contains characters which are non alphabetic and no digits"
+
+#: resources/Zend_Validate.php:30
+#: resources/Zend_Validate.php:35
+#: resources/Zend_Validate.php:76
+msgid "'%value%' is an empty string"
+msgstr "'%value%' is an empty string"
+
+#: resources/Zend_Validate.php:33
+#: resources/Zend_Validate.php:41
+#: resources/Zend_Validate.php:58
+#: resources/Zend_Validate.php:79
+#: resources/Zend_Validate.php:189
+#: resources/Zend_Validate.php:193
+#: resources/Zend_Validate.php:221
+#: resources/Zend_Validate.php:246
+#: resources/Zend_Validate.php:250
+#: resources/Zend_Validate.php:254
+#: resources/Zend_Validate.php:260
+msgid "Invalid type given. String expected"
+msgstr "Invalid type given. String expected"
+
+#: resources/Zend_Validate.php:34
+msgid "'%value%' contains non alphabetic characters"
+msgstr "'%value%' contains non alphabetic characters"
+
+#: resources/Zend_Validate.php:38
+msgid "'%value%' failed checksum validation"
+msgstr "'%value%' failed checksum validation"
+
+#: resources/Zend_Validate.php:39
+msgid "'%value%' contains invalid characters"
+msgstr "'%value%' contains invalid characters"
+
+#: resources/Zend_Validate.php:40
+msgid "'%value%' should have a length of %length% characters"
+msgstr "'%value%' should have a length of %length% characters"
+
+#: resources/Zend_Validate.php:44
+msgid "'%value%' is not between '%min%' and '%max%', inclusively"
+msgstr "'%value%' is not between '%min%' and '%max%', inclusively"
+
+#: resources/Zend_Validate.php:45
+msgid "'%value%' is not strictly between '%min%' and '%max%'"
+msgstr "'%value%' is not strictly between '%min%' and '%max%'"
+
+#: resources/Zend_Validate.php:48
+msgid "'%value%' is not valid"
+msgstr "'%value%' is not valid"
+
+#: resources/Zend_Validate.php:49
+msgid "An exception has been raised within the callback"
+msgstr "An exception has been raised within the callback"
+
+#: resources/Zend_Validate.php:52
+msgid "'%value%' must contain between 13 and 19 digits"
+msgstr "'%value%' must contain between 13 and 19 digits"
+
+#: resources/Zend_Validate.php:53
+msgid "Luhn algorithm (mod-10 checksum) failed on '%value%'"
+msgstr "Luhn algorithm (mod-10 checksum) failed on '%value%'"
+
+#: resources/Zend_Validate.php:56
+msgid "'%value%' seems to contain an invalid checksum"
+msgstr "'%value%' seems to contain an invalid checksum"
+
+#: resources/Zend_Validate.php:57
+#: resources/Zend_Validate.php:75
+msgid "'%value%' must contain only digits"
+msgstr "'%value%' must contain only digits"
+
+#: resources/Zend_Validate.php:59
+msgid "'%value%' contains an invalid amount of digits"
+msgstr "'%value%' contains an invalid amount of digits"
+
+#: resources/Zend_Validate.php:60
+msgid "'%value%' is not from an allowed institute"
+msgstr "'%value%' is not from an allowed institute"
+
+#: resources/Zend_Validate.php:61
+msgid "'%value%' seems to be an invalid creditcard number"
+msgstr "'%value%' seems to be an invalid creditcard number"
+
+#: resources/Zend_Validate.php:62
+msgid "An exception has been raised while validating '%value%'"
+msgstr "An exception has been raised while validating '%value%'"
+
+#: resources/Zend_Validate.php:65
+msgid "Invalid type given. String, integer, array or Zend_Date expected"
+msgstr "Invalid type given. String, integer, array or Zend_Date expected"
+
+#: resources/Zend_Validate.php:66
+msgid "'%value%' does not appear to be a valid date"
+msgstr "'%value%' does not appear to be a valid date"
+
+#: resources/Zend_Validate.php:67
+msgid "'%value%' does not fit the date format '%format%'"
+msgstr "'%value%' does not fit the date format '%format%'"
+
+#: resources/Zend_Validate.php:70
+msgid "No record matching '%value%' was found"
+msgstr "No record matching '%value%' was found"
+
+#: resources/Zend_Validate.php:71
+msgid "A record matching '%value%' was found"
+msgstr "A record matching '%value%' was found"
+
+#: resources/Zend_Validate.php:80
+msgid ""
+"'%value%' is no valid email address in the basic format local-part@hostname"
+msgstr ""
+"'%value%' is not a valid email address in the basic format local-"
+"part@hostname"
+
+#: resources/Zend_Validate.php:81
+msgid "'%hostname%' is no valid hostname for email address '%value%'"
+msgstr "'%hostname%' is not a valid hostname for email address '%value%'"
+
+#: resources/Zend_Validate.php:82
+msgid ""
+"'%hostname%' does not appear to have a valid MX record for the email address "
+"'%value%'"
+msgstr ""
+"'%hostname%' does not appear to have a valid MX record for the email address "
+"'%value%'"
+
+#: resources/Zend_Validate.php:83
+msgid ""
+"'%hostname%' is not in a routable network segment. The email address "
+"'%value%' should not be resolved from public network"
+msgstr ""
+"'%hostname%' is not in a routable network segment. The email address "
+"'%value%' should not be resolved from public network"
+
+#: resources/Zend_Validate.php:84
+#, php-format
+msgid "'%localPart%' can not be matched against dot-atom format"
+msgstr "'%localPart%' can not be matched against dot-atom format"
+
+#: resources/Zend_Validate.php:85
+#, php-format
+msgid "'%localPart%' can not be matched against quoted-string format"
+msgstr "'%localPart%' can not be matched against quoted-string format"
+
+#: resources/Zend_Validate.php:86
+msgid "'%localPart%' is no valid local part for email address '%value%'"
+msgstr "'%localPart%' is not a valid local part for email address '%value%'"
+
+#: resources/Zend_Validate.php:87
+msgid "'%value%' exceeds the allowed length"
+msgstr "'%value%' exceeds the allowed length"
+
+#: resources/Zend_Validate.php:90
+msgid "Too many files, maximum '%max%' are allowed but '%count%' are given"
+msgstr "Too many files, maximum '%max%' are allowed but '%count%' are given"
+
+#: resources/Zend_Validate.php:91
+msgid "Too few files, minimum '%min%' are expected but '%count%' are given"
+msgstr "Too few files, minimum '%min%' are expected but '%count%' are given"
+
+#: resources/Zend_Validate.php:94
+msgid "File '%value%' does not match the given crc32 hashes"
+msgstr "File '%value%' does not match the given crc32 hashes"
+
+#: resources/Zend_Validate.php:95
+msgid "A crc32 hash could not be evaluated for the given file"
+msgstr "A crc32 hash could not be evaluated for the given file"
+
+#: resources/Zend_Validate.php:96
+#: resources/Zend_Validate.php:100
+#: resources/Zend_Validate.php:105
+#: resources/Zend_Validate.php:111
+#: resources/Zend_Validate.php:121
+#: resources/Zend_Validate.php:129
+#: resources/Zend_Validate.php:134
+#: resources/Zend_Validate.php:139
+#: resources/Zend_Validate.php:144
+#: resources/Zend_Validate.php:149
+#: resources/Zend_Validate.php:157
+#: resources/Zend_Validate.php:162
+#: resources/Zend_Validate.php:179
+msgid "File '%value%' is not readable or does not exist"
+msgstr "File '%value%' is not readable or does not exist"
+
+#: resources/Zend_Validate.php:99
+#: resources/Zend_Validate.php:110
+msgid "File '%value%' has a false extension"
+msgstr "File '%value%' has a false extension"
+
+#: resources/Zend_Validate.php:103
+#: resources/Zend_Validate.php:147
+msgid "File '%value%' has a false mimetype of '%type%'"
+msgstr "File '%value%' has a false mimetype of '%type%'"
+
+#: resources/Zend_Validate.php:104
+#: resources/Zend_Validate.php:133
+#: resources/Zend_Validate.php:138
+#: resources/Zend_Validate.php:148
+msgid "The mimetype of file '%value%' could not be detected"
+msgstr "The mimetype of file '%value%' could not be detected"
+
+#: resources/Zend_Validate.php:107
+msgid "File '%value%' does not exist"
+msgstr "File '%value%' does not exist"
+
+#: resources/Zend_Validate.php:114
+msgid ""
+"All files in sum should have a maximum size of '%max%' but '%size%' were "
+"detected"
+msgstr ""
+"All files in sum should have a maximum size of '%max%' but '%size%' were "
+"detected"
+
+#: resources/Zend_Validate.php:115
+msgid ""
+"All files in sum should have a minimum size of '%min%' but '%size%' were "
+"detected"
+msgstr ""
+"All files in sum should have a minimum size of '%min%' but '%size%' were "
+"detected"
+
+#: resources/Zend_Validate.php:116
+msgid "One or more files can not be read"
+msgstr "One or more files can not be read"
+
+#: resources/Zend_Validate.php:119
+msgid "File '%value%' does not match the given hashes"
+msgstr "File '%value%' does not match the given hashes"
+
+#: resources/Zend_Validate.php:120
+msgid "A hash could not be evaluated for the given file"
+msgstr "A hash could not be evaluated for the given file"
+
+#: resources/Zend_Validate.php:124
+msgid ""
+"Maximum allowed width for image '%value%' should be '%maxwidth%' but "
+"'%width%' detected"
+msgstr ""
+"Maximum allowed width for image '%value%' should be '%maxwidth%' but "
+"'%width%' detected"
+
+#: resources/Zend_Validate.php:125
+msgid ""
+"Minimum expected width for image '%value%' should be '%minwidth%' but "
+"'%width%' detected"
+msgstr ""
+"Minimum expected width for image '%value%' should be '%minwidth%' but "
+"'%width%' detected"
+
+#: resources/Zend_Validate.php:126
+msgid ""
+"Maximum allowed height for image '%value%' should be '%maxheight%' but "
+"'%height%' detected"
+msgstr ""
+"Maximum allowed height for image '%value%' should be '%maxheight%' but "
+"'%height%' detected"
+
+#: resources/Zend_Validate.php:127
+msgid ""
+"Minimum expected height for image '%value%' should be '%minheight%' but "
+"'%height%' detected"
+msgstr ""
+"Minimum expected height for image '%value%' should be '%minheight%' but "
+"'%height%' detected"
+
+#: resources/Zend_Validate.php:128
+msgid "The size of image '%value%' could not be detected"
+msgstr "The size of image '%value%' could not be detected"
+
+#: resources/Zend_Validate.php:132
+msgid "File '%value%' is not compressed, '%type%' detected"
+msgstr "File '%value%' is not compressed, '%type%' detected"
+
+#: resources/Zend_Validate.php:137
+msgid "File '%value%' is no image, '%type%' detected"
+msgstr "File '%value%' is not an image, '%type%' detected"
+
+#: resources/Zend_Validate.php:142
+msgid "File '%value%' does not match the given md5 hashes"
+msgstr "File '%value%' does not match the given md5 hashes"
+
+#: resources/Zend_Validate.php:143
+msgid "A md5 hash could not be evaluated for the given file"
+msgstr "A md5 hash could not be evaluated for the given file"
+
+#: resources/Zend_Validate.php:152
+msgid "File '%value%' exists"
+msgstr "File '%value%' exists"
+
+#: resources/Zend_Validate.php:155
+msgid "File '%value%' does not match the given sha1 hashes"
+msgstr "File '%value%' does not match the given sha1 hashes"
+
+#: resources/Zend_Validate.php:156
+msgid "A sha1 hash could not be evaluated for the given file"
+msgstr "A sha1 hash could not be evaluated for the given file"
+
+#: resources/Zend_Validate.php:160
+msgid ""
+"Maximum allowed size for file '%value%' is '%max%' but '%size%' detected"
+msgstr ""
+"Maximum allowed size for file '%value%' is '%max%' but '%size%' detected"
+
+#: resources/Zend_Validate.php:161
+msgid ""
+"Minimum expected size for file '%value%' is '%min%' but '%size%' detected"
+msgstr ""
+"Minimum expected size for file '%value%' is '%min%' but '%size%' detected"
+
+#: resources/Zend_Validate.php:165
+msgid "File '%value%' exceeds the defined ini size"
+msgstr "File '%value%' exceeds the defined ini size"
+
+#: resources/Zend_Validate.php:166
+msgid "File '%value%' exceeds the defined form size"
+msgstr "File '%value%' exceeds the defined form size"
+
+#: resources/Zend_Validate.php:167
+msgid "File '%value%' was only partially uploaded"
+msgstr "File '%value%' was only partially uploaded"
+
+#: resources/Zend_Validate.php:168
+msgid "File '%value%' was not uploaded"
+msgstr "File '%value%' was not uploaded"
+
+#: resources/Zend_Validate.php:169
+msgid "No temporary directory was found for file '%value%'"
+msgstr "No temporary directory was found for file '%value%'"
+
+#: resources/Zend_Validate.php:170
+msgid "File '%value%' can't be written"
+msgstr "File '%value%' can't be written"
+
+#: resources/Zend_Validate.php:171
+msgid "A PHP extension returned an error while uploading the file '%value%'"
+msgstr "A PHP extension returned an error while uploading the file '%value%'"
+
+#: resources/Zend_Validate.php:172
+msgid ""
+"File '%value%' was illegally uploaded. This could be a possible attack"
+msgstr ""
+"File '%value%' was illegally uploaded. This could be a possible attack"
+
+#: resources/Zend_Validate.php:173
+msgid "File '%value%' was not found"
+msgstr "File '%value%' was not found"
+
+#: resources/Zend_Validate.php:174
+msgid "Unknown error while uploading file '%value%'"
+msgstr "Unknown error while uploading file '%value%'"
+
+#: resources/Zend_Validate.php:177
+msgid ""
+"Too much words, maximum '%max%' are allowed but '%count%' were counted"
+msgstr ""
+"Too many words, maximum '%max%' are allowed but '%count%' were counted"
+
+#: resources/Zend_Validate.php:178
+msgid ""
+"Too less words, minimum '%min%' are expected but '%count%' were counted"
+msgstr ""
+"Too few words, minimum '%min%' are expected but '%count%' were counted"
+
+#: resources/Zend_Validate.php:183
+msgid "'%value%' does not appear to be a float"
+msgstr "'%value%' does not appear to be a float"
+
+#: resources/Zend_Validate.php:186
+msgid "'%value%' is not greater than '%min%'"
+msgstr "'%value%' is not greater than '%min%'"
+
+#: resources/Zend_Validate.php:190
+msgid "'%value%' has not only hexadecimal digit characters"
+msgstr "'%value%' has not only hexadecimal digit characters"
+
+#: resources/Zend_Validate.php:194
+msgid ""
+"'%value%' appears to be an IP address, but IP addresses are not allowed"
+msgstr ""
+"'%value%' appears to be an IP address, but IP addresses are not allowed"
+
+#: resources/Zend_Validate.php:195
+msgid ""
+"'%value%' appears to be a DNS hostname but cannot match TLD against known "
+"list"
+msgstr ""
+"'%value%' appears to be a DNS hostname but cannot match TLD against known "
+"list"
+
+#: resources/Zend_Validate.php:196
+msgid ""
+"'%value%' appears to be a DNS hostname but contains a dash in an invalid "
+"position"
+msgstr ""
+"'%value%' appears to be a DNS hostname but contains a dash in an invalid "
+"position"
+
+#: resources/Zend_Validate.php:197
+msgid ""
+"'%value%' appears to be a DNS hostname but cannot match against hostname "
+"schema for TLD '%tld%'"
+msgstr ""
+"'%value%' appears to be a DNS hostname but cannot match against hostname "
+"schema for TLD '%tld%'"
+
+#: resources/Zend_Validate.php:198
+msgid "'%value%' appears to be a DNS hostname but cannot extract TLD part"
+msgstr "'%value%' appears to be a DNS hostname but cannot extract TLD part"
+
+#: resources/Zend_Validate.php:199
+msgid "'%value%' does not match the expected structure for a DNS hostname"
+msgstr "'%value%' does not match the expected structure for a DNS hostname"
+
+#: resources/Zend_Validate.php:200
+msgid "'%value%' does not appear to be a valid local network name"
+msgstr "'%value%' does not appear to be a valid local network name"
+
+#: resources/Zend_Validate.php:201
+msgid ""
+"'%value%' appears to be a local network name but local network names are not "
+"allowed"
+msgstr ""
+"'%value%' appears to be a local network name but local network names are not "
+"allowed"
+
+#: resources/Zend_Validate.php:202
+msgid ""
+"'%value%' appears to be a DNS hostname but the given punycode notation "
+"cannot be decoded"
+msgstr ""
+"'%value%' appears to be a DNS hostname but the given punycode notation "
+"cannot be decoded"
+
+#: resources/Zend_Validate.php:205
+msgid "Unknown country within the IBAN '%value%'"
+msgstr "Unknown country within the IBAN '%value%'"
+
+#: resources/Zend_Validate.php:206
+msgid "'%value%' has a false IBAN format"
+msgstr "'%value%' has a false IBAN format"
+
+#: resources/Zend_Validate.php:207
+msgid "'%value%' has failed the IBAN check"
+msgstr "'%value%' has failed the IBAN check"
+
+#: resources/Zend_Validate.php:210
+msgid "The two given tokens do not match"
+msgstr "The two given tokens do not match"
+
+#: resources/Zend_Validate.php:211
+msgid "No token was provided to match against"
+msgstr "No token was provided to match against"
+
+#: resources/Zend_Validate.php:214
+msgid "'%value%' was not found in the haystack"
+msgstr "'%value%' was not found in the haystack"
+
+#: resources/Zend_Validate.php:217
+#: resources/Zend_Validate.php:225
+#: resources/Zend_Validate.php:236
+msgid "Invalid type given. String or integer expected"
+msgstr "Invalid type given. String or integer expected"
+
+#: resources/Zend_Validate.php:218
+msgid "'%value%' does not appear to be an integer"
+msgstr "'%value%' does not appear to be an integer"
+
+#: resources/Zend_Validate.php:222
+msgid "'%value%' does not appear to be a valid IP address"
+msgstr "'%value%' does not appear to be a valid IP address"
+
+#: resources/Zend_Validate.php:226
+msgid "'%value%' is no valid ISBN number"
+msgstr "'%value%' is not a valid ISBN number"
+
+#: resources/Zend_Validate.php:229
+msgid "'%value%' is not less than '%max%'"
+msgstr "'%value%' is not less than '%max%'"
+
+#: resources/Zend_Validate.php:232
+msgid "Invalid type given. String, integer, float, boolean or array expected"
+msgstr ""
+"Invalid type given. String, integer, float, boolean or array expected"
+
+#: resources/Zend_Validate.php:233
+msgid "Value is required and can't be empty"
+msgstr "Value is required and can't be empty"
+
+#: resources/Zend_Validate.php:237
+msgid "'%value%' does not appear to be a postal code"
+msgstr "'%value%' does not appear to be a postal code"
+
+#: resources/Zend_Validate.php:241
+msgid "'%value%' does not match against pattern '%pattern%'"
+msgstr "'%value%' does not match against pattern '%pattern%'"
+
+#: resources/Zend_Validate.php:242
+msgid "There was an internal error while using the pattern '%pattern%'"
+msgstr "There was an internal error while using the pattern '%pattern%'"
+
+#: resources/Zend_Validate.php:245
+msgid "'%value%' is no valid sitemap changefreq"
+msgstr "'%value%' is not a valid sitemap changefreq"
+
+#: resources/Zend_Validate.php:249
+msgid "'%value%' is no valid sitemap lastmod"
+msgstr "'%value%' is not a valid sitemap lastmod"
+
+#: resources/Zend_Validate.php:253
+msgid "'%value%' is no valid sitemap location"
+msgstr "'%value%' is not a valid sitemap location"
+
+#: resources/Zend_Validate.php:257
+msgid "'%value%' is no valid sitemap priority"
+msgstr "'%value%' is not a valid sitemap priority"
+
+#: resources/Zend_Validate.php:258
+msgid "Invalid type given. Numeric string, integer or float expected"
+msgstr "Invalid type given. Numeric string, integer or float expected"
+
+#: resources/Zend_Validate.php:261
+msgid "'%value%' is less than %min% characters long"
+msgstr "'%value%' is less than %min% characters long"
+
+#: resources/Zend_Validate.php:262
+msgid "'%value%' is more than %max% characters long"
+msgstr "'%value%' is more than %max% characters long"

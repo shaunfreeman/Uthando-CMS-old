@@ -1,0 +1,42 @@
+<h2>Current Users</h2>
+<table class="datatable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+<? foreach ($this->users as $user): ?>
+        <tr>
+            <td><?= $this->escape($user->fullname); ?></td>
+            <td><?= $this->escape($user->email); ?></td>
+            <td><?= $this->escape($user->role); ?></td>
+            <td>
+                <?php if ($this->AuthInfo('upid') <= $user->upid): ?>
+                <a href="<?= $this->url(array(
+                    'controller'    => 'user',
+                    'action'        => 'edit',
+                    'id'            => $user->userId
+                ), 'admin', true); ?>"><img src="/images/24x24/Edit3.png" class="Tips" title="Edit User" rel="Click to edit the user" /></a>
+                <?php else: ?>
+                <img src="/images/24x24/GreyEdit3.png" class="Tips" title="Edit User" rel="You cannot edit this user" />
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if ($this->AuthInfo('upid') <= $user->upid): ?>
+                <a href="<?= $this->url(array(
+                    'controller'    => 'user',
+                    'action'        => 'delete',
+                    'id'            => $user->userId
+                ), 'admin', true); ?>"><img src="/images/24x24/DeleteRed.png" class="Tips" title="Delete User" rel="Click to delete the user" /></a>
+                <?php else: ?>
+                <img src="/images/24x24/GreyDeleteRed.png" class="Tips" title="Delete User" rel="You cannot delete this user." />
+                <?php endif; ?>
+            </td>
+        </tr>
+<? endforeach; ?>
+    </tbody>
+</table>

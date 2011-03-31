@@ -1,0 +1,11 @@
+<h1>Welcome to the default Controller</h1>
+<?php if (count($this->messages)) : ?>
+<ul id="messages">
+<?php foreach ($this->messages as $message) : ?>
+    <li><?php echo $this->escape($message); ?></li>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+<?= $this->authInfo('role'); ?>
+
+

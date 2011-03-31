@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : navi.xml
+    Created on : 10 January 2011, 10:36
+    Author     : shaun
+    Description:
+        Purpose of the document follows.
+-->
+
+<config>
+    <main_menu>
+        <home>
+            <label>Home</label>
+            <class>mainlevel</class>
+            <controller>index</controller>
+            <action>index</action>
+            <route>default</route>
+            <resource>Admin</resource>
+        </home>
+        <admin>
+            <label>Admin</label>
+            <class>mainlevel</class>
+            <module>core</module>
+            <controller>admin</controller>
+            <action>index</action>
+            <route>admin</route>
+            <reset_params>true</reset_params>
+            <resource>Admin</resource>
+        </admin>
+        <user>
+            <label>Users</label>
+            <class>mainlevel</class>
+            <module>core</module>
+            <controller>user</controller>
+            <action>index</action>
+            <route>admin</route>
+            <resource>Admin</resource>
+            <pages>
+                <list>
+                    <label>List Users</label>
+                    <class>submenu</class>
+                    <module>core</module>
+                    <controller>user</controller>
+                    <action>list</action>
+                    <route>admin</route>
+                    <resource>Admin</resource>
+                    <pages>
+                         <edit>
+                            <label>Edit User</label>
+                            <class>submenu</class>
+                            <module>core</module>
+                            <controller>user</controller>
+                            <action>edit</action>
+                            <route>admin</route>
+                            <resource>Admin</resource>
+                            <visible>0</visible>
+                        </edit>
+                        <save>
+                            <label>Save User</label>
+                            <class>submenu</class>
+                            <module>core</module>
+                            <controller>user</controller>
+                            <action>save</action>
+                            <route>admin</route>
+                            <resource>Admin</resource>
+                            <visible>0</visible>
+                        </save>
+                        <delete>
+                            <label>Delete User</label>
+                            <class>submenu</class>
+                            <module>core</module>
+                            <controller>user</controller>
+                            <action>delete</action>
+                            <route>admin</route>
+                            <resource>Admin</resource>
+                            <visible>0</visible>
+                        </delete>
+                    </pages>
+                </list>
+                <new>
+                    <label>Add User</label>
+                    <class>submenu</class>
+                    <module>core</module>
+                    <controller>user</controller>
+                    <action>new</action>
+                    <route>admin</route>
+                    <resource>Admin</resource>
+                    <pages>
+                        <save-new>
+                            <label>Save New User</label>
+                            <class>submenu</class>
+                            <module>core</module>
+                            <controller>user</controller>
+                            <action>save-new</action>
+                            <route>admin</route>
+                            <visible>0</visible>
+                        </save-new>
+                    </pages>
+                </new>
+            </pages>
+        </user>
+        <logout>
+            <label>Logout</label>
+            <class>mainlevel</class>
+            <module>default</module>
+            <controller>user</controller>
+            <action>logout</action>
+            <route>default</route>
+            <resource>Admin</resource>
+        </logout>
+    </main_menu>
+</config>

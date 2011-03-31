@@ -1,0 +1,70 @@
+<?= $this->doctype(); ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="Generator" content="Uthano CMS" />
+        <?= $this->headTitle(); ?>
+        <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <?= $this->headLink(); ?>
+    </head>
+    <body>
+        <div id="outerDivWrap">
+            <div id="headingDiv" class="headerDiv">
+                <span>Control Panel</span>
+                <a href="https://bugs.launchpad.net/uthando-cms" target="_blank">
+                    <img src="/images/24x24/Bugs.png" class="Tips" title="Report a Bug" rel="Click the Ladybug to report a bug you have found or to request a feature. (opens in a new window)" />
+                </a>
+                <span id="version">Uthando-CMS Version: <?= $this->Version(); ?></span>
+            </div>
+            <div id="outerDivBody" class="brdPad">
+                <div id="leftDivWrap">
+                    <?= $this->widget()->getWidgetsByGroup('admin left'); ?>
+                </div>
+                <!-- End menuDivWrap -->
+                <!-- Main Content -->
+                <div id="mainDivWrap">
+                    <div id="mainDivHeader" class="headerDiv">
+                        <span id="page"><a href="/admin">Admin</a> : <?= $this->navigation()
+                        ->breadcrumbs()->setRenderInvisible()
+                        ->setMinDepth(0); ?>
+                        </span>
+                        <span id="login_status"><?= $this->AuthInfo('username'); ?> : <?= $this->AuthInfo('role'); ?></span>
+                    </div>
+                    <div id="mainDiv">
+                        <noscript>
+                            <h1>Please Enable Javascript</h1>
+                        </noscript>
+                        <!-- content starts here -->
+                        <param name="error" />
+                        <div class="scroller">
+                            <div id="contentPage">
+                                <?= $this->layout()->content; ?>
+                                <!-- content ends here -->
+                                <div class="scrollarea">
+                                    <div class="scrollBack"></div>
+                                    <div class="scrollBarContainer">
+                                        <div class="scrollKnob"></div>
+                                    </div>
+                                    <div class="scrollForward"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="footerDiv" class="headerDiv">
+                    <p>
+                        <span>Powered By Uthando</span>
+                        <img src="/images/Safari_Web_Badge.png" />
+                        <img src="/images/firefox.gif" />
+                        <img src="/images/css.png" />
+                        <img src="/images/xhtml.png" />
+                        <param name="benchmark" />
+                    </p>
+                </div>
+            </div>
+            <!-- End First Brdpad -->
+        </div>
+        <!-- End outerDivWrap -->
+    </body>
+</html>

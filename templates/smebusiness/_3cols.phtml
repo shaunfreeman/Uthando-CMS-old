@@ -1,0 +1,36 @@
+<!-- 3 columns -->
+<div id="mosright">
+    <div class="padding">
+        <module name="right"></module>
+    </div>
+</div>
+<div id="mcontent">
+    <div id="newsflash">
+        <div class="newsflash">
+            <module name="top"></module>
+        </div>
+    </div>
+    <div class="padding">
+        <div id="ajax_content">
+            <!-- content starts here -->
+            <div class="pathway">
+                <?= $this->navigation()
+                        ->breadcrumbs()
+                        ->setMinDepth(0);
+                ?>
+            </div>
+            <?= $this->layout()->content; ?>
+            <!-- content ends here -->
+        </div>
+    </div>
+
+    <div id="botln">
+        <div id="latest_news">
+            <module name="user1"></module>
+        </div>
+        <div id="most_popular">
+            <module name="user2"></module>
+        </div>
+        <div class="both"><!-- --></div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+/*
+form elements
+*/
+
+#menuEdit {
+	width:300px;
+}
+
+#menuEdit .table-cell {
+	width:100px;
+}
+
+#menuEdit .cell2 {
+	width:auto;
+}
+
+#menuitemEdit .formRequiredNote {
+	margin-top:10px;
+}
+
+#menu_item_type {
+	width:170px;
+	float:left;
+}
+
+#menu_item_details {
+	width:400px;
+	height:123px;
+	float:left;
+}
+
+#menu_item_type .table-cell {
+	width:120px;
+}
+
+#menu_item_details .table-cell {
+	width:150px;
+}
+
+#menu_item_position .table-cell input, #menu_item_position .table-cell label {
+	vertical-align: middle;
+}
+
+#menu_item_details .cell2, #menu_item_type .cell2 {
+	width:auto;
+}
+
+th {
+	text-align:left;
+}
+
+#external_link, #component_link, #menu_item_position {
+	position:relative;
+	top:10px;
+	width:577px;
+	left:10px;
+	margin:0px;
+}
+
+#external_link, #component_link {
+	height: 104px;
+}
+
+#menu_item_position {
+	width:350px;
+}
+
+/*
+Buttons
+*/
+#menus-24 {
+	background: url(/images/24x24/alacarte.png) no-repeat center 5px;
+}
+
+#new_menu-24 {
+	width:60px;
+	background: url(/images/24x24/addAlacarte.png) no-repeat center 5px;
+}
+
+#new_link-24 {
+	width:60px;
+	background: url(/images/24x24/addAlacarte.png) no-repeat center 5px;
+}
