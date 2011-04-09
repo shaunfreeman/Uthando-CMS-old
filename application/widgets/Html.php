@@ -27,10 +27,7 @@
  */
 class Core_Widget_Html extends Uthando_Widget_Acl
 {
-    public function  init() {
-        $log = Zend_Registry::get('log');
-        $log->info(__METHOD__);
-
+    protected function  init() {
         $this->_view->html = $this->_view->widget->html;
     }
 }

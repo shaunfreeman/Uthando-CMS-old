@@ -38,6 +38,7 @@ class Zend_View_Helper_AuthInfo extends Zend_View_Helper_Abstract
      *
      * @param string|null $info The data to fetch, null to chain
      * @return string|Zend_View_Helper_AuthInfo
+     * @access public
      */
     public function authInfo($info = null)
     {
@@ -58,8 +59,10 @@ class Zend_View_Helper_AuthInfo extends Zend_View_Helper_Abstract
 
     /**
      * Returns wheather user is logged in.
-     * 
+     *
+     * @param none
      * @return bool true|false
+     * @access public
      */
     public function isLoggedIn()
     {

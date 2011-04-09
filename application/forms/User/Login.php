@@ -44,7 +44,9 @@ class Core_Form_User_Login extends Core_Form_User_Base
         $this->removeDisplayGroup('SitePassword');
         $this->removeDisplayGroup('SiteCaptcha');
         
-        $this->getElement('email')->removeValidator('Db_NoRecordExists');
+        $this->getElement('email')
+                ->removeValidator('Db_NoRecordExists')
+                ->removeValidator('EmailAddress');
 
         $this->addHash('csrf');
 

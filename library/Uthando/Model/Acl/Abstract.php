@@ -35,6 +35,7 @@ implements Zend_Acl_Resource_Interface
      * Implement the Zend_Acl_Resource_Interface, make this model
      * an acl resource
      *
+     * @param none
      * @return string The resource id
      * @access public
      */

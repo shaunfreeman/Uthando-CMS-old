@@ -28,12 +28,5 @@
 class Core_Widget_Message extends Uthando_Widget_Abstract {
 
     protected $_viewTemplate = 'message.phtml';
-
-    public function  init() {
-        $log = Zend_Registry::get('log');
-        $log->info(__METHOD__);
-
-        //$this->_view->html = $this->_view->widget->html;
-    }
 }
 ?>

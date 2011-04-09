@@ -1,5 +1,15 @@
-<div id="pass">
-    <p class="message">
-        User has been deleted.
-    </p>
-</div>
+<?= $this->message(array(
+    'text'  => 'User has been deleted.',
+    'type'  => 'pass',
+    'links' => array(
+        array(
+            'title' => 'back',
+            'rel'   => 'Return to user list.',
+            'url'   => $this->url(
+                array(
+                    'controller'    => 'user',
+                    'action'        => 'list'
+                ), 'admin', true)
+        )
+    )
+)); ?>

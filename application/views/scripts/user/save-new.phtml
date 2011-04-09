@@ -1,5 +1,15 @@
-<div id="pass">
-    <p class="message">
-        New user has been added.
-    </p>
-</div>
+<?= $this->message(array(
+    'text'  => 'New user has been added.',
+    'type'  => 'pass',
+    'links' => array(
+        array(
+            'title' => 'back',
+            'rel'   => 'Return to user list.',
+            'url'   => $this->url(
+                array(
+                    'controller'    => 'user',
+                    'action'        => 'list'
+                ), 'admin', true)
+        )
+    )
+)); ?>

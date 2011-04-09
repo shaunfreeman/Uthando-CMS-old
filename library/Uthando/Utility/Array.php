@@ -70,7 +70,7 @@ class Uthando_Utility_Array
         $object = new stdClass();
 		if (is_array($array) && count($array) > 0):
 			foreach ($array as $name=>$value):
-				$name = strtolower(trim($name));
+				$name = lcfirst(trim($name));
 				if (!empty($name)) $object->$name = $value;
 			endforeach;
 		endif;

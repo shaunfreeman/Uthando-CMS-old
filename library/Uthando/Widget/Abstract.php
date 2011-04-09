@@ -27,11 +27,29 @@
  */
 abstract class Uthando_Widget_Abstract
 {
+    /**
+     * Zend_View instance.
+     * 
+     * @var Zend_View
+     */
     protected $_view;
+
+    /**
+     * Widget template.
+     * 
+     * @var $_viewTemplate
+     */
     protected $_viewTemplate = 'widget.phtml';
-    
+
+    /**
+     * Contructor for widget class.
+     * 
+     * @param object|array $widget
+     * @return none
+     * @access public
+     */
     public function __construct($widget)
-    {
+    {   
         $this->_view = new Zend_View();
         $this->_view->setScriptPath(APPLICATION_PATH . '/widgets/views');
 
@@ -45,14 +63,36 @@ abstract class Uthando_Widget_Abstract
         $this->init();
     }
 
-    public function init() {}
+    /**
+     * This method is overridden by parent class for an extra construction method.
+     * 
+     * @param none
+     * @return none
+     * @access protected
+     */
+    protected function init() {}
 
+    /**
+     * Sets the params of the widget.
+     * Takes an ini string as the argument.
+     * 
+     * @param string $params ini string.
+     * @return none
+     * @access public
+     */
     public function setParams($params = null)
     {
         $params = ($params) ? $params : $this->_view->widget->params;
         $this->_view->assign('params', (array) parse_ini_string($params));
     }
-    
+
+    /**
+     * Renders the widget into an string of Html code.
+     *
+     * @param none
+     * @return string html
+     * @access public
+     */
     public function render()
     {
         return $this->_view->render($this->_viewTemplate);

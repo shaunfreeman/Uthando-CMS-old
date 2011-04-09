@@ -1,4 +1,4 @@
-<div id="<?= $this->widget->messageType; ?>">
+<div id="<?= $this->widget->type; ?>">
     <div class="message">
       <p><?= $this->widget->text; ?></p>
     </div>
@@ -7,8 +7,8 @@
         <div id="messageBarWrap">
             <div id="messageBar" class="center">
                 <? foreach ($this->widget->links as $link): ?>
-                <a id="<?= $link->title; ?>-24" class="Tips button" href="<?= $link->url ?>" title="<?= ucfirst($link->title); ?>" rel="<?= $link->rel; ?>">
-                    <span><?= ucfirst($link->title); ?></span>
+                <a id="<?= $link['title']; ?>-24" class="Tips button" href="<?= $link['url']; ?>" title="<?= ucfirst($link['title']); ?>" rel="<?= $link['rel']; ?>">
+                    <span><?= ucfirst($link['title']); ?></span>
                 </a>
                 <? endforeach; ?>
               <div class="both"></div>

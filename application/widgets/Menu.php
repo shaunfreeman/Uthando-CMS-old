@@ -27,11 +27,8 @@
  */
 class Core_Widget_Menu extends Uthando_Widget_Acl
 {   
-    public function init()
+    protected function init()
     {
-        $log = Zend_Registry::get('log');
-        $log->info(__METHOD__);
-
         $template = Zend_Registry::get('template');
 
         $container = $template->getNavigation($this->_view->params['menu']);

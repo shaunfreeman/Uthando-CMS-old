@@ -26,30 +26,22 @@
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 class Zend_View_Helper_Message extends Zend_View_Helper_Abstract
-{
-    private $_text;
-
-    private $_links = array();
-    
+{   
     /**
      * Constructs the message and adds the links if any.
      * 
-     * @param string $text
-     * @param array $links
-     * @return string
+     * @param array $text
+     * @return string rendered html string
      * @access public
      */
-    public function message($text, $links = array())
+    public function message($message)
     {
-        $this->_text = (string) $text;
-        $this->_links = (array) $links;
-
-        $this->_widget = new Core_Widget_Message($widget);
+        if (!array_key_exists('params', $message)) {
+            $message['params'] = '';
+        }
         
-    }
-
-    public function  __toString() {
-        return $html;
+        $widget = new Core_Widget_Message($message);
+        return $widget->render();
     }
 }
 ?>

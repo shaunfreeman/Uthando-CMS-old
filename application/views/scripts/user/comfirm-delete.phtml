@@ -1,26 +1,25 @@
-<div id="warning">
-    <div class="message">
-      <p>Are you sure you would like to delete this user?</p>
-    </div>
-    <div class="action">
-        <div id="messageBarWrap">
-            <div id="messageBar" class="center">
-                <a id="cancel-24" class="Tips button" href="<?= $this->url(array(
+<?= $this->message(array(
+    'text'          => 'Are you sure you would like to delete this user?',
+    'type'   => 'warning',
+    'links'         => array(
+        array(
+            'title' => 'cancel',
+            'rel'   => 'Cancel and return to user list.',
+            'url'   => $this->url(
+                array(
                     'controller'    => 'user',
                     'action'        => 'list'
-                ), 'admin', true) ?>" title="Cancel" rel="Cancel and return to user list.">
-                    <span>Cancel</span>
-                </a>
-                <a id="delete-24" class="Tips button" href="<?= $this->url(array(
+                ), 'admin', true)
+        ),
+        array(
+            'title' => 'delete',
+            'rel'   => 'Delete this user.',
+            'url'   => $this->url(array(
                     'controller'    => 'user',
                     'action'        => 'delete',
                     'id'            => $this->userId,
                     'userDelete'    => true
-                ), 'admin', true) ?>" rel="Delete this user.">
-                    <span>Delete</span>
-                </a>
-              <div class="both"></div>
-            </div>
-        </div>
-    </div>
-</div>
+                ), 'admin', true)
+        )
+    )
+)); ?>
