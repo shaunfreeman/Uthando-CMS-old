@@ -35,6 +35,10 @@ abstract class Uthando_Widget_Abstract
         $this->_view = new Zend_View();
         $this->_view->setScriptPath(APPLICATION_PATH . '/widgets/views');
 
+        if (is_array($widget)) {
+            $widget = Uthando_Utility_Array::arrayToObject($widget);
+        }
+
         $this->_view->assign('widget', (object) $widget);
         $this->setParams();
         

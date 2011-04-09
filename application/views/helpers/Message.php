@@ -27,6 +27,10 @@
  */
 class Zend_View_Helper_Message extends Zend_View_Helper_Abstract
 {
+    private $_text;
+
+    private $_links = array();
+    
     /**
      * Constructs the message and adds the links if any.
      * 
@@ -37,7 +41,15 @@ class Zend_View_Helper_Message extends Zend_View_Helper_Abstract
      */
     public function message($text, $links = array())
     {
+        $this->_text = (string) $text;
+        $this->_links = (array) $links;
+
+        $this->_widget = new Core_Widget_Message($widget);
         
+    }
+
+    public function  __toString() {
+        return $html;
     }
 }
 ?>

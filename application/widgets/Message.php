@@ -1,6 +1,6 @@
 <?php
 /* 
- * Menu.php
+ * Message.php
  * 
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
  * 
@@ -21,28 +21,19 @@
  */
 
 /**
- * Description of Menu
+ * Description of Message
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Core_Widget_Menu extends Uthando_Widget_Acl
-{   
-    public function init()
-    {
+class Core_Widget_Message extends Uthando_Widget_Abstract {
+
+    protected $_viewTemplate = 'message.phtml';
+
+    public function  init() {
         $log = Zend_Registry::get('log');
         $log->info(__METHOD__);
 
-        $template = Zend_Registry::get('template');
-
-        $container = $template->getNavigation($this->_view->params['menu']);
-
-        $this->_view->html = $this->_view
-                ->navigation($container)
-                ->menu()
-                ->setAcl($this->getAcl())
-                ->setRole($this->getRole())
-                ->setUlClass($this->_view->params['ul_class'])
-                ->render();
+        //$this->_view->html = $this->_view->widget->html;
     }
 }
 ?>

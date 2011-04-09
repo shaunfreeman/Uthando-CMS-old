@@ -56,7 +56,7 @@ class Core_Form_User_Base extends Uthando_Form_Abstract
             'validators'    => array(
                 array('StringLength', true, array(3, 128)),
                 array('EmailAddress', true, array(
-                    'mx'    => true
+                    //'mx'    => true
                 )),
                 array('Db_NoRecordExists', false, array(
                     'table' => 'core_user',
