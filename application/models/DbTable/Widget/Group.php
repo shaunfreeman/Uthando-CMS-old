@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of WidgetGroup
+ * Description of Core_Model_DbTable_Widget_Group
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */

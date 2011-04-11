@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of Config
+ * Description of Core_Model_Config
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */

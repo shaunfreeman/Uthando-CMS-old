@@ -1,8 +1,8 @@
 <?php
 /* 
- * Role.php
+ * IndexController.php
  * 
- * Copyright (c) 2010 Shaun Freeman <shaun@shaunfreeman.co.uk>.
+ * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
  * 
  * This file is part of Uthando-CMS.
  * 
@@ -21,15 +21,21 @@
  */
 
 /**
- * Description of Core_Model_DbTable_Role
+ * Description of IndexController
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Core_Model_DbTable_Role extends Zend_Db_Table_Abstract
+class Blog_IndexController extends Zend_Controller_Action
 {
-    protected $_name = 'core_role';
-    protected $_primary = 'roleId';
-    
-    protected $_dependentTables = array('Core_Model_DbTable_User');
+
+    public function init()
+    {
+        
+    }
+
+    public function indexAction()
+    {
+
+    }
 }
 ?>

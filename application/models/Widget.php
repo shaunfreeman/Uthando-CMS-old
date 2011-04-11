@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of Widget
+ * Description of Core_Model_Widget
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */

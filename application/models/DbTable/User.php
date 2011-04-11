@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of User
+ * Description of Core_Model_DbTable_User
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */

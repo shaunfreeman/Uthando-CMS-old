@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of Role
+ * Description of Core_Model_Mapper_Role
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */

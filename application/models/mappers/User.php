@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of User
+ * Description of Core_Model_Mapper_User
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @property Core_Model_User $user

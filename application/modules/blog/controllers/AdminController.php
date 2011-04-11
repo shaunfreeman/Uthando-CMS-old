@@ -1,8 +1,8 @@
 <?php
 /* 
- * Role.php
+ * AdminController.php
  * 
- * Copyright (c) 2010 Shaun Freeman <shaun@shaunfreeman.co.uk>.
+ * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
  * 
  * This file is part of Uthando-CMS.
  * 
@@ -21,15 +21,33 @@
  */
 
 /**
- * Description of Core_Model_DbTable_Role
+ * Description of Blog_AdminController
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Core_Model_DbTable_Role extends Zend_Db_Table_Abstract
+class Blog_AdminController extends Zend_Controller_Action
 {
-    protected $_name = 'core_role';
-    protected $_primary = 'roleId';
-    
-    protected $_dependentTables = array('Core_Model_DbTable_User');
+    /**
+     *
+     * @return none
+     * @access public
+     */
+    public function init()
+    {
+        if (!$this->_helper->acl('Admin')) {
+            //throw new Exception('Access Denied');
+            return $this->_helper->redirector('login', 'user');
+        }
+    }
+
+    /**
+     *
+     * @return none
+     * @access public
+     */
+    public function indexAction()
+    {
+
+    }
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 /* 
- * WidgetGroup.php
+ * Group.php
  * 
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
  * 
@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of WidgetGroup
+ * Description of Core_Model_Mapper_Widget_Group
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */

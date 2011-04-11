@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of Modules
+ * Description of Core_Model_Modules
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
