@@ -46,6 +46,26 @@
                     <route>admin</route>
                     <resource>Admin</resource>
                 </list>
+                <enable>
+                    <label>Enable Module</label>
+                    <class>submenu</class>
+                    <module>core</module>
+                    <controller>module</controller>
+                    <action>enable</action>
+                    <route>admin</route>
+                    <resource>Admin</resource>
+                    <visible>0</visible>
+                </enable>
+                <delete>
+                    <label>Delete Module</label>
+                    <class>submenu</class>
+                    <module>core</module>
+                    <controller>module</controller>
+                    <action>delete</action>
+                    <route>admin</route>
+                    <resource>Admin</resource>
+                    <visible>0</visible>
+                </delete>
             </pages>
         </modules>
         <user>

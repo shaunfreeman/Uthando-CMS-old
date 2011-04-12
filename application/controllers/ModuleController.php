@@ -49,5 +49,15 @@ class ModuleController extends Uthando_Controller_Action_Abstract
     {
         $this->view->modules = $this->_model->getModules();
     }
+
+    public function enableAction()
+    {
+
+    }
+
+    public function deleteAction()
+    {
+        
+    }
 }
 ?>

@@ -1,5 +1,5 @@
-<h1>List</h1>
-<?php print_r($this->modules); ?>
+<h1>Modules</h1>
+
 <table class="datatable">
     <thead>
         <tr>
@@ -14,16 +14,22 @@
             <td>
                 <a href="<?= $this->url(array(
                     'controller'    => 'module',
-                    'action'        => 'edit',
+                    'action'        => 'enable',
                     'id'            => $module->id
-                ), 'admin', true); ?>"><img src="/images/24x24/Edit3.png" class="Tips" title="Edit User" rel="Click to edit the user" /></a>
+                ), 'admin', true); ?>">
+                <?php if ($module->enabled == 1): ?>
+                    <img src="/images/24x24/IndicatorCircleGreenOn.png" class="Tips" title="Module Enabled" rel="Click to disable module" />
+                <?php else: ?>
+                     <img src="/images/24x24/IndicatorCircleRedOff.png" class="Tips" title="Module Disabled" rel="Click to enable module" />
+                <?php endif; ?>
+                </a>
             </td>
             <td>
                 <a href="<?= $this->url(array(
                     'controller'    => 'module',
                     'action'        => 'delete',
                     'id'            => $module->id
-                ), 'admin', true); ?>"><img src="/images/24x24/DeleteRed.png" class="Tips" title="Delete Module" rel="Click to delete the Module" /></a>
+                ), 'admin', true); ?>"><img src="/images/24x24/DeleteRed.png" class="Tips" title="Delete Module" rel="Click to delete Module" /></a>
             </td>
         </tr>
 <?php endforeach; ?>

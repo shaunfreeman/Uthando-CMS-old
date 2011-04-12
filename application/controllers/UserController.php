@@ -259,7 +259,7 @@ class UserController extends Uthando_Controller_Action_Abstract
 
         if (!$this->_request->getParam('userDelete')) {
             $this->view->userId = $this->_request->getParam('id');
-            return $this->render('comfirmDelete');
+            return $this->render('confirmDelete');
         }
 
         if ($this->_request->getParam('id')) {
