@@ -1,6 +1,6 @@
 <?php
 /* 
- * AdminController.php
+ * Comments.php
  * 
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
  * 
@@ -21,33 +21,21 @@
  */
 
 /**
- * Description of Blog_AdminController
+ * Description of Blog_Model_DbTable_Comments
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Blog_AdminController extends Zend_Controller_Action
+class Blog_Model_DbTable_Comments extends Zend_Db_Table_Abstract
 {
-    /**
-     *
-     * @return none
-     * @access public
-     */
-    public function init()
-    {
-        if (!$this->_helper->acl('Admin')) {
-            //throw new Exception('Access Denied');
-            return $this->_helper->redirector('login', 'user', 'default');
-        }
-    }
+    protected $_name = 'blog_comments';
+    protected $_primary = 'CommentId';
 
-    /**
-     *
-     * @return none
-     * @access public
-     */
-    public function indexAction()
-    {
-
-    }
+    protected $_referenceMap = array(
+        'Blog' => array(
+            'columns'   => 'blogId',
+            'refTableClass' => 'Blog_Model_DbTable_Blogs',
+            'refColumns'    => 'blogId'
+        )
+    );
 }
 ?>

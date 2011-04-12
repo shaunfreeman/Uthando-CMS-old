@@ -1,6 +1,6 @@
 <?php
 /* 
- * AdminController.php
+ * Blogs.php
  * 
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
  * 
@@ -21,33 +21,12 @@
  */
 
 /**
- * Description of Blog_AdminController
+ * Description of Blog_Model_Mapper_Blogs
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Blog_AdminController extends Zend_Controller_Action
+class Blog_Model_Mapper_Blogs extends Uthando_Model_Mapper_Acl_Abstract
 {
-    /**
-     *
-     * @return none
-     * @access public
-     */
-    public function init()
-    {
-        if (!$this->_helper->acl('Admin')) {
-            //throw new Exception('Access Denied');
-            return $this->_helper->redirector('login', 'user', 'default');
-        }
-    }
-
-    /**
-     *
-     * @return none
-     * @access public
-     */
-    public function indexAction()
-    {
-
-    }
+    //put your code here
 }
 ?>

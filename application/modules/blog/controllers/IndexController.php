@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of IndexController
+ * Description of Blog_IndexController
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */

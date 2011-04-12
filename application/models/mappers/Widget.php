@@ -25,7 +25,7 @@
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Core_Model_Mapper_Widget extends Uthando_Model_Acl_Abstract
+class Core_Model_Mapper_Widget extends Uthando_Model_Mapper_Acl_Abstract
 {
     protected $_dbTableClass = 'Core_Model_DbTable_Widget';
     protected $_modelClass = 'Core_Model_Widget';

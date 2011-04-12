@@ -21,11 +21,11 @@
  */
 
 /**
- * Description of Abstract
+ * Description of Uthando_Model_Mapper_Acl_Abstract
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-abstract class Uthando_Model_Acl_Abstract extends Uthando_Model_Mapper_Abstract
+abstract class Uthando_Model_Mapper_Acl_Abstract extends Uthando_Model_Mapper_Abstract
 implements Zend_Acl_Resource_Interface
 {
     protected $_acl;

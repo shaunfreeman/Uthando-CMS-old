@@ -26,7 +26,7 @@
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @property Core_Model_User $user
  */
-class Core_Model_Mapper_User extends Uthando_Model_Acl_Abstract
+class Core_Model_Mapper_User extends Uthando_Model_Mapper_Acl_Abstract
 {
     protected $_dbTableClass = 'Core_Model_DbTable_User';
     protected $_modelClass = 'Core_Model_User';

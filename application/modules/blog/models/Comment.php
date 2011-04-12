@@ -1,6 +1,6 @@
 <?php
 /* 
- * Articles.php
+ * Comment.php
  * 
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
  * 
@@ -21,18 +21,30 @@
  */
 
 /**
- * Description of Blog_Model_Articles
+ * Description of Blog_Model_Comment
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Blog_Model_Articles extends Uthando_Model_Abstract
+class Blog_Model_Comment extends Uthando_Model_Abstract
 {
+    protected $_commentId;
     protected $_blogId;
-    protected $_title;
-    protected $_description;
-    protected $_blog;
+    protected $_comment;
+    protected $_name;
+    protected $_email;
+    protected $_website;
     protected $_cdate;
-    protected $_mdate;
+
+    public function getCommentId()
+    {
+        return $this->_commentId;
+    }
+
+    public function setId($id)
+    {
+        $this->_commentId = (int) $id;
+        return $this;
+    }
 
     public function getBlogId()
     {
@@ -45,36 +57,47 @@ class Blog_Model_Articles extends Uthando_Model_Abstract
         return $this;
     }
 
-    public function getTitle()
+    public function getComment()
     {
-        return $this->_title;
+        return $this->_comment;
     }
 
-    public function setTitle($title)
+    public function setComment($text)
     {
-        $this->_title = (string) $title;
+        $this->_comment = (string) $text;
         return $this;
     }
 
-    public function getDescription()
+    public function getName()
     {
-        return $this->_description;
+        return $this->_name;
     }
 
-    public function setDescription($text)
+    public function setName($name)
     {
-        $this->_description = (string) $text;
+        $this->_name = (string) $name;
         return $this;
     }
 
-    public function getBlog()
+    public function getEmail()
     {
-        return $this->_blog;
+        return $this->_email;
     }
 
-    public function setBlog($text)
+    public function setEmail($email)
     {
-        $this->_blog = (string) $text;
+        $this->_email = (string) $email;
+        return $this;
+    }
+
+    public function getWebsite()
+    {
+        return $this->_website;
+    }
+
+    public function setWebsite($site)
+    {
+        $this->_website = (string) $site;
         return $this;
     }
 
@@ -86,17 +109,6 @@ class Blog_Model_Articles extends Uthando_Model_Abstract
     public function setCdate($ts)
     {
         $this->_cdate = $ts;
-        return $this;
-    }
-
-    public function getMdate()
-    {
-        return $this->_mdate;
-    }
-
-    public function setMdate($ts)
-    {
-        $this->_mdate = $ts;
         return $this;
     }
 }
