@@ -46,6 +46,15 @@ class Core_Model_Mapper_Module extends Uthando_Model_Mapper_Acl_Abstract
             ->setEnabled($row->enabled);
     }
 
+    public function getModules()
+    {
+        $select = $this->getDbTable()
+                ->select()
+                ->order('module');
+
+        return $this->fetchAll($select);
+    }
+
     /**
      * Saves sata to database if row exists then updates row else
      * inserts new row.

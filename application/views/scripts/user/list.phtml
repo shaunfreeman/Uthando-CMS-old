@@ -30,7 +30,7 @@
         </tr>
     </thead>
     <tbody>
-<? foreach ($this->users as $user): ?>
+<?php foreach ($this->users as $user): ?>
         <tr>
             <td><?= $this->escape($user->fullname); ?></td>
             <td><?= $this->escape($user->email); ?></td>
@@ -58,6 +58,6 @@
                 <?php endif; ?>
             </td>
         </tr>
-<? endforeach; ?>
+<?php endforeach; ?>
     </tbody>
 </table>

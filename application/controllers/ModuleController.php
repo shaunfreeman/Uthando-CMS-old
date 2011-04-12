@@ -25,16 +25,29 @@
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class ModuleController extends Zend_Controller_Action
+class ModuleController extends Uthando_Controller_Action_Abstract
 {
     public function init()
     {
+        if (!$this->_request->getParam('isAdmin') || !$this->_helper->acl('Admin')) {
+            return $this->_helper->redirector('login', 'user', 'default');
+        }
 
+        parent::init();
+        
+        $this->_authService = new Core_Service_Authentication();
+        $this->_model = new Core_Model_Mapper_Module();
+        
     }
 
     public function indexAction()
     {
-        
+       return $this->_forward('list');
+    }
+
+    public function listAction()
+    {
+        $this->view->modules = $this->_model->getModules();
     }
 }
 ?>

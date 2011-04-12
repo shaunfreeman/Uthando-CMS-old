@@ -28,6 +28,26 @@
             <reset_params>true</reset_params>
             <resource>Admin</resource>
         </admin>
+        <modules>
+            <label>Modules</label>
+            <class>mainlevel</class>
+            <module>core</module>
+            <controller>module</controller>
+            <action>index</action>
+            <route>admin</route>
+            <resource>Admin</resource>
+            <pages>
+                <list>
+                    <label>List Modules</label>
+                    <class>submenu</class>
+                    <module>core</module>
+                    <controller>module</controller>
+                    <action>list</action>
+                    <route>admin</route>
+                    <resource>Admin</resource>
+                </list>
+            </pages>
+        </modules>
         <user>
             <label>Users</label>
             <class>mainlevel</class>

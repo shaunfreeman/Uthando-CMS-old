@@ -1,0 +1,31 @@
+<h1>List</h1>
+<?php print_r($this->modules); ?>
+<table class="datatable">
+    <thead>
+        <tr>
+            <th>Module</th>
+            <th colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php foreach ($this->modules as $module): ?>
+        <tr>
+            <td><?= $this->escape($module->module); ?></td>
+            <td>
+                <a href="<?= $this->url(array(
+                    'controller'    => 'module',
+                    'action'        => 'edit',
+                    'id'            => $module->id
+                ), 'admin', true); ?>"><img src="/images/24x24/Edit3.png" class="Tips" title="Edit User" rel="Click to edit the user" /></a>
+            </td>
+            <td>
+                <a href="<?= $this->url(array(
+                    'controller'    => 'module',
+                    'action'        => 'delete',
+                    'id'            => $module->id
+                ), 'admin', true); ?>"><img src="/images/24x24/DeleteRed.png" class="Tips" title="Delete Module" rel="Click to delete the Module" /></a>
+            </td>
+        </tr>
+<?php endforeach; ?>
+    </tbody>
+</table>

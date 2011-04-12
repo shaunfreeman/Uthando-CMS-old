@@ -67,14 +67,7 @@ class UserController extends Uthando_Controller_Action_Abstract
         }
 
         if ($this->_request->getParam('isAdmin') && $this->_helper->acl('Admin')) {
-            return $this->_helper->redirector->gotoRoute(
-                        array(
-                            'module' => 'core',
-                            'controller' => 'user',
-                            'action' => 'list'
-                        ),
-                        'admin', true
-                    );
+            return $this->_forward('list');
         }
     }
 

@@ -21,7 +21,7 @@
  */
 
 /**
- * Description of Abstract
+ * Description of Uthando_Controller_Action_Abstract
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
@@ -30,15 +30,25 @@ abstract class Uthando_Controller_Action_Abstract extends Zend_Controller_Action
     protected $_authService;
     protected $_model;
     protected $_forms;
+    protected $_log;
+    protected $_flashMessenger;
 
     /**
      * Constructor extensions
+     *
+     * @access public
      */
     public function init()
     {
         $this->view->admin = $this->_request->getParam('isAdmin');
+        
         $container = Zend_Registry::get('template')->getNavigation('main_menu');
         $this->view->navigation($container);
+
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->view->messages = $this->_flashMessenger->getMessages();
+
+        $this->_log = Zend_Registry::get('log');
     }
 
     /**
