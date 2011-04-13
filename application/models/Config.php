@@ -35,6 +35,7 @@ class Core_Model_Config
      * @param none
 	 * @return Zend_Config
      * @access public
+     * @static
 	 */
 	public static function getConfig()
 	{

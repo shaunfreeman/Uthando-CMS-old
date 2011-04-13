@@ -25,17 +25,20 @@
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Blog_IndexController extends Zend_Controller_Action
+class Blog_IndexController extends Uthando_Controller_Action_Abstract
 {
-
     public function init()
     {
-        
+        parent::init();
+
+        $this->_authService = new Core_Service_Authentication();
+        $this->_model = new Blog_Model_Mapper_Blogs();
     }
 
     public function indexAction()
     {
-
+        $this->_log->info(__METHOD__);
+        
     }
 }
 ?>

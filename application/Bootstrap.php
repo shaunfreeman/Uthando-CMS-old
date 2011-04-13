@@ -146,11 +146,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         
         foreach ($modules as $value) {
             $enabled_modules[$value->getModule()] = APPLICATION_PATH . '/modules/' . $value->getModule() . '/controllers';
+            $autoloader = new Zend_Application_Module_Autoloader(array(
+                'namespace' => ucfirst($value->getModule()) . '_',
+                'basePath'  =>  APPLICATION_PATH . '/modules/' . $value->getModule()
+            ));
         }
 
         $front = $this->getResource('frontController');
         $front->setControllerDirectory($enabled_modules);
-        
     }
 
     /**
