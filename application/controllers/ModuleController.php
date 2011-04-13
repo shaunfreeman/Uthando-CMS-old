@@ -52,7 +52,27 @@ class ModuleController extends Uthando_Controller_Action_Abstract
 
     public function enableAction()
     {
+        if ($this->_request->getParam('id')) {
+            $module = $this->_model->find($this->_request->getParam('id'));
+        } else {
+            throw new Uthando_Exception('No module id was requested.');
+        }
 
+        $enabled = ($module->getEnabled() == 1) ? 0 : 1;
+        $module->setEnabled($enabled);
+
+        if ($this->_model->save($module)) {
+            $this->_helper->redirector->gotoRoute(
+                array(
+                    'module' => 'core',
+                    'controller' => 'module',
+                    'action' => 'list'
+                ),
+                'admin', true
+            );
+        } else {
+            throw new Uthando_Exception('Could not update database due to an error.');
+        }
     }
 
     public function deleteAction()

@@ -4,7 +4,7 @@
     <thead>
         <tr>
             <th>Module</th>
-            <th colspan="2">Action</th>
+            <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +23,17 @@
                      <img src="/images/24x24/IndicatorCircleRedOff.png" class="Tips" title="Module Disabled" rel="Click to enable module" />
                 <?php endif; ?>
                 </a>
+            </td>
+            <td>
+                <?php if ($module->enabled == 1): ?>
+                <a href="<?= $this->url(array(
+                    'module'        => $module->module,
+                    'controller'    => 'index',
+                    'action'        => 'index',
+                ), 'admin', true); ?>"><img src="/images/24x24/Config.png" class="Tips" title="Configure Module" rel="Click to configure Module" /></a>
+                <?php else: ?>
+                    <img src="/images/24x24/ConfigGrey.png" class="Tips" title="Configure Module" rel="To configure this module you will need to enable it first" />
+                <?php endif; ?>
             </td>
             <td>
                 <a href="<?= $this->url(array(

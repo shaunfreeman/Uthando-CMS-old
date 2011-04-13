@@ -100,7 +100,12 @@ class Core_Model_Mapper_User extends Uthando_Model_Mapper_Acl_Abstract
 
         unset($data['fullname']);
 
-        return $this->_save($data, $user);
+        if (null === ($id = $user->getUserId())) {
+            unset($data[$id]);
+            return $this->getDbTable()->insert($data);
+        } else {
+            return $this->getDbTable()->update($data, array('userId = ?' => $id));
+        }
     }
 
     public function deleteUser($id)
@@ -114,16 +119,6 @@ class Core_Model_Mapper_User extends Uthando_Model_Mapper_Acl_Abstract
                 ->quoteInto('userId = ?', $id);
 
         return $this->_delete($where);
-    }
-
-    protected function _save($data, $model)
-    {
-        if (null === ($id = $model->getUserId())) {
-            unset($data[$id]);
-            return $this->getDbTable()->insert($data);
-        } else {
-            return $this->getDbTable()->update($data, array('userId = ?' => $id));
-        }
     }
 
     public function getUserByEmail($email)

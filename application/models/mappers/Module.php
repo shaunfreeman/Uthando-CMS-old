@@ -56,23 +56,26 @@ class Core_Model_Mapper_Module extends Uthando_Model_Mapper_Acl_Abstract
     }
 
     /**
-     * Saves sata to database if row exists then updates row else
+     * Saves data to database if row exists then updates row else
      * inserts new row.
      * 
      * @param object $module
      */
-    protected function save($data, Core_Model_Module $model)
-    {   
+    public function save(Core_Model_Module $model)
+    {
+        if (!$this->checkAcl('save')) {
+            throw new Uthando_Acl_Exception("Insufficient rights");
+        }
+        
         $data = array(
-            'module'    => $module->getModule(),
-            'enabled'   => $module->getEnabled()
+            'module'    => $model->getModule(),
+            'enabled'   => $model->getEnabled()
         );
 
-        if (null === ($id = $module->id())) {
-            unset($data['id']);
-            $this->getDbTable()->insert($data);
+        if (null === ($id = $model->getId())) {
+            return $this->getDbTable()->insert($data);
         } else {
-            $this->getDbTable()->update($data, array('id = ?' => $id));
+            return $this->getDbTable()->update($data, array('moduleId = ?' => $id));
         }
     }
 
