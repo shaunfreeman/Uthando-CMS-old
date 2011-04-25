@@ -1,0 +1,9 @@
+<?php if ($this->blogs): ?>
+<?php
+    foreach ($this->blogs as $blog) {
+        print_r($blog);
+    }
+?>
+<?php else: ?>
+    <h1>No Blogs Yet</h1>
+<?php endif; ?>

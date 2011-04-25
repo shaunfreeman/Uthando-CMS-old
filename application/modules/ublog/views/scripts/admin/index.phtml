@@ -1,0 +1,10 @@
+<h1>Admin Blog Controller</h1>
+<?php
+if ($this->blogs) {
+    foreach ($this->blogs as $blog) {
+        print_r($blog);
+    }
+} else {
+    print "No Blogs yet!";
+}
+?>

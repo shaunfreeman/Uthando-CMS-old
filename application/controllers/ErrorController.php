@@ -6,12 +6,12 @@ class ErrorController extends Zend_Controller_Action
     public function errorAction()
     {
         $errors = $this->_getParam('error_handler');
-        
+
         if (!$errors) {
             $this->view->message = _('You have reached the error page');
             return;
         }
-        
+
         switch (get_class($errors->exception)) {
             case 'Zend_Controller_Dispatcher_Exception':
                 // send 404
@@ -34,17 +34,17 @@ class ErrorController extends Zend_Controller_Action
                 $this->view->message = $errors->exception->getMessage();
                 break;
         }
-        
+
         // Log exception, if logger available
         if ($log = $this->getLog()) {
             $log->crit($this->view->message, $errors->exception);
         }
-        
+
         // conditionally display exceptions
         if ($this->getInvokeArg('displayExceptions') == true) {
             $this->view->exception = $errors->exception;
         }
-        
+
         $this->view->request   = $errors->request;
     }
 

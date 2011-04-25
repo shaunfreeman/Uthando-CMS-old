@@ -26,19 +26,22 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     /**
-     * Holds the logger class
-     * 
-     * @var $_logger
-     * @access protected
+     * @var Zend_Log
      */
     protected $_logger;
-    
+
+    /**
+     * @var Zend_Application_Module_Autoloader
+     */
+    protected $_resourceLoader;
+
+    /**
+     * @var Zend_Controller_Front
+     */
+    public $frontController;
+
     /**
      * Sets the logging for the application.
-     * 
-     * @param none
-     * @return none
-     * @access private
      */
     protected function _initLogging()
     {
@@ -61,10 +64,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     /**
      * Sets the Database profiler for the application.
-     *
-     * @param none
-     * @return none
-     * @access private
      */
     protected function _initDbProfiler()
     {
@@ -81,33 +80,65 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     /**
+     * Setup default module, autoloader and resource loader.
+     */
+    protected function _initDefaultModuleAutoloader()
+    {
+        $this->_logger->info(__METHOD__);
+
+        $this->_resourceLoader = new Zend_Application_Module_Autoloader(array(
+            'namespace' => 'Core',
+            'basePath'  => APPLICATION_PATH,
+        ));
+
+        $this->_resourceLoader->addResourceTypes(array(
+            'widget' => array(
+              'path'      => 'widgets',
+              'namespace' => 'Widget',
+            )
+        ));
+    }
+
+    /**
+     * Set up modules from list of enabled modules from database.
+     */
+    protected function _initEnabledModules()
+    {
+        $this->_logger->info(__METHOD__);
+
+        $mapper = new Core_Model_Mapper_Module();
+        $modules = $mapper->getEnabledModules();
+
+        $enabled_modules = array(
+            'default'   => APPLICATION_PATH . '/controllers'
+        );
+
+        foreach ($modules as $value) {
+           $enabled_modules[$value->getModule()] = APPLICATION_PATH . '/modules/' . $value->getModule() . '/controllers';
+        }
+
+        $this->frontController->setControllerDirectory($enabled_modules);
+    }
+
+    /**
      * Set up domain options and merge with main Uthando-CMS options
-     *
-     * @param none
-     * @return none
-     * @access none
      */
     protected function _initConfig()
     {
         $this->_logger->info(__METHOD__);
-        
-        $config = Core_Model_Config::getConfig();
-        Zend_Registry::set('siteConfig', $config);
+
+        Zend_Registry::set('siteConfig', Core_Model_Config::getConfig());
     }
 
     /**
      * Starts the session.
-     *
-     * @param none
-     * @return none
-     * @access none
      */
     protected function _initSession()
     {
         $this->_logger->info(__METHOD__);
 
         $this->bootstrap('db');
-        
+
         $config = array(
             'name'           => 'core_session',
             'primary'        => 'id',
@@ -120,71 +151,27 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Session::start();
     }
 
+    /**
+     * Add Global Action Helpers
+     */
     protected function _initActionHelpers()
     {
         $this->_logger->info(__METHOD__);
+
         Zend_Controller_Action_HelperBroker::addHelper(new Uthando_Controller_Helper_Acl());
+        Zend_Controller_Action_HelperBroker::addHelper(new Uthando_Controller_Helper_Service());
     }
 
     /**
-     * Sets up the modules.
-     *
-     * @param none
-     * @return none
-     * @access protected
-     */
-    protected function _initModules()
-    {
-        $this->_logger->info(__METHOD__);
-        
-        $mapper = new Core_Model_Mapper_Module();
-        $modules = $mapper->getEnabledModules();
-
-        $enabled_modules = array(
-            'default'   => APPLICATION_PATH . '/controllers'
-        );
-        
-        foreach ($modules as $value) {
-            $enabled_modules[$value->getModule()] = APPLICATION_PATH . '/modules/' . $value->getModule() . '/controllers';
-            $autoloader = new Zend_Application_Module_Autoloader(array(
-                'namespace' => ucfirst($value->getModule()) . '_',
-                'basePath'  =>  APPLICATION_PATH . '/modules/' . $value->getModule()
-            ));
-        }
-
-        $front = $this->getResource('frontController');
-        $front->setControllerDirectory($enabled_modules);
-    }
-
-    /**
-     * Sets up auto loading of widgets.
-     *
-     * @param none
-     * @return none
-     * @access public
-     */
-    public function _initModelWidgetAutoloader()
-    {
-        $this->_logger->info(__METHOD__);
-
-        $this->getResourceLoader()->addResourceTypes(array(
-            'widget' => array(
-              'path'      => 'widgets',
-              'namespace' => 'Widget',
-            )
-        ));
-    }
-
-    /**
-     * Sets up translation
+     * Sets up translations.
      */
     protected function _initTranslate() {
 
         $this->_logger->info(__METHOD__);
-        
+
         // Get current registry
         $registry = Zend_Registry::getInstance();
-        
+
         $locale = new Zend_Locale();
 
         $registry->set('Zend_Locale', $locale);
@@ -199,18 +186,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'logUntranslated'   => false
             )
         );
-        
-        $registry->set('Zend_Translate', $translate);    
+
+        $registry->set('Zend_Translate', $translate);
     }
 
     /**
-     * Set default view settings
-     *
-     * @param none
-     * @return none
-     * @access private
+     * Sets up the helper paths for the application.
      */
-    protected function _initViewSettings()
+    protected function _initGlobalViewHelperPath()
     {
         $this->_logger->info(__METHOD__);
 

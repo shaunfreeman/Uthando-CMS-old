@@ -27,9 +27,7 @@
             <td>
                 <?php if ($module->enabled == 1): ?>
                 <a href="<?= $this->url(array(
-                    'module'        => $module->module,
-                    'controller'    => 'index',
-                    'action'        => 'index',
+                    'module'        => $module->module
                 ), 'admin', true); ?>"><img src="/images/24x24/Config.png" class="Tips" title="Configure Module" rel="Click to configure Module" /></a>
                 <?php else: ?>
                     <img src="/images/24x24/ConfigGrey.png" class="Tips" title="Configure Module" rel="To configure this module you will need to enable it first" />

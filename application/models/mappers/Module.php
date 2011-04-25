@@ -38,7 +38,7 @@ class Core_Model_Mapper_Module extends Uthando_Model_Mapper_Acl_Abstract
      * @return Core_Model_Module
      * @access protected
      */
-    protected function _setVars($row, $module)
+    protected function _setVars($row, Core_Model_Module $module)
     {
         return $module
             ->setId($row->moduleId)

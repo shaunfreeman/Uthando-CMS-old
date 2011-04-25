@@ -1,50 +1,38 @@
 <?php
-/* 
- * Comment.php
- * 
+/*
+ * Blog.php
+ *
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
- * 
+ *
  * This file is part of Uthando-CMS.
- * 
+ *
  * Uthando-CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Uthando-CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
  */
 
 /**
- * Description of Blog_Model_Comment
+ * Description of Blog_Model_Blog
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Blog_Model_Comment extends Uthando_Model_Abstract
+class Ublog_Model_Blog extends Uthando_Model_Abstract
 {
-    protected $_commentId;
     protected $_blogId;
-    protected $_comment;
-    protected $_name;
-    protected $_email;
-    protected $_website;
+    protected $_title;
+    protected $_description;
+    protected $_blog;
     protected $_cdate;
-
-    public function getCommentId()
-    {
-        return $this->_commentId;
-    }
-
-    public function setId($id)
-    {
-        $this->_commentId = (int) $id;
-        return $this;
-    }
+    protected $_mdate;
 
     public function getBlogId()
     {
@@ -57,47 +45,36 @@ class Blog_Model_Comment extends Uthando_Model_Abstract
         return $this;
     }
 
-    public function getComment()
+    public function getTitle()
     {
-        return $this->_comment;
+        return $this->_title;
     }
 
-    public function setComment($text)
+    public function setTitle($title)
     {
-        $this->_comment = (string) $text;
+        $this->_title = (string) $title;
         return $this;
     }
 
-    public function getName()
+    public function getDescription()
     {
-        return $this->_name;
+        return $this->_description;
     }
 
-    public function setName($name)
+    public function setDescription($text)
     {
-        $this->_name = (string) $name;
+        $this->_description = (string) $text;
         return $this;
     }
 
-    public function getEmail()
+    public function getBlog()
     {
-        return $this->_email;
+        return $this->_blog;
     }
 
-    public function setEmail($email)
+    public function setBlog($text)
     {
-        $this->_email = (string) $email;
-        return $this;
-    }
-
-    public function getWebsite()
-    {
-        return $this->_website;
-    }
-
-    public function setWebsite($site)
-    {
-        $this->_website = (string) $site;
+        $this->_blog = (string) $text;
         return $this;
     }
 
@@ -109,6 +86,17 @@ class Blog_Model_Comment extends Uthando_Model_Abstract
     public function setCdate($ts)
     {
         $this->_cdate = $ts;
+        return $this;
+    }
+
+    public function getMdate()
+    {
+        return $this->_mdate;
+    }
+
+    public function setMdate($ts)
+    {
+        $this->_mdate = $ts;
         return $this;
     }
 }

@@ -1,21 +1,21 @@
 <?php
-/* 
+/*
  * userController.php
- * 
+ *
  * Copyright (c) 2010 Shaun Freeman <shaun@shaunfreeman.co.uk>.
- * 
+ *
  * This file is part of Uthando-CMS.
- * 
+ *
  * Uthando-CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Uthando-CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
  */
@@ -30,7 +30,7 @@ class UserController extends Uthando_Controller_Action_Abstract
     public function init()
     {
         parent::init();
-        
+
         $this->_authService = new Core_Service_Authentication();
         $this->_model = new Core_Model_Mapper_User();
 
@@ -72,7 +72,7 @@ class UserController extends Uthando_Controller_Action_Abstract
     }
 
     public function editAction()
-    {   
+    {
         if (!$this->_helper->acl('User')) {
             return $this->_helper->redirector('login');
         }
@@ -122,7 +122,7 @@ class UserController extends Uthando_Controller_Action_Abstract
 
         $this->view->users = $this->_model->getUsers();
     }
-    
+
     public function loginAction()
     {
         if ($this->_helper->acl('User')) {
@@ -143,12 +143,12 @@ class UserController extends Uthando_Controller_Action_Abstract
         if (!$this->getForm('userLogin')->isValid($this->_request->getPost())) {
             return $this->render('login'); // re-render the login form
         }
-        
+
         if (false === $this->_authService->authenticate($this->getForm('userLogin')->getValues())) {
             $this->getForm('userLogin')->setDescription(_('Login failed, Please try again.'));
             return $this->render('login'); // re-render the login form
         }
-        
+
         return $this->_helper->redirector('index');
     }
 
@@ -222,7 +222,7 @@ class UserController extends Uthando_Controller_Action_Abstract
 
         if ($this->_request->getParam('isAdmin') && $this->_helper->acl('Admin')) {
             if ($this->_request->getParam('id')) {
-                
+
                 $this->view->user = $this->_model->find($this->_request->getParam('id'));
                 $this->getForm('userAdminEdit')->excludeUserEmailFromValidation($this->view->user->getEmail());
 
@@ -237,9 +237,9 @@ class UserController extends Uthando_Controller_Action_Abstract
             }
         } else {
             $this->view->user = $this->_authService->getIdentity();
-            
+
             $this->getForm('userEdit')->excludeUserEmailFromValidation($this->view->user->getEmail());
-            
+
             if (!$this->getForm('userEdit')->isValid($this->_request->getPost())) {
                 return $this->render('edit'); // re-render the edit form
             }
@@ -250,7 +250,7 @@ class UserController extends Uthando_Controller_Action_Abstract
 
         $this->_model->saveUser($data);
     }
-    
+
     public function deleteAction()
     {
         if (!$this->_helper->acl('Admin') && !$this->_request->getParam('isAdmin')) {
