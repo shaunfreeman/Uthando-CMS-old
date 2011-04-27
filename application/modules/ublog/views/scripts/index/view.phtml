@@ -1,0 +1,78 @@
+<div id="blog">
+    <span class="article_seperator">&nbsp;</span>
+    <div class="calendar_icon">
+        <div class="datetime">
+            <?php $oDate = new DateTime($this->blog->cdate); ?>
+            <p class="top"><?= $oDate->format('g:i a'); ?></p>
+            <p class="top"><?= $oDate->format('D'); ?></p>
+            <p class="day"><?= $oDate->format('d'); ?></p>
+            <p class="mon"><?= $oDate->format('M'); ?></p>
+            <p class="year"><?= $oDate->format('Y'); ?></p>
+        </div>
+    </div>
+    <div class="blogheading">
+        <h2 class="contentheading">
+            <a href="<?= $this->url(array(
+                'module'        => 'ublog',
+                'controller'    => 'index',
+                'action'        => 'view',
+                'page'          => $this->blog->ident
+            ), 'blog', true); ?>" class="contentpagetitle">
+                <?= $this->blog->title; ?>
+            </a>
+        </h2>
+        <p class="iteminfo">
+            <span class="createdby">
+                Written by <?= $this->blog->user; ?>
+            </span>
+        </p>
+    </div>
+    <div class="both"></div>
+    <div>
+        <?= $this->blog->blog; ?>
+    </div>
+    <?php $oDate = new DateTime($this->blog->mdate); ?>
+    <div class="modifydate">
+        <p>Last modified on <?= $oDate->format('jS F Y g:i a'); ?></p>
+    </div>
+    <div id="comments">
+        <h2>Comments</h2>
+        <?php foreach ($this->blog->comments as $comment): ?>
+        <div class="commentWrap">
+            <div class="commentAvatar">
+                <?= $this->gravatar(
+                        $comment->email,
+                        array(
+                            'imgSize'       => 45,
+                            'defaultImg'    => 'monsterid',
+                            'secure'        => true
+                        )
+                    ); ?>
+            </div>
+            <div class="commentHead">
+                <?php $oDate = new DateTime($comment->cdate); ?>
+                <p>
+                <?php if ($comment->website): ?>
+                    <span class="commentName">
+                        <a href="http://<?= $comment->website; ?>"><?= $comment->name; ?></a>
+                    </span>
+                <?php else: ?>
+                    <span class="commentName">
+                        <?= $comment->name; ?>
+                    </span>
+                <?php endif; ?>
+                    <br />
+                    <span class="commentDate">on <?= $oDate->format('jS F Y @ g:i a'); ?></span>
+                </p>
+            </div>
+            <div class="both"></div>
+            <div class="comment">
+                <?= $comment->comment; ?>
+            </div>
+        </div>
+        <span class="article_seperator">&nbsp;</span>
+        <?php endforeach; ?>
+    </div>
+    <?php $this->commentAddForm->addHiddenElement('blogId', $this->blog->blogId);?>
+    <div><?= $this->commentAddForm; ?></div>
+</div>

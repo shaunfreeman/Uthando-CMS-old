@@ -15,6 +15,7 @@
             <module>default</module>
             <controller>index</controller>
             <action>index</action>
+            <route>default</route>
         </home>
         <admin>
             <label>Admin</label>
@@ -32,6 +33,7 @@
             <module>default</module>
             <controller>user</controller>
             <action>login</action>
+            <route>default</route>
             <resource>Guest</resource>
         </login>
         <register>
@@ -40,6 +42,7 @@
             <module>default</module>
             <controller>user</controller>
             <action>register</action>
+            <route>default</route>
             <resource>Guest</resource>
         </register>
         <logout>
@@ -48,6 +51,7 @@
             <module>default</module>
             <controller>user</controller>
             <action>logout</action>
+            <route>default</route>
             <resource>User</resource>
         </logout>
     </top_menu>
@@ -58,6 +62,7 @@
             <module>default</module>
             <controller>index</controller>
             <action>index</action>
+            <route>default</route>
         </home>
         <user>
             <label>My Account</label>
@@ -65,6 +70,7 @@
             <module>default</module>
             <controller>user</controller>
             <action>index</action>
+            <route>default</route>
             <resource>User</resource>
             <pages>
                 <edit>
@@ -73,6 +79,7 @@
                     <module>default</module>
                     <controller>user</controller>
                     <action>edit</action>
+                    <route>default</route>
                     <resource>User</resource>
                 </edit>
             </pages>
@@ -83,6 +90,7 @@
             <module>default</module>
             <controller>user</controller>
             <action>register</action>
+            <route>default</route>
             <resource>Guest</resource>
         </register>
          <login>
@@ -91,6 +99,7 @@
             <module>default</module>
             <controller>user</controller>
             <action>login</action>
+            <route>default</route>
             <resource>Guest</resource>
         </login>
         <logout>
@@ -99,6 +108,7 @@
             <module>default</module>
             <controller>user</controller>
             <action>logout</action>
+            <route>default</route>
             <resource>User</resource>
         </logout>
     </main_menu>

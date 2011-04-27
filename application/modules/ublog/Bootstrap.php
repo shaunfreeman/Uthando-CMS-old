@@ -37,7 +37,7 @@ class Ublog_Bootstrap extends Zend_Application_Module_Bootstrap
         $this->_logger = Zend_Registry::get('log');
     }
 
-    public function _initModuleResourceAutoloader()
+    protected function _initModuleResourceAutoloader()
     {
         $this->_logger->info(__METHOD__);
 
@@ -47,6 +47,18 @@ class Ublog_Bootstrap extends Zend_Application_Module_Bootstrap
               'namespace' => 'Widget',
             )
         ));
+    }
+
+    protected function _initRoutes()
+    {
+        $this->_logger->info(__METHOD__);
+
+        $router = Zend_Controller_Front::getInstance()->getRouter();
+
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/modules/ublog/configs/routes/blog.ini', 'routes');
+
+        $router->addConfig($config, 'routes');
+
     }
 
     /**

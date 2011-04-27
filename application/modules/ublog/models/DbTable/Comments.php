@@ -28,10 +28,10 @@
 class Ublog_Model_DbTable_Comments extends Zend_Db_Table_Abstract
 {
     protected $_name = 'blog_comments';
-    protected $_primary = 'CommentId';
+    protected $_primary = 'commentId';
 
     protected $_referenceMap = array(
-        'Blog' => array(
+        'Comments' => array(
             'columns'   => 'blogId',
             'refTableClass' => 'Ublog_Model_DbTable_Blogs',
             'refColumns'    => 'blogId'

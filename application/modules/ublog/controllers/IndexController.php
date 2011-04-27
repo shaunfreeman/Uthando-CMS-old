@@ -33,6 +33,12 @@ class Ublog_IndexController extends Uthando_Controller_Action_Abstract
 
         $this->_authService = new Core_Service_Authentication();
         $this->_model = new Ublog_Model_Mapper_Blogs();
+
+        $this->setForm('commentAdd', array(
+            'controller' => 'index',
+            'action'     => 'add-comment',
+            'module'     => 'ublog'
+        ));
     }
 
     public function indexAction()
@@ -41,6 +47,25 @@ class Ublog_IndexController extends Uthando_Controller_Action_Abstract
 
         $this->view->blogs = $this->_model->getBlogs();
 
+    }
+
+    public function viewAction()
+    {
+        $page = $this->_getParam('page');
+
+        if (is_numeric($page)) {
+            $this->view->blog = $this->_model->find($page);
+        } elseif (is_string($page)) {
+            $this->view->blog = $this->_model->getBlogByIdent($page);
+        } else {
+            throw new Exception('No page found');
+        }
+
+    }
+
+    public function addCommentAction()
+    {
+        
     }
 }
 ?>

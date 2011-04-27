@@ -1,6 +1,7 @@
 <?php
+
 /*
- * Blogs.php
+ * Filter.php
  *
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
  *
@@ -21,23 +22,32 @@
  */
 
 /**
- * Description of Blog_Model_DbTable_Blogs
+ * Description of Filter
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
-class Ublog_Model_DbTable_Blogs extends Zend_Db_Table_Abstract
+class Uthando_Utility_Filter
 {
-    protected $_name = 'blog_blogs';
-    protected $_primary = 'blogId';
+    public static function filter($value)
+    {
+        $find    = array( '`', '&',   ' ', '"', "'" );
+        $replace = array( '',  'and', '-', '',  '', );
+        $new = str_replace( $find, $replace,$value);
 
-    protected $_dependentTables = array('Ublog_Model_DbTable_Comments');
+        $noalpha = 'ÁÉÍÓÚÝáéíóúýÂÊÎÔÛâêîôûÀÈÌÒÙàèìòùÄËÏÖÜäëïöüÿÃãÕõÅåÑñÇç@°ºª';
+        $alpha   = 'AEIOUYaeiouyAEIOUaeiouAEIOUaeiouAEIOUaeiouyAaOoAaNnCcaooa';
 
-    protected $_referenceMap = array(
-        'User' => array(
-            'columns'       => 'userId',
-            'refTableClass' => 'Core_Model_DbTable_User',
-            'refColumns'    => 'userId'
-        )
-    );
+        $new = substr( $new, 0, 255 );
+        $new = strtr( $new, $noalpha, $alpha );
+
+        // not permitted chars are replaced with "-"
+        $new = preg_replace( '/[^a-zA-Z0-9_\+]/', '-', $new );
+
+        //remove -----'s
+        $new = preg_replace( '/(-+)/', '-', $new );
+
+        return rtrim( $new, '-' );
+    }
 }
+
 ?>

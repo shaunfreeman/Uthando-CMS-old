@@ -1,9 +1,61 @@
+<div id="blogList">
+    <span class="article_seperator">&nbsp;</span>
 <?php if ($this->blogs): ?>
-<?php
-    foreach ($this->blogs as $blog) {
-        print_r($blog);
-    }
-?>
+    <?php foreach ($this->blogs as $blog): ?>
+        <div class="calendar_icon">
+            <div class="datetime">
+                <?php $oDate = new DateTime($blog->cdate); ?>
+                <p class="top"><?= $oDate->format('g:i a'); ?></p>
+                <p class="top"><?= $oDate->format('D'); ?></p>
+                <p class="day"><?= $oDate->format('d'); ?></p>
+                <p class="mon"><?= $oDate->format('M'); ?></p>
+                <p class="year"><?= $oDate->format('Y'); ?></p>
+            </div>
+        </div>
+        <div class="blogheading">
+            <h2 class="contentheading">
+                <a href="<?= $this->url(array(
+                    'module'        => 'ublog',
+                    'controller'    => 'index',
+                    'action'        => 'view',
+                    'page'          => $blog->ident
+                ), 'blog', true); ?>" class="contentpagetitle">
+                    <?= $blog->title; ?>
+                </a>
+            </h2>
+            <p class="iteminfo">
+                <span class="createdby">
+                    Written by <?= $blog->user; ?>
+                </span>
+            </p>
+        </div>
+        <div class="both"></div>
+        <div>
+            <?= $blog->blog; ?>
+        </div>
+        <div>
+            <a href="<?= $this->url(array(
+                'module'        => 'ublog',
+                'controller'    => 'index',
+                'action'        => 'view',
+                'page'          => $blog->ident
+            ), 'blog', true); ?>" class="readon">
+                Read more: <?= $blog->title; ?>
+            </a>
+        </div>
+        <h4 class="comments">
+            <a href="<?= $this->url(array(
+                'module'        => 'ublog',
+                'controller'    => 'index',
+                'action'        => 'view',
+                'page'          => $blog->ident
+            ), 'blog', true); ?>#comments" title="View Full Page">
+                <span class="numcomments"><?= $blog->numComments; ?></span>&nbsp;Comments
+            </a>
+        </h4>
+        <span class="article_seperator">&nbsp;</span>
+    <?php endforeach; ?>
 <?php else: ?>
     <h1>No Blogs Yet</h1>
 <?php endif; ?>
+</div>

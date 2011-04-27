@@ -33,19 +33,37 @@ class Ublog_Model_Mapper_Blogs extends Uthando_Model_Mapper_Acl_Abstract
     protected function  _setVars($row, Ublog_Model_Blog $model)
     {
         return $model->setBlogId($row->blogId)
+                ->setUserId($row->userId)
+                ->setUser($this->_getUser($row))
                 ->setTitle($row->title)
-                ->setDescription($row->description)
+                ->setIdent($row->ident)
+                ->setBlog($row->blog)
                 ->setCdate($row->cdate)
-                ->setMdate($row->mdate);
+                ->setMdate($row->mdate)
+                ->setComments($this->_getComments($row));
     }
 
     public function getBlogs()
     {
         $select = $this->getDbTable()
                 ->select()
-                ->order('cdate');
+                ->order('cdate DESC');
 
         return $this->fetchAll($select);
+    }
+
+    public function getBlogByIdent($ident)
+    {
+        $select = $this->getDbTable()
+                ->select()
+                ->where('ident = ?', $ident);
+
+        return $this->fetchRow($select);
+    }
+
+    public function getNumComments()
+    {
+        //$comments = $this->_getComments();
     }
 
     public function  setAcl($acl)
@@ -54,6 +72,30 @@ class Ublog_Model_Mapper_Blogs extends Uthando_Model_Mapper_Acl_Abstract
 
         $this->_acl->allow('Manager', $this, array('save'))
             ->allow('SuperAdministrator', $this);
+    }
+
+    private function _getUser($row = null)
+    {
+        if (null === $row) {
+            return null;
+        }
+
+        return $row->findParentRow(
+            'Core_Model_DbTable_User',
+            'User'
+        );
+    }
+
+    private function _getComments($row = null)
+    {
+        if (null === $row) {
+            return null;
+        }
+
+        return $row->findDependentRowset(
+            'Ublog_Model_DbTable_Comments',
+            'Comments'
+        );
     }
 }
 ?>

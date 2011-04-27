@@ -28,11 +28,15 @@
 class Ublog_Model_Blog extends Uthando_Model_Abstract
 {
     protected $_blogId;
+    protected $_userId;
+    protected $_user;
     protected $_title;
-    protected $_description;
+    protected $_ident;
     protected $_blog;
     protected $_cdate;
     protected $_mdate;
+    protected $_comments;
+    protected $_numComments;
 
     public function getBlogId()
     {
@@ -42,6 +46,31 @@ class Ublog_Model_Blog extends Uthando_Model_Abstract
     public function setBlogId($id)
     {
         $this->_blogId = (int) $id;
+        return $this;
+    }
+
+    public function getUserId()
+    {
+        return $this->_userId;
+    }
+
+    public function setUserId($id)
+    {
+        $this->_userId = (int) $id;
+        return $this;
+    }
+
+    public function getUser()
+    {
+        return $this->_user;
+    }
+
+    public function setUser(Zend_Db_Table_Row $user)
+    {
+        $this->_user = join(' ', array(
+            $user->firstName,
+            $user->lastName
+        ));
         return $this;
     }
 
@@ -56,14 +85,14 @@ class Ublog_Model_Blog extends Uthando_Model_Abstract
         return $this;
     }
 
-    public function getDescription()
+    public function getIdent()
     {
-        return $this->_description;
+        return $this->_ident;
     }
 
-    public function setDescription($text)
+    public function setIdent($text)
     {
-        $this->_description = (string) $text;
+        $this->_ident = (string) $text;
         return $this;
     }
 
@@ -97,6 +126,29 @@ class Ublog_Model_Blog extends Uthando_Model_Abstract
     public function setMdate($ts)
     {
         $this->_mdate = $ts;
+        return $this;
+    }
+
+    public function getComments()
+    {
+        return $this->_comments;
+    }
+
+    public function setComments(Zend_Db_Table_Rowset $comments)
+    {
+        $this->_comments = $comments;
+        $this->setNumComment($comments->count());
+        return $this;
+    }
+
+    public function getNumComments()
+    {
+        return $this->_numComments;
+    }
+
+    public function setNumComment($num)
+    {
+        $this->_numComments = (int) $num;
         return $this;
     }
 }
