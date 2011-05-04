@@ -27,6 +27,45 @@
  */
 class Ublog_Model_Mapper_Comments extends Uthando_Model_Mapper_Acl_Abstract
 {
-    //put your code here
+    protected $_dbTableClass = 'Ublog_Model_DbTable_Comments';
+    protected $_modelClass = 'Ublog_Model_Comment';
+
+    protected function _setVars($row, Ublog_Model_Comment $model) {
+        return $model->setCommentId($row->commentId)
+                ->setBlogId($row->blogId)
+                ->setName($row->name)
+                ->setEmail($row->email)
+                ->setWebsite($row->website)
+                ->setComment($row->comment)
+                ->setCdate($row->cdate);
+    }
+
+    public function getComments($id)
+    {
+        $select = $this->getDbTable()
+                ->select()
+                ->where('blogId = ?', $id)
+                ->order('cdate ASC');
+
+        return $this->fetchAll($select);
+    }
+
+    public function saveComment($values)
+    {
+        $comment = new Ublog_Model_Comment($values);
+        $data = $comment->toArray();
+
+        if (null === ($id = $comment->getCommentId())) {
+            unset($data[$id]);
+            return $this->getDbTable()->insert($data);
+        }
+    }
+
+    public function  setAcl($acl)
+    {
+        parent::setAcl($acl);
+
+        //$this->_acl->allow('Guest', $this, array('save'))->allow('Registered', $this);
+    }
 }
 ?>

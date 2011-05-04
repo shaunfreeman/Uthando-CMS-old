@@ -40,7 +40,7 @@ class Ublog_Model_Mapper_Blogs extends Uthando_Model_Mapper_Acl_Abstract
                 ->setBlog($row->blog)
                 ->setCdate($row->cdate)
                 ->setMdate($row->mdate)
-                ->setComments($this->_getComments($row));
+                ->setNumComments($this->getNumComments($row));
     }
 
     public function getBlogs()
@@ -61,9 +61,10 @@ class Ublog_Model_Mapper_Blogs extends Uthando_Model_Mapper_Acl_Abstract
         return $this->fetchRow($select);
     }
 
-    public function getNumComments()
+    public function getNumComments($row)
     {
-        //$comments = $this->_getComments();
+        $comments = $this->_getComments($row);
+        return $comments->count();
     }
 
     public function  setAcl($acl)

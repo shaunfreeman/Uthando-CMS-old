@@ -40,7 +40,7 @@ class Ublog_Model_Comment extends Uthando_Model_Abstract
         return $this->_commentId;
     }
 
-    public function setId($id)
+    public function setCommentId($id)
     {
         $this->_commentId = (int) $id;
         return $this;

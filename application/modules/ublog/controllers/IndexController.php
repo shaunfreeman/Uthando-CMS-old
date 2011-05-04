@@ -27,18 +27,19 @@
  */
 class Ublog_IndexController extends Uthando_Controller_Action_Abstract
 {
+    protected $_commentsModel;
+
     public function init()
     {
         parent::init();
 
         $this->_authService = new Core_Service_Authentication();
         $this->_model = new Ublog_Model_Mapper_Blogs();
+        $this->_commentsModel = new Ublog_Model_Mapper_Comments();
 
         $this->setForm('commentAdd', array(
-            'controller' => 'index',
-            'action'     => 'add-comment',
-            'module'     => 'ublog'
-        ));
+            'action'     => 'add-comment'
+        ), 'ublog');
     }
 
     public function indexAction()
@@ -61,11 +62,33 @@ class Ublog_IndexController extends Uthando_Controller_Action_Abstract
             throw new Exception('No page found');
         }
 
+        $this->view->comments = $this->_commentsModel->getComments($this->view->blog->blogId);
     }
 
     public function addCommentAction()
     {
-        
+        if (!$this->_request->isPost()) {
+            return $this->_helper->redirector('index');
+        }
+
+        $this->view->blog = $this->_model->find($this->_request->getParam('blogId'));
+
+        if (!$this->getForm('commentAdd')->isValid($this->_request->getPost())) {
+             $this->view->comments = $this->_commentsModel->getComments($this->view->blog->blogId);
+            return $this->render('view'); // re-render the login form
+        }
+
+        if (false === $this->_commentsModel->saveComment($this->getForm('commentAdd')->getValues())) {
+            /**
+             * TODO:
+             * flashmessager.
+             */
+        } else {
+            $this->view->comments = $this->_commentsModel->getComments($this->view->blog->blogId);
+            $this->getForm('commentAdd')->reset();
+        }
+
+        return $this->render('view');
     }
 }
 ?>

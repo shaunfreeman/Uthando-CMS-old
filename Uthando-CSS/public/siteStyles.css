@@ -145,6 +145,11 @@ Blog
     padding: 0px;
 }
 
+#comment {
+    width: 50%;
+    height: 200px;
+}
+
 /*
 Pagination
 */
@@ -247,4 +252,8 @@ Tool Tips
 #benchmark {
 	text-align:center;
 	font-size:12px;
+}
+
+.required {
+    color: #f00;
 }

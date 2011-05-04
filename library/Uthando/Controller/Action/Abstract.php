@@ -31,6 +31,10 @@ abstract class Uthando_Controller_Action_Abstract extends Zend_Controller_Action
     protected $_model;
     protected $_forms;
     protected $_log;
+    /**
+     *
+     * @var object Zend_Controller_Action_Helper_FlashMessenger
+     */
     protected $_flashMessenger;
 
     /**

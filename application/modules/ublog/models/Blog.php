@@ -129,24 +129,12 @@ class Ublog_Model_Blog extends Uthando_Model_Abstract
         return $this;
     }
 
-    public function getComments()
-    {
-        return $this->_comments;
-    }
-
-    public function setComments(Zend_Db_Table_Rowset $comments)
-    {
-        $this->_comments = $comments;
-        $this->setNumComment($comments->count());
-        return $this;
-    }
-
     public function getNumComments()
     {
         return $this->_numComments;
     }
 
-    public function setNumComment($num)
+    public function setNumComments($num)
     {
         $this->_numComments = (int) $num;
         return $this;

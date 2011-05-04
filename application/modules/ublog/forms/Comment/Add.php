@@ -22,7 +22,7 @@
  */
 
 /**
- * Description of Add
+ * Description of Ublog_Form_Comment_Add
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
@@ -30,10 +30,16 @@ class Ublog_Form_Comment_Add extends Uthando_Form_Abstract
 {
     public function init()
     {
+        $this->addElementPrefixPath(
+            'Uthando_Filter',
+            APPLICATION_PATH . '/../library/Uthando/Filter/',
+            'filter'
+        );
+
         $this->addElement('text', 'Name', array(
             'filters'       => array('StringTrim'),
             'validators'    => array(
-                'Alpha',
+                array('Alpha', true, array('allowWhiteSpace' => true)),
                 array('StringLength', true, array(3, 128))
             ),
             'required'      => true,
@@ -64,9 +70,13 @@ class Ublog_Form_Comment_Add extends Uthando_Form_Abstract
         ));
 
         $this->addElement('textarea', 'comment', array(
+            'filters'       => array('HtmlPurifier'),
             'label'         => _('Comment'),
+            'required'      => true,
             'attribs'       => array ('class' => 'inputbox', 'rows' => '15', 'cols' => '40')
         ));
+
+        $this->addElement('hidden', 'blogId');
 
         $captcha = Zend_Registry::get('siteConfig')
             ->user
