@@ -1,3 +1,5 @@
 public/tmp/*
 !public/tmp/index.html
 Uthando-ini/*
+data/cache/*
+!data/cache/index.html
