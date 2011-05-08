@@ -84,8 +84,12 @@ class Ublog_IndexController extends Uthando_Controller_Action_Abstract
              * flashmessager.
              */
         } else {
-            $this->view->comments = $this->_commentsModel->getComments($this->view->blog->blogId);
-            $this->getForm('commentAdd')->reset();
+
+            return $this->_helper->redirector->gotoRoute(
+                array('page'  => $this->view->blog->ident),
+                'blog',
+                true
+            );
         }
 
         return $this->render('view');

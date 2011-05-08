@@ -201,6 +201,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $this->_view = $this->getResource('view');
 
+        Uthando_Mootools::enableView($this->_view);
+
+        $this->_view->mootools();
+
         $this->_view->addHelperPath(
                 APPLICATION_PATH . '/views/helpers', 'Zend_View_Helper'
         );

@@ -24,13 +24,17 @@ Blog
     padding: 0px 0px 10px 4px;
 }
 
-#blogList p, #blog p {
+#blogList p, #blog p, #userLogin p, #userRegister p, #userEdit p {
     padding: 0px;
     margin: 0px;
 }
 
-#blogList div, #blog div {
+#blogList div, #blog div, #userLogin div, #userRegister div, #userEdit div {
     margin: 10px 0px;
+}
+
+#captcha div {
+    margin: 0px;
 }
 
 /* DAY OF WEEK */

@@ -35,8 +35,6 @@ class Uthando_Filter_HtmlPurifier implements Zend_Filter_Interface
      */
     protected $_instance;
 
-    protected $_config;
-
     /**
      * Constructor
      *
@@ -45,11 +43,7 @@ class Uthando_Filter_HtmlPurifier implements Zend_Filter_Interface
      */
     public function __construct($config = null)
     {
-        $this->_config = array(
-            'Cache.SerializerPath' => APPLICATION_PATH . '/../data/cache',
-            'HTML.Doctype' => 'XHTML 1.0 Strict'
-        );
-        $config = ($config) ? array_merge($this->_config, $config) : $this->_config;
+        $config['Cache.SerializerPath'] = APPLICATION_PATH . '/../data/cache';
 
         require_once APPLICATION_PATH . '/../library/htmlpurifier/HTMLPurifier.includes.php';
 		require_once APPLICATION_PATH . '/../library/htmlpurifier/HTMLPurifier.auto.php';

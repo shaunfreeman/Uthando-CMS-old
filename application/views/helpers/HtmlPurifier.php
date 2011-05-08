@@ -22,7 +22,7 @@
  */
 
 /**
- * Description of HtmlPurifier
+ * Description of Zend_View_Helper_HtmlPurifier
  *
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */

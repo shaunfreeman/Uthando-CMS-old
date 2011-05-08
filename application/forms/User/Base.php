@@ -1,21 +1,21 @@
 <?php
-/* 
+/*
  * Base.php
- * 
+ *
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
- * 
+ *
  * This file is part of Uthando-CMS.
- * 
+ *
  * Uthando-CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Uthando-CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
  */
@@ -103,7 +103,7 @@ class Core_Form_User_Base extends Uthando_Form_Abstract
         $multiOptions = array(
             0 => 'Select Role'
         );
-        
+
         $identity = Zend_Auth::getInstance();
 
         if ($identity->hasIdentity()) {
@@ -111,7 +111,7 @@ class Core_Form_User_Base extends Uthando_Form_Abstract
         } else {
             $upid = 0;
         }
-        
+
         foreach ($roles as $role) {
             if ($role->getRole() == 'Guest') continue;
             if ($upid == 0 || $role->getUpid() < $upid) continue;
@@ -170,30 +170,32 @@ class Core_Form_User_Base extends Uthando_Form_Abstract
 
         if ($captcha->enabled) {
 
-            $this->addElement('captcha', 'captcha', array(
-                'captcha'    => $captcha->options->toArray(),
-                'required'   => true,
-                'label'      => _('Please enter the letters displayed below:'),
-                'attribs'       => array ('class' => 'inputbox')
-            ));
+            $this->addCaptcha($captcha->options->toArray());
+
 
             $this->addDisplayGroup(array(
                 'captcha'
-            ), 'SiteCaptcha', array('legend' => _('Captcha Image')));
+            ), 'SiteCaptcha', array(
+                'legend' => _('Captcha Image'),
+                'decorators'    => array(
+                    'FormElements',
+                    'Fieldset',
+                    array(
+                        'HtmlTag',
+                        array(
+                            'tag' => 'div',
+                            'id' => 'siteCaptchaGroup'
+                        )
+                    )
+                )
+            ));
 
         }
-
-        $this->setDecorators(array(
-            'FormElements',
-            array('HtmlTag', array('tag' => 'dl', 'class' => 'zend_form')),
-            array('Description', array('placement' => 'prepend')),
-            'Form'
-        ));
     }
 
     /**
      * Excludes the current user's email from validating against the database.
-     * 
+     *
      * @param string $email
      * @return Core_Form_User_Base
      * @access public

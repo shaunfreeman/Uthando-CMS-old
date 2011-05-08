@@ -1,5 +1,7 @@
 <?php if ($this->admin): ?>
     <?= $this->userAdminEditForm; ?>
 <?php else: ?>
-    <?= $this->userEditForm; ?>
+    <div id="userEdit">
+        <?= $this->userEditForm; ?>
+    </div>
 <?php endif; ?>

@@ -36,7 +36,7 @@
         <p>Last modified on <?= $oDate->format('jS F Y g:i a'); ?></p>
     </div>
     <div id="comments">
-        <h2>Comments</h2>
+        <h2>Comments:</h2>
         <?php foreach ($this->comments as $comment): ?>
         <div class="commentWrap">
             <div class="commentAvatar">
@@ -73,6 +73,9 @@
         <span class="article_seperator">&nbsp;</span>
         <?php endforeach; ?>
     </div>
+    <h2>Post a comment:</h2>
     <?php $this->commentAddForm->addHiddenElement('blogId', $this->blog->blogId);?>
-    <div><?= $this->commentAddForm; ?></div>
+    <div>
+        <?= $this->commentAddForm; ?>
+    </div>
 </div>

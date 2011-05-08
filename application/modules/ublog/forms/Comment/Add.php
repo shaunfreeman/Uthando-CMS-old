@@ -30,6 +30,8 @@ class Ublog_Form_Comment_Add extends Uthando_Form_Abstract
 {
     public function init()
     {
+        $this->setDescription(_('Fill out the form to add a comment, the fields in red are required'));
+
         $this->addElementPrefixPath(
             'Uthando_Filter',
             APPLICATION_PATH . '/../library/Uthando/Filter/',
@@ -57,6 +59,7 @@ class Ublog_Form_Comment_Add extends Uthando_Form_Abstract
             ),
             'required'      => true,
             'label'         => _('Email'),
+            'description'   => _('(A valid email address is required. Your email address will not be published)'),
             'attribs'       => array ('class' => 'inputbox')
         ));
 
@@ -83,24 +86,11 @@ class Ublog_Form_Comment_Add extends Uthando_Form_Abstract
             ->captcha;
 
         if ($captcha->enabled) {
-
-            $this->addElement('captcha', 'captcha', array(
-                'captcha'    => $captcha->options->toArray(),
-                'required'   => true,
-                'label'      => _('Please enter the letters displayed below:'),
-                'attribs'       => array ('class' => 'inputbox')
-            ));
+            $this->addCaptcha($captcha->options->toArray());
         }
 
-        $this->setDecorators(array(
-            'FormElements',
-            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
-            array('Description', array('placement' => 'prepend')),
-            'Form'
-        ));
-
         $this->addSubmit('Comment');
-        $this->addHash('csrf');
+        //$this->addHash('csrf');
     }
 }
 
