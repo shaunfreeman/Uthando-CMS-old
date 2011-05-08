@@ -62,10 +62,6 @@ class Uthando_View_Template
         $this->_view->headMeta()
             ->appendName('description', $this->_options->template->description);
 
-        $this->_view
-                ->headLink()
-                ->appendStylesheet('/templates/' . $this->getTemplateName() . '/css/style.css');
-
         $controllerCss = '/templates/' . $this->getTemplateName() .
                 '/css/' . $this->_request->getControllerName() . '.css';
 
