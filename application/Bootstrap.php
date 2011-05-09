@@ -36,6 +36,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected $_resourceLoader;
 
     /**
+     * @var Zend_View
+     */
+    protected $_view;
+
+    /**
      * @var Zend_Controller_Front
      */
     public $frontController;
@@ -201,13 +206,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $this->_view = $this->getResource('view');
 
-        Uthando_Mootools::enableView($this->_view);
-
-        $this->_view->mootools();
-
         $this->_view->addHelperPath(
                 APPLICATION_PATH . '/views/helpers', 'Zend_View_Helper'
         );
+    }
+
+    protected function _initMooTools()
+    {
+        $this->_logger->info(__METHOD__);
+
+        ZendX_MooTools::enableView($this->_view);
+
+        $this->_view->mooTools()->enable();
+        $this->_view->mooTools()->setVersion('1.3.2');
     }
 }
 

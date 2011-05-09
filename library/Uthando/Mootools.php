@@ -49,6 +49,7 @@ class Uthando_Mootools
     {
         if (false === $view->getPluginLoader('helper')->getPaths('Uthando_Mootools_View_Helper')) {
             $view->addHelperPath('Uthando/Mootools/View/Helper', 'Uthando_Mootools_View_Helper');
+            $view->mootools();
         }
     }
 }

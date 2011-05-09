@@ -33,6 +33,10 @@ Blog
     margin: 10px 0px;
 }
 
+#comment-mooeditable-container div {
+    margin: 0px;
+}
+
 #captcha div {
     margin: 0px;
 }
@@ -147,6 +151,10 @@ Blog
 #comments .commentHead p {
     margin: 0px;
     padding: 0px;
+}
+
+#comments p {
+    margin: 5px 0px;
 }
 
 #comment {

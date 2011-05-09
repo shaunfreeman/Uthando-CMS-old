@@ -78,13 +78,15 @@ class Uthando_View_Template
                  ->appendStylesheet($value);
         }
 
-        /*
-        foreach (Uthando_Utility_Array::mergeMultiArray($options->template->js) as $value) {
-            $this->_view
-                 ->headScript()
-                 ->appendFile($value);
-        }
-        */
+        /**
+         * Not sure wheather to do this yet.
+         *
+            foreach (Uthando_Utility_Array::mergeMultiArray($options->template->js) as $value) {
+                $this->_view
+                     ->headScript()
+                     ->appendFile($value);
+            }
+         */
     }
 
     public function addLogos($logos)

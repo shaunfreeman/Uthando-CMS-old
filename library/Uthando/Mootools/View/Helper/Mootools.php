@@ -46,14 +46,48 @@ class Uthando_Mootools_View_Helper_Mootools extends Zend_View_Helper_Abstract
      */
     protected $_cdnVersion = '1.3.2';
 
+    protected $_jsScripts = array();
+
+    protected $_cssLinks;
+
     public function mootools()
     {
-        $log = Zend_Registry::get('log');
-        $log->info(__METHOD__);
+        $this->addJs($this->_cdnBase . $this->_cdnVersion . $this->_cdnPath);
 
-        $this->view->headScript()
-             ->appendFile($this->_cdnBase . $this->_cdnVersion . $this->_cdnPath);
+        return $this;
+    }
 
+    /**
+     * Proxy call to Mootools classes.
+     *
+     * @param method $name
+     * @param mixed $arguments
+     * @return return void
+     * @access public
+     */
+    public function __call($name, $arguments)
+    {
+        $this->view->$name($arguments);
+    }
+
+    public function render()
+    {
+        foreach ($this->_jsScripts as $js) {
+            $this->view->headScript()
+                ->appendFile($js);
+        }
+
+        return $this;
+    }
+
+    public function getJs()
+    {
+        return $this->_jsScripts;
+    }
+
+    public function addJs($js)
+    {
+        $this->_jsScripts[$js] = (string) $js;
         return $this;
     }
 }
