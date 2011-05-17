@@ -27,6 +27,8 @@
  */
 class Ublog_AdminController extends Uthando_Controller_Action_Abstract
 {
+    protected $_commentsModel;
+    
     /**
      *
      * @return none
@@ -38,6 +40,12 @@ class Ublog_AdminController extends Uthando_Controller_Action_Abstract
             //throw new Exception('Access Denied');
             return $this->_helper->redirector('login', 'user', 'default');
         }
+
+        parent::init();
+
+        $this->_authService = new Core_Service_Authentication();
+        $this->_model = new Ublog_Model_Mapper_Blogs();
+        $this->_commentsModel = new Ublog_Model_Mapper_Comments();
     }
 
     /**
@@ -47,7 +55,8 @@ class Ublog_AdminController extends Uthando_Controller_Action_Abstract
      */
     public function indexAction()
     {
-
+        $this->_log->info(__METHOD__);
+        $this->view->blogs = $this->_model->getBlogs();
     }
 }
 ?>
