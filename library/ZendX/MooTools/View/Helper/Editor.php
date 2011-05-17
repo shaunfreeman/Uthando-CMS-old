@@ -28,20 +28,74 @@
  */
 class ZendX_MooTools_View_Helper_Editor extends ZendX_MooTools_View_Helper_MooTools
 {
-    public function editor($js, $css, $domReady)
+    protected $_plugins = array(
+        'Charmap' => null,
+        'CleanPaste' => array('More/Class.Refactor'),
+        'Extras' => array('MooEditable.UI.MenuList'),
+        'Flash' => null,
+        'Forecolor' => array('MooEditable.UI.ButtonOverlay'),
+        'Group' => null,
+        'Image' => null,
+        'Pagebreak' => null,
+        'Smiley' => array('MooEditable.UI.ButtonOverlay'),
+        'Table' => null,
+        'UI.ButtonOverlay' => null,
+        'UI.ExtendedLinksDialog' => array('More/URI'),
+        'UI.MenuList' => null
+    );
+
+    public function editor($name, $plugins = null, $domReady = array())
     {
-        foreach ($js as $script) {
-            $this->mooTools()->addJavascriptFile($script);
+        if (!is_array($plugins)) {
+            $plugins = array();
         }
 
-        foreach ($css as $styleSheet) {
-            $this->mooTools()->addStylesheet($styleSheet);
+        $this->mooTools()->addJavascriptFile(
+                $this->mooTools()
+                ->getPluginsPath()
+                . '/' . $name
+                . '/' . $name . '.js'
+        );
+
+        $this->mooTools()->addStylesheet(
+                $this->mooTools()
+                ->getPluginsPath()
+                . '/Styles/' . $name
+                . '/' . $name . '.css'
+        );
+
+        foreach ($plugins as $plugin) {
+
+            $depentants = $this->_plugins[$plugin];
+
+            foreach ($depentants as $dep) {
+                $this->mooTools()->addJavascriptFile(
+                    $this->mooTools()
+                    ->getPluginsPath()
+                    . '/' . $name
+                    . '/' . $dep . '.js'
+                );
+            }
+
+            $this->mooTools()->addJavascriptFile(
+                $this->mooTools()
+                ->getPluginsPath()
+                . '/' . $name
+                . '/' . $name . '.' . $plugin . '.js'
+            );
+
+            $this->mooTools()->addStylesheet(
+                    $this->mooTools()
+                    ->getPluginsPath()
+                    . '/Styles/' . $name
+                    . '/' . $name . '.' . $plugin . '.css'
+            );
         }
 
-        $this->mooTools()->addDomReady($this->buildJs($domReady));
+        $this->mooTools()->addDomReady($this->build($domReady));
     }
 
-    public function buildJs($js)
+    public function build($js)
     {
         $returnJs = "\t";
 
@@ -50,7 +104,6 @@ class ZendX_MooTools_View_Helper_Editor extends ZendX_MooTools_View_Helper_MooTo
 
         foreach ($js['options'] as $key => $option) {
             $returnJs .= "\t\t".$key.":".$option.",".PHP_EOL;
-
         }
 
         $returnJs = substr($returnJs, 0, -2).PHP_EOL;

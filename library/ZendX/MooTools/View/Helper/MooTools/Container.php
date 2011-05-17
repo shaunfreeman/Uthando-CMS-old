@@ -35,7 +35,7 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      *
      * @var String
      */
-    protected $_mootolsLibraryPath = null;
+    protected $_mootoolsPath = null;
 
     /**
      * Additional javascript files that for MooTools Helper components.
@@ -92,15 +92,12 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      */
     protected $_isXhtml = false;
 
-
-
     /**
      * Default CDN MooTools Library version
      *
      * @var String
      */
     protected $_version = ZendX_MooTools::DEFAULT_MOOTOOLS_VERSION;
-
 
     /**
      * Default Render Mode (all parts)
@@ -110,12 +107,11 @@ class ZendX_MooTools_View_Helper_MooTools_Container
     protected $_renderMode = ZendX_MooTools::RENDER_ALL;
 
     /**
-     * MooTools Moore Library Enabled
+     * MooTools More Library Enabled
      *
      * @var Boolean
      */
-    protected $_mooreEnabled = false;
-
+    protected $_moreEnabled = false;
 
     /**
      * Local MooTools More Library Path
@@ -123,15 +119,14 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      *
      * @var String
      */
-    protected $_mooreLibraryPath = null;
-
+    protected $_morePath = null;
 
    /**
      * MooTools Moore Version
      *
      * @var String
      */
-    protected $_mooreVersion = ZendX_MooTools::DEFAULT_MOORE_VERSION;
+    protected $_moreVersion = ZendX_MooTools::DEFAULT_MORE_VERSION;
 
     /**
      * Load CDN Path from SSL or Non-SSL?
@@ -139,6 +134,8 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      * @var boolean
      */
     protected $_loadSslCdnPath = false;
+
+    protected $_pluginsPath = null;
 
     /**
      * View Instance
@@ -217,6 +214,19 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $this->_version;
     }
 
+    public function setMoreVersion($version)
+    {
+        if (is_string($version) && preg_match('/^[1-9]\.[0-9]\.[0-9]\.[0-9]$/', $version)) {
+            $this->_moreVersion = $version;
+        }
+        return $this;
+    }
+
+    public function getMoreVersion()
+    {
+        return $this->_moreVersion;
+    }
+
     /**
      * Set Use SSL on CDN Flag
      *
@@ -238,7 +248,6 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return !$this->useLocalPath();
     }
 
-
     /**
      * Set path to local MooTools library
      *
@@ -247,7 +256,7 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      */
     public function setLocalPath($path)
     {
-        $this->_mootolsLibraryPath  = (string) $path;
+        $this->_mootoolsPath  = (string) $path;
         return $this;
     }
 
@@ -258,9 +267,8 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      */
     public function getLocalPath()
     {
-        return $this->_mootolsLibraryPath;
+        return $this->_mootoolsPath;
     }
-
 
     /**
      * Are we using a local path?
@@ -269,54 +277,53 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      */
     public function useLocalPath()
     {
-        return (null === $this->_mootolsLibraryPath) ? false : true;
+        return (null === $this->_mootoolsPath) ? false : true;
     }
 
     /**
-     * Enable MooTools Moore Library Rendering
+     * Enable MooTools More Library Rendering
      *
      * @return ZendX_MooTools_View_Helper_MooTools_Container
      */
-    public function mooreEnable()
+    public function moreEnable()
     {
         $this->enable();
-        $this->_mooreEnabled = true;
+        $this->_moreEnabled = true;
         return $this;
     }
 
     /**
-     * Disable MooTools moore Library Rendering
+     * Disable MooTools more Library Rendering
      *
      * @return ZendX_MooTools_View_Helper_MooTools_Container
      */
-    public function mooreDisable()
+    public function moreDisable()
     {
-        $this->_mooreEnabled = false;
+        $this->_moreEnabled = false;
         return $this;
     }
 
-
     /**
-     * Check wheater currently the MooTools moore library is enabled.
+     * Check wheater currently the MooTools more library is enabled.
      *
      * @return boolean
      */
-    public function mooreIsEnabled()
+    public function moreIsEnabled()
     {
-         return $this->_mooreEnabled;
+         return $this->_moreEnabled;
     }
 
     /**
-     * Set local path to MooTools Moore library
+     * Set local path to MooTools More library
      * And Enable
      *
      * @param String $path
      * @return ZendX_MooTools_View_Helper_MooTools_Container
      */
-    public function setMooreLocalPath($path)
+    public function setMorePath($path)
     {
-    	$this->_mooreLibraryPath = (string) $path;
-    	$this->mooreEnable();
+    	$this->_morePath = (string) $path;
+    	//$this->moreEnable();
     	return $this;
     }
 
@@ -325,14 +332,23 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      *
      * @return string
      */
-    public function getMooreLocalPath()
+    public function getMorePath()
     {
-    	return $this->_mooreLibraryPath;
+    	return $this->_morePath;
     }
 
+    public function setPluginsPath($path)
+    {
+        $this->_pluginsPath = (string) $path;
+        return $this;
+    }
 
+    public function getPluginsPath()
+    {
+        return $this->_pluginsPath;
+    }
 
-     /**
+    /**
      * Start capturing routines to run onLoad
      *
      * @return boolean
@@ -362,8 +378,7 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return true;
     }
 
-
-     /**
+    /**
      * Start capturing routines to run onLoad
      *
      * @return boolean
@@ -423,7 +438,6 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return true;
     }
 
-
 	/**
 	 * Add a Javascript File to the include stack.
 	 *
@@ -451,7 +465,6 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $this->_javascriptSources;
     }
 
-
 	/**
 	 * Clear all currently registered Javascript files.
 	 *
@@ -462,7 +475,6 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         $this->_javascriptSources = array();
         return $this;
     }
-
 
     /**
      * Add arbitrary javascript to execute in MooTools JS container
@@ -506,7 +518,7 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $this;
     }
 
-/**
+    /**
      * Add a stylesheet
      *
      * @param  string $path
@@ -555,7 +567,6 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $this->_onLoadActions;
     }
 
-
     /**
      * Clear the onLoadActions stack.
      *
@@ -602,7 +613,6 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $this;
     }
 
-
 	/**
 	 * Set which parts of the MooTools enviroment should be rendered.
 	 *
@@ -648,15 +658,14 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $html;
     }
 
-
-     /**
+    /**
      * Render MooTools stylesheets
      *
      * @return string
      */
     protected function _renderStylesheets()
     {
-    	if( ($this->getRenderMode() & ZendX_MooTools::RENDER_STYLESHEETS) == 0) {
+    	if ( ($this->getRenderMode() & ZendX_MooTools::RENDER_STYLESHEETS) == 0) {
     		return '';
     	}
 
@@ -693,13 +702,13 @@ class ZendX_MooTools_View_Helper_MooTools_Container
     {
     	$scriptTags = '';
     	if( ($this->getRenderMode() & ZendX_MooTools::RENDER_LIBRARY) > 0) {
-	        $source = $this->_getMooToolsLibraryPath();
+	        $source = $this->_getMooToolsPath();
 
 	        $scriptTags .= '<script type="text/javascript" src="' . $source . '"></script>'.PHP_EOL;
 
-	        if($this->mooreIsEnabled()) {
-                $moorePath = $this->_getMooToolsMooreLibraryPath();
-	        	$scriptTags .= '<script type="text/javascript" src="'.$moorePath.'"></script>'.PHP_EOL;
+	        if($this->moreIsEnabled()) {
+                $morePath = $this->_getMooToolsMorePath();
+	        	$scriptTags .= '<script type="text/javascript" src="'.$morePath.'"></script>'.PHP_EOL;
 	        }
 
 	        if(ZendX_MooTools_View_Helper_MooTools::getNoSafeMode() == true) {
@@ -715,7 +724,6 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $scriptTags;
     }
 
-
     /**
      * Renders all javascript code related stuff of the MooTools enviroment.
      *
@@ -730,14 +738,12 @@ class ZendX_MooTools_View_Helper_MooTools_Container
 	        }
         }
 
-
         $domReadyActions = array();
         if( ($this->getRenderMode() & ZendX_MooTools::RENDER_MOOTOOLS_DOM_READY) > 0) {
 	        foreach ($this->getDomReadyActions() as $callbackDomReady) {
 	            $domReadyActions[] = $callbackDomReady;
 	        }
         }
-
 
 		$javascript = '';
 		if( ($this->getRenderMode() & ZendX_MooTools::RENDER_JAVASCRIPT) > 0) {
@@ -759,7 +765,6 @@ class ZendX_MooTools_View_Helper_MooTools_Container
             $content .= '});'."\n";
         }
 
-
         if (!empty($javascript)) {
             $content .= $javascript . "\n";
         }
@@ -776,11 +781,10 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $html;
     }
 
-
     /**
      * @return string
      */
-    protected function _getMooToolsLibraryBaseCdnUri()
+    protected function _getMooToolsBaseCdnUri()
     {
         if($this->_loadSslCdnPath == true) {
             $baseUri = ZendX_MooTools::CDN_BASE_GOOGLE_SSL;
@@ -790,25 +794,22 @@ class ZendX_MooTools_View_Helper_MooTools_Container
         return $baseUri;
     }
 
-
     /**
 	 * Internal function that constructs the include path of the MooTools library.
 	 *
 	 * @return string
 	 */
-    protected function _getMooToolsLibraryPath()
+    protected function _getMooToolsPath()
     {
-        if($this->_mootolsLibraryPath != null) {
-            $source = $this->_mootolsLibraryPath;
+        if($this->_mootoolsPath != null) {
+            $source = $this->_mootoolsPath;
         } else {
-            $baseUri = $this->_getMooToolsLibraryBaseCdnUri();
+            $baseUri = $this->_getMooToolsBaseCdnUri();
             $source = $baseUri .
                 ZendX_MooTools::CDN_SUBFOLDER_MOOTOOLS .
                 $this->getVersion() .
             	ZendX_MooTools::CDN_MOOTOOLS_PATH_GOOGLE;
         }
-        $log = Zend_Registry::get('log');
-        $log->info(__METHOD__);
 
         return $source;
     }
@@ -818,15 +819,14 @@ class ZendX_MooTools_View_Helper_MooTools_Container
      *
      * @return string
      */
-    protected function _getMooToolsMooreLibraryPath ()
+    protected function _getMooToolsMorePath ()
     {
-        if ($this->_mooreLibraryPath != null) {
-            $source = $this->_mooreLibraryPath;
+        if ($this->_morePath != null) {
+            $source = $this->_morePath;
         } else {
-            trigger_error("Mootools Moore Library Path is no defined", E_USER_NOTICE);
+            trigger_error("Mootools More Library Path is no defined", E_USER_NOTICE);
         }
 
         return $source;
     }
-
 }

@@ -217,8 +217,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         ZendX_MooTools::enableView($this->_view);
 
-        $this->_view->mooTools()->enable();
-        $this->_view->mooTools()->setVersion('1.3.2');
+        $this->_view->mooTools()
+                ->enable()
+                ->setVersion('1.3.2')
+                ->setMoreVersion('1.3.2.1')
+                ->setMorePath('/uthando-js/MooTools/more')
+                ->setPluginsPath('/uthando-js/MooTools/plugins')
+                ;
     }
 }
 

@@ -1,4 +1,3 @@
-
 window.addEvent('domready', function() {
 
     if ($('coverlogin')) {
@@ -16,5 +15,4 @@ window.addEvent('domready', function() {
             panel.start('height', 0);
         });
     }
-
 });

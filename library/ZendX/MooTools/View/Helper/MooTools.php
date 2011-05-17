@@ -56,7 +56,7 @@ class ZendX_MooTools_View_Helper_MooTools extends Zend_View_Helper_Abstract
      * @var Zend_View_Interface
      */
     public $view;
-
+    
     /**
 	 * MooTools Safe Mode
 	 * Available only in version 1.2.3 or higher of MooTools
@@ -83,7 +83,6 @@ class ZendX_MooTools_View_Helper_MooTools extends Zend_View_Helper_Abstract
             $registry[__CLASS__] = $container;
         }
         $this->_container = $registry[__CLASS__];
-
     }
 
 	/**

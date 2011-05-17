@@ -38,40 +38,40 @@ class ZendX_MooTools
 {
      /**
      * Current default supported MooTools library version with ZendX_MooTools
-     * 
-     * @const string
-     */
-    const DEFAULT_MOOTOOLS_VERSION = "1.2.4";
-    
-    
-    /**
-     * Currently supported MooTools moore library version with ZendX_MooTools
      *
      * @const string
      */
-    const DEFAULT_MOORE_VERSION = "1.2.4.4";
-    
+    const DEFAULT_MOOTOOLS_VERSION = "1.2.4";
+
+
+    /**
+     * Currently supported MooTools more library version with ZendX_MooTools
+     *
+     * @const string
+     */
+    const DEFAULT_MORE_VERSION = "1.2.4.4";
+
     /**
      * Url CDN BASE
-     * 
+     *
      * @const string Base path to CDN
      */
     const CDN_BASE_GOOGLE = 'http://ajax.googleapis.com/ajax/libs/';
-    
+
     /**
      * Url SSL CDN BASE
-     * 
+     *
      * @const string Base path to CDN
      */
     const CDN_BASE_GOOGLE_SSL = 'https://ajax.googleapis.com/ajax/libs/';
-    
-  
-    
+
+
+
      /**
      * @const string
      */
     const CDN_SUBFOLDER_MOOTOOLS = 'mootools/';
-    
+
     /**
      * Always uses compressed version, because this is assumed to be the use case
      * in production enviroment. An uncompressed version has to included manually.
@@ -79,8 +79,8 @@ class ZendX_MooTools
      * @const string File path after base and version
      */
     const CDN_MOOTOOLS_PATH_GOOGLE = '/mootools-yui-compressed.js';
-    
-    
+
+
    /**
      * Which parts of the the MooTools library should be rendered on echo'ing
      * the MooTools library to the View. The constants act as bit-mask. This
@@ -96,11 +96,11 @@ class ZendX_MooTools
     const RENDER_MOOTOOLS_ON_LOAD   = 16;
     const RENDER_MOOTOOLS_DOM_READY = 32;
     const RENDER_ALL                = 255;
-    
+
     /**
      * MooTools-enable a view instance
-     * 
-     * @param  Zend_View_Interface $view 
+     *
+     * @param  Zend_View_Interface $view
      * @return void
      */
     public static function enableView(Zend_View_Interface $view)
@@ -109,8 +109,7 @@ class ZendX_MooTools
             $view->addHelperPath('ZendX/MooTools/View/Helper', 'ZendX_MooTools_View_Helper');
         }
     }
-    
-    
+
 	/**
      * Encode Json that may include javascript expressions.
      *

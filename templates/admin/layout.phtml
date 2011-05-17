@@ -6,7 +6,12 @@
         <meta name="Generator" content="Uthano CMS" />
         <?= $this->headTitle(); ?>
         <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <?= $this->headLink(); ?>
+        <?= $this->headLink()
+                ->prependStylesheet('/templates/admin/css/style.css'); ?>
+        <?= $this->headScript(); ?>
+        <?= $this->mooTools(); ?>
+
+        <?= $this->headStyle(); ?>
     </head>
     <body>
         <div id="outerDivWrap">
