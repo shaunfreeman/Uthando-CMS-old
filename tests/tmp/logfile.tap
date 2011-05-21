@@ -1,0 +1,9 @@
+TAP version 13
+ok 1 - Uthando_Model_AbstractTest::test__constructConfigOptions
+ok 2 - Uthando_Model_AbstractTest::test__set
+ok 3 - Uthando_Model_AbstractTest::test__get
+ok 4 - Uthando_Model_AbstractTest::testSetOptions
+ok 5 - Uthando_Model_AbstractTest::testToArray
+ok 6 - Uthando_Model_AbstractTest::testSetException
+ok 7 - Uthando_Model_AbstractTest::testGetException
+1..7

@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Core_Model_Mapper_User</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name"><img src="../../media/images/Class_logo.png"
+														alt=" Class"
+														title=" Class"
+														style="vertical-align: middle"> Core_Model_Mapper_User</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Description of Core_Model_Mapper_User</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Shaun Freeman &lt;<a href="mailto:shaun@shaunfreeman.co.uk">shaun@shaunfreeman.co.uk</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_application---models---mappers---User.php.html">/application/models/mappers/User.php</a> (line <span class="field">29</span>)
+		</p>
+		
+				
+		<pre><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html">Uthando_Model_Mapper_Abstract</a>
+   |
+   --<a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html">Uthando_Model_Mapper_Acl_Abstract</a>
+      |
+      --Core_Model_Mapper_User</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$_dbTableClass" title="details" class="var-name">$_dbTableClass</a>
+				</div>
+																<div class="var-title">
+					<img src="../../media/images/Variable.png" alt=" " />
+					<span class="var-type">mixed</span>
+					<a href="#$_modelClass" title="details" class="var-name">$_modelClass</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																								<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#deleteUser" title="details" class="method-name">deleteUser</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#getUserByEmail" title="details" class="method-name">getUserByEmail</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$email</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#getUsers" title="details" class="method-name">getUsers</a>
+										()
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#registerUser" title="details" class="method-name">registerUser</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#saveUser" title="details" class="method-name">saveUser</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#setAcl" title="details" class="method-name">setAcl</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$acl</span>)
+									</div>
+																<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#_setVars" title="details" class="method-name">_setVars</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$row</span>, <span class="var-type"><a href="../../Uthando_Model/Core_Model_User.html">Core_Model_User</a></span>&nbsp;<span class="var-name">$class</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$_dbTableClass" id="$_dbTableClass"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_dbTableClass</span>
+			 = <span class="var-default"> 'Core_Model_DbTable_User'</span>			(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#var$_dbTableClass">Uthando_Model_Mapper_Abstract::$_dbTableClass</a></dt>
+						<dd>The database class name</dd>
+					</dl>
+		
+		
+
+</div>
+<a name="var$_modelClass" id="$_modelClass"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/Variable.png" />
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_modelClass</span>
+			 = <span class="var-default"> 'Core_Model_User'</span>			(line <span class="line-number">32</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#var$_modelClass">Uthando_Model_Mapper_Abstract::$_modelClass</a></dt>
+						<dd>The model class name</dd>
+					</dl>
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html">Uthando_Model_Mapper_Acl_Abstract</a></span></p>
+					<blockquote>
+													<img src="../../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#var$_acl">Uthando_Model_Mapper_Acl_Abstract::$_acl</a></span><br>
+							</span>
+													<img src="../../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#var$_identity">Uthando_Model_Mapper_Acl_Abstract::$_identity</a></span><br>
+							</span>
+											</blockquote> 
+									<p>Inherited from <span class="classname"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html">Uthando_Model_Mapper_Abstract</a></span></p>
+					<blockquote>
+													<img src="../../media/images/Variable.png" />
+							<span class="var-title">
+								<span class="var-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#var$_dbTable">Uthando_Model_Mapper_Abstract::$_dbTable</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+														<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methoddeleteUser" id="deleteUser"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">deleteUser</span> (line <span class="line-number">111</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			deleteUser
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetUserByEmail" id="getUserByEmail"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getUserByEmail</span> (line <span class="line-number">124</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getUserByEmail
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$email</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$email</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetUsers" id="getUsers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getUsers</span> (line <span class="line-number">133</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getUsers
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodregisterUser" id="registerUser"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">registerUser</span> (line <span class="line-number">56</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			registerUser
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$values</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsaveUser" id="saveUser"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">saveUser</span> (line <span class="line-number">82</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			saveUser
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$values</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$values</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetAcl" id="setAcl"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setAcl</span> (line <span class="line-number">142</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setAcl
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$acl</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$acl</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#methodsetAcl">Uthando_Model_Mapper_Acl_Abstract::setAcl()</a></dt>
+						<dd>Injector for the acl, the acl can be injected either directly  via this method or by passing the 'acl' option to the models  construct.</dd>
+					</dl>
+			
+	</div>
+<a name="method_setVars" id="_setVars"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">_setVars</span> (line <span class="line-number">34</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			_setVars
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$row</span>, <span class="var-type"><a href="../../Uthando_Model/Core_Model_User.html">Core_Model_User</a></span>&nbsp;<span class="var-name">$class</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$row</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../Uthando_Model/Core_Model_User.html">Core_Model_User</a></span>
+				<span class="var-name">$class</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#method_setVars">Uthando_Model_Mapper_Abstract::_setVars()</a></dt>
+						<dd>Sets all values for a table row.</dd>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html">Uthando_Model_Mapper_Acl_Abstract</a></span></p>
+					<blockquote>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#methodcheckAcl">Uthando_Model_Mapper_Acl_Abstract::checkAcl()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#methodgetAcl">Uthando_Model_Mapper_Acl_Abstract::getAcl()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#methodgetIdentity">Uthando_Model_Mapper_Acl_Abstract::getIdentity()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#methodgetResourceId">Uthando_Model_Mapper_Acl_Abstract::getResourceId()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#methodsetAcl">Uthando_Model_Mapper_Acl_Abstract::setAcl()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Acl_Abstract.html#methodsetIdentity">Uthando_Model_Mapper_Acl_Abstract::setIdentity()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html">Uthando_Model_Mapper_Abstract</a></span></p>
+					<blockquote>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#methodfetchAll">Uthando_Model_Mapper_Abstract::fetchAll()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#methodfetchRow">Uthando_Model_Mapper_Abstract::fetchRow()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#methodfind">Uthando_Model_Mapper_Abstract::find()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#methodgetDbTable">Uthando_Model_Mapper_Abstract::getDbTable()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#methodsetDbTable">Uthando_Model_Mapper_Abstract::setDbTable()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#method_delete">Uthando_Model_Mapper_Abstract::_delete()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#method_save">Uthando_Model_Mapper_Abstract::_save()</a></span><br>
+													<img src="../../media/images/Method.png" alt=" "/>
+							<span class="method-name"><a href="../../Uthando_Model/Mapper/Uthando_Model_Mapper_Abstract.html#method_setVars">Uthando_Model_Mapper_Abstract::_setVars()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+	
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 21 May 2011 01:57:08 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

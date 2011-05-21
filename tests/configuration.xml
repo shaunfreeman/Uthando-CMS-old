@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+configuration.xml
+
+Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
+
+This file is part of Uthando-CMS.
+
+Uthando-CMS is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Uthando-CMS is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
+-->
+
+<!-- see http://www.phpunit.de/wiki/Documentation -->
+<!--phpunit bootstrap="/path/to/bootstrap.php"
+         colors="false"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="true">
+</phpunit-->
+
+<phpunit colors="false">
+
+    <filter>
+        <blacklist>
+            <directory suffix=".php">/usr/share/php</directory>
+            <directory suffix=".php">/home/shaun/netbeans-7.0</directory>
+        </blacklist>
+    </filter>
+
+    <logging>
+      <log type="coverage-html" target="/home/shaun/NetBeansProjects/uthando-cms/source/tests/report" charset="UTF-8"
+           yui="true" highlight="false"
+           lowUpperBound="35" highLowerBound="70"/>
+      <log type="coverage-clover" target="/home/shaun/NetBeansProjects/uthando-cms/source/tests/tmp/coverage.xml"/>
+      <log type="json" target="/home/shaun/NetBeansProjects/uthando-cms/source/tests/tmp/logfile.json"/>
+      <log type="tap" target="/home/shaun/NetBeansProjects/uthando-cms/source/tests/tmp/logfile.tap"/>
+      <log type="junit" target="/home/shaun/NetBeansProjects/uthando-cms/source/tests/tmp/logfile.xml" logIncompleteSkipped="false"/>
+      <log type="testdox-html" target="/home/shaun/NetBeansProjects/uthando-cms/source/tests/tmp/testdox.html"/>
+      <log type="testdox-text" target="/home/shaun/NetBeansProjects/uthando-cms/source/tests/tmp/testdox.txt"/>
+    </logging>
+</phpunit>

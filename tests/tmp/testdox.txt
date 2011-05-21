@@ -1,0 +1,9 @@
+Uthando_Model_Abstract
+ [x] test  constructConfigOptions
+ [x] test  set
+ [x] test  get
+ [x] Set options
+ [x] To array
+ [x] Set exception
+ [x] Get exception
+
