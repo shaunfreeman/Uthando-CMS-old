@@ -50,7 +50,7 @@
                 'action'        => 'view',
                 'page'          => $blog->ident
             ), 'blog', true); ?>#comments" title="View Full Page">
-                <span class="numcomments"><?= $blog->numComments; ?></span>&nbsp;Comments
+                <span class="numcomments"><?= $this->comments($blog->blogId)->count(); ?></span>&nbsp;Comments
             </a>
         </h4>
         <span class="article_seperator">&nbsp;</span>

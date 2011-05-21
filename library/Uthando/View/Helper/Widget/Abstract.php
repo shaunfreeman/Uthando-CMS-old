@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * Abstract.php
  *
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
@@ -19,11 +18,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
+ *
+ * @category Uthando
+ * @package Uthando_View
+ * @subpackage Helper
+ * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 
 /**
  * Description of Uthando_View_Helper_Widget_Abstract
  *
+ * @category Uthando
+ * @package Uthando_View
+ * @subpackage Helper
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 abstract class Uthando_View_Helper_Widget_Abstract extends Zend_View_Helper_Abstract

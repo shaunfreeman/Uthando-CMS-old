@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Template.php
  *
  * Copyright (c) 2010 Shaun Freeman <shaun@shaunfreeman.co.uk>.
@@ -18,11 +18,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
+ *
+ * @category Uthando
+ * @package Uthando_Controller
+ * @subpackage Plugin
+ * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 
 /**
  * Description of Template
  *
+ * @category Uthando
+ * @package Uthando_Controller
+ * @subpackage Plugin
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 class Uthando_Controller_Plugin_Template extends Zend_Controller_Plugin_Abstract

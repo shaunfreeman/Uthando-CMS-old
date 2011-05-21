@@ -50,6 +50,17 @@ class Ublog_Model_Mapper_Comments extends Uthando_Model_Mapper_Acl_Abstract
         return $this->fetchAll($select);
     }
 
+    public function numComments($id)
+    {
+        $select = $this->getDbTable()
+                ->select()
+                ->where('blogId = ?', $id);
+
+        return $this->getDbTable()
+                ->fetchAll($select)
+                ->count();
+    }
+
     public function saveComment($values)
     {
         $comment = new Ublog_Model_Comment($values);

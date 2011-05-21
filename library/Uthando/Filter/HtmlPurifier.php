@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * HtmlPurifier.php
  *
  * Copyright (c) 2011 Shaun Freeman <shaun@shaunfreeman.co.uk>.
@@ -19,11 +18,17 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
+ *
+ * @category Uthando
+ * @package Uthando_Filter
+ * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 
 /**
  * Description of HtmlPurifier
  *
+ * @category Uthando
+ * @package Uthando_Filter
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 class Uthando_Filter_HtmlPurifier implements Zend_Filter_Interface

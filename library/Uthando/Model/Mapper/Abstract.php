@@ -1,28 +1,37 @@
 <?php
-/* 
+/**
  * MapperAbstract.php
- * 
+ *
  * Copyright (c) 2010 Shaun Freeman <shaun@shaunfreeman.co.uk>.
- * 
+ *
  * This file is part of Uthando-CMS.
- * 
+ *
  * Uthando-CMS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Uthando-CMS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
+ *
+ * @category Uthando
+ * @package Uthando_Model
+ * @subpackage Mapper
+ * @abstract
+ * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 
 /**
  * Description of Mapper_Abstract
  *
+ * @category Uthando
+ * @package Uthando_Model
+ * @subpackage Mapper
  * @abstract
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
@@ -30,12 +39,12 @@ abstract class Uthando_Model_Mapper_Abstract
 {
     /**
      * The database object
-     * 
+     *
      * @var object
      * @access protected
      */
     protected $_dbTable;
-    
+
     /**
      * The database class name
      *
@@ -46,7 +55,7 @@ abstract class Uthando_Model_Mapper_Abstract
 
     /**
      * The model class name
-     * 
+     *
      * @var sting
      * @access protected
      */
@@ -54,7 +63,7 @@ abstract class Uthando_Model_Mapper_Abstract
 
     /**
      * Sets the database table object.
-     * 
+     *
      * @param string $dbTable
      * @return Uthando_Model_Mapper_Abstract
      * @access public
@@ -113,7 +122,7 @@ abstract class Uthando_Model_Mapper_Abstract
 
     /**
      * Deletes records from database.
-     * 
+     *
      * @param string $where
      * @return Zend_Table
      * @access protected
@@ -174,7 +183,7 @@ abstract class Uthando_Model_Mapper_Abstract
         if (0 == count($row)) {
             return;
         }
-        
+
         return ($raw) ? $row : $this->_setVars($row, new $this->_modelClass());
     }
 }

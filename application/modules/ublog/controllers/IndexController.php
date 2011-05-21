@@ -27,7 +27,6 @@
  */
 class Ublog_IndexController extends Uthando_Controller_Action_Abstract
 {
-    protected $_commentsModel;
 
     public function init()
     {
@@ -35,7 +34,7 @@ class Ublog_IndexController extends Uthando_Controller_Action_Abstract
 
         $this->_authService = new Core_Service_Authentication();
         $this->_model = new Ublog_Model_Mapper_Blogs();
-        $this->_commentsModel = new Ublog_Model_Mapper_Comments();
+        //$this->_commentsModel = new Ublog_Model_Mapper_Comments();
 
         $this->setForm('commentAdd', array(
             'action'     => 'add-comment'
@@ -62,7 +61,7 @@ class Ublog_IndexController extends Uthando_Controller_Action_Abstract
             throw new Exception('No page found');
         }
 
-        $this->view->comments = $this->_commentsModel->getComments($this->view->blog->blogId);
+        //$this->view->comments = $this->_commentsModel->getComments($this->view->blog->blogId);
     }
 
     public function addCommentAction()
@@ -74,7 +73,7 @@ class Ublog_IndexController extends Uthando_Controller_Action_Abstract
         $this->view->blog = $this->_model->find($this->_request->getParam('blogId'));
 
         if (!$this->getForm('commentAdd')->isValid($this->_request->getPost())) {
-             $this->view->comments = $this->_commentsModel->getComments($this->view->blog->blogId);
+            //$this->view->comments = $this->_commentsModel->getComments($this->view->blog->blogId);
             return $this->render('view'); // re-render the login form
         }
 

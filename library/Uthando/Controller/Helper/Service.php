@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Acl.php
  *
  * Copyright (c) 2010 Shaun Freeman <shaun@shaunfreeman.co.uk>.
@@ -18,11 +18,19 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with Uthando-CMS.  If not, see <http ://www.gnu.org/licenses/>.
+ *
+ * @category Uthando
+ * @package Uthando_Controller
+ * @subpackage Helper
+ * @author Shaun Freeman <shaun@shaunfreeman
  */
 
 /**
  * Description of Uthando_Controller_Helper_Service
  *
+ * @category Uthando
+ * @package Uthando_Controller
+ * @subpackage Helper
  * @author Shaun Freeman <shaun@shaunfreeman.co.uk>
  */
 class Uthando_Controller_Helper_Service extends Zend_Controller_Action_Helper_Abstract
